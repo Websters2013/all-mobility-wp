@@ -25,6 +25,8 @@ let paths = {
         {
             dist: 'index.min.js',
             contains: [
+                'app/js/jquery.main.js',
+                'app/js/jquery.popup.js',
                 'app/js/jquery.index.js'
             ]
         },
@@ -36,9 +38,11 @@ let paths = {
             ]
         },
         {
-            dist: 'tabs.min.js',
+            dist: 'product.min.js',
             contains: [
-                'app/js/jquery.tabs.js'
+                'app/js/jquery.main.js',
+                'app/js/jquery.product-slider.js',
+                'app/js/jquery.websters-select.js'
             ]
         }
     ],
@@ -63,8 +67,8 @@ gulp.task('serve', ['watch'], function() {
 
 gulp.task('views', function () {
     return gulp.src(paths.views, {
-            base: 'app'
-        })
+        base: 'app'
+    })
         .pipe(gulp.dest(distPath));
 });
 
@@ -99,7 +103,7 @@ gulp.task('styles', function () {
         .pipe(autoprefixer({ browsers: ['last 2 versions'] }))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(`${ distPath }/css`))
-        .pipe(browserSync.stream());
+    .pipe(browserSync.stream());
 });
 
 gulp.task( 'scripts', function () {
