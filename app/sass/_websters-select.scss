@@ -1,0 +1,121 @@
+.websters-select {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: 39px;
+  margin: 0 0 15px;
+  border: 2px solid #D1D1D1;
+  border-radius: 4px;
+  font-family: Roboto-Regular;
+  font-size: 16px;
+  color: rgba(28, 28, 28, 0.51);
+  cursor: pointer;
+
+  &_opened {
+
+    .websters-select__arrow {
+      -webkit-transform: scale(-1,-1) translateY(-50%);
+      transform: scale(-1,-1) translateY(-50%);
+    }
+
+  }
+
+
+  letter-spacing: 0;
+
+  &__arrow{
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    width: 0;
+    height: 0;
+    margin-top: 3px;
+    border: 5px solid transparent;
+    border-top: 6px solid #D8D8D8;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+
+    &:after {
+
+      content: '';
+    }
+
+  }
+
+  &__item {
+    overflow: hidden;
+    @include absoluteCenterY();
+    right: 20px;
+    left: 8px;
+    padding: 1px 5px 0;
+    box-sizing: border-box;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+  }
+
+  &_mobile {
+
+    select {
+      position: absolute;
+      top: 0;
+      bottom: -1px;
+      left: 1px;
+      width: 100%;
+    }
+
+  }
+
+  &_custom {
+
+    select {
+      position: absolute;
+      left: -100000px;
+    }
+
+  }
+
+  &__popup {
+    overflow: hidden;
+    position: absolute;
+    z-index: 10;
+    box-sizing: border-box;
+    border: 2px solid #D1D1D1;
+    background: #fff;
+    border-radius: 4px;
+    font-family: Roboto-Regular;
+    font-size: 16px;
+    color: rgba(28, 28, 28, 0.51);
+
+    ul {
+      z-index: 1;
+    }
+
+    li {
+      white-space: nowrap;
+      overflow: hidden;
+      cursor: pointer;
+      padding: 6px 14px;
+
+      &:hover {
+        color: #fff;
+        background: #D1D1D1;
+      }
+
+      &.active {
+        color: #fff;
+        background: rgba(28, 28, 28, 0.51);
+      }
+
+    }
+
+  }
+
+}
+
+@media (min-width: $desktop) {}
