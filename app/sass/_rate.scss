@@ -24,9 +24,18 @@
   vertical-align: top;
   margin: 3px 0 0 10px;
   font-family: ProximaNova-Regular;
+  font-weight: 400;
   font-size: 16px;
   color: #4E4E4E;
   line-height: 20px;
+}
+a.rate__reviews {
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+
 }
 
 @media (min-width: $desktop) {

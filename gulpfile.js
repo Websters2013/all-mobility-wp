@@ -44,6 +44,15 @@ let paths = {
                 'app/js/jquery.product-slider.js',
                 'app/js/jquery.websters-select.js'
             ]
+        },
+        {
+            dist: 'category.min.js',
+            contains: [
+                'app/js/jquery.main.js',
+                'app/js/jquery.product-slider.js',
+                'app/js/jquery.websters-select.js',
+                'app/js/jquery.filters.js'
+            ]
         }
     ],
     vendorScripts: 'app/js/vendors/**/*.js',
