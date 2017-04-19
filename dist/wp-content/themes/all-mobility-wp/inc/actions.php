@@ -72,6 +72,11 @@ function add_js()
         wp_enqueue_style('swiper_css',get_template_directory_uri().'/assets/css/swiper.min.css');
         wp_enqueue_script('swiper_js');
         wp_enqueue_script('index_js');
+    } else {
+        wp_enqueue_style('index_css', get_template_directory_uri().'/assets/css/index.css');
+        wp_enqueue_style('swiper_css',get_template_directory_uri().'/assets/css/swiper.min.css');
+        wp_enqueue_script('swiper_js');
+        wp_enqueue_script('index_js');
     }
 
     if( is_singular( 'product' ) ){
@@ -287,6 +292,8 @@ add_action('wb_woocommerce_single_product_summary','woocommerce_template_single_
 add_action('wb_woocommerce_single_product_summary','woocommerce_template_single_rating', 10);
 add_action('wb_woocommerce_single_product_summary','woocommerce_template_single_excerpt', 20);
 add_action('wb_slider_preview','get_preview_slider', 5);
+add_action('wb_product_review','woocommerce_output_product_data_tabs',5);
+add_filter( 'woocommerce_get_price_html', 'custom_price_html', 100, 2 );
 
 function wb_get_content (){
     echo get_the_content();
@@ -339,12 +346,60 @@ function get_preview_slider(){
 
 <?php }
 
-add_filter( 'woocommerce_get_price_html', 'custom_price_html', 100, 2 );
+add_filter( 'woocommerce_product_tabs', 'woo_remove_product_tabs', 98 );
+function woo_remove_product_tabs( $tabs ) {
+
+    unset( $tabs['description'] );   // Remove the additional information tab
+
+    return $tabs;
+}
+
 
 function custom_price_html( $price, $product ){
 
-    $price_formated = str_replace('<del>','<del>List Price: ',$price);
+    if( is_singular('product') ){
 
-    return str_replace( '<ins>', '', $price_formated );
+        $price_formated = str_replace('<del>','<del>List Price: ',$price);
+
+        return str_replace( '<ins>', '', $price_formated );
+    } else {
+        
+        return str_replace( '<ins>', '', $price );
+    }
+
 
 }
+
+//woocommerce get lowest price in category
+function wpq_get_min_price_per_product_cat( $term_id ) {
+
+    global $wpdb;
+
+    $sql = "
+
+    SELECT  MIN( meta_value+0 ) as minprice
+
+    FROM {$wpdb->posts} 
+
+    INNER JOIN {$wpdb->term_relationships} ON ({$wpdb->posts}.ID = {$wpdb->term_relationships}.object_id)
+
+    INNER JOIN {$wpdb->postmeta} ON ({$wpdb->posts}.ID = {$wpdb->postmeta}.post_id) 
+
+    WHERE  
+
+      ( {$wpdb->term_relationships}.term_taxonomy_id IN (%d) ) 
+
+    AND {$wpdb->posts}.post_type = 'product' 
+
+    AND {$wpdb->posts}.post_status = 'publish' 
+
+    AND {$wpdb->postmeta}.meta_key = '_price'
+
+  ";
+
+    return $wpdb->get_var( $wpdb->prepare( $sql, $term_id ) );
+
+}
+
+
+
