@@ -32,6 +32,10 @@
       text-align: center;
 
     }
+    img {
+      width: 33px;
+      height: 33px;
+    }
 
   }
 
@@ -78,6 +82,7 @@
 }
 .advantages_mob {
   margin: 0 -30px 28px;
+  padding: 24px 53px 17px;
 }
 
 @media (min-width: $phone-mini) {
@@ -105,7 +110,9 @@
   .advantages_3 {
     padding: 24px 0 14px;
   }
-
+  .advantages_mob {
+    padding: 24px 53px 17px;
+  }
 }
 @media (min-width: $desktop) {
 
