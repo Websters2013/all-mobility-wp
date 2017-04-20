@@ -232,19 +232,23 @@
 
                         var count = 0;
 
-                        loop1:
+
                         for ( var i = 0; i <= productsCategoriesArr.length-1; i++ ) {
 
+                            loop1:
                             for ( var j = 0; j <= productsCategoriesArr[i].length-1; j++ ) {
 
                                 var subcategoriesWrap = '';
 
+                                loop2:
                                 for( var z = 0; z <= productsCategoriesArr[i][1].length-1; z++ ) {
 
-                                    if( count < 12 ) {
+                                    subcategoriesWrap += '<li class="search__found-sub"><a href="#">' + productsCategoriesArr[i][1][z] + '</a></li>';
+                                    count ++;
 
-                                        subcategoriesWrap += '<li class="search__found-sub"><a href="#">' + productsCategoriesArr[i][1][z] + '</a></li>';
-                                        count ++;
+                                    if( count >= 12 ) {
+
+                                        break loop2;
 
                                     }
 
@@ -252,13 +256,20 @@
 
                                 subcategoriesWrap += '';
 
+                                if( count >= 12 ) {
+
+                                    break loop1;
+
+                                }
+
                             }
 
-                            if( count < 12 ) {
+                            //if( count < 12 ) {
 
                                 resultStr += '<li><a href="#">' + productsCategoriesArr[i][0] + '</a></li>'+ subcategoriesWrap +'';
 
-                            }
+
+                            //}
 
                         }
 
