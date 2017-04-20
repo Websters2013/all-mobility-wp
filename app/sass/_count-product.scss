@@ -1,0 +1,89 @@
+.count-product {
+  position: relative;
+  @include flexbox();
+  @include justify-content(flex-start);
+  @include align-items(center);
+  @include flex-direction();
+
+  input.site__input {
+    width: 50px;
+    height: 40px;
+    color: #512c1d;
+    font-size: 16px;
+    line-height: 16px;
+    text-align: center;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0;
+    }
+
+  }
+
+}
+.count-product__btn {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  line-height: 20px;
+  @include main-font1();
+  color: #373737;
+  background: transparent;
+  border-radius: 4px;
+  text-align: center;
+  -webkit-transition: color 0.3s ease, background 0.3s ease;
+  transition: color 0.3s ease, background 0.3s ease;
+
+  span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    //height: 40px;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+  }
+  &:hover {
+    color: #7a222e;
+  }
+
+}
+.count-product_del {
+  margin: -1px 0 0;
+}
+
+@media (min-width: $desktop) {
+
+  .count-product {
+
+    input.site__input {
+      margin: 0 8px;
+      width: 54px;
+    }
+
+  }
+  .count-product__btn {
+    color: #fff;
+    background: #373737;
+
+    > span {
+
+    }
+    &:hover {
+      color: #fff;
+      background: #F47920;
+    }
+
+  }
+  .count-product_del {
+    margin: -2px 0 0;
+  }
+
+}
+
+

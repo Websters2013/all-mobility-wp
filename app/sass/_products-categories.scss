@@ -48,7 +48,7 @@
 }
 .product-categories__title {
   margin: 0 3px 4px;
-  font-family: ProximaNova-Bold;
+  @include main-font1();
   font-size: 16px;
   color: #4E4E4E;
 }
@@ -76,7 +76,7 @@
   @include flex-wrap(wrap);
   margin: 0 0 7px;
   padding: 0 4px;
-  font-family: ProximaNova-Bold;
+  @include main-font1();
   font-size: 16px;
   color: #4E4E4E;
 
@@ -260,7 +260,7 @@
       padding: 0 4px;
 
       span {
-        font-family: ProximaNova-Regular;
+        @include main-font3();
         font-weight: 400;
         font-size: 16px;
         text-transform: none;
@@ -269,6 +269,25 @@
     }
     .product-categories__footer {
       bottom: 15px;
+    }
+
+  }
+  .product-categories_3 {
+    margin: 0;
+    padding: 0;
+
+    .product-categories__inner {
+
+      >div {
+        width: 25%;
+        margin: 0 0 24px;
+      }
+
+      .product-categories__item {
+        max-width: 100%;
+        padding: 28px 20px 58px;
+      }
+
     }
 
   }

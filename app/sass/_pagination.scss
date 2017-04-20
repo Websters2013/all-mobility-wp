@@ -1,0 +1,80 @@
+.pagination {
+  position: relative;
+  max-width: 368px;
+  @include flexbox();
+  @include justify-content(center);
+  @include align-items(center);
+  @include flex-direction();
+  margin: 0 auto 29px;
+  padding: 0 53px;
+  @include main-font1();
+  font-size: 30px;
+  line-height: 30px;
+  color: #4E4E4E;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: default;
+
+  a {
+    @include flexbox();
+    @include justify-content(center);
+    @include align-items(center);
+    @include flex-direction();
+    width: 25%;
+    height: 51px;
+    color: #4E4E4E;
+    text-align: center;
+    -webkit-transition: background 0.3s, color 0.3s;
+    transition: background 0.3s, color 0.3s;
+
+    &:hover,
+    &.active {
+      color: #F47920;
+    }
+    &.active {
+      cursor: default;
+    }
+
+  }
+
+  .pagination__next,
+  .pagination__prev {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 53px;
+    padding: 0;
+    background: #0094C1;
+    border-radius: 6px;
+    background: url("../img/arrow-right-big.png") no-repeat center #0094C1;
+    background-size: 24px 17px;
+
+    &:hover {
+      background-color: #F47920;
+    }
+
+  }
+  .pagination__next {
+    right: 0;
+    left: auto;
+    -webkit-transform: scale(-1,-1);
+    transform: scale(-1,-1);
+  }
+
+}
+
+@media (min-width: $phone-mini) {
+
+  .pagination {
+    padding: 0 75px;
+  }
+
+}
+@media (min-width: $desktop) {
+
+  .pagination {
+    margin: 0 auto 50px;
+  }
+
+}
+

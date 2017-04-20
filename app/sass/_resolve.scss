@@ -13,7 +13,7 @@
 .resolve__title {
   position: relative;
   margin: 9px 12px 15px;
-  font-family: ProximaNova-Bold;
+  @include main-font1();
   line-height: 29px;
   font-size: 24px;
   color: #FFFFFF;
@@ -24,12 +24,12 @@
   span {
     display: block;
     margin: 0 0 10px;
-    font-family: ProximaNova-Regular;
+    @include main-font3();
     font-size: 16px;
     color: #FFFFFF;
   }
   a {
-    font-family: ProximaNova-Bold;
+    @include main-font1();
     font-size: 24px;
     color: #FFFFFF;
   }

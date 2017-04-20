@@ -28,7 +28,7 @@
     min-height: 20px;
     padding-left: 26px;
     cursor: pointer;
-    font-family: Roboto-Regular;
+    @include main-font4();
     font-size: 16px;
     line-height: 20px;
     color: #FFFFFF;
