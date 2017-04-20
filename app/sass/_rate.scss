@@ -23,7 +23,7 @@
   display: inline-block;
   vertical-align: top;
   margin: 3px 0 0 10px;
-  font-family: ProximaNova-Regular;
+  @include main-font3();
   font-weight: 400;
   font-size: 16px;
   color: #4E4E4E;

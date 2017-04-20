@@ -12,7 +12,7 @@
     position: relative;
     display: inline-block;
     vertical-align: top;
-    font-family: Roboto-Regular;
+    @include main-font4();
     font-size: 16px;
     color: #4E4E4E;
     line-height: 33px;

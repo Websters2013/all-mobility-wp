@@ -1,6 +1,56 @@
 //fonts
 @mixin main-font1() {
-  font-family: "myriadpro-regular", sans-serif;
+  font-family: "proximanova-bold", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+@mixin main-font2() {
+  font-family: "proximanova-semibold", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+@mixin main-font3() {
+  font-family: "proximanova-regular", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+@mixin main-font4() {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+@mixin main-font5() {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+@mixin main-font6() {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+@mixin main-font7() {
+  font-family: "proximanova-black", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+@mixin main-font8() {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+@mixin main-font9() {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+@mixin main-font10() {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+@mixin main-font11() {
+  font-family: "proximanova-extrabold", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
