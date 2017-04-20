@@ -1,14 +1,16 @@
 .get-catalog {
+  position: relative;
   width: 100%;
   max-width: 738px;
   margin: 0 auto;
   background: #fff;
   border-radius: 4px;
-  padding: 21px 20px 42px;
+  padding: 10px 10px 45px;
+  text-align: center;
 }
 .get-catalog__pic {
   overflow: hidden;
-  margin: 0 0 26px;
+  margin: 0 0 25px;
   border-radius: 4px;
 
   img {
@@ -18,51 +20,18 @@
   }
 
 }
-.get-catalog__wrap {
-  padding: 0 22px;
-
-  >div {
-
-    &:first-child {
-      margin: 0 0 30px;
-    }
-
-  }
-
-}
 .get-catalog__title {
-  margin: 0 0 22px;
-  font-family: ProximaNova-Black;
-  font-size: 20px;
-  line-height: 20px;
+  margin: 0 30px 16px;
+  @include main-font1();
+  font-size: 26px;
+  line-height: 25px;
   color: #373737;
-  letter-spacing: 1.91px;
+  letter-spacing: 1.65px;
   text-transform: uppercase;
 }
-.get-catalog__list {
-
-  li {
-    position: relative;
-    padding-left: 10px;
-    font-family: Roboto-Medium;
-    font-size: 16px;
-    color: rgba(78, 78, 78, 0.8);
-    line-height: 22px;
-
-    &:after {
-      position: absolute;
-      top: 9px;
-      left: 2px;
-      width: 3px;
-      height: 3px;
-      border-radius: 100%;
-      background: rgba(78, 78, 78, 0.8);
-      content: '';
-    }
-  }
-
-}
 .get-catalog__subscribe {
+  max-width: 292px;
+  margin: 0 auto;
 
   input[type=email] {
     display: inline-block;
@@ -71,7 +40,7 @@
     width: 100%;
     height: 40px;
     padding: 10px 10px;
-    font-family: Roboto-Regular;
+    @include main-font4();
     font-size: 16px;
     line-height: 16px;
     color: rgba(28, 28, 28, 0.51);
@@ -87,10 +56,40 @@
 
   }
   .btn {
-    width: 119px;
-    height: 40px;
+    width: 100%;
+    height: 60px;
+    font-size: 25px;
+    line-height: 25px;
+  }
+
+}
+.get-catalog__list {
+  @include flexbox();
+  @include justify-content(center);
+  @include align-items();
+  @include flex-direction();
+  margin: 0 0 12px;
+  text-transform: uppercase;
+
+  li {
+    @include inline-flex();
+    @include justify-content(center);
+    @include align-items(center);
+    @include flex-direction(column);
+    width: 33.333%;
+    @include main-font1();
+    padding: 14px 0;
     font-size: 14px;
-    line-height: 14px;
+    line-height: 17px;
+    color: rgba(78, 78, 78, 0.81);
+    text-align: center;
+
+    >span {
+      text-align: center;
+      width: 75%;
+      margin: 14px 0 0;
+    }
+
   }
 
 }
@@ -98,38 +97,48 @@
 @media (min-width: $desktop) {
 
   .get-catalog {
-
+    padding: 21px 20px 54px;
   }
-  .get-catalog__wrap {
-    @include flexbox();
-    @include justify-content();
-    @include align-items();
-    @include flex-direction();
-    @include flex-wrap(wrap);
-
-    >div {
-      width: 38%;
-      padding-left: 37px;
-
-      &:first-child {
-        width: 61%;
-        padding: 0;
-        margin: 0;
-      }
-
-    }
+  .get-catalog__pic {
+    margin: 0 0 20px;
 
   }
   .get-catalog__title {
-    margin: 0 0 22px;
-    font-size: 30px;
-    line-height: 30px;
+    margin: 0 30px 25px;
+    font-size: 28px;
+    line-height: 28px;
+    letter-spacing: 1.78px;
+  }
+  .get-catalog__list {
+    margin: 0 0 40px;
+
+    li {
+      @include flex-direction();
+      width: auto;
+      padding: 14px 0;
+      font-size: 16px;
+      line-height: 16px;
+      border-left: 2px solid #0094C1;
+
+      &:first-child {
+        border-left: none;
+      }
+
+      >span {
+        text-align: left;
+        width: 48%;
+        margin: 0 0 0 13px;
+      }
+    }
+
   }
   .get-catalog__subscribe {
+    margin: 0;
+    max-width: 100%;
 
     form {
       @include flexbox();
-      @include justify-content(space-between);
+      @include justify-content(center);
       @include align-items();
       @include flex-direction();
       @include flex-wrap(wrap);
@@ -137,11 +146,14 @@
 
 
     input[type=email] {
-      width: 265px;
-      margin: 0;
+      width: 191px;
+      margin: 0 10px 0 0;
     }
     .btn {
-      width: 100px;
+      width: 119px;
+      height: 40px;
+      font-size: 14px;
+      line-height: 14px;
     }
 
   }

@@ -1,4 +1,5 @@
 .featured-product {
+  position: relative;
   padding: 25px 36px 0;
   text-align: center;
 
@@ -8,9 +9,10 @@
 
 }
 .featured-product__title {
-  width: 57%;
+  width: 70%;
+  min-height: 40px;
   margin: 0 0 21px 5px;
-  font-family: ProximaNova-Bold;
+  @include main-font1();
   font-size: 18px;
   color: #4E4E4E;
   line-height: 20px;
@@ -18,7 +20,7 @@
 }
 .featured-product__pic {
   position: relative;
-  height: 124px;
+  height: 207px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -43,6 +45,8 @@
   height: 84px;
   border-radius: 100%;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.17);
+  -webkit-transition: opacity 0.150s, visibility 0.150s;
+  transition: opacity 0.150s, visibility 0.150s;
 
   &.visible {
     opacity: 1;
@@ -59,7 +63,7 @@
     border-radius: 100%;
     box-shadow: 0 0 0 5px rgba(244,121,32,0.5), 0 0 0 9px rgba(244,121,32,0.5), 0 0 0 12px rgba(255,255,255,0.9);
     background: #F47920;
-    font-family: ProximaNova-Black;
+    @include main-font7();
     font-size: 14px;
     color: #FFFFFF;
     text-align: center;
@@ -69,14 +73,14 @@
 .featured-product__price {
   display: block;
   margin: 0 0 17px;
-  font-family: ProximaNova-Bold;
+  @include main-font1();
   font-size: 20px;
   color: #4E4E4E;
 
   del {
     display: inline-block;
     margin: 0 10px 0 -3px;
-    font-family: ProximaNova-Bold;
+    @include main-font1();
     font-size: 14px;
     color: #F47920;
 
@@ -87,5 +91,62 @@
   }
 
 }
+.featured-product__loading {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  -webkit-transition: opacity 0.150s, visibility 0.150s;
+  transition: opacity 0.150s, visibility 0.150s;
 
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &:after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -25px 0 0 -25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 80px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid #F47920;
+    border-left: 7px solid #F47920;
+    border-right: 7px solid transparent;
+    border-top: 7px solid #F47920;
+    border-bottom: 7px solid #F47920;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    background: none;
+    -webkit-animation: cwSpin 1s linear .2s infinite;
+    animation: cwSpin .666s linear .2s infinite;
+    content: '';
+  }
+
+}
+
+@-webkit-keyframes cwSpin {
+  0%{
+    -webkit-transform:rotate(0deg);
+  }
+  100%{
+    -webkit-transform:rotate(360deg);
+  }
+}
+@keyframes cwSpin {
+  0%{
+    transform:rotate(0deg);
+  }
+  100%{
+    transform:rotate(360deg);
+  }
+}
 

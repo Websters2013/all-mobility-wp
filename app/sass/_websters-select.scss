@@ -10,7 +10,7 @@
   border: 2px solid #D1D1D1;
   background: #fff;
   border-radius: 4px;
-  font-family: Roboto-Regular;
+  @include main-font4();
   font-size: 16px;
   color: rgba(28, 28, 28, 0.51);
   cursor: pointer;
@@ -89,7 +89,7 @@
     border: 2px solid #D1D1D1;
     background: #fff;
     border-radius: 4px;
-    font-family: Roboto-Regular;
+    @include main-font4();
     font-size: 16px;
     color: rgba(28, 28, 28, 0.51);
 

@@ -1,0 +1,91 @@
+.locations {
+  @include main-font5();
+  font-size: 16px;
+  color: rgba(78, 78, 78, 0.81);
+  line-height: 22px;
+
+  p {
+    margin: 0 0 28px;
+  }
+
+}
+.locations__items {
+  margin: 0 0 35px;
+
+  >div {
+    margin: 0 -29px;
+
+    &:first-child {
+      margin: 0 0 30px;
+    }
+
+  }
+  .btn {
+    min-width: 274px;
+  }
+
+}
+.locations__map {
+  height: 300px;
+}
+.locations__info {
+  padding: 20px 0 5px;
+
+  li {
+    position: relative;
+    padding-left: 36px;
+    margin: 0 0 21px;
+
+    svg {
+      position: absolute;
+      top: 0;
+      left: 4px;
+      width: 24px;
+    }
+
+  }
+
+}
+.locations__address {
+
+  span {
+    display: block;
+  }
+
+}
+
+@media (min-width: $desktop) {
+
+  .locations {
+    padding: 0 40px 14px;
+  }
+  .locations__items {
+    @include flexbox();
+    @include justify-content(space-between);
+    @include align-items();
+    @include flex-direction();
+    margin: 0 0 57px;
+
+    >div {
+      width: calc( 41.3% + 40px );
+      margin: 0 -40px 0 0;
+
+      &:first-child {
+        width: 52%;
+        padding-top: 28px;
+        padding-left: 4px;
+        margin: 0;
+      }
+
+    }
+
+  }
+  .locations__info {
+    padding: 0 0 5px;
+  }
+  .locations__map {
+    height: 541px;
+  }
+
+}
+

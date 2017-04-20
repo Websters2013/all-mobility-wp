@@ -13,7 +13,7 @@
   position: relative;
   padding: 0 0 0 61px;
   margin: 0 0 18px;
-  font-family: ProximaNova-Bold;
+  @include main-font1();
   font-size: 24px;
   line-height: 29px;
   color: #4E4E4E;

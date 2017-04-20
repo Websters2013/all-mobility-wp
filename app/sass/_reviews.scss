@@ -1,5 +1,5 @@
 .reviews {
-  font-family: Roboto-Regular;
+  @include main-font4();
   font-weight: 400;
   font-size: 16px;
   color: #4E4E4E;
@@ -48,14 +48,14 @@
 }
 .reviews__name {
   margin: 0 0 5px;
-  font-family: ProximaNova-Bold;
+  @include main-font1();
   font-size: 16px;
   color: #444444;
   line-height: 16px;
 }
 .reviews__place {
   margin: 0 0 5px;
-  font-family: ProximaNova-Regular;
+  @include main-font3();
   font-weight: 400;
   font-size: 16px;
   color: #444444;
