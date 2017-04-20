@@ -7,8 +7,9 @@
   border-radius: 39px;
   padding: 0 10px;
   height: 45px;
-  font-family: ProximaNova-Bold;
+  @include main-font1();
   font-size: 18px;
+  line-height: 18px;
   color: #FFFFFF;
   letter-spacing: 0;
   border: none;
@@ -55,8 +56,9 @@
     height: 40px;
     background: #0094C1;
     border-radius: 4px;
-    font-family: OpenSans-Bold;
+    @include main-font10();
     font-size: 16px;
+    line-height: 16px;
 
   }
 
@@ -64,8 +66,9 @@
     height: 40px;
     background: #F47920;
     border-radius: 4px;
-    font-family: OpenSans-Bold;
+    @include main-font10();
     font-size: 16px;
+    line-height: 16px;
 
     &:hover {
       background: #ea5438;
@@ -81,8 +84,9 @@
     height: 40px;
     background: #fff;
     border-radius: 4px;
-    font-family: OpenSans-Bold;
+    @include main-font10();
     font-size: 16px;
+    line-height: 16px;
     color: #0094C1;
 
     &:hover {
@@ -100,8 +104,9 @@
     height: 40px;
     background: #F47920;
     border-radius: 4px;
-    font-family: OpenSans-Bold;
+    @include main-font10();
     font-size: 16px;
+    line-height: 16px;
 
     &:hover {
       background: #ea5438;
@@ -117,6 +122,30 @@
     height: 26px;
     border-radius: 2px;
     font-size: 14px;
+    line-height: 14px;
+  }
+
+  &_7 {
+    height: 40px;
+    border-radius: 4px;
+    font-size: 20px;
+    line-height: 20px;
+    background: #373737;
+    color: #FFFFFF;
+  }
+  &_8 {
+    height: 40px;
+    border-radius: 4px;
+    background: #F47920;
+
+    &:hover {
+      background: #ea5438;
+    }
+
+    &:active {
+      background: #ea5438;
+    }
+
   }
 
 }
@@ -144,6 +173,13 @@
       height: 40px;
       border-radius: 4px;
       font-size: 16px;
+      line-height: 16px;
+    }
+    &_8 {
+      height: 48px;
+      border-radius: 4px;
+      font-size: 16px;
+      line-height: 16px;
     }
 
   }

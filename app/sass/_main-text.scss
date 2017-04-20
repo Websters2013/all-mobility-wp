@@ -1,6 +1,6 @@
 .main-text {
   padding: 30px 33px 13px;
-  font-family: Roboto-Medium;
+  @include main-font5();
   font-weight: 400;
   font-size: 16px;
   color: rgba(78, 78, 78, 0.8);
@@ -34,7 +34,7 @@
 }
 .main-text__title {
   margin: 0 0 9px;
-  font-family: ProximaNova-Regular;
+  @include main-font3();
   font-weight: 400;
   font-size: 24px;
   color: #F47920;

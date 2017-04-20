@@ -3,7 +3,7 @@
 }
 .top-products__title {
   margin: 0 0 11px;
-  font-family: Roboto-Regular;
+  @include main-font4();
   font-size: 14px;
   line-height: 20px;
   color: #4E4E4E;
@@ -58,7 +58,7 @@
 .top-products__price {
   display: block;
   padding: 0 11px;
-  font-family: Roboto-Bold;
+  @include main-font6();
   font-size: 12px;
   color: #4E4E4E;
 
@@ -69,7 +69,7 @@
 }
 .top-products__item-title {
   padding: 0 11px;
-  font-family: Roboto-Bold;
+  @include main-font6();
   font-size: 12px;
   line-height: 14px;
   color: #4E4E4E;
@@ -85,7 +85,7 @@
   @include flex-direction();
   height: 27px;
   background: #0094C1;
-  font-family: OpenSans-Bold;
+  @include main-font10();
   font-size: 12px;
   color: #FFFFFF;
   letter-spacing: 0;

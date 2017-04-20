@@ -4,7 +4,8 @@
 .check-out__map {
   position: relative;
   height: 329px;
-  background: #000;
+  background-size: cover;
+  background-repeat: no-repeat;
 
   .btn {
     position: absolute;

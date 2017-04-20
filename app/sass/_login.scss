@@ -1,9 +1,8 @@
 .login {
-  display: none;
   position: absolute;
-  top: 24px;
-  right: 30px;
-  font-family: ProximaNova-Bold;
+  top: 34px;
+  left: 29%;
+  @include main-font1();
   font-size: 16px;
   color: rgba(255, 255, 255, 0.71);
   letter-spacing: 0;
@@ -23,17 +22,18 @@
   }
 
 }
+
 @media (min-width: $desktop) {
 
   .login {
-    display: block;
     top: 46px;
     right: 35px;
+    left: auto;
 
     &:after {
       position: absolute;
       top: 2px;
-      left: -23px;
+      left: -12px;
       width: 2px;
       height: 12px;
       background: rgba(255, 255, 255, 0.71);
