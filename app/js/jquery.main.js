@@ -175,7 +175,7 @@
 
                                     $('.featured-product__loading').removeClass('visible');
 
-                                }, 320 );
+                                }, 200 );
 
                             }
 
