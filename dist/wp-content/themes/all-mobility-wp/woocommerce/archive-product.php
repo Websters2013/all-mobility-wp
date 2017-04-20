@@ -32,22 +32,81 @@ get_header( 'shop' ); ?>
 		do_action( 'woocommerce_before_main_content' );
 	?>
 
-		<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
+		<!-- site__content -->
+		<div class="site__content site__content_inner site__white-back">
 
-			<h1 class="page-title"><?php woocommerce_page_title(); ?></h1>
+			<!-- why-us -->
+			<div class="why-us">
+				<div>
 
-		<?php endif; ?>
+					<h2 class="why-us__title">Why
+						Us?</h2>
 
-		<?php
-			/**
-			 * woocommerce_archive_description hook.
-			 *
-			 * @hooked woocommerce_taxonomy_archive_description - 10
-			 * @hooked woocommerce_product_archive_description - 10
-			 */
-			do_action( 'woocommerce_archive_description' );
-		?>
+					<!-- why-us__advantages -->
+					<ul class="why-us__advantages">
+						<li>
+							<img src="pic/money.png" width="45" height="45" alt="">
+							30-days Money
+							Back Guarantee
+						</li>
+						<li>
+							<img src="pic/free.png" width="46" height="36" alt="">
+							Free Shipping
+							over $50
+						</li>
+						<li>
+							<img src="pic/save.png" width="55" height="55" alt="">
+							Safe & Secure
+							Online Payments
+						</li>
+						<li>
+							<img src="pic/expert.png" width="38" height="44" alt="">
+							Expert Support
+							at Your Service
+						</li>
+					</ul>
+					<!-- /why-us__advantages -->
 
+				</div>
+				<div class="why-us__resolve">
+
+					<h2 class="why-us__resolve-title">Questions?
+						Concerns?</h2>
+
+					<!-- why-us__call -->
+					<div class="why-us__call">
+						<span>Call us now or leave a message</span>
+						<a class="why-us__phone" href="#">
+							<svg width="13px" height="18px" viewBox="0 0 13 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+								<!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+								<desc>Created with Sketch.</desc>
+								<defs></defs>
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.5">
+									<g transform="translate(-230.000000, -79.000000)" fill="#FFFFFF">
+										<g transform="translate(230.000000, 79.000000)">
+											<circle id="Oval-5-Copy-2" cx="11.5" cy="1.5" r="1.5"></circle>
+											<circle id="Oval-5-Copy-5" cx="11.5" cy="6.5" r="1.5"></circle>
+											<circle id="Oval-5-Copy-8" cx="11.5" cy="11.5" r="1.5"></circle>
+											<circle id="Oval-5-Copy-3" cx="6.5" cy="1.5" r="1.5"></circle>
+											<circle id="Oval-5-Copy-6" cx="6.5" cy="6.5" r="1.5"></circle>
+											<circle id="Oval-5-Copy-9" cx="6.5" cy="11.5" r="1.5"></circle>
+											<circle id="Oval-5-Copy-11" cx="6.5" cy="16.5" r="1.5"></circle>
+											<circle id="Oval-5-Copy-4" cx="1.5" cy="1.5" r="1.5"></circle>
+											<circle id="Oval-5-Copy-7" cx="1.5" cy="6.5" r="1.5"></circle>
+											<circle id="Oval-5-Copy-10" cx="1.5" cy="11.5" r="1.5"></circle>
+										</g>
+									</g>
+								</g>
+							</svg>
+							1-800-ALL-MOBI
+						</a>
+					</div>
+					<!-- /why-us__call -->
+
+				</div>
+			</div>
+			<!-- /why-us -->
+			
 		<?php if ( have_posts() ) : ?>
 
 			<?php
@@ -59,16 +118,12 @@ get_header( 'shop' ); ?>
 				 */
 				do_action( 'woocommerce_before_shop_loop' );
 			?>
+	
+			<div class="category category_filters">
 
 			<?php woocommerce_product_loop_start(); ?>
 
-				<?php woocommerce_product_subcategories(); ?>
-
-				<?php while ( have_posts() ) : the_post(); ?>
-
-					<?php wc_get_template_part( 'content', 'product' ); ?>
-
-				<?php endwhile; // end of the loop. ?>
+				<?php get_template_part('content/content','product-category') ?>
 
 			<?php woocommerce_product_loop_end(); ?>
 
@@ -95,14 +150,7 @@ get_header( 'shop' ); ?>
 		 */
 		do_action( 'woocommerce_after_main_content' );
 	?>
-
-	<?php
-		/**
-		 * woocommerce_sidebar hook.
-		 *
-		 * @hooked woocommerce_get_sidebar - 10
-		 */
-		do_action( 'woocommerce_sidebar' );
-	?>
+		</div>
+	</div>
 
 <?php get_footer( 'shop' ); ?>

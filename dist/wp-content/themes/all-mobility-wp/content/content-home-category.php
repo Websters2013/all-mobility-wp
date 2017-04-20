@@ -1,5 +1,7 @@
 <?php
 
+global $wp_query;
+
 if( is_front_page() ){
 
     if( have_rows('categories_items') ):
@@ -7,7 +9,6 @@ if( is_front_page() ){
         while ( have_rows('categories_items') ) : the_row();
 
             $termsIds[] = get_sub_field('categories');
-
 
         endwhile;
     endif;
@@ -21,19 +22,70 @@ if( is_front_page() ){
 
     ) );
 
+} elseif( is_product_category() ){
+
+$cat_obj = $wp_query->get_queried_object();
+
+$category_ID  = $cat_obj->term_id;
+
+$args = array(
+    'parent'   => $category_ID,
+    'taxonomy' => 'product_cat'
+);
+
+$product_terms = get_terms($args);
+
 }
 
-
 if(!empty($product_terms)):
-?>
+
+    $product_cat_id = 10;
+
+    $attribute_name  = 'brand';
+
+    $attribute_value = 'second-brand';
+
+    $serialized_value = serialize( 'name' ) . serialize( $attribute_name ) . serialize( 'value' ) . serialize( $attribute_value ); // extended version: $serialized_value = serialize( $attribute_name ) . 'a:6:{' . serialize( 'name' ) . serialize( $attribute_name ) . serialize( 'value' ) . serialize( $attribute_value ) . serialize( 'position' );
+
+    $args = array (
+        'post_type'  => 'product',
+        'tax_query'  => array(
+            'relation' => 'AND',
+            array(
+                'taxonomy'      => 'product_cat',
+                'field' => 'term_id',
+                'terms' => 20
+            ),
+            array(
+                'taxonomy' 		=> 'pa_' . $attribute_name,
+                'terms' 		=> array(25),
+                'operator' 		=> 'IN'
+            ),
+            array(
+                'taxonomy' 		=> 'pa_' . 'color',
+                'terms' 		=> array(27),
+                'operator' 		=> 'IN'
+            )
+        ),
+        'meta_query' => array(
+            array(
+                'key' => '_price',
+                'value' => array(1390, 14000),
+                'compare' => 'BETWEEN',
+                'type' => 'NUMERIC'
+            )
+        )
+    );
+
+    $attrProducts =  get_posts($args); ?>
 
 <!-- product-categories__inner -->
 <div class="product-categories__inner">
     <?php foreach ($product_terms as $product_term):
         $id = $product_term->term_id;
-        ( $link = get_field('link_for_the_button', 'product_cat_'.$id ) )? true : $link = get_term_link($id) ;
-        ( $textLink = get_field('text_for_preview_on_home_page', 'product_cat_'.$id) )? true : $textLink = 'see more' ;
-        ( $catName = get_field('custom_category_title', 'product_cat_'.$id) )? true : $catName = $product_term->name;
+        ( !is_product_category() &&  $link = get_field('link_for_the_button', 'product_cat_'.$id ) )? true : $link = get_term_link($id) ;
+        ( !is_product_category() && $textLink = get_field('text_for_preview_on_home_page', 'product_cat_'.$id) )? true : $textLink = 'see more' ;
+        ( !is_product_category() && $catName = get_field('custom_category_title', 'product_cat_'.$id) )? true : $catName = $product_term->name;
 
         if( !( $fromPrice = get_field('price_for_preview_on_home_page', 'product_cat_'.$id) ) ){
             $fromPrice = wpq_get_min_price_per_product_cat($id);
@@ -41,7 +93,7 @@ if(!empty($product_terms)):
             $fromPrice = '$'.number_format($fromPrice, 2, ',', ' ');
         }
 
-        if( !( $previewImage = get_field('image_for_preview_on_home_page', 'product_cat_'.$id) ) ){
+        if( ( !is_product_category() && !( $previewImage = get_field('image_for_preview_on_home_page', 'product_cat_'.$id) ) ) ){
             $thumbnail_id = get_woocommerce_term_meta( $id, 'thumbnail_id', true );
             $image = wp_get_attachment_url( $thumbnail_id );
             $previewImage = $image;

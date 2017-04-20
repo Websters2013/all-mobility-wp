@@ -62,17 +62,13 @@ function add_js()
     wp_register_script('index_js',get_template_directory_uri().'/assets/js/index.min.js');
     wp_register_script('perfect_js',get_template_directory_uri().'/assets/js/vendors/perfect-scrollbar.jquery.min.js');
     wp_register_script('product_js',get_template_directory_uri().'/assets/js/product.min.js');
+    wp_register_script('category_js',get_template_directory_uri().'/assets/js/category.min.js');
 
     wp_enqueue_script('jquery');
 
     wp_register_script('app',get_template_directory_uri().'/assets/js/app.min.js');
 
     if (is_page_template('page-home.php')){
-        wp_enqueue_style('index_css', get_template_directory_uri().'/assets/css/index.css');
-        wp_enqueue_style('swiper_css',get_template_directory_uri().'/assets/css/swiper.min.css');
-        wp_enqueue_script('swiper_js');
-        wp_enqueue_script('index_js');
-    } else {
         wp_enqueue_style('index_css', get_template_directory_uri().'/assets/css/index.css');
         wp_enqueue_style('swiper_css',get_template_directory_uri().'/assets/css/swiper.min.css');
         wp_enqueue_script('swiper_js');
@@ -86,6 +82,13 @@ function add_js()
         wp_enqueue_script('swiper_js');
         wp_enqueue_script('perfect_js');
         wp_enqueue_script('product_js');
+    }
+
+    if( is_product_category() ){
+        wp_enqueue_style('perfect_scrollbar',get_template_directory_uri().'/assets/css/perfect-scrollbar.css');
+        wp_enqueue_style('category_css',get_template_directory_uri().'/assets/css/category-single.css');
+        wp_enqueue_script('perfect_js');
+        wp_enqueue_script('category_js');
     }
 
 }
@@ -347,6 +350,7 @@ function get_preview_slider(){
 <?php }
 
 add_filter( 'woocommerce_product_tabs', 'woo_remove_product_tabs', 98 );
+
 function woo_remove_product_tabs( $tabs ) {
 
     unset( $tabs['description'] );   // Remove the additional information tab
@@ -354,6 +358,11 @@ function woo_remove_product_tabs( $tabs ) {
     return $tabs;
 }
 
+add_filter( 'woocommerce_taxonomy_archive_description', 'wb_woocommerce_taxonomy_archive_description_formating' );
+
+function wb_woocommerce_taxonomy_archive_description_formating (){
+    
+}
 
 function custom_price_html( $price, $product ){
 
@@ -370,7 +379,6 @@ function custom_price_html( $price, $product ){
 
 }
 
-//woocommerce get lowest price in category
 function wpq_get_min_price_per_product_cat( $term_id ) {
 
     global $wpdb;
@@ -401,5 +409,67 @@ function wpq_get_min_price_per_product_cat( $term_id ) {
 
 }
 
+function getAttrForCategory( $catID ){
 
+    $all_attributes = wc_get_attribute_taxonomies();
+
+    foreach ($all_attributes as $attribute){
+
+        $currentAttrTax = $attribute->attribute_name;
+
+        $taxonomyName = 'pa_'.$currentAttrTax;
+
+        $terms = get_terms( array(
+            'taxonomy' => $taxonomyName,
+            'hide_empty' => true
+        ) );
+
+        foreach ($terms as $term) {
+
+            $is_related = checkProduct( $taxonomyName, $term->term_id, $catID );
+
+            if( $is_related ) {
+                $outPutAttr[$attribute->attribute_name] =  $attribute;
+                $outPutAttr[$attribute->attribute_name] =  $term;
+            }
+
+        }
+
+    }
+
+    return $outPutAttr;
+    
+}
+
+function checkProduct( $taxonomyName, $termid, $catID ){
+    
+    $args = array (
+        'post_type'  => 'product',
+        'posts_per_page' => -1,
+        'tax_query'  => array(
+            'relation' => 'AND',
+            array(
+                'taxonomy' => 'product_cat',
+                'field' => 'term_id',
+                'terms' => $catID
+            ),
+            array(
+                'taxonomy' 		=> $taxonomyName,
+                'terms' 		=> array($termid),
+                'operator' 		=> 'IN'
+            )
+        )
+    );
+
+    $attrProducts =  get_posts($args);
+
+    if(empty($attrProducts)){
+        $attrProducts = false;
+    } else {
+        $attrProducts = $termid;
+    }
+
+    return $attrProducts;
+    
+}
 
