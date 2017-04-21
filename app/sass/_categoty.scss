@@ -14,6 +14,7 @@
 
 }
 .category__inner {
+  position: relative;
 
   &_filters {
 
@@ -35,7 +36,7 @@
   margin: 0 52px 20px 0;
   padding: 0 31px 0 18px;
   height: 45px;
-  background: #9B9B9B;
+  background: #5d5d5d;
   border-radius: 6px;
   text-transform: uppercase;
   @include main-font1();
@@ -43,6 +44,21 @@
   line-height: 16px;
   color: #FFFFFF;
   cursor: pointer;
+  -webkit-transition: background 0.3s, color 0.3s;
+  transition: background 0.3s, color 0.3s;
+
+  &.selected {
+    background: #F47920;
+
+    &:hover {
+      background: #ea5438;
+    }
+
+  }
+
+  &:hover {
+    background: #9B9B9B;
+  }
 
   svg {
     margin: 0 12px 0 0;
@@ -54,6 +70,8 @@
 
 }
 .category__filters-clear {
+  opacity: 1;
+  visibility: visible;
   display: inline-block;
   vertical-align: top;
   margin: 15px 0 0 0;
@@ -62,9 +80,15 @@
   line-height: 16px;
   color: rgba(68, 68, 68, 0.51);
   text-decoration: underline;
+  -webkit-transition: opacity 0.3s, visibility 0.3s;
+  transition: opacity 0.3s, visibility 0.3s;
 
   &:hover {
     text-decoration: none;
+  }
+  &.hidden {
+    opacity: 0;
+    visibility: hidden;
   }
 
 }
@@ -157,6 +181,11 @@
     position: absolute;
     opacity: 0;
     visibility: hidden;
+
+    &:checked + label {
+      color: #F47920;
+    }
+
   }
   label {
     display: block;
@@ -200,6 +229,11 @@
 }
 .category__filtered {
   padding: 0 0 35px 31px;
+
+  &.hidden {
+    display: none;
+  }
+
 }
 .category__filtered-by {
   display: block;
@@ -267,6 +301,10 @@
 @media (min-width: $tablet-portrait) {
 
   .category {
+
+    .site__title_3 {
+      margin: 0 0 14px;
+    }
 
     p {
       margin: 0 0 28px;
@@ -371,6 +409,19 @@
     line-height: 24px;
     color: #4E4E4E;
     cursor: default;
+
+    &.selected {
+      background: transparent;
+
+      &:hover {
+        background: transparent;
+      }
+
+    }
+
+    &:hover {
+      background: transparent;
+    }
 
     svg {
       display: none;
@@ -482,6 +533,62 @@
   .category__filtered-close,
   .category__filtered {
     display: none;
+  }
+
+  .category__head {
+    @include flexbox();
+    @include justify-content(space-between);
+    @include align-items(center);
+    @include flex-direction();
+
+    >div {
+      width: 512px;
+      padding-top: 6px;
+
+      &:first-child {
+        width: calc(100% - 555px);
+        padding-top: 0;
+      }
+
+    }
+
+  }
+  .category__sorting {
+
+    form {
+      @include flexbox();
+      @include justify-content(space-between);
+      @include align-items(center);
+      @include flex-direction();
+    }
+
+    label {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 13px 0 0;
+    }
+    .websters-select {
+      vertical-align: middle;
+      width: 215px;
+      margin: 0;
+    }
+
+    >fieldset {
+      width: 70%;
+
+      &:first-child {
+        width: 30%;
+      }
+
+    }
+
+  }
+  .category__sorting-pages {
+
+    .websters-select {
+      width: 77px;
+    }
+
   }
 
 }

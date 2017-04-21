@@ -148,13 +148,13 @@
 
                             var data = curItem.data('product');
 
-                            if( $('.featured-product__loading').hasClass('visible') ) {
+                            //if( $('.featured-product__loading').hasClass('visible') ) {
 
                                 timeout = setTimeout( function() {
 
                                     _obj.find('.featured-product').find('.featured-product__title').text(data.name);
                                     _obj.find('.featured-product').find('.featured-product__pic img').attr('src', data.src);
-                                    _obj.find('.featured-product').find('.btn').attr('url', data.href);
+                                    _obj.find('.featured-product').find('.btn').attr('href', data.href);
                                     _obj.find('.featured-product').find('.featured-product__price span').text(data.price);
 
                                     if( data.onSale ) {
@@ -177,7 +177,7 @@
 
                                 }, 200 );
 
-                            }
+                            //}
 
                         }
 
