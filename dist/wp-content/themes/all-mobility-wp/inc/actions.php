@@ -472,4 +472,3 @@ function checkProduct( $taxonomyName, $termid, $catID ){
     return $attrProducts;
     
 }
-

@@ -88,6 +88,12 @@
                 </a>
                 <!-- /cart -->
 
+                <!-- site__header-btn -->
+                <button class="site__header-btn">
+                    <span></span>
+                </button>
+                <!-- /site__header-btn -->
+
                 <!-- login -->
                 <a href="#" class="login">
 
@@ -379,158 +385,7 @@
                     <span>CALL</span> <?= $phone ?></a>
                 <!-- /site__header-call -->
 
-                <!-- site__menu -->
-                <nav class="site__menu">
-
-                    <ul>
-                        <li class="site__menu-item active site__menu-item_sub">
-                            <a href="#" data-product='{
-                                "src": "pic/girl.jpg",
-                                "name": "bla bla bal",
-                                "url": "ghjfghf",
-                                "price": "1000$",
-                                "oldPrice": "1$",
-                                "onSale": "true"
-                            }'>
-                                Mobility Scooters</a>
-
-                            <div class="site__menu-sub">
-
-                                <div>
-
-                                    <ul>
-                                        <li><a href="#" data-product='{
-                                "src": "pic/lift-chairs.png",
-                                "name": "bla bla bal",
-                                "url": "ghjfghf",
-                                "price": "1000$",
-                                "oldPrice": "100$",
-                                "onSale": "true"
-                            }'>4-Wheel Rollators</a></li>
-                                        <li><a href="#" data-product='{
-                                "src": "pic/girl.jpg",
-                                "name": "bla bla bal",
-                                "url": "ghjfghf",
-                                "price": "1000$"
-                            }'>3-Wheel Rollators</a></li>
-                                        <li><a href="#" data-product='{
-                                "src": "pic/lift-chairs.png",
-                                "name": "bla bla bal",
-                                "url": "ghjfghf",
-                                "price": "1000$",
-                                "oldPrice": "100$",
-                                "onSale": "true"
-                            }'>Standard Walkers</a></li>
-                                        <li><a href="#">Heavy Duty Walkers</a></li>
-                                        <li><a href="#">Standard Canes</a></li>
-                                        <li><a href="#">Quad Canes</a></li>
-                                        <li><a href="#">Folding Canes</a></li>
-                                        <li><a href="#">Seat Canes</a></li>
-                                        <li><a href="#">Fashion Canes</a></li>
-                                        <li><a href="#">Heavy Duty Canes</a></li>
-                                        <li><a href="#">Walking Sticks</a></li>
-                                    </ul>
-                                    <ul>
-                                        <li><a href="#">Cane Accessories</a></li>
-                                        <li><a href="#">Crutches</a></li>
-                                        <li><a href="#">Knee Walkers</a></li>
-                                        <li><a href="#">Specialty Walkers</a></li>
-                                        <li><a href="#">Two-in-one Walker-Wheelchair</a></li>
-                                        <li><a href="#">Walker Accessories</a></li>
-                                    </ul>
-
-                                </div>
-                                <div>
-
-                                    <!-- featured-product -->
-                                    <div class="featured-product">
-                                        <h2 class="featured-product__title">The Name of the
-                                            product</h2>
-
-                                        <div class="featured-product__pic">
-                                            <span class="featured-product__remark"><span>ON SALE</span></span>
-                                            <img src="pic/lift-chairs.png" width="414" height="414" alt="">
-                                        </div>
-
-                                        <span class="featured-product__price"><del>$1,800.00</del> <span>$1,350.00</span></span>
-
-                                        <a href="#" class="btn">SEE MORE</a>
-                                    </div>
-                                    <!-- /featured-product -->
-
-                                </div>
-
-                            </div>
-
-                        </li>
-                        <li class="site__menu-item">
-                            <a href="#">Manual Wheelchairs</a>
-                        </li>
-                        <li class="site__menu-item">
-                            <a href="#">Power Wheelchairs</a>
-                        </li>
-                        <li class="site__menu-item">
-                            <a href="#">Walking Aids</a>
-                        </li>
-                        <li class="site__menu-item">
-                            <a href="#">Lift Chairs</a>
-                        </li>
-                        <li class="site__menu-item site__menu-item_sub">
-                            <a href="#">Patient Lifts</a>
-
-                            <div class="site__menu-sub">
-
-                                <ul>
-                                    <li><a href="#">4-Wheel Rollators</a></li>
-                                    <li><a href="#">3-Wheel Rollators</a></li>
-                                    <li><a href="#">Standard Walkers</a></li>
-                                    <li><a href="#">Heavy Duty Walkers</a></li>
-                                    <li><a href="#">Standard Canes</a></li>
-                                    <li><a href="#">Quad Canes</a></li>
-                                    <li><a href="#">Folding Canes</a></li>
-                                    <li><a href="#">Seat Canes</a></li>
-                                    <li><a href="#">Fashion Canes</a></li>
-                                    <li><a href="#">Heavy Duty Canes</a></li>
-                                    <li><a href="#">Walking Sticks</a></li>
-                                    <li><a href="#">Cane Accessories</a></li>
-                                    <li><a href="#">Crutches</a></li>
-                                    <li><a href="#">Knee Walkers</a></li>
-                                    <li><a href="#">Specialty Walkers</a></li>
-                                    <li><a href="#">Two-in-one Walker-Wheelchair</a></li>
-                                    <li><a href="#">Walker Accessories</a></li>
-                                </ul>
-
-                                <!-- featured-product -->
-                                <div class="featured-product">
-                                    <h2 class="featured-product__title">The Name of the
-                                        product</h2>
-
-                                    <div class="featured-product__pic">
-                                        <span class="featured-product__remark"><span>ON SALE</span></span>
-                                        <img src="pic/lift-chairs.png" width="414" height="414" alt="">
-                                    </div>
-
-                                    <span class="featured-product__price"><del>$1,800.00</del> $1,350.00</span>
-
-                                    <a href="#" class="btn">SEE MORE</a>
-                                </div>
-                                <!-- /featured-product -->
-
-                            </div>
-                        </li>
-                        <li class="site__menu-item">
-                            <a href="#">Vehicle Lifts</a>
-                        </li>
-                        <li class="site__menu-item">
-                            <a href="#">Other</a>
-                        </li>
-                        <li class="site__menu-item">
-                            <a href="#">About</a>
-                        </li>
-                    </ul>
-
-                </nav>
-                <!-- /site__menu -->
+               <?php get_template_part( 'content/content', 'home-menu' ) ?>
 
             </div>
             <!-- /site__header-layout -->
