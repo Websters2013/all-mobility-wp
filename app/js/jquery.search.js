@@ -29,80 +29,131 @@
                 _input.on( {
                     keyup: function(I) {
 
-                        switch(I.keyCode) {
-                            case 13:
+                        if( $(window).width() >= 1024 ) {
 
-                                if( $('.search__found li').filter('.active').length == 0 ) {
-                                    _obj.find('form').submit();
-                                }
+                            switch(I.keyCode) {
+                                case 13:
 
-                                break;
-                            case 32:
-                            case 27:
-                            case 37:
-                            case 38:
-                            case 39:
-                            case 40:
-                                break;
-                            default:
-
-                                var valueInput = $(this).val();
-                                var count = 0;
-
-                                if( valueInput.length > 0 ) {
-
-                                    _ajaxRequest( $(this), valueInput.length);
-
-
-                                } else {
-
-                                    if( $(this).val() == '' ){
-                                        $('.search__result').removeClass('visible');
-                                        suggestSelected = 0;
+                                    if( $('.search__found li').filter('.active').length == 0 ) {
+                                        _obj.find('form').submit();
                                     }
-                                }
-                                //self.core.goSubmit();
-                                break;
-                        }
 
+                                    break;
+                                case 32:
+                                case 27:
+                                case 37:
+                                case 38:
+                                case 39:
+                                case 40:
+                                    break;
+                                default:
+
+                                    var valueInput = $(this).val();
+                                    var count = 0;
+
+                                    if( valueInput.length > 0 ) {
+
+                                        _ajaxRequest( $(this), valueInput.length);
+
+
+                                    } else {
+
+                                        if( $(this).val() == '' ){
+                                            _result.removeClass('visible');
+                                            suggestSelected = 0;
+                                        }
+                                    }
+
+                                    break;
+                            }
+
+                        }
                     },
                     keydown: function(I) {
 
-                        switch( I.keyCode ) {
-                            case 13:
+                        if( $(window).width() >= 1024 ) {
 
-                                if( $('.search__found li').filter('.active').length == 0 ) {
-                                    window.location.href = _obj.data('action');
-                                    return false;
-                                }
+                            switch( I.keyCode ) {
+                                case 13:
 
-                                break;
-
-                            case 27:
-                                $('.search__result').remove();
-                                suggestSelected = 0;
-                                return false;
-                                break;
-
-                            case 38:
-                            case 40:
-                                I.preventDefault();
-
-                                if( countItems > 0 ){
-                                    _keyActivate( I.keyCode );
-
-                                    if( suggestSelected ==  countItems){
-                                        suggestSelected = 0
+                                    if( $('.search__found li').filter('.active').length == 0 ) {
+                                        window.location.href = _obj.data('action');
+                                        return false;
                                     }
 
-                                }
+                                    break;
 
-                                break;
+                                case 27:
+                                    _result.remove();
+                                    suggestSelected = 0;
+                                    return false;
+                                    break;
+
+                                case 38:
+                                case 40:
+                                    I.preventDefault();
+
+                                    if( countItems > 0 ){
+                                        _keyActivate( I.keyCode );
+
+                                        if( suggestSelected == countItems){
+                                            suggestSelected = 0
+                                        }
+
+                                    }
+
+                                    break;
+                            }
+
                         }
 
                     }
 
                 } );
+                $('html').click( function() {
+
+                    _result.removeClass('visible');
+
+                    suggestSelected = 0;
+
+                } );
+                $(document).on(
+                    "click",
+                    "body",
+                    function( event ){
+                        event = event || window.event;
+
+                        if (event.stopPropagation) {
+                            event.stopPropagation();
+                        } else {
+                            event.cancelBubble = true;
+                        }
+                    }
+                );
+                $(document).on(
+                    "click",
+                    ".search__found li",
+                    function() {
+                        var curItem = $(this),
+                            curText = curItem.find('a').text();
+
+                        _input.val(curText);
+                        _result.removeClass('visible');
+                        suggestSelected = 0;
+                    }
+                );
+                $(document).on(
+                    "keydown",
+                    ".search__found li",
+                    function(I){
+                        switch(I.keyCode) {
+                            case 13:
+
+                                $(this).trigger('click');
+                                break;
+                        }
+                    }
+                );
 
             },
             _keyActivate = function(n) {
@@ -139,9 +190,6 @@
                     productsCategoriesArr = [],
                     flag = true;
 
-                _result.addClass('visible');
-
-
                 var productsWrap = '<div class="top-products__wrap">';
 
                 $.each( products, function() {
@@ -166,11 +214,9 @@
 
                 } );
 
-
                 productsWrap += '</div>';
 
                 _result.find('div').eq(1).find('.top-products').html(productsWrap);
-
 
                     var resultStr = '<ul class="search__found">';
 
@@ -225,51 +271,30 @@
 
                                 }
 
-
                             }
 
                         }
 
                         var count = 0;
 
-
                         for ( var i = 0; i <= productsCategoriesArr.length-1; i++ ) {
 
-                            loop1:
                             for ( var j = 0; j <= productsCategoriesArr[i].length-1; j++ ) {
 
                                 var subcategoriesWrap = '';
 
-                                loop2:
                                 for( var z = 0; z <= productsCategoriesArr[i][1].length-1; z++ ) {
 
                                     subcategoriesWrap += '<li class="search__found-sub"><a href="#">' + productsCategoriesArr[i][1][z] + '</a></li>';
                                     count ++;
 
-                                    if( count >= 12 ) {
-
-                                        break loop2;
-
-                                    }
-
                                 }
 
                                 subcategoriesWrap += '';
 
-                                if( count >= 12 ) {
-
-                                    break loop1;
-
-                                }
-
                             }
 
-                            //if( count < 12 ) {
-
-                                resultStr += '<li><a href="#">' + productsCategoriesArr[i][0] + '</a></li>'+ subcategoriesWrap +'';
-
-
-                            //}
+                            resultStr += '<li><a href="#">' + productsCategoriesArr[i][0] + '</a></li>'+ subcategoriesWrap +'';
 
                         }
 
@@ -277,10 +302,13 @@
 
                     resultStr += '</ul>';
 
-                    _result.find('div:first').html(resultStr);
+                _result.find('div:first').html(resultStr);
 
+                _result.find('.search__found').find('li:not(:lt(11))').remove();
 
-                countItems = $(resultStr).find('li').length;
+                countItems = _result.find('.search__found').find('li').length;
+
+                _result.addClass('visible');
 
             },
             _ajaxRequest =  function( input, n ) {
@@ -300,7 +328,7 @@
                     },
                     error: function (XMLHttpRequest) {
                         if (XMLHttpRequest.statusText != "abort") {
-                            alert("При попытке отправить сообщение произошла неизвестная ошибка. \n Попробуй еще раз через несколько минут.");
+                            alert("Error");
                         }
                     }
                 });

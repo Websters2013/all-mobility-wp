@@ -65,25 +65,14 @@
                         if( curItem.hasClass('opened') ) {
 
                             curItem.removeClass('opened');
-                            _filters.css( {
-                                'min-height': 0,
-                                height: 0
-                            } );
+                            _filters.removeClass('opened');
+                            $('.site__header').attr( 'style', '' );
 
                         } else {
 
                             curItem.addClass('opened');
-                            _filters.css( {
-                                'min-height': _filters.find('>div').innerHeight()
-                            } );
-
-                            setTimeout( function() {
-
-                                _filters.css( {
-                                    'height': 'auto'
-                                } );
-
-                            }, 310 )
+                            _filters.addClass('opened');
+                            $('.site__header').css( { 'z-index': 0 } )
 
                         }
 

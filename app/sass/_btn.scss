@@ -123,6 +123,7 @@
     border-radius: 2px;
     font-size: 14px;
     line-height: 14px;
+
   }
 
   &_7 {
@@ -147,6 +148,24 @@
     }
 
   }
+
+  &_9 {
+    height: 31px;
+    padding: 0 22px;
+    border-radius: 2px;
+    font-size: 14px;
+    line-height: 14px;
+    background: #F47920;
+
+    &:hover {
+      background: #ea5438;
+    }
+
+    &:active {
+      background: #ea5438;
+    }
+  }
+
 
 }
 
