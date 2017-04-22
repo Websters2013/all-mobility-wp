@@ -43,6 +43,7 @@ let paths = {
             dist: 'product.min.js',
             contains: [
                 'app/js/jquery.main.js',
+                'app/js/jquery.popup.js',
                 'app/js/jquery.product-slider.js',
                 'app/js/jquery.websters-select.js',
                 'app/js/jquery.search.js'
@@ -52,6 +53,7 @@ let paths = {
             dist: 'category.min.js',
             contains: [
                 'app/js/jquery.main.js',
+                'app/js/jquery.popup.js',
                 'app/js/jquery.product-slider.js',
                 'app/js/jquery.websters-select.js',
                 'app/js/jquery.filters.js',
@@ -63,6 +65,7 @@ let paths = {
             dist: 'locations.min.js',
             contains: [
                 'app/js/jquery.main.js',
+                'app/js/jquery.popup.js',
                 'app/js/jquery.websters-select.js',
                 'app/js/jquery.map.js',
                 'app/js/jquery.search.js'
@@ -72,6 +75,7 @@ let paths = {
             dist: 'my-cart.min.js',
             contains: [
                 'app/js/jquery.main.js',
+                'app/js/jquery.popup.js',
                 'app/js/jquery.ajax-cart.js',
                 'app/js/jquery.number-spinner.js',
                 'app/js/jquery.product-slider.js',
@@ -82,6 +86,7 @@ let paths = {
             dist: 'faq.min.js',
             contains: [
                 'app/js/jquery.main.js',
+                'app/js/jquery.popup.js',
                 'app/js/jquery.accordion.js',
                 'app/js/jquery.search.js'
             ]
@@ -90,6 +95,7 @@ let paths = {
             dist: 'contact-us.min.js',
             contains: [
                 'app/js/jquery.main.js',
+                'app/js/jquery.popup.js',
                 'app/js/jquery.map.js',
                 'app/js/jquery.search.js'
             ]
@@ -98,6 +104,7 @@ let paths = {
             dist: 'checkout.min.js',
             contains: [
                 'app/js/jquery.main.js',
+                'app/js/jquery.popup.js',
                 'app/js/jquery.websters-select.js',
                 'app/js/jquery.search.js'
             ]

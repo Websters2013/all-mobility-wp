@@ -218,54 +218,52 @@
 
                 _result.find('div').eq(1).find('.top-products').html(productsWrap);
 
-                    var resultStr = '<ul class="search__found">';
+                var resultStr = '<ul class="search__found">';
 
-                    if( categoriesAvailability ) {
+                if( categoriesAvailability ) {
 
-                        $.each( categories, function() {
+                    $.each( categories, function() {
 
-                            var subcategories = this.subcategories,
-                                subcategoriesWrap = '';
+                        var subcategories = this.subcategories,
+                            subcategoriesWrap = '';
 
-                            if( subcategories != undefined ) {
+                        if( subcategories != undefined ) {
 
-                                for( var i = 0; i <= subcategories.length-1; i++ ) {
+                            for( var i = 0; i <= subcategories.length-1; i++ ) {
 
-                                    subcategoriesWrap += '<li class="search__found-sub"><a href="#">' + subcategories[i] + '</a></li>';
-                                }
-
-                                subcategoriesWrap += '';
-
+                                subcategoriesWrap += '<li class="search__found-sub"><a href="#">' + subcategories[i] + '</a></li>';
                             }
 
-                            resultStr += '<li><a href="#">' + this.name + '</a></li>'+ subcategoriesWrap +'';
+                            subcategoriesWrap += '';
 
-                        } );
+                        }
 
-                    } else {
+                        resultStr += '<li><a href="#">' + this.name + '</a></li>'+ subcategoriesWrap +'';
 
-                        for ( var i = 0; i <= allProductsCategoriesArr.length-1; i++ ) {
+                    } );
 
-                            if( flag ){
-                                productsCategoriesArr.push(allProductsCategoriesArr[i]);
-                                flag = false;
-                            }
+                } else {
 
-                            if( productsCategoriesArr[productsCategoriesArr.length-1][0] != allProductsCategoriesArr[i][0] ) {
+                    for ( var i = 0; i <= allProductsCategoriesArr.length-1; i++ ) {
 
-                                productsCategoriesArr.push(allProductsCategoriesArr[i]);
+                        if( flag ){
+                            productsCategoriesArr.push(allProductsCategoriesArr[i]);
+                            flag = false;
+                        }
 
-                            } else {
+                        if( productsCategoriesArr[productsCategoriesArr.length-1][0] != allProductsCategoriesArr[i][0] ) {
 
-                                for ( var j = 0; j <= allProductsCategoriesArr[i].length-1; j++ ) {
+                            productsCategoriesArr.push(allProductsCategoriesArr[i]);
 
-                                    for ( var z = 0; z <= allProductsCategoriesArr[i][1].length-1; z++ ) {
+                        } else {
 
-                                        if( productsCategoriesArr[productsCategoriesArr.length-1][1].indexOf( allProductsCategoriesArr[i][1][z]) == -1 ) {
+                            for ( var j = 0; j <= allProductsCategoriesArr[i].length-1; j++ ) {
 
-                                            productsCategoriesArr[productsCategoriesArr.length-1][1].push( allProductsCategoriesArr[i][1][z] )
+                                for ( var z = 0; z <= allProductsCategoriesArr[i][1].length-1; z++ ) {
 
-                                        }
+                                    if( productsCategoriesArr[productsCategoriesArr.length-1][1].indexOf( allProductsCategoriesArr[i][1][z]) == -1 ) {
+
+                                        productsCategoriesArr[productsCategoriesArr.length-1][1].push( allProductsCategoriesArr[i][1][z] )
 
                                     }
 
@@ -275,32 +273,34 @@
 
                         }
 
-                        var count = 0;
+                    }
 
-                        for ( var i = 0; i <= productsCategoriesArr.length-1; i++ ) {
+                    var count = 0;
 
-                            for ( var j = 0; j <= productsCategoriesArr[i].length-1; j++ ) {
+                    for ( var i = 0; i <= productsCategoriesArr.length-1; i++ ) {
 
-                                var subcategoriesWrap = '';
+                        for ( var j = 0; j <= productsCategoriesArr[i].length-1; j++ ) {
 
-                                for( var z = 0; z <= productsCategoriesArr[i][1].length-1; z++ ) {
+                            var subcategoriesWrap = '';
 
-                                    subcategoriesWrap += '<li class="search__found-sub"><a href="#">' + productsCategoriesArr[i][1][z] + '</a></li>';
-                                    count ++;
+                            for( var z = 0; z <= productsCategoriesArr[i][1].length-1; z++ ) {
 
-                                }
-
-                                subcategoriesWrap += '';
+                                subcategoriesWrap += '<li class="search__found-sub"><a href="#">' + productsCategoriesArr[i][1][z] + '</a></li>';
+                                count ++;
 
                             }
 
-                            resultStr += '<li><a href="#">' + productsCategoriesArr[i][0] + '</a></li>'+ subcategoriesWrap +'';
+                            subcategoriesWrap += '';
 
                         }
 
+                        resultStr += '<li><a href="#">' + productsCategoriesArr[i][0] + '</a></li>'+ subcategoriesWrap +'';
+
                     }
 
-                    resultStr += '</ul>';
+                }
+
+                resultStr += '</ul>';
 
                 _result.find('div:first').html(resultStr);
 
