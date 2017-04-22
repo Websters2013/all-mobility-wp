@@ -32,8 +32,8 @@
   &.fixed {
     position: fixed;
     height: 53px;
-    -webkit-transition:  -webkit-transform .5s ease, background-color .3s ease, top .3s ease, height .3s ease;
-    transition: transform .5s ease, background-color .3s ease, top .3s ease, height .3s ease;
+    -webkit-transition:  -webkit-transform .5s ease, background-color .3s ease;
+    transition: transform .5s ease, background-color .3s ease;
 
     .site__header-layout {
       height: 53px;
@@ -48,8 +48,8 @@
   padding: 0 20px;
   margin: 0 auto;
   height: 113px;
-  -webkit-transition:  -webkit-transform .5s ease, background-color .3s ease, top .3s ease, height .3s ease;
-  transition: transform .5s ease, background-color .3s ease, top .3s ease, height .3s ease;
+  -webkit-transition:  -webkit-transform .5s ease, background-color .3s ease;
+  transition: transform .5s ease, background-color .3s ease;
 }
 .site__menu {
 
@@ -323,8 +323,8 @@
   font-size: 10px;
   color: #FFFFFF;
   letter-spacing: 0;
-  -webkit-transition: background 0.3s, top .3s ease, opacity 0.3s, visibility .3s ease;
-  transition: background 0.3s, top .3s ease, opacity 0.3s, visibility .3s ease;
+  -webkit-transition: background 0.3s, visibility .3s ease;
+  transition: background 0.3s, visibility .3s ease;
   text-align: center;
 
   &:hover {
