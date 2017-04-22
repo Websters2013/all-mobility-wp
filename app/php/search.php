@@ -5,19 +5,27 @@ $json_data = '{
     "categories": [
         {
             "name": "category1",
-            "subcategories": ["subcategory1-1", "subcategory1-2", "subcategory1-3"]
+            "urlCategory": "222",
+            "subcategories": ["subcategory1-1", "subcategory1-2", "subcategory1-3"],
+            "urlSubcategories": ["1", "#", "#"]
         },
         {
             "name": "category2",
-            "subcategories": ["subcategory2-1", "subcategory2-2", "subcategory2-3"]
+            "urlCategory": "#",
+            "subcategories": ["subcategory2-1", "subcategory2-2", "subcategory2-3"],
+             "urlSubcategories": ["#", "#", "#"]
         },
         {
             "name": "category3",
-            "subcategories": ["subcategory3-1", "subcategory3-2", "subcategory3-3"]
+             "urlCategory": "#",
+            "subcategories": ["subcategory3-1", "subcategory3-2", "subcategory3-3"],
+             "urlSubcategories": ["#", "#", "#"]
         },
         {
             "name": "category4",
-            "subcategories": ["subcategory4-1", "subcategory4-2", "subcategory4-3"]
+             "urlCategory": "#",
+            "subcategories": ["subcategory4-1", "subcategory4-2", "subcategory4-3"],
+             "urlSubcategories": ["#", "#", "#"]
         },
         {
             "name": "category5"
@@ -33,7 +41,9 @@ $json_data = '{
             "oldPrice": "20000$",
             "categories": {
                 "mainCategory": "main category 1",
-                "subcategories": ["subcategory1-1", "subcategory1-2", "subcategory1-3"]
+                "urlMainCategory": "222",
+                "subcategories": ["subcategory1-1", "subcategory1-2", "subcategory1-3"],
+                "urlSubcategories": ["7689", "#", "#"]
             }
         },
         {
@@ -45,7 +55,9 @@ $json_data = '{
             "oldPrice": "22000$",
             "categories": {
                 "mainCategory": "main category 1",
-                "subcategories": ["subcategory2-1", "subcategory2-2", "subcategory2-3"]
+                "urlMainCategory": "222",
+                "subcategories": ["subcategory2-1", "subcategory2-2", "subcategory2-3"],
+                "urlSubcategories": ["#", "#", "#"]
             }
         },
         {
@@ -57,7 +69,9 @@ $json_data = '{
             "oldPrice": "23000$",
             "categories": {
                 "mainCategory": "main category 3",
-                "subcategories": ["subcategory3-1", "subcategory3-2", "subcategory3-3"]
+                "urlMainCategory": "#",
+                "subcategories": ["subcategory3-1", "subcategory3-2", "subcategory3-3"],
+                "urlSubcategories": ["#", "#", "#"]
             }
         },
         {
@@ -69,7 +83,8 @@ $json_data = '{
             "oldPrice": "24000$",
             "categories": {
                 "mainCategory": "main category 4",
-                "subcategories": ["subcategory4-1", "subcategory4-2", "subcategory4-3"]
+                "subcategories": ["subcategory4-1", "subcategory4-2", "subcategory4-3"],
+                "urlSubcategories": ["#", "#", "#"]
             }
         },
         {
@@ -81,7 +96,9 @@ $json_data = '{
             "oldPrice": "25000$",
             "categories": {
                 "mainCategory": "main category 5",
-                "subcategories": ["subcategory5-1", "subcategory5-2", "subcategory5-3"]
+                "urlMainCategory": "#",
+                "subcategories": ["subcategory5-1", "subcategory5-2", "subcategory5-3"],
+                "urlSubcategories": ["#", "#", "#"]
             }
         },
         {
@@ -93,7 +110,9 @@ $json_data = '{
             "oldPrice": "26000$",
             "categories": {
                 "mainCategory": "main category 6",
-                "subcategories": ["subcategory6-1", "subcategory6-2", "subcategory6-3"]
+                "urlMainCategory": "#",
+                "subcategories": ["subcategory6-1", "subcategory6-2", "subcategory6-3"],
+                "urlSubcategories": ["#", "#", "#"]
             }
         },
         {
@@ -105,7 +124,9 @@ $json_data = '{
             "oldPrice": "27000$",
             "categories": {
                 "mainCategory": "main category 7",
-                "subcategories": ["subcategory7-1", "subcategory7-2", "subcategory7-3"]
+                "urlMainCategory": "#",
+                "subcategories": ["subcategory7-1", "subcategory7-2", "subcategory7-3"],
+                "urlSubcategories": ["#", "#", "#"]
             }
         },
         {
@@ -117,7 +138,9 @@ $json_data = '{
             "oldPrice": "28000$",
             "categories": {
                 "mainCategory": "main category 8",
-                "subcategories": ["subcategory8-1", "subcategory8-2", "subcategory8-3"]
+                "urlMainCategory": "#",
+                "subcategories": ["subcategory8-1", "subcategory8-2", "subcategory8-3"],
+                "urlSubcategories": ["#", "#", "#"]
             }
         }
     ]
