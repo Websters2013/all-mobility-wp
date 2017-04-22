@@ -10,7 +10,7 @@
         <title><?php document_title(); ?></title>
         <?php  wp_head() ?>
     </head>
-    <body data-action="<?php echo admin_url( 'admin-ajax.php' );?>" <?php body_class(); ?>>
+    <body data-action="<?php echo admin_url( 'admin-ajax.php' );?>">
 
     <!-- site -->
     <div class="site">
@@ -94,259 +94,8 @@
                 </button>
                 <!-- /site__header-btn -->
 
-                <!-- login -->
-                <a href="#" class="login">
-
-                    <img src="<?= DIRECT ?>img/person.png" width="12" height="12" alt="">
-
-                    Log In
-
-                </a>
-                <!-- /login -->
-
-                <!-- search -->
-                <div class="search">
-
-                    <form action="#">
-                        <input type="search" name="search" id="search">
-                        <button type="submit">search</button>
-                    </form>
-
-                    <!-- search__result -->
-                    <div class="search__result">
-
-                        <div>
-
-                            <ul class="search__found">
-                                <li>Wheelchairs
-
-                                    <ul>
-                                        <li>Transport Wheelchairs</li>
-                                        <li>Standard Wheelchairs</li>
-                                        <li>Lightweight Wheelchairs</li>
-                                        <li>Ultralightweight Wheelchairs</li>
-                                    </ul>
-
-                                </li>
-                                <li>3-Wheel Chair</li>
-                                <li>4-Wheel Rollators</li>
-                                <li>3-Wheel Rollators</li>
-                                <li>Wagon Wheels</li>
-                                <li>Wheelie Wonkie</li>
-                            </ul>
-
-                        </div>
-                        <div>
-
-                            <!-- top-products -->
-                            <div class="top-products">
-
-                                <h2 class="top-products__title">Top Products</h2>
-
-                                <!-- top-products__wrap -->
-                                <div class="top-products__wrap">
-                                    <div>
-
-                                        <!-- top-products__item -->
-                                        <div class="top-products__item">
-
-                                            <!-- top-products__pic -->
-                                            <div class="top-products__pic">
-
-                                                <img src="pic/lift-chairs.png" width="414" height="414" alt="">
-
-                                            </div>
-                                            <!-- /top-products__pic -->
-
-                                            <!-- top-products__price -->
-                                            <span class="top-products__price"><del>$1,800</del> $1,350</span>
-                                            <!-- /top-products__price -->
-
-                                            <!-- top-products__item-title -->
-                                            <h3 class="top-products__item-title">Wheelchairs
-                                                Product Title</h3>
-                                            <!-- /top-products__item-title -->
-
-                                            <!-- top-products__btn -->
-                                            <a href="#" class="top-products__btn">view</a>
-                                            <!-- /top-products__btn -->
-
-                                        </div>
-                                        <!-- /top-products__item -->
-
-                                    </div>
-                                    <div>
-
-                                        <!-- top-products__item -->
-                                        <div class="top-products__item">
-
-                                            <!-- top-products__pic -->
-                                            <div class="top-products__pic">
-
-                                                <img src="pic/lift-chairs.png" width="414" height="414" alt="">
-
-                                            </div>
-                                            <!-- /top-products__pic -->
-
-                                            <!-- top-products__price -->
-                                            <span class="top-products__price"><del>$1,800</del> $1,350</span>
-                                            <!-- /top-products__price -->
-
-                                            <!-- top-products__item-title -->
-                                            <h3 class="top-products__item-title">Wheelchairs
-                                                Product Title</h3>
-                                            <!-- /top-products__item-title -->
-
-                                            <!-- top-products__btn -->
-                                            <a href="#" class="top-products__btn">view</a>
-                                            <!-- /top-products__btn -->
-
-                                        </div>
-                                        <!-- /top-products__item -->
-
-                                    </div>
-                                    <div>
-
-                                        <!-- top-products__item -->
-                                        <div class="top-products__item">
-
-                                            <!-- top-products__pic -->
-                                            <div class="top-products__pic">
-
-                                                <img src="pic/lift-chairs.png" width="414" height="414" alt="">
-
-                                            </div>
-                                            <!-- /top-products__pic -->
-
-                                            <!-- top-products__price -->
-                                            <span class="top-products__price"><del>$1,800</del> $1,350</span>
-                                            <!-- /top-products__price -->
-
-                                            <!-- top-products__item-title -->
-                                            <h3 class="top-products__item-title">Wheelchairs
-                                                Product Title</h3>
-                                            <!-- /top-products__item-title -->
-
-                                            <!-- top-products__btn -->
-                                            <a href="#" class="top-products__btn">view</a>
-                                            <!-- /top-products__btn -->
-
-                                        </div>
-                                        <!-- /top-products__item -->
-
-                                    </div>
-                                    <div>
-
-                                        <!-- top-products__item -->
-                                        <div class="top-products__item">
-
-                                            <!-- top-products__pic -->
-                                            <div class="top-products__pic">
-
-                                                <img src="pic/lift-chairs.png" width="414" height="414" alt="">
-
-                                            </div>
-                                            <!-- /top-products__pic -->
-
-                                            <!-- top-products__price -->
-                                            <span class="top-products__price"><del>$1,800</del> $1,350</span>
-                                            <!-- /top-products__price -->
-
-                                            <!-- top-products__item-title -->
-                                            <h3 class="top-products__item-title">Wheelchairs
-                                                Product Title</h3>
-                                            <!-- /top-products__item-title -->
-
-                                            <!-- top-products__btn -->
-                                            <a href="#" class="top-products__btn">view</a>
-                                            <!-- /top-products__btn -->
-
-                                        </div>
-                                        <!-- /top-products__item -->
-
-                                    </div>
-                                    <div>
-
-                                        <!-- top-products__item -->
-                                        <div class="top-products__item">
-
-                                            <!-- top-products__pic -->
-                                            <div class="top-products__pic">
-
-                                                <img src="pic/lift-chairs.png" width="414" height="414" alt="">
-
-                                            </div>
-                                            <!-- /top-products__pic -->
-
-                                            <!-- top-products__price -->
-                                            <span class="top-products__price"><del>$1,800</del> $1,350</span>
-                                            <!-- /top-products__price -->
-
-                                            <!-- top-products__item-title -->
-                                            <h3 class="top-products__item-title">Wheelchairs
-                                                Product Title</h3>
-                                            <!-- /top-products__item-title -->
-
-                                            <!-- top-products__btn -->
-                                            <a href="#" class="top-products__btn">view</a>
-                                            <!-- /top-products__btn -->
-
-                                        </div>
-                                        <!-- /top-products__item -->
-
-                                    </div>
-                                    <div>
-
-                                        <!-- top-products__item -->
-                                        <div class="top-products__item">
-
-                                            <!-- top-products__pic -->
-                                            <div class="top-products__pic">
-
-                                                <img src="pic/lift-chairs.png" width="414" height="414" alt="">
-
-                                            </div>
-                                            <!-- /top-products__pic -->
-
-                                            <!-- top-products__price -->
-                                            <span class="top-products__price"><del>$1,800</del> $1,350</span>
-                                            <!-- /top-products__price -->
-
-                                            <!-- top-products__item-title -->
-                                            <h3 class="top-products__item-title">Wheelchairs
-                                                Product Title</h3>
-                                            <!-- /top-products__item-title -->
-
-                                            <!-- top-products__btn -->
-                                            <a href="#" class="top-products__btn">view</a>
-                                            <!-- /top-products__btn -->
-
-                                        </div>
-                                        <!-- /top-products__item -->
-
-                                    </div>
-                                </div>
-                                <!-- /top-products__wrap -->
-
-                            </div>
-                            <!-- /top-products -->
-
-                        </div>
-
-                    </div>
-                    <!-- /search__result -->
-
-                </div>
-                <!-- /search -->
-
-                <!-- site__header-btn -->
-                <button class="site__header-btn">
-                    <span></span>
-                </button>
-                <!-- /site__header-btn -->
-
                 <!-- site__header-get -->
-                <a class="site__header-get" href="#">
+                <a class="site__header-get popup__open" data-popup="get" href="#">
 
                     <img src="img/book.png" width="17" height="18" alt="book">
 
@@ -385,7 +134,51 @@
                     <span>CALL</span> <?= $phone ?></a>
                 <!-- /site__header-call -->
 
-               <?php get_template_part( 'content/content', 'home-menu' ) ?>
+                <!-- site__hidden-items -->
+                <div class="site__hidden-items">
+
+                    <!-- logo-mobile -->
+                    <div class="logo-mobile">
+
+                        <svg width="45px" height="35px" viewBox="0 0 45 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+                            <desc>Created with Sketch.</desc>
+                            <defs></defs>
+                            <g id="high-fildelity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="main-menu-mobile" transform="translate(-30.000000, -25.000000)">
+                                    <path d="M44.3772686,25.0148062 C48.5184306,25.0163712 52.6603742,25.0124586 56.8015361,25.0171537 C62.147215,25.0226314 66.6948331,26.895983 70.2935325,30.8946575 C72.5446738,33.3955897 73.8773807,36.3316028 74.4683053,39.6651358 C75.7759995,47.0419468 71.9217017,54.5760443 65.4621769,57.9463557 C61.6680659,59.9253475 57.6777616,60.5020643 53.5170585,59.5544332 C47.059097,58.0832966 42.7913083,54.0752319 40.6542874,47.870635 C40.0954103,46.246907 40.0453849,44.4369395 39.8562265,42.7020938 C39.7569574,41.7951538 40.3408472,41.2192194 41.1217118,41.223132 C41.8181587,41.2262621 42.4247162,41.8295846 42.418463,42.6582727 C42.4043934,44.5237992 42.7303399,46.3228114 43.4572709,48.0294864 C45.4293645,52.6557415 48.7974783,55.7122626 53.7163783,56.9314279 C60.0328618,58.4980319 65.9780634,55.9211953 69.4587343,51.0132332 C74.8560018,43.4024488 71.7294167,32.4956923 63.1219279,28.8421089 C61.150616,28.0055956 59.093323,27.6033806 56.9703717,27.5986855 C48.2487626,27.5791225 40.4283916,27.5939904 31.7067825,27.5775574 C31.2628074,27.5767749 30.6882974,27.539214 30.4115946,27.2723748 C30.1192589,26.9891028 29.9504233,26.3889104 30.012955,25.9694799 C30.1051892,25.3497245 30.6718828,25.0531496 31.2925099,25.0155887 C31.8388807,24.9819403 32.388378,25.0132411 32.936312,25.0132411 C37.050898,25.0140236 40.2634642,25.0132411 44.3772686,25.0148062" id="Fill-2" fill="#0094C1"></path>
+                                    <path d="M46.6629608,30.0080697 C50.075839,30.0080697 53.4895082,30.0404846 56.9015955,30.0007763 C62.0743009,29.9399983 66.7764008,33.4537789 68.3669682,38.4845792 C70.5080253,45.2536312 67.0706281,52.3727647 60.2812546,54.4578564 C53.7323248,56.469204 47.041027,52.7033972 45.13725,46.150715 C44.8248312,45.0745386 44.6895816,43.9351531 44.5646141,42.8135958 C44.4602108,41.8711311 45.0526201,41.1669164 45.8316896,41.1385533 C46.6036408,41.1101902 47.0916468,41.7357987 47.1699492,42.7520074 C47.4926501,46.9448813 49.4620746,49.9854036 53.2933567,51.6004785 C57.8997537,53.5429444 63.2931295,51.3354863 65.4389322,46.7098729 C67.8805441,41.4456849 65.321874,35.0761472 59.9340347,33.2033734 C58.8567832,32.8289807 57.6514005,32.7130973 56.5037559,32.7025624 C50.8715182,32.6515089 45.2384895,32.6750097 39.6054607,32.6741994 C38.1366972,32.673389 35.9972219,32.7033728 34.5284583,32.6750097 C33.5429551,32.6563711 32.8959715,31.9651223 33.0138206,31.1474552 C33.1166419,30.4278433 33.6133482,30.0234668 34.425637,30.0226564 C38.281438,30.0194149 42.8071597,30.0210357 46.6629608,30.0210357 L46.6629608,30.0080697 Z" id="Fill-3" fill="#0094C1"></path>
+                                    <path d="M48.9852527,36.0015964 C51.5743327,36.0015964 54.1626016,35.9975097 56.7516816,36.0024137 C60.2256883,36.0097697 62.8285573,37.8177117 63.7370064,41.1630583 C64.8190342,45.1483772 62.4424664,48.7315679 58.8046143,49.7703989 C55.6307202,50.6760046 51.6311108,48.8664279 50.4176823,44.9824585 C50.1954367,44.2713782 50.2100368,43.4622179 50.2351814,42.7020976 C50.2603259,41.963228 50.8621735,41.6779785 51.4891656,41.6706225 C52.0934465,41.6640839 52.5833601,41.9918346 52.7285497,42.6481536 C52.8339947,43.1222071 52.8891506,43.6077033 52.9840511,44.0842088 C53.3490529,45.9093148 55.3808967,47.4262861 57.2870176,47.303686 C59.2799279,47.1745473 61.1065595,45.4499733 61.2493158,43.5627499 C61.4634502,40.7102555 59.6416853,38.7184134 56.7865595,38.7126921 C51.4104874,38.7028841 46.0336042,38.7077881 40.6575321,38.7037014 C39.5284596,38.7037014 38.982579,38.2476292 39.0004236,37.3379369 C39.0182681,36.4364179 39.6176823,36.0065004 40.7086324,36.0138564 C43.4672354,36.0334724 46.2266496,36.020395 48.9852527,36.020395 L48.9852527,36.0015964" id="Fill-4" fill="#F37820"></path>
+                                </g>
+                            </g>
+                        </svg>
+
+                    </div>
+                    <!-- /logo-mobile -->
+
+                    <!-- login -->
+                    <a href="#" class="login">
+
+                        <img src="<?= DIRECT ?>img/person.png" width="12" height="12" alt="">
+
+                        Log In
+
+                    </a>
+                    <!-- /login -->
+
+                    <?php get_template_part( 'content/content', 'search-form' ) ?>
+
+                    <!-- site__hidden-close -->
+                    <a href="#" class="site__hidden-close"></a>
+                    <!-- /site__hidden-close -->
+
+                    <a href="#" class="site__hidden-btn popup__open" data-popup="get">GET A FREE CATALOG</a>
+
+                    <?php get_template_part( 'content/content', 'home-menu' ) ?>
+
+                </div>
+                <!-- /site__hidden-items -->
+
 
             </div>
             <!-- /site__header-layout -->

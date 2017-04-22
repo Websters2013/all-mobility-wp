@@ -317,7 +317,8 @@
                 _request = $.ajax( {
                     url: _path,
                     data: {
-                        value: input.val()
+                        value: input.val(),
+                        action:'main_search'
                     },
                     dataType: 'json',
                     type: "get",

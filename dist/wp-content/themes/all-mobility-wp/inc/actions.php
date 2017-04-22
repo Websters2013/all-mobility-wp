@@ -275,16 +275,6 @@ function theme_pagination() {
     if ($max > 1) echo '</div>';
 }
 
-function get_posts_current(){
-
-
-}
-
-add_action('wp_ajax_get_posts','get_posts_current');
-
-add_action('wp_ajax_nopriv_get_posts', 'get_posts_current');
-
-
 //Remove wrappers
 remove_action('woocommerce_before_main_content','woocommerce_output_content_wrapper',10);
 remove_action('woocommerce_before_main_content','woocommerce_breadcrumb',20);
@@ -470,5 +460,266 @@ function checkProduct( $taxonomyName, $termid, $catID ){
     }
 
     return $attrProducts;
+    
+}
+
+function main_search(){
+
+    $query = $_GET['value'];
+
+    $terms = getTermsForSearch($query);
+
+    if( $terms ):
+
+    $allCatWithMain = array();
+
+    foreach ( $terms as $key => $term ){
+
+        if( $term == 0 ){
+            $terms[$key] = $key;
+        }
+
+    }
+
+    $limit = 12;
+
+    foreach ( $terms as $key => $term ){
+
+        if( !$allCatWithMain[$term] ){
+
+            $allCatWithMain[$term][0] = -1;
+
+            foreach ($terms as $sub_key => $sub_term ) {
+
+                if( $sub_term == $term && $term !=$sub_key ){
+
+                    $allCatWithMain[$term][] = $sub_key;
+
+                }
+
+            }
+
+        }
+    }
+
+    foreach ( $allCatWithMain as $key => $item ) {
+
+        unset($allCatWithMain[$key][0]);
+
+    }
+
+    $categories = '"categories": [ ';
+
+    $counterCat = 0;
+
+    foreach ( $allCatWithMain as $key => $item ) {
+
+        if( $counterCat >= $limit ){ break; }
+
+        $counterCat++;
+        
+        $catObj = get_term( $key,'product_cat' );
+
+        $catName = $catObj->name;
+
+        $catName = str_replace($query,"<span>$query</span>",$catName);
+
+        $categories .= '{
+            "name": "'.$catName.'",';
+
+        if( empty($item) ){
+
+            $categories = substr( $categories, 0, -1 );
+
+        } else {
+
+            if( $counterCat >= $limit ){
+
+                $categories = substr( $categories, 0, -1 );
+
+                $categories .= '},';
+
+                break;
+            }
+
+            $categories .= '"subcategories": [';
+
+            foreach ( $item as $value ) {
+
+                $counterCat++;
+
+                $catObj = get_term( $key,'product_cat' );
+
+                $catName = $catObj->name;
+
+                $catName = str_replace($query,"<span>$query</span>",$catName);
+
+                $categories .= '"'.$catName.'"'.',';
+
+                if( $counterCat >= $limit ){
+                    break;
+                }
+
+            }
+
+            $categories = substr( $categories, 0, -1 );
+
+            $categories .= ']';
+
+        }
+
+
+        $categories .= '},';
+
+    }
+
+    $categories = substr( $categories, 0, -1 );
+
+    $categories .= ']';
+
+    else:
+        $categories = '"categories": []';
+    endif;
+
+    $productsSearch = getProductsSearch( $query );
+    
+    if( $productsSearch ):
+
+        $products = '"products": [';
+
+        foreach ( $productsSearch as $item ){
+
+            $product = wc_get_product($item);
+
+            $name = json_encode($product->get_name());
+
+            $thumb_id = get_post_thumbnail_id($item);
+
+            $thumb_url = wp_get_attachment_image_src($thumb_id,'full')[0];
+
+            if( $product->is_type('variable') ){
+
+                $regularPrice = $product->get_variation_regular_price();
+
+                $salePrice = $product->get_variation_sale_price();
+
+            } elseif( $product->is_type('simple') ) {
+
+                $regularPrice = $product->get_regular_price();
+
+                $salePrice = $product->get_sale_price();
+
+            }
+
+            $product_terms  = wp_get_object_terms( 79, 'product_cat');
+
+            $sub_cat = '';
+
+            foreach ($product_terms as $term){
+
+                if( $term->parent == 0 ){
+
+                    $main_cat = json_encode($term->name);
+
+                } else {
+
+                    $sub_cat .= json_encode($term->name).',';
+
+                }
+
+            }
+
+            $sub_cat = substr( $sub_cat, 0, -1 );
+
+            $products .= ' {
+            "name": '.$name.',
+            "src": "'.$thumb_url.'",
+            "alt": '.$name.',
+            "href": "'.get_the_permalink($item).'",
+            "price": "'.$regularPrice.'$",
+            "oldPrice": "'.$salePrice.'$",
+            "categories": {
+                "mainCategory": '.$main_cat.',
+                "subcategories": ['.$sub_cat.']
+            }
+        },';
+
+        }
+
+        $products = substr( $products, 0, -1 );
+
+        $products .=']';
+    
+    else:
+
+        $products = '"products": []';
+        
+    endif;
+
+    $productsSearch .= '"products": [
+        {
+            "name": "Product1",
+            "src": "pic/lift-chairs.png",
+            "alt": "picture",
+            "href": "#",
+            "price": "10000$",
+            "oldPrice": "20000$",
+            "categories": {
+                "mainCategory": "main category 1",
+                "subcategories": ["subcategory1-1", "subcategory1-2", "subcategory1-3"]
+            }
+        }
+    ]';
+
+    $json_data = '{'.$categories.','.$products .'}';
+
+    $json_data = str_replace("\r\n",'',$json_data);
+
+    $json_data = str_replace("\n",'',$json_data);
+
+    echo $json_data;
+
+    exit;
+    
+}
+
+add_action('wp_ajax_main_search','main_search');
+
+add_action('wp_ajax_nopriv_main_search', 'main_search');
+
+function getTermsForSearch( $query ){
+    
+    $terms = get_terms(
+        array(
+            'taxonomy' => 'product_cat',
+            'hide_empty' => false,
+            'search' => $query,
+            'number' => 12,
+            'fields' => 'id=>parent'
+        )
+    );
+    
+    return $terms;
+    
+}
+
+function getProductsSearch( $query ){
+
+    $products = get_posts(
+
+        array(
+            'post_type' => 'product',
+            'posts_per_page' => 6,
+            's' => $query,
+            'post_status' => 'publish',
+            'fields' => 'ids',
+            'meta_key'			=> 'featured_product',
+            'orderby'			=> 'meta_value',
+            'order'				=> 'DESC'
+        )
+    
+    );
+    
+    return $products;
     
 }
