@@ -61,7 +61,7 @@ global $product;
 			<div class="product__add">
 
 				<h2 class="product__add-title">Customize & Purchase</h2>
-				
+
 				<form action="#">
 					<select name="parameter1" id="parameter1">
 						<option value="0">customizable parameter</option>
@@ -105,6 +105,8 @@ global $product;
 
 					</button>
 				</form>
+
+				<?php do_action( 'woocommerce_single_product_summary' ); ?>
 
 			</div>
 			<div>

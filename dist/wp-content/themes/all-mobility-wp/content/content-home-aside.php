@@ -8,32 +8,12 @@
            <?= get_field('advantages_title') ?>
         </h2>
 
-        <?php if( have_rows('advantages_list') ): ?>
+       <?php get_template_part( 'content/content', 'advantages' ) ?>
 
-        <ul class="advantages__list">
-
-                  <?php  while ( have_rows('advantages_list') ) : the_row();
-                      $image = get_sub_field('advantage_image');
-                      ?>
-
-                      <li>
-                                <span>
-                                    <?php if($image): ?>
-                                    <img src="<?= $image['url'] ?>" width="32" height="32" alt="<?= $image['alt'] ?>" title="<?= $image['title'] ?>">
-                                    <?php endif; ?>
-                                </span>
-                      <?= get_sub_field('advantage_text') ?>
-                      </li>
-
-                        <?php
-        
-                    endwhile; ?>
-
-                </ul>
-
-                <?php endif; ?>
     </div>
     <!-- /advantages -->
+
+    <?php if( $title = get_field('financing_title') ) :  ?>
 
     <!-- need-help -->
     <div class="need-help">
@@ -41,7 +21,7 @@
         <!-- need-help__title -->
         <h2 class="need-help__title">
             <span>$</span>
-            <?= get_field( 'financing_title' ) ?>
+            <?= $title ?>
         </h2>
         <!-- /need-help__title -->
 
@@ -52,6 +32,8 @@
 
     </div>
     <!-- /need-help -->
+
+    <?php endif; ?>
 
     <!-- watch-video -->
     <div class="watch-video" style="background-image: url(<?= get_field('video_image') ?>)">

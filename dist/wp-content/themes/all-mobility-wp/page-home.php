@@ -29,41 +29,10 @@ get_header(); ?>
             <div class="advantages advantages_mob">
 
                 <h2 class="advantages__title">
-                    Why All Around Mobility
+                    <?= get_field('advantages_title') ?>
                 </h2>
 
-                <ul class="advantages__list">
-                    <li>
-                                <span>
-                                    <img src="img/10938-200.png" width="32" height="32" alt="">
-                                </span>
-                        30-days Money Back
-                        Guarantee</li>
-                    <li>
-                                <span>
-                                    <img src="img/Ecommerce-Free-Shipping-icon.png" width="38" height="30" alt="">
-                                </span>
-                        Free Shipping
-                        over $50</li>
-                    <li>
-                                <span>
-                                    <img src="img/Credit_Card_Payment_Safe_Secure_Shopping_Ecommerce_Pay-512.png" width="46" height="46" alt="">
-                                </span>
-                        Safe & Secure
-                        Online Payments</li>
-                    <li>
-                                <span>
-                                     <img src="img/icon-innovative-research.png" width="30" height="35" alt="">
-                                </span>
-                        Expert Support
-                        at Your Service</li>
-                    <li>
-                                <span>
-                                    <img src="img/MAW_icon-vector-blue_14_geo_125x125.png" width="23" height="36" alt="">
-                                </span>
-                        Local Stores
-                        Near You</li>
-                </ul>
+               <?php get_template_part('content/content', 'advantages') ?>
 
             </div>
             <!-- /advantages -->
@@ -89,13 +58,13 @@ get_header(); ?>
             <!-- check-out -->
             <div class="check-out site__white-back">
 
-                <h2 class="site__title">Check out our local stores
+                <h2 class="site__title"><?= get_field( 'choose_the_title' ) ?>
 
                     <a class="site__title-link" href="#">store locator</a>
 
                 </h2>
 
-                <div class="check-out__map">
+                <div class="check-out__map" style="background-image: url(<?= get_field( 'choose_the_map_image' ) ?>)">
 
                     <a href="#" class="btn btn_3">store locator</a>
 

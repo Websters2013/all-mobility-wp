@@ -8,9 +8,9 @@
         <link rel='shortcut icon' type='image/x-icon' href='<?php echo TEMPLATEURI; ?>/assets/img/favicon.ico' />
 
         <title><?php document_title(); ?></title>
-        <?php  wp_head() ?>
+        <?php wp_head() ?>
     </head>
-    <body data-action="<?php echo admin_url( 'admin-ajax.php' );?>">
+    <body data-action="<?php echo admin_url( 'admin-ajax.php' );?>" <?php body_class() ?>>
 
     <!-- site -->
     <div class="site">

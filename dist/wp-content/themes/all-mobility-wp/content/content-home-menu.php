@@ -133,147 +133,19 @@
                     <div>
 
                         <ul>
-                            <li>
-                                <a href="#" data-product='{
-                                                        "src": "pic/lift-chairs.png",
-                                                        "name": "4-Wheel Rollators",
-                                                        "url": "ghjfghf",
-                                                        "price": "1000$",
-                                                        "oldPrice": "100$",
-                                                        "onSale": "true"
-                                                    }'>4-Wheel Rollators</a>
-                            </li>
-                            <li><a href="#" data-product='{
-                                                        "src": "pic/lift-chairs.png",
-                                                        "name": "3-Wheel Rollators",
-                                                        "url": "ghjfghf",
-                                                        "price": "2000$",
-                                                        "oldPrice": "100$",
-                                                        "onSale": "true"
-                                                    }'>3-Wheel Rollators</a></li>
-                            <li><a href="#" data-product='{
-                                    "src": "pic/lift-chairs.png",
-                                    "name": "bla bla bal",
-                                    "url": "ghjfghf",
-                                    "price": "1000$",
-                                    "oldPrice": "100$",
-                                    "onSale": "true"
-                                }'>Standard Walkers</a></li>
-                            <li><a href="#" data-product='{
-                                                        "src": "pic/lift-chairs.png",
-                                                        "name": "Heavy Duty Walkers",
-                                                        "url": "ghjfghf",
-                                                        "price": "2000$",
-                                                        "oldPrice": "100$",
-                                                        "onSale": "true"
-                                                    }'>Heavy Duty Walkers</a></li>
-                            <li><a href="#" data-product='{
-                                                        "src": "pic/lift-chairs.png",
-                                                        "name": "Standard Canes",
-                                                        "url": "ghjfghf",
-                                                        "price": "2000$",
-                                                        "oldPrice": "100$",
-                                                        "onSale": "true"
-                                                    }'>Standard Canes</a></li>
-                            <li><a href="#" data-product='{
-                                                        "src": "pic/lift-chairs.png",
-                                                        "name": "Quad Canes",
-                                                        "url": "ghjfghf",
-                                                        "price": "2000$",
-                                                        "oldPrice": "100$",
-                                                        "onSale": "true"
-                                                    }'>Quad Canes</a></li>
-                            <li><a href="#" data-product='{
-                                                        "src": "pic/lift-chairs.png",
-                                                        "name": "Folding Canes",
-                                                        "url": "ghjfghf",
-                                                        "price": "2000$",
-                                                        "oldPrice": "100$",
-                                                        "onSale": "true"
-                                                    }'>Folding Canes</a></li>
-                            <li><a href="#" data-product='{
-                                                        "src": "pic/lift-chairs.png",
-                                                        "name": "Seat Canes",
-                                                        "url": "ghjfghf",
-                                                        "price": "2000$",
-                                                        "oldPrice": "100$",
-                                                        "onSale": "true"
-                                                    }'>Seat Canes</a></li>
-                            <li><a href="#" data-product='{
-                                                        "src": "pic/lift-chairs.png",
-                                                        "name": "Fashion Canes",
-                                                        "url": "ghjfghf",
-                                                        "price": "2000$",
-                                                        "oldPrice": "100$",
-                                                        "onSale": "true"
-                                                    }'>Fashion Canes</a></li>
-                            <li><a href="#" data-product='{
-                                                        "src": "pic/lift-chairs.png",
-                                                        "name": "Heavy Duty Canes",
-                                                        "url": "ghjfghf",
-                                                        "price": "2000$",
-                                                        "oldPrice": "100$",
-                                                        "onSale": "true"
-                                                    }'>Heavy Duty Canes</a></li>
-                            <li><a href="#" data-product='{
-                                                        "src": "pic/lift-chairs.png",
-                                                        "name": "Walking Sticks",
-                                                        "url": "ghjfghf",
-                                                        "price": "2000$",
-                                                        "oldPrice": "100$",
-                                                        "onSale": "true"
-                                                    }'>Walking Sticks</a></li>
+
+                            <?php foreach ($terms as $item) {
+                                $itemId = $item->term_id;
+                                ?>
+
+                                <li>
+                                    <a href="<?= get_term_link($itemId) ?>"><?= $item->name ?></a>
+                                </li>
+
+                          <?php } ?>
+
                         </ul>
-                        <ul>
-                            <li><a href="#" data-product='{
-                                                        "src": "pic/lift-chairs.png",
-                                                        "name": "Cane Accessories",
-                                                        "url": "ghjfghf",
-                                                        "price": "2000$",
-                                                        "oldPrice": "100$",
-                                                        "onSale": "true"
-                                                    }'>Cane Accessories</a></li>
-                            <li><a href="#" data-product='{
-                                                        "src": "pic/lift-chairs.png",
-                                                        "name": "Crutches",
-                                                        "url": "ghjfghf",
-                                                        "price": "2000$",
-                                                        "oldPrice": "100$",
-                                                        "onSale": "true"
-                                                    }'>Crutches</a></li>
-                            <li><a href="#" data-product='{
-                                                        "src": "pic/lift-chairs.png",
-                                                        "name": "Knee Walkers",
-                                                        "url": "ghjfghf",
-                                                        "price": "2000$",
-                                                        "oldPrice": "100$",
-                                                        "onSale": "true"
-                                                    }'>Knee Walkers</a></li>
-                            <li><a href="#" data-product='{
-                                                        "src": "pic/lift-chairs.png",
-                                                        "name": "Specialty Walkers",
-                                                        "url": "ghjfghf",
-                                                        "price": "2000$",
-                                                        "oldPrice": "100$",
-                                                        "onSale": "true"
-                                                    }'>Specialty Walkers</a></li>
-                            <li><a href="#" data-product='{
-                                                        "src": "pic/lift-chairs.png",
-                                                        "name": "Two-in-one Walker-Wheelchair",
-                                                        "url": "ghjfghf",
-                                                        "price": "2000$",
-                                                        "oldPrice": "100$",
-                                                        "onSale": "true"
-                                                    }'>Two-in-one Walker-Wheelchair</a></li>
-                            <li><a href="#" data-product='{
-                                                        "src": "pic/lift-chairs.png",
-                                                        "name": "Walker Accessories",
-                                                        "url": "ghjfghf",
-                                                        "price": "2000$",
-                                                        "oldPrice": "100$",
-                                                        "onSale": "true"
-                                                    }'>Walker Accessories</a></li>
-                        </ul>
+
 
                     </div>
                     <div>
