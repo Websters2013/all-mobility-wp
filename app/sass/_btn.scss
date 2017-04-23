@@ -61,7 +61,6 @@
     line-height: 16px;
 
   }
-
   &_3 {
     height: 40px;
     background: #F47920;
@@ -79,7 +78,6 @@
     }
 
   }
-
   &_4 {
     height: 40px;
     background: #fff;
@@ -99,7 +97,6 @@
     }
 
   }
-
   &_5 {
     height: 40px;
     background: #F47920;
@@ -117,7 +114,6 @@
     }
 
   }
-
   &_6 {
     height: 26px;
     border-radius: 2px;
@@ -125,7 +121,6 @@
     line-height: 14px;
 
   }
-
   &_7 {
     height: 40px;
     border-radius: 4px;
@@ -135,7 +130,9 @@
     color: #FFFFFF;
   }
   &_8 {
-    height: 40px;
+    height: 48px;
+    font-size: 16px;
+    line-height: 16px;
     border-radius: 4px;
     background: #F47920;
 
@@ -148,7 +145,6 @@
     }
 
   }
-
   &_9 {
     height: 31px;
     padding: 0 22px;
@@ -165,7 +161,22 @@
       background: #ea5438;
     }
   }
+  &_10 {
+    height: 48px;
+    border-radius: 4px;
+    background: #F47920;
+    font-size: 16px;
+    line-height: 16px;
 
+    &:hover {
+      background: #ea5438;
+    }
+
+    &:active {
+      background: #ea5438;
+    }
+
+  }
 
 }
 
@@ -176,15 +187,12 @@
     &_2 {
       height: 48px;
     }
-
     &_3 {
       height: 48px;
     }
-
     &_4 {
       height: 48px;
     }
-
     &_5 {
       height: 48px;
     }
@@ -199,6 +207,12 @@
       border-radius: 4px;
       font-size: 16px;
       line-height: 16px;
+    }
+    &_10 {
+      height: 60px;
+      border-radius: 4px;
+      font-size: 20px;
+      line-height: 20px;
     }
 
   }

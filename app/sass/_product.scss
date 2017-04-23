@@ -190,7 +190,6 @@
 
 }
 
-
 @media (min-width: $desktop) {
 
   .product {
@@ -272,6 +271,61 @@
 
     }
 
+    &.product__items_non-customize {
+      display: block;
+
+      >div {
+        width: 72%;
+        padding-left: 0;
+
+        &:first-child {
+          display: block;
+          width: 100%;
+        }
+
+      }
+
+      .advantages {
+        padding: 33px 0 0;
+      }
+      .advantages__list {
+        @include flexbox();
+        @include justify-content();
+        @include align-items();
+        @include flex-direction();
+
+        >li {
+          margin: 0 0 25px;
+
+          &:nth-child( 3n + 1 ) {
+            width: 33%;
+          }
+          &:nth-child( 3n + 2 ) {
+            width: 39%;
+          }
+          &:nth-child( 3n + 3 ) {
+            width: 28%;
+          }
+
+          img {
+            width: 30px;
+            height: 30px;
+          }
+
+        }
+
+      }
+
+      .product__add {
+
+        .btn {
+          margin-top: 6px;
+        }
+
+      }
+
+    }
+
   }
   .product__wrap {
     padding: 0 29px 0 7px;
@@ -306,7 +360,7 @@
   }
   .product__download {
     display: block;
-    margin-top: -10px;
+    margin-top: 10px;
     margin-bottom: 34px;
 
     a {

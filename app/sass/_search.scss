@@ -109,6 +109,8 @@
   font-size: 16px;
   line-height: 16px;
   color: rgba(255, 255, 255, 0.71);
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
 }
 .search-btn {
   position: absolute;
@@ -118,8 +120,8 @@
   font-size: 16px;
   color: rgba(255, 255, 255, 0.71);
   letter-spacing: 0;
-  -webkit-transition: color 0.3s, top .3s ease;
-  transition: color 0.3s, top .3s ease;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
 
   svg {
     margin: 0 4px 0 0;
@@ -140,6 +142,8 @@
     left: 279px;
     right: 450px;
     padding-right: 0;
+    -webkit-transition: none;
+    transition: none;
 
     input[type=search] {
       height: 48px;
@@ -157,7 +161,6 @@
   .search__result {
     overflow: hidden;
     display: block;
-    overflow: hidden;
     opacity: 0;
     visibility: hidden;
     @include flexbox();
@@ -173,8 +176,6 @@
     border: 1px solid #E8E8E8;
     box-shadow: 4px 4px 2px 0 rgba(2,2,0,0.15);
     border-radius: 4px;
-    -webkit-transition: visibility 0.3s, opacity 0.3s;
-    transition: visibility 0.3s, opacity 0.3s;
 
     >div {
       width: 61.6%;
