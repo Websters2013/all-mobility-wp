@@ -78,9 +78,10 @@
 
                                     if( $('.search__found li').filter('.active').length == 0 ) {
                                         window.location.href = _obj.data('action');
-                                        return false;
+                                    } else {
+                                        window.location.href = $('.search__found li').filter('.active').find('a').attr('href')
                                     }
-
+                                    return false;
                                     break;
 
                                 case 27:
@@ -188,6 +189,7 @@
                     products = data.products,
                     allProductsCategoriesArr = [],
                     productsCategoriesArr = [],
+                    urlProductsCategoriesArr = [],
                     flag = true;
 
                 var productsWrap = '<div class="top-products__wrap">';
@@ -208,7 +210,7 @@
                                         </div>';
                     if( !categoriesAvailability ) {
 
-                        allProductsCategoriesArr.push( [product.categories.mainCategory, product.categories.subcategories] );
+                        allProductsCategoriesArr.push( [product.categories.mainCategory, product.categories.urlMainCategory, product.categories.subcategories, product.categories.urlSubcategories] );
 
                     }
 
@@ -225,20 +227,21 @@
                     $.each( categories, function() {
 
                         var subcategories = this.subcategories,
+                            urlSubcategories = this.urlSubcategories,
                             subcategoriesWrap = '';
 
                         if( subcategories != undefined ) {
 
                             for( var i = 0; i <= subcategories.length-1; i++ ) {
 
-                                subcategoriesWrap += '<li class="search__found-sub"><a href="#">' + subcategories[i] + '</a></li>';
+                                subcategoriesWrap += '<li class="search__found-sub"><a href="'+ urlSubcategories[i] +'">' + subcategories[i] + '</a></li>';
                             }
 
                             subcategoriesWrap += '';
 
                         }
 
-                        resultStr += '<li><a href="#">' + this.name + '</a></li>'+ subcategoriesWrap +'';
+                        resultStr += '<li><a href="'+ this.urlCategory +'">'+ this.name +'</a></li>'+ subcategoriesWrap +'';
 
                     } );
 
@@ -259,11 +262,11 @@
 
                             for ( var j = 0; j <= allProductsCategoriesArr[i].length-1; j++ ) {
 
-                                for ( var z = 0; z <= allProductsCategoriesArr[i][1].length-1; z++ ) {
+                                for ( var z = 0; z <= allProductsCategoriesArr[i][2].length-1; z++ ) {
 
-                                    if( productsCategoriesArr[productsCategoriesArr.length-1][1].indexOf( allProductsCategoriesArr[i][1][z]) == -1 ) {
+                                    if( productsCategoriesArr[productsCategoriesArr.length-1][2].indexOf( allProductsCategoriesArr[i][2][z]) == -1 ) {
 
-                                        productsCategoriesArr[productsCategoriesArr.length-1][1].push( allProductsCategoriesArr[i][1][z] )
+                                        productsCategoriesArr[productsCategoriesArr.length-1][2].push( allProductsCategoriesArr[i][2][z] )
 
                                     }
 
@@ -275,6 +278,8 @@
 
                     }
 
+                    console.log(productsCategoriesArr)
+
                     var count = 0;
 
                     for ( var i = 0; i <= productsCategoriesArr.length-1; i++ ) {
@@ -283,9 +288,9 @@
 
                             var subcategoriesWrap = '';
 
-                            for( var z = 0; z <= productsCategoriesArr[i][1].length-1; z++ ) {
+                            for( var z = 0; z <= productsCategoriesArr[i][2].length-1; z++ ) {
 
-                                subcategoriesWrap += '<li class="search__found-sub"><a href="#">' + productsCategoriesArr[i][1][z] + '</a></li>';
+                                subcategoriesWrap += '<li class="search__found-sub"><a href="' + productsCategoriesArr[i][3][z] + '">' + productsCategoriesArr[i][2][z] + '</a></li>';
                                 count ++;
 
                             }
@@ -294,7 +299,7 @@
 
                         }
 
-                        resultStr += '<li><a href="#">' + productsCategoriesArr[i][0] + '</a></li>'+ subcategoriesWrap +'';
+                        resultStr += '<li><a href="' + productsCategoriesArr[i][1] + '">' + productsCategoriesArr[i][0] + '</a></li>'+ subcategoriesWrap +'';
 
                     }
 
