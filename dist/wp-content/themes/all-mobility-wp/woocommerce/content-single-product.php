@@ -56,6 +56,22 @@ global $product;
 		</div>
 		<!-- /product__price -->
 
+		<!-- custom form -->
+<!--		<form action="http://all-mobility-wp/wp-comments-post.php" method="post" id="commentform" class="comment-form">-->
+<!--			<p class="comment-form-rating"><label for="rating">Your rating</label><div class="websters-select websters-select_custom"><span class="websters-select__item">Average</span><p class="stars"><span><a class="star-1" href="#">1</a><a class="star-2" href="#">2</a><a class="star-3" href="#">3</a><a class="star-4" href="#">4</a><a class="star-5" href="#">5</a></span></p>-->
+<!--			<select name="rating" id="rating" aria-required="true" required="" style="opacity: 0; display: none;">-->
+<!--				<option value="">Rate…</option>-->
+<!--				<option selected value="5">Perfect</option>-->
+<!--				<option value="4">Good</option>-->
+<!--				<option value="3">Average</option>-->
+<!--				<option value="2">Not that bad</option>-->
+<!--				<option value="1">Very poor</option>-->
+<!--			</select><div class="websters-select__arrow"></div></div></p><p class="comment-form-comment"><label for="comment">Your review <span class="required">*</span></label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" required=""></textarea></p><p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Submit"> <input type="hidden" name="comment_post_ID" value="59" id="comment_post_ID">-->
+<!--		</form>-->
+	<!-- custom form -->
+
+
+
 		<!-- product__items -->
 		<div class="product__items">
 			<div class="product__add">
@@ -114,38 +130,7 @@ global $product;
 				<!-- advantages -->
 				<div class="advantages advantages_2">
 
-					<ul class="advantages__list">
-						<li>
-                                <span>
-                                    <img src="img/10938-200.png" width="32" height="32" alt="">
-                                </span>
-							30-days Money Back
-							Guarantee</li>
-						<li>
-                                <span>
-                                    <img src="img/Credit_Card_Payment_Safe_Secure_Shopping_Ecommerce_Pay-512.png" width="46" height="46" alt="">
-                                </span>
-							Safe & Secure
-							Online Payments</li>
-						<li>
-                                <span>
-                                    <img src="img/Ecommerce-Free-Shipping-icon.png" width="38" height="30" alt="">
-                                </span>
-							Free Shipping
-							over $50</li>
-						<li>
-                                <span>
-                                     <img src="img/icon-innovative-research.png" width="30" height="35" alt="">
-                                </span>
-							Expert Support
-							at Your Service</li>
-						<li>
-                                <span>
-                                    <img src="img/MAW_icon-vector-blue_14_geo_125x125.png" width="23" height="36" alt="">
-                                </span>
-							Local Stores
-							Near You</li>
-					</ul>
+					<?php get_template_part('content/content', 'advantages') ?>
 
 				</div>
 				<!-- /advantages -->

@@ -1,6 +1,7 @@
 <?php global $wp_query;
 
 $cat_obj = $wp_query->get_queried_object();
+
 $category_ID  = $cat_obj->term_id; ?>
 
     <h1 class="site__title site__title_3"><?php woocommerce_page_title(); ?></h1>
@@ -14,7 +15,7 @@ $category_ID  = $cat_obj->term_id; ?>
     <!-- category__inner -->
     <div class="category__inner category__inner_filters">
 
-        <?php var_dump(getAttrForCategory( $category_ID )); ?>
+        <?php $attrs = getAttrForCategory( $category_ID ); ?>
 
         <!-- category__filters -->
         <aside class="category__filters">
@@ -31,143 +32,116 @@ $category_ID  = $cat_obj->term_id; ?>
                     </g>
                 </svg>
 
-                Filters <span>(2)</span>
+                Filters <span></span>
 
             </h2>
-            <a href="#" class="category__filters-clear">
+            <a href="#" class="category__filters-clear hidden">
                 clear
             </a>
 
             <!-- category__filters-items -->
             <div class="category__filters-items">
-                <div>
-                    <div class="category__filters-item">
-                                <span>Price Range
+                <a href="#" class="category__filtered-close"></a>
 
-                                     <svg width="6px" height="8px" viewBox="0 0 6 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                         <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
-                                         <desc>Created with Sketch.</desc>
-                                         <defs></defs>
-                                         <g id="high-fildelity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-                                             <g id="HD-category" transform="translate(-207.000000, -947.000000)" stroke-width="2" stroke="#444444">
-                                                 <polyline id="Path-3-Copy-10" transform="translate(209.500000, 951.000000) rotate(-90.000000) translate(-209.500000, -951.000000) " points="206.5 949.5 209.5 952.5 212.5 949.5"></polyline>
+                <h2 class="category__filters-title-inner">
+
+                    Filters <span></span>
+
+                </h2>
+
+                <form action="#">
+
+                    <div class="category__filtered hidden">
+                        <span class="category__filtered-by">Filtered by:</span>
+
+                        <ul class="category__filtered-list"></ul>
+
+                        <a href="#" class="btn btn_9">clear all</a>
+
+                    </div>
+
+                    <div class="category__filters-item">
+                                    <span>Price Range
+
+                                         <svg width="6px" height="8px" viewBox="0 0 6 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                             <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+                                             <desc>Created with Sketch.</desc>
+                                             <defs></defs>
+                                             <g id="high-fildelity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                                                 <g id="HD-category" transform="translate(-207.000000, -947.000000)" stroke-width="2" stroke="#444444">
+                                                     <polyline id="Path-3-Copy-10" transform="translate(209.500000, 951.000000) rotate(-90.000000) translate(-209.500000, -951.000000) " points="206.5 949.5 209.5 952.5 212.5 949.5"></polyline>
+                                                 </g>
                                              </g>
-                                         </g>
-                                     </svg>
+                                         </svg>
 
-                                </span>
+                                    </span>
                         <div class="category__filters-list">
                             <div>
-                                <a href="#">$1,100.00 - $1,199.99 1</a>
-                                <a href="#">$1,400.00 - $1,499.99 5</a>
-                                <a href="#">$1,500.00 - $1,599.99 1</a>
-                                <a href="#">$1,600.00 - $1,699.99 1</a>
-                                <a href="#">$1,900.00 and above 13</a>
+                                <div>
+                                    <input type="checkbox" name="name1" id="name1">
+                                    <label for="name1">$1,100.00 - $1,199.99 <span class="category__filters-count">1</span></label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="name2" id="name2">
+                                    <label for="name2">$1,400.00 - $1,499.99  <span class="category__filters-count">1</span></label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="name3" id="name3">
+                                    <label for="name3">$1,500.00 - $1,599.99  <span class="category__filters-count">1</span></label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="name4" id="name4">
+                                    <label for="name4">$1,600.00 - $1,699.99  <span class="category__filters-count">1</span></label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="name5" id="name5">
+                                    <label for="name5">$1,900.00 and above  <span class="category__filters-count">1</span></label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="category__filters-item">
-                                <span>Brand
 
-                                     <svg width="6px" height="8px" viewBox="0 0 6 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                         <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
-                                         <desc>Created with Sketch.</desc>
-                                         <defs></defs>
-                                         <g id="high-fildelity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-                                             <g id="HD-category" transform="translate(-207.000000, -947.000000)" stroke-width="2" stroke="#444444">
-                                                 <polyline id="Path-3-Copy-10" transform="translate(209.500000, 951.000000) rotate(-90.000000) translate(-209.500000, -951.000000) " points="206.5 949.5 209.5 952.5 212.5 949.5"></polyline>
+                    <?php foreach ( $attrs as $key =>  $attr ):
+                        ?>
+
+                        <div class="category__filters-item">
+                                    <span><?= $key ?>
+
+                                         <svg width="6px" height="8px" viewBox="0 0 6 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                             <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+                                             <desc>Created with Sketch.</desc>
+                                             <defs></defs>
+                                             <g id="high-fildelity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                                                 <g id="HD-category" transform="translate(-207.000000, -947.000000)" stroke-width="2" stroke="#444444">
+                                                     <polyline id="Path-3-Copy-10" transform="translate(209.500000, 951.000000) rotate(-90.000000) translate(-209.500000, -951.000000) " points="206.5 949.5 209.5 952.5 212.5 949.5"></polyline>
+                                                 </g>
                                              </g>
-                                         </g>
-                                     </svg>
+                                         </svg>
 
-                                </span>
-                        <div class="category__filters-list">
-                            <div>
-                                <a href="#">Brand1</a>
-                                <a href="#">Brand2</a>
-                                <a href="#">Brand3</a>
-                                <a href="#">Brand4</a>
-                                <a href="#">Brand5</a>
+                                    </span>
+
+                            <div class="category__filters-list">
+                                <div>
+
+                                    <?php foreach ($attr as $sub_key => $item): ?>
+
+
+                                        <div>
+                                            <input type="checkbox" name="<?= $item->taxonomy ?>" id="<?= $item->term_id ?>" value="<?= $item->term_id ?>">
+                                            <label for="<?= $item->term_id ?>"><?= $item->name ?> <span class="category__filters-count"><?= $item->count_posts ?></span></label>
+                                        </div>
+
+                                    <?php
+                                    endforeach; ?>
+
+                                </div>
                             </div>
+
                         </div>
-                    </div>
-                    <div class="category__filters-item">
-                                <span>Frame Type
 
-                                     <svg width="6px" height="8px" viewBox="0 0 6 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                         <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
-                                         <desc>Created with Sketch.</desc>
-                                         <defs></defs>
-                                         <g id="high-fildelity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-                                             <g id="HD-category" transform="translate(-207.000000, -947.000000)" stroke-width="2" stroke="#444444">
-                                                 <polyline id="Path-3-Copy-10" transform="translate(209.500000, 951.000000) rotate(-90.000000) translate(-209.500000, -951.000000) " points="206.5 949.5 209.5 952.5 212.5 949.5"></polyline>
-                                             </g>
-                                         </g>
-                                     </svg>
+                    <?php endforeach; ?>
 
-                                </span>
-                        <div class="category__filters-list">
-                            <div>
-                                <a href="#">Type1</a>
-                                <a href="#">Type2</a>
-                                <a href="#">Type3</a>
-                                <a href="#">Type4</a>
-                                <a href="#">Type5</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="category__filters-item">
-                                <span>Seat Width
-
-                                     <svg width="6px" height="8px" viewBox="0 0 6 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                         <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
-                                         <desc>Created with Sketch.</desc>
-                                         <defs></defs>
-                                         <g id="high-fildelity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-                                             <g id="HD-category" transform="translate(-207.000000, -947.000000)" stroke-width="2" stroke="#444444">
-                                                 <polyline id="Path-3-Copy-10" transform="translate(209.500000, 951.000000) rotate(-90.000000) translate(-209.500000, -951.000000) " points="206.5 949.5 209.5 952.5 212.5 949.5"></polyline>
-                                             </g>
-                                         </g>
-                                     </svg>
-
-                                </span>
-                        <div class="category__filters-list">
-                            <div>
-                                <a href="#">width1</a>
-                                <a href="#">width2</a>
-                                <a href="#">width3</a>
-                                <a href="#">width4</a>
-                                <a href="#">width5</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="category__filters-item">
-                                <span>Frame Color
-
-                                    <svg width="6px" height="8px" viewBox="0 0 6 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                        <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
-                                        <desc>Created with Sketch.</desc>
-                                        <defs></defs>
-                                        <g id="high-fildelity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-                                            <g id="HD-category" transform="translate(-207.000000, -947.000000)" stroke-width="2" stroke="#444444">
-                                                <polyline id="Path-3-Copy-10" transform="translate(209.500000, 951.000000) rotate(-90.000000) translate(-209.500000, -951.000000) " points="206.5 949.5 209.5 952.5 212.5 949.5"></polyline>
-                                            </g>
-                                        </g>
-                                    </svg>
-
-                                </span>
-                        <div class="category__filters-list">
-                            <div>
-                                <a href="#">Black 4</a>
-                                <a href="#">Blue 8</a>
-                                <a href="#">Gray 1</a>
-                                <a href="#">Orange 1</a>
-                                <a href="#">Pink 1</a>
-                                <a href="#">(more)</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
             <!-- /category__filters-items -->
 
@@ -241,6 +215,9 @@ $category_ID  = $cat_obj->term_id; ?>
 
             <?php endif; ?>
 
+            <!-- category__wrap -->
+            <div class="category__wrap">
+
             <!-- product-categories -->
             <div class="product-categories product-categories_2">
 
@@ -248,6 +225,8 @@ $category_ID  = $cat_obj->term_id; ?>
 
             </div>
             <!-- /product-categories -->
+
+            </div>
 
             <!-- advantages -->
             <div class="advantages advantages_mob">

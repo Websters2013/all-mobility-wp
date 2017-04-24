@@ -1,13 +1,16 @@
 
 <?php $frontPage_id = get_option( 'page_on_front' ); ?>
 
-    <?php if( have_rows('advantages_list', $frontPage_id ) ): ?>
+    <?php if( have_rows('advantages_list', $frontPage_id ) ):
+        $count = 0;
+        ?>
 
     <ul class="advantages__list">
 
         <?php  while ( have_rows('advantages_list', $frontPage_id ) ) : the_row();
 
-
+            if( get_sub_field('hide_on_categories_page') != 'hide' && $count != 4) {
+                
                 $image = get_sub_field('advantage_image');
                 ?>
 
@@ -23,6 +26,8 @@
 
 
                 <?php
+            }
+        $count++;
         endwhile; ?>
 
     </ul>

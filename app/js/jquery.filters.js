@@ -308,11 +308,16 @@
             },
             _requestContent = function ( itemText, itemName, clear ) {
 
+                var ser = _form.serializeArray();
+
+                console.log(ser);
+
                 _request.abort();
                 _request = $.ajax( {
                     url: _path,
                     data: {
-                        value: _form.serialize()
+                        value: _form.serializeArray(),
+                        action : 'get_filtered_products'
                     },
                     dataType: 'json',
                     type: "get",

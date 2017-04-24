@@ -82,22 +82,41 @@ if(!empty($product_terms)):
 <!-- product-categories__inner -->
 <div class="product-categories__inner">
     <?php foreach ($product_terms as $product_term):
+
         $id = $product_term->term_id;
-        ( !is_product_category() &&  $link = get_field('link_for_the_button', 'product_cat_'.$id ) )? true : $link = get_term_link($id) ;
-        ( !is_product_category() && $textLink = get_field('text_for_preview_on_home_page', 'product_cat_'.$id) )? true : $textLink = 'see more' ;
-        ( !is_product_category() && $catName = get_field('custom_category_title', 'product_cat_'.$id) )? true : $catName = $product_term->name;
 
-        if( !( $fromPrice = get_field('price_for_preview_on_home_page', 'product_cat_'.$id) ) ){
-            $fromPrice = wpq_get_min_price_per_product_cat($id);
+        if( is_front_page() ){
+
+            ( $link = get_field('link_for_the_button', 'product_cat_'.$id ) )? true : $link = get_term_link($id) ;
+            ( $textLink = get_field('text_for_preview_on_home_page', 'product_cat_'.$id) )? true : $textLink = 'see more' ;
+            ( $catName = get_field('custom_category_title', 'product_cat_'.$id) )? true : $catName = $product_term->name;
+            if( !( $fromPrice = get_field('price_for_preview_on_home_page', 'product_cat_'.$id) ) ){
+                $min_price = wpq_get_min_price_per_product_cat($id);
+                (!$min_price)? $min_price = 0 : $min_price;
+
+                $fromPrice = $min_price;
+            }
+
+
+            if( ( !( $previewImage = get_field('image_for_preview_on_home_page', 'product_cat_'.$id) ) ) ){
+                $thumbnail_id = get_woocommerce_term_meta( $id, 'thumbnail_id', true );
+                $image = wp_get_attachment_url( $thumbnail_id );
+                $previewImage = $image;
+            }
+
         } else {
-            $fromPrice = '$'.number_format($fromPrice, 2, ',', ' ');
-        }
-
-        if( ( !is_product_category() && !( $previewImage = get_field('image_for_preview_on_home_page', 'product_cat_'.$id) ) ) ){
+            $link = get_term_link($id);
+            $textLink = 'see more';
+            $catName = $product_term->name;
+            $min_price = wpq_get_min_price_per_product_cat($id);
+            (!$min_price)? $min_price = 0 : $min_price;
+            $fromPrice = $min_price;
             $thumbnail_id = get_woocommerce_term_meta( $id, 'thumbnail_id', true );
             $image = wp_get_attachment_url( $thumbnail_id );
             $previewImage = $image;
-        } ?>
+        }
+        
+        $fromPrice = '$'.number_format($fromPrice, 2, ',', ' ');  ?>
 
         <div>
 

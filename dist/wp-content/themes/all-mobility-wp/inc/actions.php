@@ -424,9 +424,12 @@ function getAttrForCategory( $catID ){
 
             $is_related = checkProduct( $taxonomyName, $term->term_id, $catID );
 
-            if( $is_related ) {
-                $outPutAttr[$attribute->attribute_name] =  $attribute;
-                $outPutAttr[$attribute->attribute_name] =  $term;
+            if( $is_related[0] ) {
+
+                $term->count_posts = $is_related[1];
+
+                $outPutAttr[$attribute->attribute_name][] =  $term;
+
             }
 
         }
@@ -451,7 +454,7 @@ function checkProduct( $taxonomyName, $termid, $catID ){
             ),
             array(
                 'taxonomy' 		=> $taxonomyName,
-                'terms' 		=> array($termid),
+                'terms' 		=> array( $termid ),
                 'operator' 		=> 'IN'
             )
         )
@@ -459,10 +462,12 @@ function checkProduct( $taxonomyName, $termid, $catID ){
 
     $attrProducts =  get_posts($args);
 
+    $countPosts = count($attrProducts);
+    
     if(empty($attrProducts)){
-        $attrProducts = false;
+        $attrProducts = array( false, $countPosts );
     } else {
-        $attrProducts = $termid;
+        $attrProducts = array( $termid, $countPosts );
     }
 
     return $attrProducts;
@@ -531,7 +536,8 @@ function main_search(){
         $catName = str_replace($query,"<span>$query</span>",$catName);
 
         $categories .= '{
-            "name": "'.$catName.'",';
+            "name": "'.$catName.'",
+            "urlCategory": "'.get_term_link($key).'",';
 
         if( empty($item) ){
 
@@ -550,11 +556,15 @@ function main_search(){
 
             $categories .= '"subcategories": [';
 
+            $subUrls = array();
+
             foreach ( $item as $value ) {
 
                 $counterCat++;
 
-                $catObj = get_term( $key,'product_cat' );
+                $catObj = get_term( $value,'product_cat' );
+
+                $subUrls[] = $value;
 
                 $catName = $catObj->name;
 
@@ -571,6 +581,19 @@ function main_search(){
             $categories = substr( $categories, 0, -1 );
 
             $categories .= ']';
+
+            if( !empty($subUrls) ){
+
+                $categories .=  ',"urlSubcategories": [';
+
+                foreach ($subUrls as $id  ){
+                    $categories .= '"'.get_term_link($id).'"'.',';
+                }
+
+                $categories = substr( $categories, 0, -1 );
+
+                $categories .=  ']';
+            }
 
         }
 
@@ -637,13 +660,16 @@ function main_search(){
 
             $sub_cat = substr( $sub_cat, 0, -1 );
 
+            ( $salePrice )? $salePrice = $salePrice.'$' : $salePrice = '' ;
+            ( $regularPrice )? $regularPrice = $regularPrice.'$' : $regularPrice = '' ;
+
             $products .= ' {
             "name": '.$name.',
             "src": "'.$thumb_url.'",
             "alt": '.$name.',
             "href": "'.get_the_permalink($item).'",
-            "price": "'.$regularPrice.'$",
-            "oldPrice": "'.$salePrice.'$",
+            "price": "'.$regularPrice.'",
+            "oldPrice": "'.$salePrice.'",
             "categories": {
                 "mainCategory": '.$main_cat.',
                 "subcategories": ['.$sub_cat.']
@@ -730,3 +756,104 @@ function getProductsSearch( $query ){
     
 }
 
+function get_filtered_products(){
+
+$value = $_GET['value'];
+
+    $value =    parse_str($_GET, $value);
+
+$json_data = '{
+    "products": [
+        {
+            "name": "s",
+            "featured": "featured",
+            "picture": "pic/mobile-scooters-heavy-duty.jpg",
+            "title": "Product Title Even if it’s a Long one it fits (8000 Mph)",
+            "content": {
+                "description": ["Short bullet list of main chct if it’s pretty long or short", "Shoulmain keywords users will", "Will be limited to 3 points"],
+                "specification": {
+                    "head": ["Top Speed","Drive Range","Seat Width","Foldable"],
+                    "content": ["3.5 mph","8.7 miles","17”","Yes"]
+                }
+            },
+            "price": "$1,800.00",
+            "oldPrice": "$1,999",
+            "urlDetails": "#"
+        },
+        {
+            "name": "category2",
+            "featured": "featured",
+            "picture": "pic/mobile-scooters-heavy-duty.jpg",
+            "title": "Product Title Even if it’s a Long one it fits (8000 Mph)",
+            "rate": {
+                "starsCount": "3",
+                "reviewsCount": "20 Reviews",
+                "urlReviews": "#"
+            },
+            "content": {
+                "specification": {
+                    "head": ["Top Speed","Drive Range","Seat Width","Foldable"],
+                    "content": ["3.5 mph","8.7 miles","17”","Yes"]
+                }
+            },
+            "price": "$1,800.00",
+            "oldPrice": "$1,999",
+            "urlDetails": "#"
+        },
+        {
+            "name": "category3",
+            "picture": "pic/mobile-scooters-heavy-duty.jpg",
+            "title": "Product Title Even if it’s a Long one it fits (8000 Mph)",
+            "rate": {
+                "starsCount": "4",
+                "reviewsCount": "30 Reviews",
+                "urlReviews": "#"
+            },
+            "content": {
+                "description": ["Short bullet list of main characteristics of the product if it’s pretty long or short", "Should contain main keywords users will", "Will be limited to 3 points"],
+                "specification": {
+                    "head": ["Top Speed","Drive Range","Seat Width","Foldable"],
+                    "content": ["3.5 mph","8.7 miles","17”","Yes"]
+                }
+            },
+            "price": "$1,800.00",
+            "oldPrice": "$1,999",
+            "urlDetails": "#"
+        },
+        {
+            "name": "category4",
+            "picture": "pic/mobile-scooters-heavy-duty.jpg",
+            "title": "Product Title Even if it’s a Long one it fits (8000 Mph)",
+            "rate": {
+                "starsCount": "2",
+                "reviewsCount": "10 Reviews",
+                "urlReviews": "#"
+            },
+            "content": {
+                "description": ["Short bullet list of main characteristics of the product if it’s pretty long or short", "Should contain main keywords users will", "Will be limited to 3 points"],
+                "specification": {
+                    "head": ["Top Speed","Drive Range","Seat Width","Foldable"],
+                    "content": ["3.5 mph","8.7 miles","17”","Yes"]
+                }
+            },
+            "price": "$1,800.00",
+            "urlDetails": "#"
+        }
+    ]
+}';
+
+
+
+$json_data = str_replace("\r\n",'',$json_data);
+$json_data = str_replace("\n",'',$json_data);
+
+echo $json_data;
+exit;
+
+
+
+}
+
+add_action('wp_ajax_get_filtered_products','get_filtered_products');
+
+add_action('wp_ajax_nopriv_get_filtered_products', 'get_filtered_products');
