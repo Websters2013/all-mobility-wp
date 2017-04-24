@@ -26,91 +26,79 @@ if ( ! comments_open() ) {
 }
 
 ?>
-<div id="reviews" class="woocommerce-Reviews">
-	<div id="comments">
-		<h2 class="woocommerce-Reviews-title"><?php
-			if ( get_option( 'woocommerce_enable_review_rating' ) === 'yes' && ( $count = $product->get_review_count() ) ) {
-				/* translators: 1: reviews count 2: product name */
-				printf( esc_html( _n( '%1$s review for %2$s', '%1$s reviews for %2$s', $count, 'woocommerce' ) ), esc_html( $count ), '<span>' . get_the_title() . '</span>' );
-			} else {
-				_e( 'Reviews', 'woocommerce' );
-			}
-			?></h2>
 
-		<?php if ( have_comments() ) : ?>
+<!-- reviews -->
+<div class="reviews">
 
-			<ol class="commentlist">
-				<?php wp_list_comments( apply_filters( 'woocommerce_product_review_list_args', array( 'callback' => 'woocommerce_comments' ) ) ); ?>
-			</ol>
+	<h2 class="site__title site__title_2">Reviews (<?= $product->get_review_count()?>)</h2>
 
-			<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) :
-				echo '<nav class="woocommerce-pagination">';
-				paginate_comments_links( apply_filters( 'woocommerce_comment_pagination_args', array(
-					'prev_text' => '&larr;',
-					'next_text' => '&rarr;',
-					'type'      => 'list',
-				) ) );
-				echo '</nav>';
-			endif; ?>
+	<!-- reviews__items -->
+	<div class="reviews__items">
+
+		<?php if ( have_comments() ) :
+
+			$args = array(
+				'status'      => 'approve',
+				'post_status' => 'publish',
+				'post_type'   => 'product'
+			);
+
+			$comments = get_comments( $args );
+
+			foreach ($comments as $comment):
+				?>
+				<!-- reviews__single -->
+				<div class="reviews__single">
+
+					<!-- reviews__head -->
+					<div class="reviews__head">
+
+						<div class="reviews__pic">
+							<img src="<?= get_avatar_url($comment->comment_author_email) ?>" width="74" height="74" alt="">
+						</div>
+
+						<div>
+							<h2 class="reviews__name"><?= $comment->comment_author ?></h2>
+							<h3 class="reviews__place"><?= $comment->comment_author_email ?></h3>
+
+							<!-- rate -->
+							<div class="rate">
+								<div class="rate__star">
+									<div style="width: 100%"></div>
+								</div>
+							</div>
+							<!-- /rate -->
+
+						</div>
+
+					</div>
+					<!-- /reviews__head -->
+
+					<p><?= $comment->comment_content ?></p>
+
+				</div>
+				<!-- /reviews__single -->
+			<?php endforeach; ?>
 
 		<?php else : ?>
 
 			<p class="woocommerce-noreviews"><?php _e( 'There are no reviews yet.', 'woocommerce' ); ?></p>
 
 		<?php endif; ?>
+
 	</div>
 
-	<?php if ( get_option( 'woocommerce_review_rating_verification_required' ) === 'no' || wc_customer_bought_product( '', get_current_user_id(), $product->get_id() ) ) : ?>
-
-		<div id="review_form_wrapper">
-			<div id="review_form">
-				<?php
-				$commenter = wp_get_current_commenter();
-
-				$comment_form = array(
-					'title_reply'          => have_comments() ? __( 'Add a review', 'woocommerce' ) : sprintf( __( 'Be the first to review &ldquo;%s&rdquo;', 'woocommerce' ), get_the_title() ),
-					'title_reply_to'       => __( 'Leave a Reply to %s', 'woocommerce' ),
-					'title_reply_before'   => '<span id="reply-title" class="comment-reply-title">',
-					'title_reply_after'    => '</span>',
-					'comment_notes_after'  => '',
-					'fields'               => array(
-						'author' => '<p class="comment-form-author">' . '<label for="author">' . esc_html__( 'Name', 'woocommerce' ) . ' <span class="required">*</span></label> ' .
-							'<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" aria-required="true" required /></p>',
-						'email'  => '<p class="comment-form-email"><label for="email">' . esc_html__( 'Email', 'woocommerce' ) . ' <span class="required">*</span></label> ' .
-							'<input id="email" name="email" type="email" value="' . esc_attr( $commenter['comment_author_email'] ) . '" size="30" aria-required="true" required /></p>',
-					),
-					'label_submit'  => __( 'Submit', 'woocommerce' ),
-					'logged_in_as'  => '',
-					'comment_field' => '',
-				);
-
-				if ( $account_page_url = wc_get_page_permalink( 'myaccount' ) ) {
-					$comment_form['must_log_in'] = '<p class="must-log-in">' . sprintf( __( 'You must be <a href="%s">logged in</a> to post a review.', 'woocommerce' ), esc_url( $account_page_url ) ) . '</p>';
-				}
-
-				if ( get_option( 'woocommerce_enable_review_rating' ) === 'yes' ) {
-					$comment_form['comment_field'] = '<p class="comment-form-rating"><label for="rating">' . esc_html__( 'Your rating', 'woocommerce' ) . '</label><select name="rating" id="rating" aria-required="true" required>
-							<option value="">' . esc_html__( 'Rate&hellip;', 'woocommerce' ) . '</option>
-							<option value="5">' . esc_html__( 'Perfect', 'woocommerce' ) . '</option>
-							<option value="4">' . esc_html__( 'Good', 'woocommerce' ) . '</option>
-							<option value="3">' . esc_html__( 'Average', 'woocommerce' ) . '</option>
-							<option value="2">' . esc_html__( 'Not that bad', 'woocommerce' ) . '</option>
-							<option value="1">' . esc_html__( 'Very poor', 'woocommerce' ) . '</option>
-						</select></p>';
-				}
-
-				$comment_form['comment_field'] .= '<p class="comment-form-comment"><label for="comment">' . esc_html__( 'Your review', 'woocommerce' ) . ' <span class="required">*</span></label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" required></textarea></p>';
-
-				comment_form( apply_filters( 'woocommerce_product_review_comment_form_args', $comment_form ) );
-				?>
-			</div>
-		</div>
-
-	<?php else : ?>
-
-		<p class="woocommerce-verification-required"><?php _e( 'Only logged in customers who have purchased this product may leave a review.', 'woocommerce' ); ?></p>
-
-	<?php endif; ?>
-
-	<div class="clear"></div>
 </div>
+
+<!-- custom form -->
+		<form action="/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+				<select name="rating" id="rating" aria-required="true" required="" style="opacity: 0; display: none;">
+				<option value="">Rate…</option>
+				<option selected value="5">Perfect</option>
+				<option value="4">Good</option>
+				<option value="3">Average</option>
+				<option value="2">Not that bad</option>
+				<option value="1">Very poor</option>
+			</select><div class="websters-select__arrow"></div></div></p><p class="comment-form-comment"><label for="comment">Your review <span class="required">*</span></label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" required=""></textarea></p><p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Submit"> <input type="hidden" name="comment_post_ID" value="59" id="comment_post_ID">
+		</form>
+<!-- custom form -->

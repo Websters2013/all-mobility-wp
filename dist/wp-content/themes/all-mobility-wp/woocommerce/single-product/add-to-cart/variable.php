@@ -23,7 +23,14 @@ global $product;
 
 $attribute_keys = array_keys( $attributes );
 
-do_action( 'woocommerce_before_add_to_cart_form' ); ?>
+do_action( 'woocommerce_before_add_to_cart_form' ); 
+
+?>
+
+<div class="product__items">
+	<div class="product__add">
+
+	<h2 class="product__add-title">Customize & Purchase</h2>
 
 <form class="variations_form" method="post" enctype='multipart/form-data' data-product_id="<?php echo absint( $product->get_id() ); ?>" data-product_variations="<?php echo htmlspecialchars( wp_json_encode( $available_variations ) ) ?>">
 	<?php do_action( 'woocommerce_before_variations_form' ); ?>
@@ -43,7 +50,10 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 				<?php endforeach;?>
 
 		</div>
-		<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
+
+		<?php
+		do_action('wb_single_varitaion');
+		do_action( 'woocommerce_before_add_to_cart_button' ); ?>
 
 		<div class="single_variation_wrap">
 			<?php
@@ -72,6 +82,11 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
 	<?php do_action( 'woocommerce_after_variations_form' ); ?>
 </form>
+</div>
+	<div class="advantages advantages_2">
+		<?php get_template_part('content/content','advantages') ?>
+	</div>
 
+</div>
 <?php
 do_action( 'woocommerce_after_add_to_cart_form' );

@@ -5,13 +5,13 @@
         $count = 0;
         ?>
 
-    <ul class="advantages__list">
+    <ul class="why-us__advantages">
 
         <?php  while ( have_rows('advantages_list', $frontPage_id ) ) : the_row();
 
             if( get_sub_field('hide_on_categories_page') != 'hide' && $count != 4) {
                 
-                $image = get_sub_field('advantage_image');
+                $image = get_sub_field('advantage_image_in_why_us_block');
                 ?>
 
                 <li>
@@ -23,7 +23,6 @@
                                 </span>
                     <?= get_sub_field('advantage_text') ?>
                 </li>
-
 
                 <?php
             }

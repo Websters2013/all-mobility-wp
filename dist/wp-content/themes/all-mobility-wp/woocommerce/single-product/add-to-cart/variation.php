@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		{{{ data.variation.variation_description }}}
 	</div>
 
-	<div class="woocommerce-variation-price">
+	<div class="woocommerce-variation-price featured-product__price">
 		{{{ data.variation.price_html }}}
 	</div>
 

@@ -10,7 +10,7 @@
         <title><?php document_title(); ?></title>
         <?php wp_head() ?>
     </head>
-    <body data-action="<?php echo admin_url( 'admin-ajax.php' );?>" <?php body_class() ?>>
+    <body data-action="<?php echo admin_url( 'admin-ajax.php' );?>">
 
     <!-- site -->
     <div class="site">

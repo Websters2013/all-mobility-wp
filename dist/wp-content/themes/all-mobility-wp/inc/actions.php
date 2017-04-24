@@ -277,7 +277,7 @@ function theme_pagination() {
 
 //Remove wrappers
 remove_action('woocommerce_before_main_content','woocommerce_output_content_wrapper',10);
-remove_action('woocommerce_before_main_content','woocommerce_breadcrumb',20);
+//remove_action('woocommerce_before_main_content','woocommerce_breadcrumb',20);
 remove_action('woocommerce_after_main_content','woocommerce_output_content_wrapper_end',10);
 remove_action('woocommerce_get_sidebar','woocommerce_sidebar',10);
 
@@ -291,8 +291,9 @@ remove_action('woocommerce_single_product_summary','woocommerce_template_single_
 remove_action('woocommerce_single_product_summary','woocommerce_template_single_rating',10);
 remove_action('woocommerce_single_product_summary','woocommerce_template_single_price',10);
 remove_action('woocommerce_single_product_summary','woocommerce_template_single_excerpt',20);
-
-
+remove_action('woocommerce_single_product_summary','woocommerce_template_single_meta',40);
+remove_action('woocommerce_single_variation','woocommerce_single_variation',10);
+add_filter('wb_single_varitaion','woocommerce_single_variation',5);
 
 function wb_get_content (){
     echo get_the_content();
@@ -760,7 +761,7 @@ function get_filtered_products(){
 
 $value = $_GET['value'];
 
-    $value =    parse_str($_GET, $value);
+$value = parse_str($_GET, $value);
 
 $json_data = '{
     "products": [

@@ -98,11 +98,11 @@
                                     "oldPrice": "'.$salePrice.'$",
                                     "onSale": "'.$flagIsSale.'"
                                 }';
-
+                    $productExist = true;
                 } else {
 
                     $dataProduct = '';
-
+                    $productExist = false;
                 }
 
             } else {
@@ -123,7 +123,7 @@
             ?>
 
             <li class="site__menu-item<?= $sub_menu_class.$active ?>">
-                <a href="<?= $menu_item->url ?>"  data-product='<?= $dataProduct ?>'>
+                <a href="<?= $menu_item->url ?>">
                     <span class="site__menu-icon"></span>
                     <?= $menu_item->title ?></a>
 
@@ -146,28 +146,31 @@
 
                         </ul>
 
-
                     </div>
                     <div>
 
+                        <?php if( $productExist ): ?>
                         <!-- featured-product -->
                         <div class="featured-product">
 
-                            <h2 class="featured-product__title">Product Name nme nema</h2>
+                            <h2 class="featured-product__title"><?= $product->get_name() ?></h2>
 
-                            <div class="featured-product__pic" style="background-image: url(pic/lift-chairs.png)">
+                            <div class="featured-product__pic" style="background-image: url(<?= $thumb_url ?>)">
+                                <?php if($flagIsSale): ?>
                                 <span class="featured-product__remark"><span>ON SALE</span></span>
+                                <?php endif; ?>
                             </div>
 
                             <div class="featured-product__footer">
-                                <span class="featured-product__price"><del>$1,800.00</del> $1,350.00</span>
-                                <span class="btn">SEE MORE</span>
+                                <span class="featured-product__price"><del><?= $regularPrice.'$' ?></del><?= $salePrice.'$' ?></span>
+                                <a href="<?= get_the_permalink($featured_product_id) ?>" class="btn">SEE More</a>
                             </div>
 
                             <div class="featured-product__loading"></div>
 
                         </div>
                         <!-- /featured-product -->
+                        <?php endif; ?>
 
                     </div>
 

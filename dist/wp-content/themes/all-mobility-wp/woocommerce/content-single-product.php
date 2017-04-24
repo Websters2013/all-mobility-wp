@@ -55,90 +55,8 @@ global $product;
 
 		</div>
 		<!-- /product__price -->
-
-		<!-- custom form -->
-<!--		<form action="http://all-mobility-wp/wp-comments-post.php" method="post" id="commentform" class="comment-form">-->
-<!--			<p class="comment-form-rating"><label for="rating">Your rating</label><div class="websters-select websters-select_custom"><span class="websters-select__item">Average</span><p class="stars"><span><a class="star-1" href="#">1</a><a class="star-2" href="#">2</a><a class="star-3" href="#">3</a><a class="star-4" href="#">4</a><a class="star-5" href="#">5</a></span></p>-->
-<!--			<select name="rating" id="rating" aria-required="true" required="" style="opacity: 0; display: none;">-->
-<!--				<option value="">Rate…</option>-->
-<!--				<option selected value="5">Perfect</option>-->
-<!--				<option value="4">Good</option>-->
-<!--				<option value="3">Average</option>-->
-<!--				<option value="2">Not that bad</option>-->
-<!--				<option value="1">Very poor</option>-->
-<!--			</select><div class="websters-select__arrow"></div></div></p><p class="comment-form-comment"><label for="comment">Your review <span class="required">*</span></label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" required=""></textarea></p><p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Submit"> <input type="hidden" name="comment_post_ID" value="59" id="comment_post_ID">-->
-<!--		</form>-->
-	<!-- custom form -->
-
-
-
-		<!-- product__items -->
-		<div class="product__items">
-			<div class="product__add">
-
-				<h2 class="product__add-title">Customize & Purchase</h2>
-
-				<form action="#">
-					<select name="parameter1" id="parameter1">
-						<option value="0">customizable parameter</option>
-						<option value="1">parameter1</option>
-						<option value="2">parameter2</option>
-						<option value="3">parameter3</option>
-						<option value="4">parameter4</option>
-					</select>
-					<select name="parameter2" id="parameter2">
-						<option value="0">customizable parameter</option>
-						<option value="1">parameter1</option>
-						<option value="2">parameter2</option>
-						<option value="3">parameter3</option>
-						<option value="4">parameter4</option>
-					</select>
-					<select name="parameter3" id="parameter3">
-						<option value="0">customizable parameter</option>
-						<option value="1">parameter1</option>
-						<option value="2">parameter2</option>
-						<option value="3">parameter3</option>
-						<option value="4">parameter4</option>
-					</select>
-					<select name="parameter4" id="parameter4">
-						<option value="0">customizable parameter</option>
-						<option value="1">parameter1</option>
-						<option value="2">parameter2</option>
-						<option value="3">parameter3</option>
-						<option value="4">parameter4</option>
-						<option value="4">parameter4</option>
-						<option value="4">parameter4</option>
-						<option value="4">parameter4</option>
-						<option value="4">parameter4</option>
-					</select>
-					<button type="submit" class="btn btn_2 btn_img-left">
-
-                                    <span>
-
-                                        <img src="<?= DIRECT ?>img/cart.png" width="30" height="26px" alt="">
-
-                                        add to cart</span>
-
-					</button>
-				</form>
-
-				<?php do_action( 'woocommerce_single_product_summary' ); ?>
-
-			</div>
-			<div>
-
-				<!-- advantages -->
-				<div class="advantages advantages_2">
-
-					<?php get_template_part('content/content', 'advantages') ?>
-
-				</div>
-				<!-- /advantages -->
-
-			</div>
-		</div>
-		<!-- /product__items -->
-
+		
+		<?php do_action( 'woocommerce_single_product_summary' ); ?>
 	</div>
 	<!-- /product__inner -->
 
@@ -155,7 +73,7 @@ global $product;
 
 			</div>
 			<div>
-				<?php if( !($thumb_url = get_field('image_for_aside') ) ){
+				<?php if( !( $thumb_url = get_field('image_for_aside') ) ){
 					$thumb_id = get_post_thumbnail_id($product_id);
 					$thumb_url = wp_get_attachment_image_src($thumb_id,'full')[0];
 				}
@@ -235,118 +153,8 @@ global $product;
 	<!-- /product__wrap -->
 
 	<?php get_featured_slider_products(); ?>
-
-	<!-- reviews -->
-	<div class="reviews">
-
-		<h2 class="site__title site__title_2">Reviews (3)</h2>
-
-		<!-- reviews__items -->
-		<div class="reviews__items">
-
-			<!-- reviews__single -->
-			<div class="reviews__single">
-
-				<!-- reviews__head -->
-				<div class="reviews__head">
-
-					<div class="reviews__pic">
-						<img src="pic/userpic.jpg" width="74" height="74" alt="">
-					</div>
-
-					<div>
-						<h2 class="reviews__name">Jonathan Defoe,</h2>
-						<h3 class="reviews__place">Stamford, CA</h3>
-
-						<!-- rate -->
-						<div class="rate">
-							<div class="rate__star">
-								<div style="width: 100%"></div>
-							</div>
-						</div>
-						<!-- /rate -->
-
-					</div>
-
-				</div>
-				<!-- /reviews__head -->
-
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-
-			</div>
-			<!-- /reviews__single -->
-
-			<!-- reviews__single -->
-			<div class="reviews__single">
-
-				<!-- reviews__head -->
-				<div class="reviews__head">
-
-					<div class="reviews__pic">
-						<img src="pic/userpic.jpg" width="74" height="74" alt="">
-					</div>
-
-					<div>
-						<h2 class="reviews__name">Jonathan Defoe,</h2>
-						<h3 class="reviews__place">Stamford, CA</h3>
-
-						<!-- rate -->
-						<div class="rate">
-							<div class="rate__star">
-								<div style="width: 100%"></div>
-							</div>
-						</div>
-						<!-- /rate -->
-
-					</div>
-
-				</div>
-				<!-- /reviews__head -->
-
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-
-			</div>
-			<!-- /reviews__single -->
-
-			<!-- reviews__single -->
-			<div class="reviews__single">
-
-				<!-- reviews__head -->
-				<div class="reviews__head">
-
-					<div class="reviews__pic">
-						<img src="pic/userpic.jpg" width="74" height="74" alt="">
-					</div>
-
-					<div>
-						<h2 class="reviews__name">Jonathan Defoe,</h2>
-						<h3 class="reviews__place">Stamford, CA</h3>
-
-						<!-- rate -->
-						<div class="rate">
-							<div class="rate__star">
-								<div style="width: 100%"></div>
-							</div>
-						</div>
-						<!-- /rate -->
-
-					</div>
-
-				</div>
-				<!-- /reviews__head -->
-
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-
-			</div>
-			<!-- /reviews__single -->
-
-		</div>
-		<!-- /reviews__items -->
-
-	</div>
-	<!-- /reviews -->
-
-	<?php do_action( 'wb_product_review' ); ?>
+	
+	<?php comments_template(); ?>
 	
 </div>
 

@@ -32,40 +32,24 @@ get_header( 'shop' ); ?>
 		do_action( 'woocommerce_before_main_content' );
 	?>
 
+		<?php
+		if( is_tax('product_cat') ){
+			$class_padding=' site__content_no-padding';
+		} else {
+			$class_padding='';
+		}
+		?>
+
 		<!-- site__content -->
-		<div class="site__content site__content_inner site__white-back">
+		<div class="site__content site__content_inner site__white-back<?= $class_padding ?>">
 
 			<!-- why-us -->
 			<div class="why-us">
 				<div>
+					<?php $frontPage_id = get_option( 'page_on_front' ); ?>
+					<h2 class="why-us__title"><?= get_field('why_us_title', $frontPage_id) ?></h2>
 
-					<h2 class="why-us__title">Why
-						Us?</h2>
-
-					<!-- why-us__advantages -->
-					<ul class="why-us__advantages">
-						<li>
-							<img src="pic/money.png" width="45" height="45" alt="">
-							30-days Money
-							Back Guarantee
-						</li>
-						<li>
-							<img src="pic/free.png" width="46" height="36" alt="">
-							Free Shipping
-							over $50
-						</li>
-						<li>
-							<img src="pic/save.png" width="55" height="55" alt="">
-							Safe & Secure
-							Online Payments
-						</li>
-						<li>
-							<img src="pic/expert.png" width="38" height="44" alt="">
-							Expert Support
-							at Your Service
-						</li>
-					</ul>
-					<!-- /why-us__advantages -->
+					<?php get_template_part('content/content','advantages-why-us') ?>
 
 				</div>
 				<div class="why-us__resolve">
