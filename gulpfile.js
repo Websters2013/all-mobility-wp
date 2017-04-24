@@ -46,7 +46,8 @@ let paths = {
                 'app/js/jquery.popup.js',
                 'app/js/jquery.product-slider.js',
                 'app/js/jquery.websters-select.js',
-                'app/js/jquery.search.js'
+                'app/js/jquery.search.js',
+                'app/js/jquery.rate.js'
             ]
         },
         {

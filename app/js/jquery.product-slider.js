@@ -22,7 +22,10 @@
         var _self = this,
             _obj = obj,
             _slider,
-            _galleryThumbs;
+            _galleryThumbs,
+            _window = $(window),
+            _loop = false,
+            _slidesLength = 0;
 
         //private methods
         var _constructor = function() {
@@ -31,27 +34,24 @@
             },
             _initSlider = function () {
 
+                _addSomeParams();
+
                 _slider = new Swiper( _obj.find('.gallery-top') , {
                     slidesPerView: '1',
-                    loop: true,
-                    loopedSlides: _obj.find('.gallery-top .swiper-slide').length,
-                    //autoplay: 4000,
+                    loop: _loop,
+                    loopedSlides: _slidesLength,
                     centeredSlides: false,
                     spaceBetween: 30
                 } );
 
                 _galleryThumbs = new Swiper( _obj.find('.gallery-thumbs'), {
                     centeredSlides: false,
-                    loop: true,
-                    //autoplay: 4000,
-                    loopedSlides: _obj.find('.gallery-thumbs .swiper-slide').length,
                     slidesPerView: '4',
                     touchRatio: 0.2,
+                    loop: _loop,
+                    loopedSlides: _slidesLength,
                     slideToClickedSlide: true,
                     breakpoints: {
-                        415: {
-                            slidesPerView: '3'
-                        },
                         1440: {
                             slidesPerView: '3'
                         }
@@ -60,6 +60,31 @@
 
                 _slider.params.control = _galleryThumbs;
                 _galleryThumbs.params.control = _slider;
+
+            },
+            _addSomeParams = function() {
+
+                if( _window.width() < 1440 ) {
+
+                    if( _obj.find('.gallery-thumbs .swiper-slide').length >= 3 ) {
+
+                        _loop = true;
+                        _slidesLength = _obj.find('.gallery-thumbs .swiper-slide').length;
+
+                    }
+
+                }
+                else {
+
+                    if( _obj.find('.gallery-thumbs .swiper-slide').length >= 4 ) {
+
+                        _loop = true;
+                        _slidesLength = _obj.find('.gallery-thumbs .swiper-slide').length;
+
+                    }
+
+                }
+
             };
 
         _constructor();

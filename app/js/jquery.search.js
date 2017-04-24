@@ -34,7 +34,7 @@
                             switch(I.keyCode) {
                                 case 13:
 
-                                    if( $('.search__found li').filter('.active').length == 0 ) {
+                                    if( _result.find('.search__found li').filter('.active').length == 0 ) {
                                         _obj.find('form').submit();
                                     }
 
@@ -76,10 +76,10 @@
                             switch( I.keyCode ) {
                                 case 13:
 
-                                    if( $('.search__found li').filter('.active').length == 0 ) {
+                                    if( _result.find('.search__found li').filter('.active').length == 0 ) {
                                         window.location.href = _obj.data('action');
                                     } else {
-                                        window.location.href = $('.search__found li').filter('.active').find('a').attr('href')
+                                        window.location.href = _result.find('.search__found li').filter('.active').find('a').attr('href')
                                     }
                                     return false;
                                     break;
@@ -159,7 +159,7 @@
             },
             _keyActivate = function(n) {
 
-                $('.search__found li').removeClass('active');
+                _result.find('.search__found li').removeClass('active');
 
                 if( n == 40 && suggestSelected < countItems ) {
 
@@ -172,8 +172,8 @@
 
                 if( suggestSelected > 0 ) {
 
-                    $('.search__found li').eq( suggestSelected - 1 ).addClass('active');
-                    _input.val( $('.search__found li').eq( suggestSelected - 1 ).find('a').text() );
+                    _result.find('.search__found li').eq( suggestSelected - 1 ).addClass('active');
+                    _input.val( _result.find('.search__found li').eq( suggestSelected - 1 ).find('a').text() );
 
                 } else {
 
@@ -278,8 +278,6 @@
 
                     }
 
-                    console.log(productsCategoriesArr)
-
                     var count = 0;
 
                     for ( var i = 0; i <= productsCategoriesArr.length-1; i++ ) {
@@ -333,7 +331,7 @@
                     },
                     error: function (XMLHttpRequest) {
                         if (XMLHttpRequest.statusText != "abort") {
-                            alert("Error");
+                            console.log("Error");
                         }
                     }
                 });

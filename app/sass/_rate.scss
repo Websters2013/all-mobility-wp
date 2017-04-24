@@ -1,5 +1,17 @@
 .rate {
- margin: 0 0 21px;
+  margin: 0 0 21px;
+
+  img {
+    width: 30px;
+    height: 25px;
+    margin: 0 0 0 -4px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+  }
+
 }
 .rate__star {
   display: inline-block;
@@ -22,7 +34,7 @@
 .rate__reviews {
   display: inline-block;
   vertical-align: top;
-  margin: 3px 0 0 10px;
+  margin: 5px 0 0 10px;
   @include main-font3();
   font-weight: 400;
   font-size: 16px;

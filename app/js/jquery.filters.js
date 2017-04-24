@@ -330,7 +330,7 @@
                     },
                     error: function (XMLHttpRequest) {
                         if ( XMLHttpRequest.statusText != "abort" ) {
-                            alert("ERROR!!!");
+                            console.log("Error");
                         }
                     }
                 } );
