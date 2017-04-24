@@ -469,7 +469,7 @@
 }
 .site__content_inner {
   max-width: 1360px;
-  padding: 28px 29px;
+  padding: 28px 20px;
 }
 .site__content_page {
   max-width: 1360px;
@@ -540,11 +540,11 @@
 .site__featured {
   position: absolute;
   top: -4px;
-  left: -5px;
-  padding: 4px 6px;
+  left: -3px;
+  padding: 3px 6px;
   @include main-font1();
-  font-size: 14px;
-  line-height: 14px;
+  font-size: 10px;
+  line-height: 10px;
   color: #FFFFFF;
   background: #F47920;
   border-radius: 4px;
@@ -681,6 +681,22 @@ input[type="number"].site__input {
   &:-webkit-autofill:focus {
     background-color: rgba(250, 255, 189, 0);
   }
+}
+textarea.site__input {
+
+  height: 102px;
+
+}
+.site__label {
+  @include main-font4();
+  font-size: 16px;
+  line-height: 22px;
+  color: #4E4E4E;
+
+  span {
+    color: #F47920;
+  }
+
 }
 
 @media (min-width: $phone-mini) {
@@ -870,10 +886,14 @@ input[type="number"].site__input {
         //position: relative;
         display: inline-block;
         vertical-align: top;
+        -webkit-transition: z-index 0.3s;
+        transition: z-index 0.3s;
 
+        &:hover {
+          z-index: 3;
+        }
         &:hover,
         &.active {
-          z-index: 2;
 
           >a {
             background: #242424;
@@ -1240,7 +1260,9 @@ input[type="number"].site__input {
   .site__featured {
     top: -4px;
     left: -5px;
-    padding: 5px 7px;
+    padding: 4px 7px 3px;
+    font-size: 14px;
+    line-height: 14px;
   }
   .site__white-back {
     overflow: hidden;

@@ -59,7 +59,6 @@
     @include main-font10();
     font-size: 16px;
     line-height: 16px;
-
   }
   &_3 {
     height: 40px;
@@ -177,6 +176,15 @@
     }
 
   }
+  &_11 {
+    height: 40px;
+    min-width: 122px;
+    background: #0094C1;
+    border-radius: 4px;
+    @include main-font10();
+    font-size: 16px;
+    line-height: 16px;
+  }
 
 }
 
@@ -213,6 +221,9 @@
       border-radius: 4px;
       font-size: 20px;
       line-height: 20px;
+    }
+    &_11 {
+      height: 40px;
     }
 
   }

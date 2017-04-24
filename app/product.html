@@ -10,6 +10,7 @@
     <title>Title</title>
 
     <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/rating.min.css">
     <link rel="stylesheet" href="css/perfect-scrollbar.css">
     <link rel="stylesheet" href="css/product-single.css">
 
@@ -2078,9 +2079,11 @@
 
                     <!-- rate -->
                     <div class="rate">
-                        <div class="rate__star">
-                            <div style="width: 100%"></div>
-                        </div>
+                        <img src="img/star.png" width="30" height="25" alt="">
+                        <img src="img/star.png" width="30" height="25" alt="">
+                        <img src="img/star.png" width="30" height="25" alt="">
+                        <img src="img/star.png" width="30" height="25" alt="">
+                        <img src="img/star.png" width="30" height="25" alt="">
                         <span class="rate__reviews">15 Reviews</span>
                     </div>
                     <!-- /rate -->
@@ -2619,6 +2622,49 @@
                 </div>
                 <!-- /featured-products -->
 
+                <!-- add-review -->
+                <div class="add-review">
+
+                    <h2 class="site__title site__title_2">Add Your Review</h2>
+
+                    <!-- add-review__form -->
+                    <div class="add-review__form">
+                        <form action="#">
+                            <p>You are adding review as Jonathan Smith, San Francisco, CA</p>
+
+                            <div class="add-review__row">
+                                <div><label class="site__label" for="name">Your Name <span>*</span></label></div>
+                                <div>
+
+                                    <div class="add-review__rate">
+                                        <input type="hidden" name="stars">
+                                        <div id="#el"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="add-review__row">
+                                <div><label class="site__label" for="name">Your Name <span>*</span></label></div>
+                                <div><input class="site__input" type="text" required name="name" id="name"></div>
+                            </div>
+                            <div class="add-review__row">
+                                <div><label class="site__label" for="email">Your E-mail <span>*</span></label></div>
+                                <div><input class="site__input" type="email" required name="email" id="email"></div>
+                            </div>
+                            <div class="add-review__row">
+                                <div><label class="site__label" for="review">Your Review <span>*</span></label></div>
+                                <div><textarea class="site__input" name="review" id="review" cols="30" rows="10"></textarea></div>
+                            </div>
+                            <div class="add-review__send">
+                                <button class="btn btn_11"><span>submit</span></button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /add-review__form -->
+
+                </div>
+                <!-- /add-review -->
+
                 <!-- reviews -->
                 <div class="reviews">
 
@@ -2643,9 +2689,11 @@
 
                                     <!-- rate -->
                                     <div class="rate">
-                                        <div class="rate__star">
-                                            <div style="width: 100%"></div>
-                                        </div>
+                                        <img src="img/star.png" width="30" height="25" alt="">
+                                        <img src="img/star.png" width="30" height="25" alt="">
+                                        <img src="img/star.png" width="30" height="25" alt="">
+                                        <img src="img/star.png" width="30" height="25" alt="">
+                                        <img src="img/star.png" width="30" height="25" alt="">
                                     </div>
                                     <!-- /rate -->
 
@@ -2675,9 +2723,11 @@
 
                                     <!-- rate -->
                                     <div class="rate">
-                                        <div class="rate__star">
-                                            <div style="width: 100%"></div>
-                                        </div>
+                                        <img src="img/star.png" width="30" height="25" alt="">
+                                        <img src="img/star.png" width="30" height="25" alt="">
+                                        <img src="img/star.png" width="30" height="25" alt="">
+                                        <img src="img/star.png" width="30" height="25" alt="">
+                                        <img src="img/star.png" width="30" height="25" alt="">
                                     </div>
                                     <!-- /rate -->
 
@@ -2707,9 +2757,11 @@
 
                                     <!-- rate -->
                                     <div class="rate">
-                                        <div class="rate__star">
-                                            <div style="width: 100%"></div>
-                                        </div>
+                                        <img src="img/star.png" width="30" height="25" alt="">
+                                        <img src="img/star.png" width="30" height="25" alt="">
+                                        <img src="img/star.png" width="30" height="25" alt="">
+                                        <img src="img/star.png" width="30" height="25" alt="">
+                                        <img src="img/star.png" width="30" height="25" alt="">
                                     </div>
                                     <!-- /rate -->
 
@@ -3262,6 +3314,7 @@
     <script src="js/vendors/jquery-2.2.1.min.js"></script>
     <script src="js/vendors/perfect-scrollbar.jquery.min.js"></script>
     <script src="js/vendors/swiper.jquery.min.js"></script>
+    <script src="js/vendors/rating.js"></script>
     <script src="js/product.min.js"></script>
 </body>
 </html>

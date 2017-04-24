@@ -9,12 +9,6 @@
 
         } );
 
-        //$.each( $('.product-single__info'), function () {
-        //
-        //    new AddProductsToCart( $(this) );
-        //
-        //} );
-
     } );
 
     var ProductsInCart = function (obj) {
@@ -281,7 +275,7 @@
                     },
                     error: function (XMLHttpRequest) {
                         if ( XMLHttpRequest.statusText != "abort" ) {
-                            alert("ERROR!!!");
+                            console.log("Error");
                         }
                     }
                 } );
@@ -329,7 +323,7 @@
                     },
                     error: function (XMLHttpRequest) {
                         if ( XMLHttpRequest.statusText != "abort" ) {
-                            alert("ERROR!!!");
+                            console.log("Error");
                         }
                     }
                 } );
@@ -363,7 +357,7 @@
                     },
                     error: function (XMLHttpRequest) {
                         if ( XMLHttpRequest.statusText != "abort" ) {
-                            alert("ERROR!!!");
+                            console.log("Error");
                         }
                     }
                 } );
@@ -429,199 +423,5 @@
 
         _init();
     };
-
-    //var AddProductsToCart = function (obj) {
-    //
-    //    //private properties
-    //    var _self = this,
-    //        _obj = obj,
-    //        _input = _obj.find('.count-product__input'),
-    //        _price = _obj.find('.product-single__price'),
-    //        _addToCartBtn = _obj.find('.product-single__add'),
-    //        _header = $('.site__header'),
-    //        _request = new XMLHttpRequest(),
-    //        _cart = $('.cart'),
-    //        oldCount = 0,
-    //        newCount = 0,
-    //        _window = $(window);
-    //
-    //    //private methods
-    //    var _addEvents = function () {
-    //
-    //            _addToCartBtn.on( {
-    //                click: function ( event ) {
-    //
-    //                    if( !( _addToCartBtn.hasClass('adding') ) ) {
-    //
-    //                        if( $('.gallery__top .slick-current').length ) {
-    //
-    //                            _animatedAdding( event );
-    //
-    //                        } else {
-    //
-    //                            _writeInCart();
-    //
-    //                        }
-    //
-    //                        _requestProductAddToCart( $(this).parents('.product-single__info') );
-    //                        _addToCartBtn.addClass('adding');
-    //
-    //                    }
-    //
-    //                    return false;
-    //
-    //                }
-    //            } );
-    //
-    //        },
-    //        _animatedAdding = function( event ) {
-    //
-    //            _header.removeClass('site__header_hidden');
-    //            _header.removeClass('site__header_hide');
-    //            _header.addClass('site__header_fixed');
-    //
-    //            var pic = $('.gallery__top .slick-current').data('image'),
-    //
-    //            e = event || window.event;
-    //
-    //            var pageX = e.pageX,
-    //                pageY = e.pageY;
-    //
-    //            $('body').append('<div class="site__product hidden" style="background-image:url('+ pic +')"></div>');
-    //            $('.site__product').css( {
-    //                top: $('.gallery__top').offset().top ,
-    //                left: $('.gallery__top').offset().left,
-    //                width: $('.gallery__top').width(),
-    //                height: $('.gallery__top').height()
-    //            } );
-    //
-    //            setTimeout( function() {
-    //
-    //                $('.site__product').addClass('visible');
-    //                $('.site__product').css( {
-    //                    top: _cart.offset().top + _cart.innerHeight()/2 - $('.site__product').height()/2 ,
-    //                    left: _cart.offset().left + _cart.innerWidth()/2 - $('.site__product').width()/2
-    //                } );
-    //
-    //            }, 400 );
-    //
-    //            setTimeout( function() {
-    //
-    //                $('.site__product').removeClass('visible');
-    //                $('.site__product').css( {
-    //                    '-webkit-transform': 'scale(0.3)',
-    //                    'transform': 'scale(0.3)'
-    //                } );
-    //
-    //            }, 800 );
-    //
-    //            setTimeout( function() {
-    //
-    //                $('.site__product').remove();
-    //
-    //            }, 1100 );
-    //
-    //
-    //            _writeInCart();
-    //
-    //        },
-    //        _writeInCart =  function() {
-    //
-    //
-    //            if( !( _cart.hasClass('cart_fill') ) ) {
-    //
-    //                newCount = parseInt( _input.val() );
-    //
-    //                setTimeout( function() {
-    //
-    //                    _cart.append('<div></div>');
-    //                    _cart.addClass('cart_fill');
-    //                    $('.site__header').addClass('site__header_fill-cart');
-    //
-    //                    setTimeout( function() {
-    //
-    //                        if( newCount == 1 ) {
-    //
-    //                            _cart.find('div').html( newCount + ' item');
-    //
-    //                        } else {
-    //
-    //                            _cart.find('div').html( newCount + ' items');
-    //
-    //                        }
-    //
-    //                    }, 400 );
-    //
-    //                }, 600 );
-    //
-    //            } else {
-    //
-    //                oldCount = parseInt( _cart.find('div').text() );
-    //                newCount = parseInt( _input.val() ) + oldCount;
-    //
-    //                setTimeout( function() {
-    //
-    //                    _cart.find('div').html( newCount + ' items');
-    //
-    //                }, 1100 );
-    //
-    //            }
-    //
-    //            setTimeout( function() {
-    //
-    //                _addToCartBtn.removeClass('adding');
-    //
-    //            }, 700 );
-    //
-    //        },
-    //        _requestProductAddToCart = function ( elem ) {
-    //
-    //            _request.abort();
-    //            _request = $.ajax( {
-    //                url: $('body').attr('data-action'),
-    //                data: {
-    //                    action: 'single_add_product',
-    //                    id: elem.attr('data-id'),
-    //                    countProduct: _input.val(),
-    //                    price: _price.text(),
-    //                    flag: 'addToCart'
-    //                },
-    //                dataType: 'json',
-    //                type: "get",
-    //                success: function (m) {
-    //
-    //                    if ( parseInt( m.cartCountProducts ) != newCount ) {
-    //
-    //                        _cart.find('div').html( m.cartCountProducts );
-    //
-    //                    }
-    //
-    //                },
-    //                error: function ( XMLHttpRequest, m ) {
-    //                    if ( XMLHttpRequest.statusText != "abort" ) {
-    //
-    //                        if ( parseInt( m.cartCountProducts ) != newCount ) {
-    //
-    //                            _cart.find('div').html( oldCount + 'items' );
-    //
-    //                        }
-    //
-    //                    }
-    //                }
-    //            } );
-    //
-    //        },
-    //        _init = function () {
-    //            _obj[0].obj = _self;
-    //            _addEvents();
-    //        };
-    //
-    //    //public properties
-    //
-    //    //public methods
-    //
-    //
-    //    _init();
-    //};
 
 } )();

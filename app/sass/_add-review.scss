@@ -1,0 +1,53 @@
+.add-review {
+  margin: 0 0 50px;
+}
+.add-review__form {
+  max-width: 592px;
+  padding-top: 3px;
+}
+.add-review__row {
+  margin: 0 0 16px;
+}
+.add-review__rate {
+  margin: 0 0 6px;
+}
+
+@media (min-width: $desktop) {
+
+  .add-review {
+    margin: 0 0 70px;
+  }
+  .add-review__row {
+    @include flexbox();
+    @include justify-content(space-between);
+    @include align-items();
+    @include flex-direction(row);
+
+    >div {
+      width: 76%;
+
+      &:first-child {
+        width: 22%;
+        padding-top: 6px;
+      }
+
+    }
+
+    input[type="submit"].site__input,
+    input[type="text"].site__input,
+    input[type="password"].site__input,
+    input[type="email"].site__input,
+    input[type="tel"].site__input,
+    input[type="phone"].site__input,
+    input[type="number"].site__input {
+      max-width: 310px;
+    }
+
+  }
+  .add-review__send {
+    padding-left: 24.3%;
+    margin-top: -8px;
+  }
+
+}
+

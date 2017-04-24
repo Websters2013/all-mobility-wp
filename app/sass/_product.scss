@@ -106,6 +106,13 @@
     height: 63px;
     font-size: 20px;
     line-height: 20px;
+
+    &.disabled {
+      opacity: 0.6;
+      pointer-events: none;
+      cursor: default;
+    }
+
   }
 
 }
