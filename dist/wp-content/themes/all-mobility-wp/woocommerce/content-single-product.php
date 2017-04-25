@@ -36,15 +36,6 @@ global $product;
 	<div class="product__inner">
 
 		<?php do_action('wb_woocommerce_single_product_summary') ?>
-
-		<!-- rate -->
-		<div class="rate">
-			<div class="rate__star">
-				<div style="width: 100%"></div>
-			</div>
-			<span class="rate__reviews">15 Reviews</span>
-		</div>
-		<!-- /rate -->
 		
 		<?php do_action('wb_slider_preview') ?>
 		
@@ -153,7 +144,7 @@ global $product;
 	<!-- /product__wrap -->
 
 	<?php get_featured_slider_products(); ?>
-	
+
 	<?php comments_template(); ?>
 	
 </div>

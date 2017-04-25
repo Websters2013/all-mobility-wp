@@ -12,8 +12,7 @@ if( is_front_page() ){
 
         endwhile;
     endif;
-
-
+    
     $product_terms  = get_terms( array(
         'taxonomy' => 'product_cat',
         'hide_empty' => false,
@@ -37,47 +36,7 @@ $product_terms = get_terms($args);
 
 }
 
-if(!empty($product_terms)):
-
-    $product_cat_id = 10;
-
-    $attribute_name  = 'brand';
-
-    $attribute_value = 'second-brand';
-
-    $serialized_value = serialize( 'name' ) . serialize( $attribute_name ) . serialize( 'value' ) . serialize( $attribute_value ); // extended version: $serialized_value = serialize( $attribute_name ) . 'a:6:{' . serialize( 'name' ) . serialize( $attribute_name ) . serialize( 'value' ) . serialize( $attribute_value ) . serialize( 'position' );
-
-    $args = array (
-        'post_type'  => 'product',
-        'tax_query'  => array(
-            'relation' => 'AND',
-            array(
-                'taxonomy'      => 'product_cat',
-                'field' => 'term_id',
-                'terms' => 20
-            ),
-            array(
-                'taxonomy' 		=> 'pa_' . $attribute_name,
-                'terms' 		=> array(25),
-                'operator' 		=> 'IN'
-            ),
-            array(
-                'taxonomy' 		=> 'pa_' . 'color',
-                'terms' 		=> array(27),
-                'operator' 		=> 'IN'
-            )
-        ),
-        'meta_query' => array(
-            array(
-                'key' => '_price',
-                'value' => array(1390, 14000),
-                'compare' => 'BETWEEN',
-                'type' => 'NUMERIC'
-            )
-        )
-    );
-
-    $attrProducts =  get_posts($args); ?>
+if(!empty($product_terms)): ?>
 
 <!-- product-categories__inner -->
 <div class="product-categories__inner">

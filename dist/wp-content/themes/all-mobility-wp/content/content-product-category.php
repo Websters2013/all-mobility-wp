@@ -4,6 +4,8 @@ $cat_obj = $wp_query->get_queried_object();
 
 $category_ID  = $cat_obj->term_id; ?>
 
+<div class="category category_filters">
+
     <h1 class="site__title site__title_3"><?php woocommerce_page_title(); ?></h1>
     <?php if ( is_product_taxonomy() && 0 === absint( get_query_var( 'paged' ) ) ) {
         $description = wc_format_content( term_description() );
@@ -101,7 +103,9 @@ $category_ID  = $cat_obj->term_id; ?>
                         </div>
                     </div>
 
-                    <?php foreach ( $attrs as $key =>  $attr ):
+                    <?php
+                    if(!empty($attrs)):
+                    foreach ( $attrs as $key =>  $attr ):
                         ?>
 
                         <div class="category__filters-item">
@@ -139,7 +143,9 @@ $category_ID  = $cat_obj->term_id; ?>
 
                         </div>
 
-                    <?php endforeach; ?>
+                    <?php endforeach;
+                    endif;
+                    ?>
 
                 </form>
             </div>
@@ -286,3 +292,179 @@ $category_ID  = $cat_obj->term_id; ?>
 
     </div>
     <!-- /category__inner -->
+
+<?php $string = 'pa_brand=25';
+
+    parse_str($string,$output);
+
+    foreach ($output as $key => $item){
+        $atts[$key] = explode( ',',$item );
+    }
+
+    if( $string ){
+
+        $attributes_filter = '';
+
+        foreach ( $atts as $key => $item ){
+            $attributesQuery[] =  array(
+                'taxonomy' 		=> $key,
+                'terms' 		=> $item,
+                'operator' 		=> 'IN'
+            );
+        }
+
+    } else {
+        $attributes_filter = '';
+    }
+
+    $term_id = 10;
+
+    $args = array (
+        'post_type'  => 'product',
+        'fields' => 'ids',
+        'posts_per_page' => -1,
+        'meta_key'			=> '_price',
+        'orderby'			=> 'meta_value_num',
+        'order' => 'DESC',
+//        'post_status' => 'publish',
+        'tax_query'  => array(
+            'relation' => 'AND',
+            array(
+                'taxonomy' => 'product_cat',
+                'field' => 'term_id',
+                'terms' => $term_id
+            ),
+
+            $attributesQuery
+
+        ),
+        'meta_query' => array(
+
+            array(
+                'key' => '_price',
+                'value' => array(0, 14000),
+                'compare' => 'BETWEEN',
+                'type' => 'NUMERIC'
+            ),
+            array(
+                'key' => 'featured_product'
+            )
+
+        ),
+
+    );
+
+    $attrProducts =  get_posts($args);
+    var_dump($attrProducts);
+    $products = '';
+
+    foreach ($attrProducts as $product_id){
+
+        $currentProduct = wc_get_product($product_id);
+
+        if( get_field('featured_product',$product_id) ){
+            $featured = 'featured';
+        } else {
+            $featured = '';
+        }
+
+        $thumb_id = get_post_thumbnail_id($product_id);
+        $thumb_url = wp_get_attachment_image_src($thumb_id,'full')[0];
+        $name = json_encode($currentProduct->get_name());
+        $rate = $currentProduct->get_rating_count();
+        $review = $currentProduct->get_review_count();
+        $link = get_permalink($product_id);
+        $review_link = $link.'?to_review=true';
+
+        if( $currentProduct->is_type('variable') ){
+
+            $regularPrice = $currentProduct->get_variation_regular_price();
+
+            $salePrice = $currentProduct->get_variation_sale_price();
+
+        } elseif( $currentProduct->is_type('simple') ) {
+
+            $regularPrice = $currentProduct->get_regular_price();
+
+            $salePrice = $currentProduct->get_sale_price();
+
+        }
+
+        ( $salePrice )? $salePrice = $salePrice.'$' : $salePrice = '' ;
+
+        ( $regularPrice )? $regularPrice = $regularPrice.'$' : $regularPrice = '' ;
+
+        $description = '';
+
+        if( have_rows('technical_specifications_block', $product_id) ):
+           $count = 0 ;
+            while ( have_rows('technical_specifications_block', $product_id) ) : the_row();
+
+                if( $count <= 2 ){
+                    $description .= '"'.get_sub_field('value').'",';
+                }
+
+            endwhile; $count++;
+            $description = substr( $description, 0, -1 );
+        endif;
+
+        $products .= ' {
+            "name": "'.$term_id.'",
+            "featured": "'.$featured.'",
+            "picture": "'.$thumb_url.'",
+            "title": '.$name.',
+            "rate": {
+                "starsCount": "'.$rate.'",
+                "reviewsCount": "'.$review.' Reviews",
+                "urlReviews": "'.$review_link.'"
+            },
+            "content": {
+                 "description": ['.$description.'],
+                  "specification": {
+                    "head": ["Top Speed","Drive Range","Seat Width","Foldable"],
+                    "content": ["3.5 mph","8.7 miles","17”","Yes"]
+                }
+            },
+            "price": "'.$salePrice.'",
+            "oldPrice": "'.$regularPrice.'",
+            "urlDetails": "'.$link.'"
+        },';
+
+
+    }
+
+    $products = substr( $products, 0, -1 );
+
+    $json_data = '{
+    "products": [
+       '.$products.'
+    ]
+}';
+var_dump($json_data);
+?>
+
+    <?php
+
+   $min_price = wpq_get_min_price_per_product_cat(10);
+
+   $max_price = wpq_get_max_price_per_product_cat(10);
+
+   $delta = round( $max_price - $min_price )/5;
+
+   $ranges = array();
+
+    for( $i = 0; $i <=4; $i++ ){
+
+        if( $i==0 ){
+            $ranges[$i][] = $min_price;
+            $ranges[$i][] = ($min_price+$delta);
+        }
+
+    }
+
+    echo $delta;
+    echo $min_price;
+    echo $max_price;
+    ?>
+
+</div>

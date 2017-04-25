@@ -11,7 +11,6 @@ function woocommerce_support() {
     add_theme_support( 'woocommerce' );
 }
 
-require_once( TEMPLATEINC . '/cpt.php' );
 require_once( TEMPLATEINC . '/template.php' );
 require_once( TEMPLATEINC . '/actions.php' );
 require_once( TEMPLATEINC . '/often_parts.php' );

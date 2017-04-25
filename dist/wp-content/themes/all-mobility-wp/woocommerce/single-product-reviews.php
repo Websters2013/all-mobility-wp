@@ -19,13 +19,77 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-global $product;
+global $product, $post;
 
 if ( ! comments_open() ) {
 	return;
 }
 
+$post_id = get_the_ID();
+
+if ( $post_id > 0 ) {
+	$where = $wpdb->prepare("%d", $post_id);
+} else{
+	$where = 0;
+}
+
 ?>
+
+<!-- add-review -->
+<div class="add-review">
+
+	<h2 class="site__title site__title_2">Add Your Review</h2>
+
+	<!-- add-review__form -->
+	<div class="add-review__form">
+		<form action="/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+			<?php if( is_user_logged_in()): ?>
+
+			<?php $user = get_user_by( 'id', get_current_user_id() ); ?>
+
+			<p>You are adding review as <?= $user->user_login ?></p>
+
+			<?php endif; ?>
+			<div class="add-review__row">
+				<div><label class="site__label" for="name">Rate Product <span>*</span></label></div>
+				<div>
+
+					<div class="add-review__rate">
+						<input type="hidden" name="rating" value="0">
+						<div id="#el"></div>
+					</div>
+
+				</div>
+			</div>
+
+			<?php if( !is_user_logged_in()): ?>
+
+			<div class="add-review__row">
+				<div><label class="site__label" for="author">Your Name <span>*</span></label></div>
+				<div><input class="site__input" type="text" required name="author" id="author"></div>
+			</div>
+			<div class="add-review__row">
+				<div><label class="site__label" for="email">Your E-mail <span>*</span></label></div>
+				<div><input class="site__input" type="email" required name="email" id="email"></div>
+			</div>
+
+			<?php endif; ?>
+
+			<div class="add-review__row">
+				<div><label class="site__label" for="comment">Your Review <span>*</span></label></div>
+				<div><textarea class="site__input" name="comment" id="comment" cols="30" rows="10"></textarea></div>
+			</div>
+			<div class="add-review__send">
+				<button class="btn btn_11" id="submit" type="submit"><span>submit</span></button>
+				<input type="hidden" name="comment_post_ID" value="<?= $where ?>" id="comment_post_ID">
+				<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+			</div>
+		</form>
+	</div>
+	<!-- /add-review__form -->
+
+</div>
+<!-- /add-review -->
 
 <!-- reviews -->
 <div class="reviews">
@@ -38,14 +102,22 @@ if ( ! comments_open() ) {
 		<?php if ( have_comments() ) :
 
 			$args = array(
-				'status'      => 'approve',
+				'status'      => 'all',
 				'post_status' => 'publish',
-				'post_type'   => 'product'
+				'post_type'   => 'product',
+				'post_id' => $post_id
 			);
 
 			$comments = get_comments( $args );
 
 			foreach ($comments as $comment):
+
+				if ( get_option( 'woocommerce_enable_review_rating' ) !== 'no' ){
+					$meta_values = get_comment_meta( $comment->comment_ID, 'rating' );
+				} else {
+					$meta_values = 0;
+				}
+
 				?>
 				<!-- reviews__single -->
 				<div class="reviews__single">
@@ -61,14 +133,13 @@ if ( ! comments_open() ) {
 							<h2 class="reviews__name"><?= $comment->comment_author ?></h2>
 							<h3 class="reviews__place"><?= $comment->comment_author_email ?></h3>
 
-							<!-- rate -->
+							<?php if( $meta_values ): ?>
 							<div class="rate">
-								<div class="rate__star">
-									<div style="width: 100%"></div>
-								</div>
+								<?php for( $i = 1; $i <= $meta_values[0]; $i++ ){
+									echo '	<img src="'.DIRECT.'img/star.png" width="30" height="25" alt="">';
+								} ?>
 							</div>
-							<!-- /rate -->
-
+							<?php endif; ?>
 						</div>
 
 					</div>
@@ -89,4 +160,3 @@ if ( ! comments_open() ) {
 	</div>
 
 </div>
-

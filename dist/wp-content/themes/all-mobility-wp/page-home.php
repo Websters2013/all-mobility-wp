@@ -42,7 +42,7 @@ get_header(); ?>
 
                 <h2 class="site__title"><?php the_field('featured_title') ?>
 
-                    <a class="site__title-link" href="#">see full catalog</a>
+<!--                    <a class="site__title-link" href="#">see full catalog</a>-->
 
                 </h2>
                 
