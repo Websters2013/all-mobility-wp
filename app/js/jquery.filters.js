@@ -32,6 +32,8 @@
             _globalCheckFlag = false,
             _loading = $('<div class="loading"></div>'),
             _inputHidden = _obj.find('input[type=hidden]'),
+            _sortingPage = _obj.find('#items-page'),
+            _sortingDate = _obj.find('#sorting-date'),
             _window = $(window),
             _objValue = {},
             _arr = [];
@@ -58,6 +60,15 @@
                             }
 
                         } );
+
+                    },
+                    load: function() {
+
+                        if( _obj.hasClass('category_sub') ) {
+
+                            _requestContent( null, null, null, true );
+                            console.log( _sortingPage.val() );
+                        }
 
                     }
                 } );
@@ -148,6 +159,22 @@
                         _closeFilter();
                         _writeInHidden( name, id, _globalCheckFlag );
                         _requestContent( labelText, id, name, false );
+
+                    }
+                } );
+                _sortingPage.on( {
+                    change: function () {
+
+                        _addLoading();
+                        _requestContent( null, null, null, false );
+
+                    }
+                } );
+                _sortingDate.on( {
+                    change: function () {
+
+                        _addLoading();
+                        _requestContent( null, null, null, false );
 
                     }
                 } );
@@ -425,7 +452,9 @@
                 _request = $.ajax( {
                     url: _path,
                     data: {
-                        value: _inputHidden.val()
+                        value: _inputHidden.val(),
+                        pageSorting: _sortingPage.val(),
+                        dateSorting: _sortingDate.val()
                     },
                     dataType: 'json',
                     type: "get",
