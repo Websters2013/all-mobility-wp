@@ -455,7 +455,8 @@
                         value: _inputHidden.val(),
                         pageSorting: _sortingPage.val(),
                         dateSorting: _sortingDate.val(),
-                        currentPage: _inputHiddenPage.val()
+                        currentPage: _inputHiddenPage.val(),
+                        action: "get_filtered_products"
                     },
                     dataType: 'json',
                     type: "get",

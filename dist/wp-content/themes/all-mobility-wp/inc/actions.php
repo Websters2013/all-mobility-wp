@@ -643,99 +643,172 @@ function getProductsSearch( $query ){
 
 function get_filtered_products(){
 
-$value = $_GET['value'];
+$string = $_GET['value'];
 
-$value = parse_str($_GET, $value);
+parse_str($string,$output);
 
-$json_data = '{
-    "products": [
-        {
-            "name": "s",
-            "featured": "featured",
-            "picture": "pic/mobile-scooters-heavy-duty.jpg",
-            "title": "Product Title Even if it’s a Long one it fits (8000 Mph)",
-            "content": {
-                "description": ["Short bullet list of main chct if it’s pretty long or short", "Shoulmain keywords users will", "Will be limited to 3 points"],
-                "specification": {
-                    "head": ["Top Speed","Drive Range","Seat Width","Foldable"],
-                    "content": ["3.5 mph","8.7 miles","17”","Yes"]
-                }
-            },
-            "price": "$1,800.00",
-            "oldPrice": "$1,999",
-            "urlDetails": "#"
-        },
-        {
-            "name": "category2",
-            "featured": "featured",
-            "picture": "pic/mobile-scooters-heavy-duty.jpg",
-            "title": "Product Title Even if it’s a Long one it fits (8000 Mph)",
-            "rate": {
-                "starsCount": "3",
-                "reviewsCount": "20 Reviews",
-                "urlReviews": "#"
-            },
-            "content": {
-                "specification": {
-                    "head": ["Top Speed","Drive Range","Seat Width","Foldable"],
-                    "content": ["3.5 mph","8.7 miles","17”","Yes"]
-                }
-            },
-            "price": "$1,800.00",
-            "oldPrice": "$1,999",
-            "urlDetails": "#"
-        },
-        {
-            "name": "category3",
-            "picture": "pic/mobile-scooters-heavy-duty.jpg",
-            "title": "Product Title Even if it’s a Long one it fits (8000 Mph)",
-            "rate": {
-                "starsCount": "4",
-                "reviewsCount": "30 Reviews",
-                "urlReviews": "#"
-            },
-            "content": {
-                "description": ["Short bullet list of main characteristics of the product if it’s pretty long or short", "Should contain main keywords users will", "Will be limited to 3 points"],
-                "specification": {
-                    "head": ["Top Speed","Drive Range","Seat Width","Foldable"],
-                    "content": ["3.5 mph","8.7 miles","17”","Yes"]
-                }
-            },
-            "price": "$1,800.00",
-            "oldPrice": "$1,999",
-            "urlDetails": "#"
-        },
-        {
-            "name": "category4",
-            "picture": "pic/mobile-scooters-heavy-duty.jpg",
-            "title": "Product Title Even if it’s a Long one it fits (8000 Mph)",
-            "rate": {
-                "starsCount": "2",
-                "reviewsCount": "10 Reviews",
-                "urlReviews": "#"
-            },
-            "content": {
-                "description": ["Short bullet list of main characteristics of the product if it’s pretty long or short", "Should contain main keywords users will", "Will be limited to 3 points"],
-                "specification": {
-                    "head": ["Top Speed","Drive Range","Seat Width","Foldable"],
-                    "content": ["3.5 mph","8.7 miles","17”","Yes"]
-                }
-            },
-            "price": "$1,800.00",
-            "urlDetails": "#"
+$pageSorting = $_GET['pageSorting'];
+
+$sortingDate = $_GET['dateSorting'];
+
+$currentPage = $_GET['currentPage'];
+
+    foreach ($output as $key => $item){
+        $atts[$key] = explode(',',$item );
+    }
+
+    if( $string ){
+
+        $attributes_filter = '';
+
+        foreach ( $atts as $key => $item ){
+            $attributesQuery[] =  array(
+                'taxonomy' 		=> $key,
+                'terms' 		=> $item,
+                'operator' 		=> 'IN'
+            );
         }
-    ]
+
+    } else {
+        $attributes_filter = '';
+    }
+
+    $term_id = 10;
+
+    $args = array (
+        'post_type'  => 'product',
+        'fields' => 'ids',
+        'posts_per_page' => -1,
+        'meta_key'			=> '_price',
+        'orderby'			=> 'meta_value_num',
+        'order' => 'ASC',
+        'post_status' => 'publish',
+        'tax_query'  => array(
+            'relation' => 'AND',
+            array(
+                'taxonomy' => 'product_cat',
+                'field' => 'term_id',
+                'terms' => $term_id
+            ),
+
+            $attributesQuery
+
+        ),
+        'meta_query' => array(
+
+            array(
+                'key' => '_price',
+                'value' => array(0, 14000),
+                'compare' => 'BETWEEN',
+                'type' => 'NUMERIC'
+            )
+
+        ),
+
+    );
+
+    $attrProducts =  get_posts($args);
+
+    $products = '';
+
+    foreach ($attrProducts as $product_id){
+
+        $currentProduct = wc_get_product($product_id);
+
+        if( get_field('featured_product',$product_id) == 'yes' ){
+            $featured = 'featured';
+        } else {
+            $featured = '';
+        }
+
+        $thumb_id = get_post_thumbnail_id($product_id);
+        $thumb_url = wp_get_attachment_image_src($thumb_id,'full')[0];
+        $name = json_encode($currentProduct->get_name());
+        $rate = $currentProduct->get_rating_count();
+        $review = $currentProduct->get_review_count();
+        $link = get_permalink($product_id);
+        $review_link = $link.'?to_review=true';
+
+        if( $currentProduct->is_type('variable') ){
+
+            $regularPrice = $currentProduct->get_variation_regular_price();
+
+            $salePrice = $currentProduct->get_variation_sale_price();
+
+        } elseif( $currentProduct->is_type('simple') ) {
+
+            $regularPrice = $currentProduct->get_regular_price();
+
+            $salePrice = $currentProduct->get_sale_price();
+
+        }
+
+        ( $regularPrice )? $regularPrice = $regularPrice.'$' : $regularPrice = '' ;
+
+        if( $salePrice ){
+            $salePrice = $salePrice.'$';
+        } else {
+            $salePrice = $regularPrice;
+            $regularPrice = '';
+        }
+
+
+        $description = '"Short bullet list of main characteristics of the product if it’s pretty long or short", "Should contain main keywords users will", "Will be limited to 3 points"';
+
+        if( have_rows('technical_specifications_block', $product_id) ):
+            $count = 0 ;
+            while ( have_rows('technical_specifications_block', $product_id) ) : the_row();
+
+                if( $count <= 2 ){
+
+                }
+
+            endwhile; $count++;
+//            $description = substr( $description, 0, -1 );
+        endif;
+
+        $products .= ' {
+            "name": "'.$term_id.'",
+            "featured": "'.$featured.'",
+            "picture": "'.$thumb_url.'",
+            "title": '.$name.',
+            "rate": {
+                "starsCount": "'.$rate.'",
+                "reviewsCount": "'.$review.' Reviews",
+                "urlReviews": "'.$review_link.'"
+            },
+            "content": {
+                 "description": ['.$description.'],
+                  "specification": {
+                    "head": ["Top Speed","Drive Range","Seat Width","Foldable"],
+                    "content": ["3.5 mph","8.7 miles","17”","Yes"]
+                }
+            },
+            "price": "'.$salePrice.'",
+            "oldPrice": "'.$regularPrice.'",
+            "urlDetails": "'.$link.'"
+        },';
+
+
+    }
+
+    $products = substr( $products, 0, -1 );
+
+    $json_data = '{
+    "products": [
+       '.$products.'
+    ],
+    "settings": {
+        "pagesAll": "10",
+        "currentPage": "'.$currentPage.'"
+    }
 }';
-
-
 
 $json_data = str_replace("\r\n",'',$json_data);
 $json_data = str_replace("\n",'',$json_data);
 
 echo $json_data;
 exit;
-
-
 
 }
 

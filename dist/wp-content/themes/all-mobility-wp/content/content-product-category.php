@@ -6,6 +6,8 @@ $category_ID  = $cat_obj->term_id; ?>
 
 <div class="category category_filters">
 
+    <div class="category__head">
+        <div>
     <h1 class="site__title site__title_3"><?php woocommerce_page_title(); ?></h1>
     <?php if ( is_product_taxonomy() && 0 === absint( get_query_var( 'paged' ) ) ) {
         $description = wc_format_content( term_description() );
@@ -13,7 +15,42 @@ $category_ID  = $cat_obj->term_id; ?>
             echo $description;
         }
     } ?>
+    </div>
 
+        <div>
+
+            <!-- category__sorting -->
+            <div class="category__sorting">
+
+                <form action="#">
+
+                    <fieldset class="category__sorting-pages">
+                        <label for="items-page">items per page</label>
+                        <select name="items-page" id="items-page">
+                            <option value="0">30</option>
+                            <option value="1">40</option>
+                            <option value="2">50</option>
+                            <option value="3">60</option>
+                        </select>
+                    </fieldset>
+                    <fieldset>
+                        <label for="sorting-date">sorting</label>
+                        <select name="sorting-date" id="sorting-date">
+                            <option value="0">date: new first</option>
+                            <option value="1">date: new first</option>
+                            <option value="2">date: new first</option>
+                            <option value="3">date: new first</option>
+                        </select>
+                    </fieldset>
+
+                </form>
+
+            </div>
+            <!-- /category__sorting -->
+
+        </div>
+
+    </div>
     <!-- category__inner -->
     <div class="category__inner category__inner_filters">
 
@@ -40,6 +77,9 @@ $category_ID  = $cat_obj->term_id; ?>
             <a href="#" class="category__filters-clear hidden">
                 clear
             </a>
+
+            <input type="hidden" name="value-check" class="value-check">
+            <input type="hidden" name="current-page" class="current-page" value="1">
 
             <!-- category__filters-items -->
             <div class="category__filters-items">
@@ -222,7 +262,7 @@ $category_ID  = $cat_obj->term_id; ?>
             <?php endif; ?>
 
             <!-- category__wrap -->
-            <div class="category__wrap">
+            <div class="category__wrap" data-rate-path="<?= DIRECT ?>">
 
             <!-- product-categories -->
             <div class="product-categories product-categories_2">
@@ -241,38 +281,7 @@ $category_ID  = $cat_obj->term_id; ?>
                     Why All Around Mobility
                 </h2>
 
-                <ul class="advantages__list">
-                    <li>
-                                    <span>
-                                        <img src="img/10938-200.png" width="32" height="32" alt="">
-                                    </span>
-                        30-days Money Back
-                        Guarantee</li>
-                    <li>
-                                    <span>
-                                        <img src="img/Ecommerce-Free-Shipping-icon.png" width="38" height="30" alt="">
-                                    </span>
-                        Free Shipping
-                        over $50</li>
-                    <li>
-                                    <span>
-                                        <img src="img/Credit_Card_Payment_Safe_Secure_Shopping_Ecommerce_Pay-512.png" width="46" height="46" alt="">
-                                    </span>
-                        Safe & Secure
-                        Online Payments</li>
-                    <li>
-                                    <span>
-                                         <img src="img/icon-innovative-research.png" width="30" height="35" alt="">
-                                    </span>
-                        Expert Support
-                        at Your Service</li>
-                    <li>
-                                    <span>
-                                        <img src="img/MAW_icon-vector-blue_14_geo_125x125.png" width="23" height="36" alt="">
-                                    </span>
-                        Local Stores
-                        Near You</li>
-                </ul>
+                <?php get_template_part('content/content','advantages') ?>
 
             </div>
             <!-- /advantages -->
@@ -296,6 +305,11 @@ $category_ID  = $cat_obj->term_id; ?>
 <?php $string = 'pa_brand=25';
 
     parse_str($string,$output);
+
+    $value = $_GET['value'];
+    $pageSorting = $_GET['pageSorting'];
+    $sortingDate = $_GET['dateSorting'];
+    $currentPage = $_GET['currentPage'];
 
     foreach ($output as $key => $item){
         $atts[$key] = explode( ',',$item );
@@ -325,8 +339,8 @@ $category_ID  = $cat_obj->term_id; ?>
         'posts_per_page' => -1,
         'meta_key'			=> '_price',
         'orderby'			=> 'meta_value_num',
-        'order' => 'DESC',
-//        'post_status' => 'publish',
+        'order' => 'ASC',
+        'post_status' => 'publish',
         'tax_query'  => array(
             'relation' => 'AND',
             array(
@@ -345,9 +359,6 @@ $category_ID  = $cat_obj->term_id; ?>
                 'value' => array(0, 14000),
                 'compare' => 'BETWEEN',
                 'type' => 'NUMERIC'
-            ),
-            array(
-                'key' => 'featured_product'
             )
 
         ),
@@ -355,7 +366,7 @@ $category_ID  = $cat_obj->term_id; ?>
     );
 
     $attrProducts =  get_posts($args);
-    var_dump($attrProducts);
+
     $products = '';
 
     foreach ($attrProducts as $product_id){
@@ -438,9 +449,14 @@ $category_ID  = $cat_obj->term_id; ?>
     $json_data = '{
     "products": [
        '.$products.'
-    ]
+    ],
+    ,
+    "settings": {
+        "pagesAll": "10",
+        "currentPage": "5"
+    }
 }';
-var_dump($json_data);
+
 ?>
 
     <?php
