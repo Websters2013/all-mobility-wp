@@ -30,7 +30,10 @@
             _clearFilters = _obj.find('.category__filtered .btn, .category__filters-clear'),
             _globalCheckFlag = false,
             _loading = $('<div class="loading"></div>'),
-            _window = $(window);
+            _inputHidden = _obj.find('input[type=hidden]'),
+            _window = $(window),
+            _objValue = {},
+            _arr = [];
 
         //private methods
 
@@ -120,12 +123,15 @@
                         var curItem = $(this),
                             curItemName = curItem.attr('name'),
                             label = curItem.next(),
-                            labelText = label.text();
+                            labelText = label.text(),
+                            name = curItem.attr('name'),
+                            val = curItem.attr('id');
 
                         _globalCheckFlag = curItem.prop('checked');
 
                         _addLoading();
                         _closeFilter();
+                        _writeInHidden( name, val, _globalCheckFlag );
                         _requestContent( labelText, curItemName, false );
 
                     }
@@ -304,6 +310,87 @@
                 productsWrap += '</div>';
 
                 $('.category__wrap').html(productsWrap);
+
+            },
+            _writeInHidden = function(name, value, checkFlag) {
+
+                if( checkFlag ) {
+
+                    if(_objValue.hasOwnProperty(name)) {
+
+                        for (var prop in _objValue) {
+
+                            if( prop == name ) {
+
+                                _objValue[prop].push(value);
+
+                            }
+
+                        }
+
+
+
+                    } else {
+
+                        _objValue[name] = [value]
+
+                    }
+
+                } else {
+
+                    for (var prop in _objValue) {
+
+                        if( prop == name ) {
+
+                            var i = _objValue[prop].indexOf(value);
+
+                            if(i != -1) {
+
+                                _objValue[prop].splice(i, 1);
+
+                            }
+
+                        }
+
+                    }
+
+                    if( _objValue[name].length == 0 ) {
+
+                        delete _objValue[name];
+
+                    }
+
+                }
+
+
+                var strFinish = '',
+                    strValues = '',
+                    strFull = '',
+                    arrAll = [];
+
+                for( var key in _objValue ) {
+
+                    _arr = [];
+
+                    var item = _objValue[ key ];
+
+                    _arr.push( item );
+
+                    for( var i = 0; i <= _arr.length-1; i++) {
+
+                        strValues = _arr.join(',');
+
+                    }
+
+                    strFull = key + '=' + strValues;
+
+                    arrAll.push(strFull);
+
+                    strFinish = arrAll.join('&');
+
+                }
+
+                _inputHidden.val( strFinish );
 
             },
             _requestContent = function ( itemText, itemName, clear ) {
