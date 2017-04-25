@@ -58,6 +58,18 @@
   font-size: 18px;
   line-height: 22px;
   color: #4E4E4E;
+
+  a {
+    color: #4E4E4E;
+    -webkit-transition: background 0.3s, color 0.3s;
+    transition: background 0.3s, color 0.3s;
+
+    &:hover {
+      color: #F47920;
+    }
+
+  }
+
 }
 .products-subcategory__description {
   padding: 0 3px;

@@ -210,7 +210,7 @@
                     slidesPerView: 5,
                     paginationClickable: true,
                     speed: 600,
-                    //loop: true,
+                    loop: true,
                     autoplay: 5000,
                     autoplayDisableOnInteraction: false,
                     nextButton: _obj.find('.swiper-button-next'),

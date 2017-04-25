@@ -466,6 +466,11 @@
   width: 100%;
   //padding: 0 20px;
   margin: 0 auto;
+
+  &.non-events {
+    pointer-events: none;
+  }
+
 }
 .site__content_inner {
   max-width: 1360px;
@@ -874,7 +879,7 @@ textarea.site__input {
   .site__menu {
     position: absolute;
     left: 36px;
-    bottom: 9px;
+    bottom: 14px;
     right: 26px;
 
     >ul {
@@ -909,6 +914,7 @@ textarea.site__input {
           border-bottom: none;
           padding: 10px 11px;
           font-size: 14px;
+          line-height: 14px;
           -webkit-transition: background 0.3s;
           transition: background 0.3s;
 
