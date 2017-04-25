@@ -63,6 +63,12 @@
 
                         } );
 
+                        if( _window.width() >= 1024 ) {
+
+                            $('.site__content').css( { 'z-index': '' } )
+
+                        }
+
                     },
                     load: function() {
 
@@ -230,7 +236,7 @@
 
                 _loading = $('<div class="loading"></div>');
 
-                $('.category__inner').append(_loading);
+                $('.category__content').append(_loading);
 
             },
             _closeLoading = function() {
@@ -328,7 +334,8 @@
 
                     productsWrap += '<div class="products-subcategory__item">';
 
-                    if( product.featured != undefined ) {
+                    console.log(product.featured)
+                    if( product.featured != undefined && product.featured != "" ) {
 
                         productsWrap += '<span class="site__featured">'+ product.featured +'</span>';
 
@@ -339,7 +346,7 @@
                                                 <div class="products-subcategory__pic" style="background-image: url('+ product.picture +')"></div>\
                                             </div>\
                                             <div>\
-                                                <h2 class="products-subcategory__title">'+ product.title +'</h2>';
+                                                <h2 class="products-subcategory__title"><a href="'+ product.urlDetails +'">'+ product.title +'</a></h2>';
 
                     if( product.rate != undefined ) {
 
@@ -671,7 +678,7 @@
                     paginationWrap +='<a href="#" class="pagination__next"></a>';
                     paginationWrap += '</div>';
 
-                    $('.pagination-wrap').append(paginationWrap);
+                    $('.pagination-wrap').html(paginationWrap);
 
                 } else {
 

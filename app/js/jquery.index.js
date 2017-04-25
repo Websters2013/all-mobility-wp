@@ -17,22 +17,37 @@
         var _obj = obj,
             _window = $(window),
             _slide = _obj.find('.swiper-slide'),
-            _swiper;
+            _swiper,
+            _globalWinWidth = _window.width();
 
         //private methods
 
         var _addEvents = function () {
 
-                _window.resize( function() {
+                _window.on({
+                    resize: function () {
 
-                    _slide.css( {
-                        minHeight: ''
-                    } );
-                    _slide.css( {
-                        minHeight: $('.swiper-container').height()
-                    } );
+                        if (_globalWinWidth < _window.width()) {
 
-                } );
+                            _globalWinWidth = _window.width() - 1;
+
+                            _slide.css({
+                                minHeight: ''
+                            });
+                            _slide.css({
+                                minHeight: $('.swiper-container').height()
+                            });
+
+                        }
+                    },
+                    load: function() {
+
+                        _slide.css( {
+                            minHeight: $('.swiper-container').height()
+                        } );
+
+                    }
+                });
             },
             _initSlider = function() {
 
@@ -45,10 +60,6 @@
                     autoplayDisableOnInteraction: false,
                     nextButton: _obj.find('.swiper-button-next'),
                     prevButton: _obj.find('.swiper-button-prev')
-                } );
-
-                _slide.css( {
-                    minHeight: $('.swiper-container').height()
                 } );
 
             },
