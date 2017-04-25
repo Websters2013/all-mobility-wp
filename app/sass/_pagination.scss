@@ -6,10 +6,10 @@
   @include align-items(center);
   @include flex-direction();
   margin: 0 auto 29px;
-  padding: 0 53px;
+  padding: 0 40px;
   @include main-font1();
-  font-size: 30px;
-  line-height: 30px;
+  font-size: 16px;
+  line-height: 16px;
   color: #4E4E4E;
   text-transform: uppercase;
   text-align: center;
@@ -22,7 +22,7 @@
     @include flex-direction();
     width: 25%;
     padding: 0 5px;
-    height: 51px;
+    height: 40px;
     color: #4E4E4E;
     text-align: center;
     -webkit-transition: background 0.3s, color 0.3s;
@@ -43,7 +43,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 53px;
+    width: 40px;
     padding: 0;
     background: #0094C1;
     border-radius: 6px;
@@ -75,6 +75,18 @@
 
   .pagination {
     margin: 0 auto 50px;
+    padding: 0 53px;
+    font-size: 30px;
+    line-height: 30px;
+
+    a {
+      height: 51px;
+    }
+    .pagination__next,
+    .pagination__prev {
+      width: 53px;
+    }
+
   }
 
 }

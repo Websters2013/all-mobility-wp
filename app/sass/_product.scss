@@ -35,6 +35,7 @@
   .gallery-thumbs {
     width: 90%;
     height: 81px;
+    max-width: 400px;
 
     .product__slider-thumbs {
       position: absolute;
@@ -55,7 +56,9 @@
       background-size: auto 82%;
 
 
-      &-active {
+      &.is-selected
+      //&-active
+      {
 
         .product__slider-thumbs {
           border-color: rgba(244, 121, 32, 0.5);
@@ -229,6 +232,7 @@
     .gallery-thumbs {
       width: 100%;
       height: 120px;
+      max-width: 100%;
 
       .product__slider-thumbs {
         width: 120px;

@@ -230,7 +230,7 @@
 
                 _loading = $('<div class="loading"></div>');
 
-                $('.category__inner').append(_loading);
+                $('.category__content').append(_loading);
 
             },
             _closeLoading = function() {
@@ -670,7 +670,7 @@
                     paginationWrap +='<a href="#" class="pagination__next"></a>';
                     paginationWrap += '</div>';
 
-                    $('.pagination-wrap').append(paginationWrap);
+                    $('.pagination-wrap').html(paginationWrap);
 
                 } else {
 

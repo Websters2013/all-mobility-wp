@@ -41,13 +41,33 @@
                     loop: _loop,
                     loopedSlides: _slidesLength,
                     centeredSlides: false,
-                    spaceBetween: 30
+                    spaceBetween: 30,
+                    onSlideChangeEnd: function(swiper){
+
+                        if(!_loop) {
+                            var activeIndex = swiper.activeIndex;
+                            $(_galleryThumbs.slides).removeClass('is-selected');
+                            $(_galleryThumbs.slides).eq(activeIndex).addClass('is-selected');
+                            _galleryThumbs.slideTo(activeIndex,500, false);
+                        } else {
+
+                            $('.swiper-slide .product__slider-thumbs').css({
+                                "border-color": "transparent"
+                            });
+                            $('.swiper-slide-active .product__slider-thumbs').css({
+                                "border-color": "rgba(244, 121, 32, 0.5)"
+                            });
+
+                        }
+
+                    }
                 } );
 
                 _galleryThumbs = new Swiper( _obj.find('.gallery-thumbs'), {
                     centeredSlides: false,
                     slidesPerView: '4',
                     touchRatio: 0.2,
+                    //freeMode: !_loop,
                     loop: _loop,
                     loopedSlides: _slidesLength,
                     slideToClickedSlide: true,
@@ -55,11 +75,38 @@
                         1440: {
                             slidesPerView: '3'
                         }
+                    },
+                    onInit: function(swiper) {
+
+                        if(!_loop) {
+                            $(swiper.slides).eq(swiper.activeIndex).addClass('is-selected');
+                        }
+                    },
+                    onClick: function (swiper, event){
+
+                        if(!_loop) {
+                            var clicked = swiper.clickedIndex;
+                            swiper.activeIndex = clicked;
+                            swiper.updateClasses();
+                            $(swiper.slides).removeClass('is-selected');
+                            $(swiper.clickedSlide).addClass('is-selected');
+                            _slider.slideTo(clicked,500, false);
+                        }
+
+
                     }
                 });
 
                 _slider.params.control = _galleryThumbs;
                 _galleryThumbs.params.control = _slider;
+
+                if (_loop) {
+
+                    $('.swiper-slide-active .product__slider-thumbs').css({
+                        "border-color": "rgba(244, 121, 32, 0.5)"
+                    });
+
+                }
 
             },
             _addSomeParams = function() {
