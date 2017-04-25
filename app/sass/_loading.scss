@@ -1,11 +1,11 @@
 .loading {
   opacity: 1;
   visibility: visible;
-  position: absolute;
+  position: fixed;
   z-index: 20;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: -30px;
+  right: -30px;
   height: 100%;
   background: #fff;
   -webkit-transition: opacity 0.300s, visibility 0.300s;
@@ -55,5 +55,13 @@
   100%{
     transform:rotate(360deg);
   }
+}
+
+@media (min-width: $desktop) {
+
+  .loading {
+    position: absolute;
+  }
+
 }
 

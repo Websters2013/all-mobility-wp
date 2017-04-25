@@ -241,10 +241,35 @@
             _search = $('.search'),
             _openSearch = $('.search-btn'),
             _closeSearch = $('.search__cancel'),
-            _getFree = $('.site__hidden-btn');
+            _getFree = $('.site__hidden-btn'),
+            _content = $('.site__content');
 
         //private methods
         var _addEvents = function () {
+
+                $(document).on(
+                    "click",
+                    ".search",
+                    function( event ){
+                        event = event || window.event;
+
+                        if (event.stopPropagation) {
+                            event.stopPropagation();
+                        } else {
+                            event.cancelBubble = true;
+                        }
+                    }
+                );
+
+                $(document).on(
+                    "click",
+                    "body",
+                    function(){
+
+                        _closeSearchBox();
+
+                    }
+                );
 
                 _showBtn.on({
                     click: function () {
@@ -356,6 +381,13 @@
                             default:
                                 return;
                         }
+                    },
+                    resize: function() {
+
+                        if( _window.width()>=1024 ) {
+                            _content.removeClass('non-events');
+                        }
+
                     }
                 } );
 
@@ -395,11 +427,13 @@
 
                 if (curItem.hasClass('opened')) {
 
+                    _content.removeClass('non-events');
                     curItem.removeClass('opened');
                     _hiddenBlockMenu.removeClass('opened');
 
                 } else {
 
+                    _content.addClass('non-events');
                     curItem.addClass('opened');
                     _hiddenBlockMenu.addClass('opened');
 
@@ -429,6 +463,8 @@
 
                 _showBtn.removeClass('opened');
                 _hiddenBlockMenu.removeClass('opened');
+                _content.removeClass('non-events');
+                _search.find('input').focusout();
 
             },
             _closeSearchBox = function () {

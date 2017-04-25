@@ -161,25 +161,53 @@
 
                 _result.find('.search__found li').removeClass('active');
 
-                if( n == 40 && suggestSelected < countItems ) {
+                if( _obj.parents().hasClass('site__footer') ) {
 
-                    suggestSelected++;
+                    if( n == 38 && suggestSelected < countItems ) {
 
-                } else if ( n == 38 && suggestSelected > 0 ) {
+                        suggestSelected++;
 
-                    suggestSelected--;
-                }
+                    } else if ( n == 40 && suggestSelected > 0 ) {
 
-                if( suggestSelected > 0 ) {
+                        suggestSelected--;
+                    }
 
-                    _result.find('.search__found li').eq( suggestSelected - 1 ).addClass('active');
-                    _input.val( _result.find('.search__found li').eq( suggestSelected - 1 ).find('a').text() );
+                    if( suggestSelected > 0 ) {
+
+                        _result.find('.search__found li').eq( -1 - (suggestSelected - 1) ).addClass('active');
+                        _input.val( _result.find('.search__found li').eq( -1 - (suggestSelected - 1) ).find('a').text() );
+
+                    } else {
+
+                        _input.val( valueInput );
+
+                    }
 
                 } else {
 
-                    _input.val( valueInput );
+                    if( n == 40 && suggestSelected < countItems ) {
+
+                        suggestSelected++;
+
+                    } else if ( n == 38 && suggestSelected > 0 ) {
+
+                        suggestSelected--;
+                    }
+
+                    if( suggestSelected > 0 ) {
+
+                        _result.find('.search__found li').eq( suggestSelected - 1 ).addClass('active');
+                        _input.val( _result.find('.search__found li').eq( suggestSelected - 1 ).find('a').text() );
+
+                    } else {
+
+                        _input.val( valueInput );
+
+                    }
 
                 }
+
+
             },
             _addData = function( data ) {
 
