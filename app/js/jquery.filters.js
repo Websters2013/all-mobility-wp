@@ -31,7 +31,8 @@
             _clearSingle = _obj.find('.category__filtered-remove'),
             _globalCheckFlag = false,
             _loading = $('<div class="loading"></div>'),
-            _inputHidden = _obj.find('input[type=hidden]'),
+            _inputHidden = _obj.find('input[type=hidden].value-check'),
+            _inputHiddenPage = _obj.find('input[type=hidden].current-page'),
             _sortingPage = _obj.find('#items-page'),
             _sortingDate = _obj.find('#sorting-date'),
             _window = $(window),
@@ -67,7 +68,6 @@
                         if( _obj.hasClass('category_sub') ) {
 
                             _requestContent( null, null, null, true );
-                            console.log( _sortingPage.val() );
                         }
 
                     }
@@ -166,7 +166,7 @@
                     change: function () {
 
                         _addLoading();
-                        _requestContent( null, null, null, false );
+                        _requestContent( null, null, null, true );
 
                     }
                 } );
@@ -174,7 +174,7 @@
                     change: function () {
 
                         _addLoading();
-                        _requestContent( null, null, null, false );
+                        _requestContent( null, null, null, true );
 
                     }
                 } );
@@ -454,7 +454,8 @@
                     data: {
                         value: _inputHidden.val(),
                         pageSorting: _sortingPage.val(),
-                        dateSorting: _sortingDate.val()
+                        dateSorting: _sortingDate.val(),
+                        currentPage: _inputHiddenPage.val()
                     },
                     dataType: 'json',
                     type: "get",

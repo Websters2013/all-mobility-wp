@@ -2,6 +2,7 @@
 $value = $_GET['value'];
 $pageSorting = $_GET['pageSorting'];
 $sortingDate = $_GET['dateSorting'];
+$currentPage = $_GET['currentPage'];
 
 $json_data = '{
     "products": [
