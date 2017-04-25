@@ -28,6 +28,7 @@
             _title = _obj.find('.category__filters-title'),
             _titleInner = _obj.find('.category__filters-title-inner'),
             _clearFilters = _obj.find('.category__filtered .btn, .category__filters-clear'),
+            _clearSingle = _obj.find('.category__filtered-remove'),
             _globalCheckFlag = false,
             _loading = $('<div class="loading"></div>'),
             _inputHidden = _obj.find('input[type=hidden]'),
@@ -108,6 +109,20 @@
                         return false;
                     }
                 } );
+                $(document).on(
+                    "click",
+                    ".category__filtered-remove",
+                    function() {
+                        var curItem = $(this),
+                            parent = curItem.parent(),
+                            dataId = parent.data('id'),
+                            dataName =  parent.data('name');
+
+                        _clearSingleFilter( dataId, dataName );
+
+                        return false;
+                    }
+                );
                 _closeFilters.on( {
                     click: function () {
 
@@ -125,14 +140,14 @@
                             label = curItem.next(),
                             labelText = label.text(),
                             name = curItem.attr('name'),
-                            val = curItem.attr('id');
+                            id = curItem.attr('id');
 
                         _globalCheckFlag = curItem.prop('checked');
 
                         _addLoading();
                         _closeFilter();
-                        _writeInHidden( name, val, _globalCheckFlag );
-                        _requestContent( labelText, curItemName, false );
+                        _writeInHidden( name, id, _globalCheckFlag );
+                        _requestContent( labelText, id, name, false );
 
                     }
                 } );
@@ -164,9 +179,20 @@
                 _title.removeClass('selected');
                 _filteredList.find('li').remove();
                 _filterItem.find('input[type=checkbox]').prop('checked', false);
+                _inputHidden.val('');
 
                 _addLoading();
-                _requestContent( null, null, true );
+                _requestContent( null, null, null, true );
+
+            },
+            _clearSingleFilter = function( itemId, itemName ) {
+
+                _filterItem.find('input[id='+ itemId +']').prop('checked', false);
+                _globalCheckFlag = false;
+                _addingFilteredBy( '', itemId );
+                _addLoading();
+                _requestContent( null, null, null, true );
+                _writeInHidden( itemName, itemId, _globalCheckFlag );
 
             },
             _closeFilter = function() {
@@ -185,15 +211,15 @@
 
                 }
             },
-            _addingFilteredBy = function( itemText, itemName ) {
+            _addingFilteredBy = function( itemText, itemId, itemName ) {
 
                 if( _globalCheckFlag ) {
 
-                    _filteredList.append('<li data-name="'+ itemName +'">'+ itemText +' <a href="#" class="category__filtered-remove"></a></li>');
+                    _filteredList.append('<li data-name='+ itemName +' data-id="'+ itemId +'">'+ itemText +' <a href="#" class="category__filtered-remove"></a></li>');
 
                 } else {
 
-                    _filteredList.find('li[data-name=' + itemName + ']').remove();
+                    _filteredList.find('li[data-id=' + itemId + ']').remove();
 
                 }
                 _countFiltered = _filteredList.find('li').length;
@@ -393,13 +419,13 @@
                 _inputHidden.val( strFinish );
 
             },
-            _requestContent = function ( itemText, itemName, clear ) {
+            _requestContent = function ( itemText, itemId, itemName, clear ) {
 
                 _request.abort();
                 _request = $.ajax( {
                     url: _path,
                     data: {
-                        value: _form.serialize()
+                        value: _inputHidden.val()
                     },
                     dataType: 'json',
                     type: "get",
@@ -407,7 +433,7 @@
 
                         if( !clear ) {
 
-                            _addingFilteredBy( itemText, itemName );
+                            _addingFilteredBy( itemText, itemId, itemName );
 
                         }
 
