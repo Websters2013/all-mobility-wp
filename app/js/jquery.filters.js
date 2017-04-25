@@ -35,6 +35,7 @@
             _inputHiddenPage = _obj.find('input[type=hidden].current-page'),
             _sortingPage = _obj.find('#items-page'),
             _sortingDate = _obj.find('#sorting-date'),
+            _dataRatePath = _obj.find('.category__wrap').data('rate-path'),
             _window = $(window),
             _objValue = {},
             _arr = [];
@@ -67,7 +68,9 @@
 
                         if( _obj.hasClass('category_sub') ) {
 
+                            _addLoading();
                             _requestContent( null, null, null, true );
+
                         }
 
                     }
@@ -120,6 +123,49 @@
                         return false;
                     }
                 } );
+                $(document).on(
+                    "click",
+                    ".pagination a",
+                    function() {
+                        var curItem = $(this),
+                            value = parseInt(curItem.text());
+
+                        if( curItem.hasClass('pagination__prev') ) {
+
+                            if( parseInt( _inputHiddenPage.val() ) != 1 ) {
+
+                                _inputHiddenPage.val( _inputHiddenPage.val() - 1 );
+                                _addLoading();
+                                _requestContent( null, null, null, true );
+
+                            }
+
+
+                        } else if( curItem.hasClass('pagination__next') ) {
+
+                            if( !( curItem.prev().hasClass('active') ) ) {
+
+                                _inputHiddenPage.val( parseInt( _inputHiddenPage.val() ) - 1 );
+                                _addLoading();
+                                _requestContent( null, null, null, true );
+
+                            }
+
+                        } else {
+
+                            if( value != parseInt( _inputHiddenPage.val() ) ) {
+
+                                _inputHiddenPage.val(value);
+                                _addLoading();
+                                _requestContent( null, null, null, true );
+
+                            }
+
+                        }
+
+                        return false;
+                    }
+                );
                 $(document).on(
                     "click",
                     ".category__filtered-remove",
@@ -300,7 +346,7 @@
                         productsWrap += '<div class="rate">';
 
                         for( var i = 0; i <= product.rate.starsCount-1; i++ ) {
-                            productsWrap +='<img src="img/star.png" width="60" height="50" alt="">&nbsp;'
+                            productsWrap +='<img src="'+ _dataRatePath +'img/star.png" width="60" height="50" alt="">&nbsp;'
                         }
 
                         productsWrap +='<a href="'+ product.rate.urlReviews +'" class="rate__reviews">'+ product.rate.reviewsCount +'</a>\
@@ -346,17 +392,32 @@
 
                     productsWrap +='</div>\
                                                     </div>\
-                                                </div>\
-                                                <div class="products-subcategory__footer">\
+                                                </div>';
+
+                    if( product.oldPrice != undefined ) {
+
+                        productsWrap +='<div class="products-subcategory__footer">\
                                                     <div class="products-subcategory__price">\
                                                         <del>'+ product.oldPrice +'</del> '+ product.price +'\
-                                                    </div>\
-                                                    <a href="'+ product.urlDetails +'" class="btn btn_3">see details</a>\
+                                                    </div>';
+
+                    } else {
+
+                        productsWrap +='<div class="products-subcategory__footer">\
+                                                    <div class="products-subcategory__price">\
+                                                        '+ product.price +'\
+                                                    </div>';
+
+                    }
+
+                    productsWrap +='<a href="'+ product.urlDetails +'" class="btn btn_3">see details</a>\
                                                 </div>\
                                             </div>\
                                         </div>\
                                     </div>\
                                     </div>';
+
+
 
                 } );
 
@@ -455,7 +516,8 @@
                         value: _inputHidden.val(),
                         pageSorting: _sortingPage.val(),
                         dateSorting: _sortingDate.val(),
-                        currentPage: _inputHiddenPage.val()
+                        currentPage: _inputHiddenPage.val(),
+                        idCategory: _obj.data('id-category')
                     },
                     dataType: 'json',
                     type: "get",
@@ -469,6 +531,7 @@
 
                         _pasteNewProducts( m );
                         _closeLoading();
+                        _createPagination( m );
 
                     },
                     error: function (XMLHttpRequest) {
@@ -477,6 +540,147 @@
                         }
                     }
                 } );
+
+            },
+            _createPagination = function( data ) {
+
+                var pages = parseInt(data.settings.pagesAll),
+                    activePage = parseInt(data.settings.currentPage);
+
+                _inputHiddenPage.val(activePage);
+
+                if( pages != 1 ) {
+
+                    var paginationWrap = '<div class="pagination">';
+
+                    paginationWrap +='<a href="#" class="pagination__prev"></a>';
+
+                    if( pages <= 7 ) {
+
+                        for( var i = 1; i <= pages - 1; i++ ) {
+
+                            if( i == activePage ) {
+                                paginationWrap +='<a href="#" class="active">'+ i +'</a>';
+                            } else {
+                                paginationWrap +='<a href="#">'+ i +'</a>';
+                            }
+
+                        }
+
+                    }
+                    else {
+
+                        if( activePage <= 3 || activePage > pages-3 ) {
+
+                            for( var i = 1; i <= 3; i++ ) {
+
+                                if( i == activePage ) {
+                                    paginationWrap +='<a href="#" class="active">'+ i +'</a>';
+                                } else {
+                                    paginationWrap +='<a href="#">'+ i +'</a>';
+                                }
+
+                            }
+
+                            paginationWrap +='<span>...</span>';
+
+                            for( var i = pages-2; i <= pages; i++ ) {
+
+                                if( i == activePage ) {
+                                    paginationWrap +='<a href="#" class="active">'+ i +'</a>';
+                                } else {
+                                    paginationWrap +='<a href="#">'+ i +'</a>';
+                                }
+
+                            }
+
+                        }
+                        if( activePage > 3 && activePage <= pages-3 ) {
+
+                            paginationWrap +='<a href="#">1</a>';
+                            paginationWrap +='<span>...</span>';
+
+                            if( (activePage-1 > 3) && (activePage+1 <= pages-3) ) {
+
+                                for( var i = activePage-1; i <= activePage+1; i++ ) {
+
+                                    if( i == activePage ) {
+                                        paginationWrap +='<a href="#" class="active">'+ i +'</a>';
+                                    } else {
+                                        paginationWrap +='<a href="#">'+ i +'</a>';
+                                    }
+
+                                }
+
+                            } else if( activePage-1 <= 3 ) {
+
+                                for( var i = activePage; i <= activePage+2; i++ ) {
+
+                                    if( i == activePage ) {
+                                        paginationWrap +='<a href="#" class="active">'+ i +'</a>';
+                                    } else {
+                                        paginationWrap +='<a href="#">'+ i +'</a>';
+                                    }
+
+                                }
+
+                            } else if( activePage+1 >= pages-3 ) {
+
+                                for( var i = activePage-2; i <= activePage; i++ ) {
+
+                                    if( i == activePage ) {
+                                        paginationWrap +='<a href="#" class="active">'+ i +'</a>';
+                                    } else {
+                                        paginationWrap +='<a href="#">'+ i +'</a>';
+                                    }
+
+                                }
+
+                            }
+
+                            paginationWrap +='<span>...</span>';
+                            paginationWrap +='<a href="#">'+ pages +'</a>';
+
+                        }
+                        if( pages == 8 ) {
+
+                            if( activePage > 3 && activePage <= pages-3 ) {
+                                paginationWrap +='<a href="#">1</a>';
+                                paginationWrap +='<span>...</span>';
+
+                                for( var i = 4; i <= 5; i++ ) {
+
+                                    if( i == activePage ) {
+                                        paginationWrap +='<a href="#" class="active">'+ i +'</a>';
+                                    } else {
+                                        paginationWrap +='<a href="#">'+ i +'</a>';
+                                    }
+
+                                }
+
+                                paginationWrap +='<span>...</span>';
+                                paginationWrap +='<a href="#">'+ pages +'</a>';
+
+                            }
+
+                        }
+
+                    }
+
+                    paginationWrap +='<a href="#" class="pagination__next"></a>';
+                    paginationWrap += '</div>';
+
+                    $('.pagination-wrap').append(paginationWrap);
+
+                } else {
+
+                    if( $('.pagination').length ) {
+
+                        $('.pagination').remove();
+
+                    }
+
+                }
 
             },
             _init = function () {
