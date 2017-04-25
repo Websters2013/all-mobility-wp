@@ -76,6 +76,10 @@
       -webkit-transition: background 0.3s;
       transition: background 0.3s;
 
+      span {
+        color: #F47920;
+      }
+
       &:hover {
         background: #EEEEEE;
       }
@@ -190,6 +194,15 @@
     &.visible {
       opacity: 1;
       visibility: visible;
+    }
+
+  }
+  .site__footer {
+
+    .search__result {
+      top: auto;
+      bottom: 48px;
+      box-shadow: -4px -4px 2px 0 rgba(2,2,0,0.15);
     }
 
   }

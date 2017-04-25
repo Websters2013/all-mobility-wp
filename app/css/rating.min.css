@@ -1,0 +1,18 @@
+.c-rating{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;list-style:none;margin:0;padding:0}.c-rating__item{-webkit-box-flex:0;-webkit-flex:0 0 24px;-ms-flex:0 0 24px;flex:0 0 24px;height:24px;background:url(../img/stars.svg);cursor:pointer}.c-rating__item.is-active,.c-rating__item:hover{background-position:-24px 0}
+
+.c-rating__item {
+    display: inline-block;
+    vertical-align: top;
+    width: 32px;
+    height: 30px;
+    margin: 0 0 0 3px;
+    background: url(../img/rate-stars.png);
+    background-size: 62px 30px;
+    background-position: 1px 0;
+    background-repeat: no-repeat;
+}
+.c-rating__item:first-child {
+    margin-left: 0;
+}
+.c-rating__item.is-active, .c-rating__item:hover {
+    background-position: -30px 0;

@@ -90,15 +90,3 @@ if ( ! comments_open() ) {
 
 </div>
 
-<!-- custom form -->
-		<form action="/wp-comments-post.php" method="post" id="commentform" class="comment-form">
-				<select name="rating" id="rating" aria-required="true" required="" style="opacity: 0; display: none;">
-				<option value="">Rate…</option>
-				<option selected value="5">Perfect</option>
-				<option value="4">Good</option>
-				<option value="3">Average</option>
-				<option value="2">Not that bad</option>
-				<option value="1">Very poor</option>
-			</select><div class="websters-select__arrow"></div></div></p><p class="comment-form-comment"><label for="comment">Your review <span class="required">*</span></label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" required=""></textarea></p><p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Submit"> <input type="hidden" name="comment_post_ID" value="59" id="comment_post_ID">
-		</form>
-<!-- custom form -->
