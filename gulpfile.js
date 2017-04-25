@@ -47,7 +47,8 @@ let paths = {
                 'app/js/jquery.product-slider.js',
                 'app/js/jquery.websters-select.js',
                 'app/js/jquery.search.js',
-                'app/js/jquery.rate.js'
+                'app/js/jquery.rate.js',
+                'app/js/jquery.review-go.js'
             ]
         },
         {
