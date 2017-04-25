@@ -1,5 +1,8 @@
 <?php
 $value = $_GET['value'];
+$pageSorting = $_GET['pageSorting'];
+$sortingDate = $_GET['dateSorting'];
+$currentPage = $_GET['currentPage'];
 
 $json_data = '{
     "products": [
@@ -78,9 +81,12 @@ $json_data = '{
             "price": "$1,800.00",
             "urlDetails": "#"
         }
-    ]
+    ],
+    "settings": {
+        "pagesAll": "10",
+        "currentPage": "5"
+    }
 }';
-
 
 
 $json_data = str_replace("\r\n",'',$json_data);

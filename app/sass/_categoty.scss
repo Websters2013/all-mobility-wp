@@ -1,4 +1,5 @@
 .category {
+  position: relative;
   @include main-font5();
   font-size: 16px;
   line-height: 22px;
@@ -15,6 +16,7 @@
 }
 .category__inner {
   position: relative;
+  padding-top: 4px;
 
   &_filters {
 
@@ -26,14 +28,14 @@
   margin: 0 0 6px;
 }
 .category__content {
-
+  padding-top: 96px;
 }
 .category__filters-title {
   @include inline-flex();
   @include justify-content(center);
   @include align-items(center);
   @include flex-direction();
-  margin: 0 52px 20px 0;
+  margin: 0 52px 13px 0;
   padding: 0 31px 0 18px;
   height: 45px;
   background: #5d5d5d;
@@ -103,6 +105,7 @@
     line-height: 20px;
     color: #008FB1;
     cursor: pointer;
+    text-transform: capitalize;
 
     &:hover {
       color: #008FB1;
@@ -297,6 +300,44 @@
   top: 32px;
   right: 32px;
 }
+.category__head {
+  position: relative;
+  z-index: 3;
+}
+.category__sorting {
+  position: absolute;
+  bottom: -143px;
+  right: 0;
+  left: 0;
+
+  form {
+    @include flexbox();
+    @include justify-content(space-between);
+    @include align-items(flex-end);
+    @include flex-direction();
+
+    >fieldset {
+      width: 58%;
+
+      &:first-child {
+        width: 29%;
+      }
+
+    }
+
+  }
+
+  label {
+    display: block;
+    margin: 0 0 4px;
+    line-height: 14px;
+  }
+  .websters-select {
+    vertical-align: middle;
+    margin: 0;
+  }
+
+}
 
 @media (min-width: $tablet-portrait) {
 
@@ -311,6 +352,9 @@
     }
 
   }
+  .category__sorting {
+    bottom: -160px;
+  }
 
 }
 @media (min-width: $desktop) {
@@ -319,6 +363,7 @@
     padding: 0 40px 74px;
   }
   .category__inner {
+    padding-top: 4px;
 
     &_filters {
       @include flexbox();
@@ -334,6 +379,7 @@
     width: 17.5%;
   }
   .category__content {
+    padding-top: 0;
     width: 76%;
   }
   .category__filters-item {
@@ -530,11 +576,24 @@
   .category__filters-title-inner {
     display: none;
   }
-  .category__filtered-close,
-  .category__filtered {
+  .category__filtered-close {
     display: none;
   }
+  .category__filtered {
+    padding: 0 0 35px 15px;
+  }
+  .category__filtered-list {
 
+    li {
+      color: #4E4E4E;
+      font-size: 16px;
+      line-height: 18px;
+    }
+
+  }
+  .category__filtered-remove {
+    margin: -5px 0 0 8px;
+  }
   .category__head {
     @include flexbox();
     @include justify-content(space-between);
@@ -542,7 +601,7 @@
     @include flex-direction();
 
     >div {
-      width: 512px;
+      width: 516px;
       padding-top: 6px;
 
       &:first-child {
@@ -554,32 +613,31 @@
 
   }
   .category__sorting {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    left: auto;
 
     form {
-      @include flexbox();
-      @include justify-content(space-between);
       @include align-items(center);
-      @include flex-direction();
-    }
 
+      >fieldset {
+        width: auto;
+
+        &:first-child {
+          width: auto;
+        }
+
+      }
+
+    }
     label {
       display: inline-block;
       vertical-align: middle;
       margin: 0 13px 0 0;
     }
     .websters-select {
-      vertical-align: middle;
       width: 215px;
-      margin: 0;
-    }
-
-    >fieldset {
-      width: 70%;
-
-      &:first-child {
-        width: 30%;
-      }
-
     }
 
   }

@@ -28,9 +28,16 @@
             _title = _obj.find('.category__filters-title'),
             _titleInner = _obj.find('.category__filters-title-inner'),
             _clearFilters = _obj.find('.category__filtered .btn, .category__filters-clear'),
+            _clearSingle = _obj.find('.category__filtered-remove'),
             _globalCheckFlag = false,
             _loading = $('<div class="loading"></div>'),
-            _window = $(window);
+            _inputHidden = _obj.find('input[type=hidden].value-check'),
+            _inputHiddenPage = _obj.find('input[type=hidden].current-page'),
+            _sortingPage = _obj.find('#items-page'),
+            _sortingDate = _obj.find('#sorting-date'),
+            _window = $(window),
+            _objValue = {},
+            _arr = [];
 
         //private methods
 
@@ -54,6 +61,14 @@
                             }
 
                         } );
+
+                    },
+                    load: function() {
+
+                        if( _obj.hasClass('category_sub') ) {
+
+                            _requestContent( null, null, null, true );
+                        }
 
                     }
                 } );
@@ -105,6 +120,20 @@
                         return false;
                     }
                 } );
+                $(document).on(
+                    "click",
+                    ".category__filtered-remove",
+                    function() {
+                        var curItem = $(this),
+                            parent = curItem.parent(),
+                            dataId = parent.data('id'),
+                            dataName =  parent.data('name');
+
+                        _clearSingleFilter( dataId, dataName );
+
+                        return false;
+                    }
+                );
                 _closeFilters.on( {
                     click: function () {
 
@@ -120,13 +149,32 @@
                         var curItem = $(this),
                             curItemName = curItem.attr('name'),
                             label = curItem.next(),
-                            labelText = label.text();
+                            labelText = label.text(),
+                            name = curItem.attr('name'),
+                            id = curItem.attr('id');
 
                         _globalCheckFlag = curItem.prop('checked');
 
                         _addLoading();
                         _closeFilter();
-                        _requestContent( labelText, curItemName, false );
+                        _writeInHidden( name, id, _globalCheckFlag );
+                        _requestContent( labelText, id, name, false );
+
+                    }
+                } );
+                _sortingPage.on( {
+                    change: function () {
+
+                        _addLoading();
+                        _requestContent( null, null, null, true );
+
+                    }
+                } );
+                _sortingDate.on( {
+                    change: function () {
+
+                        _addLoading();
+                        _requestContent( null, null, null, true );
 
                     }
                 } );
@@ -158,9 +206,20 @@
                 _title.removeClass('selected');
                 _filteredList.find('li').remove();
                 _filterItem.find('input[type=checkbox]').prop('checked', false);
+                _inputHidden.val('');
 
                 _addLoading();
-                _requestContent( null, null, true );
+                _requestContent( null, null, null, true );
+
+            },
+            _clearSingleFilter = function( itemId, itemName ) {
+
+                _filterItem.find('input[id='+ itemId +']').prop('checked', false);
+                _globalCheckFlag = false;
+                _addingFilteredBy( '', itemId );
+                _addLoading();
+                _requestContent( null, null, null, true );
+                _writeInHidden( itemName, itemId, _globalCheckFlag );
 
             },
             _closeFilter = function() {
@@ -179,15 +238,15 @@
 
                 }
             },
-            _addingFilteredBy = function( itemText, itemName ) {
+            _addingFilteredBy = function( itemText, itemId, itemName ) {
 
                 if( _globalCheckFlag ) {
 
-                    _filteredList.append('<li data-name="'+ itemName +'">'+ itemText +' <a href="#" class="category__filtered-remove"></a></li>');
+                    _filteredList.append('<li data-name='+ itemName +' data-id="'+ itemId +'">'+ itemText +' <a href="#" class="category__filtered-remove"></a></li>');
 
                 } else {
 
-                    _filteredList.find('li[data-name=' + itemName + ']').remove();
+                    _filteredList.find('li[data-id=' + itemId + ']').remove();
 
                 }
                 _countFiltered = _filteredList.find('li').length;
@@ -306,13 +365,97 @@
                 $('.category__wrap').html(productsWrap);
 
             },
-            _requestContent = function ( itemText, itemName, clear ) {
+            _writeInHidden = function(name, value, checkFlag) {
+
+                if( checkFlag ) {
+
+                    if(_objValue.hasOwnProperty(name)) {
+
+                        for (var prop in _objValue) {
+
+                            if( prop == name ) {
+
+                                _objValue[prop].push(value);
+
+                            }
+
+                        }
+
+
+
+                    } else {
+
+                        _objValue[name] = [value]
+
+                    }
+
+                } else {
+
+                    for (var prop in _objValue) {
+
+                        if( prop == name ) {
+
+                            var i = _objValue[prop].indexOf(value);
+
+                            if(i != -1) {
+
+                                _objValue[prop].splice(i, 1);
+
+                            }
+
+                        }
+
+                    }
+
+                    if( _objValue[name].length == 0 ) {
+
+                        delete _objValue[name];
+
+                    }
+
+                }
+
+
+                var strFinish = '',
+                    strValues = '',
+                    strFull = '',
+                    arrAll = [];
+
+                for( var key in _objValue ) {
+
+                    _arr = [];
+
+                    var item = _objValue[ key ];
+
+                    _arr.push( item );
+
+                    for( var i = 0; i <= _arr.length-1; i++) {
+
+                        strValues = _arr.join(',');
+
+                    }
+
+                    strFull = key + '=' + strValues;
+
+                    arrAll.push(strFull);
+
+                    strFinish = arrAll.join('&');
+
+                }
+
+                _inputHidden.val( strFinish );
+
+            },
+            _requestContent = function ( itemText, itemId, itemName, clear ) {
 
                 _request.abort();
                 _request = $.ajax( {
                     url: _path,
                     data: {
-                        value: _form.serialize()
+                        value: _inputHidden.val(),
+                        pageSorting: _sortingPage.val(),
+                        dateSorting: _sortingDate.val(),
+                        currentPage: _inputHiddenPage.val()
                     },
                     dataType: 'json',
                     type: "get",
@@ -320,7 +463,7 @@
 
                         if( !clear ) {
 
-                            _addingFilteredBy( itemText, itemName );
+                            _addingFilteredBy( itemText, itemId, itemName );
 
                         }
 
