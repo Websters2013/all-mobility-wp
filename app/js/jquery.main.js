@@ -1,5 +1,8 @@
 ( function(){
 
+
+    var globalScrollFlag = true;
+
     $(function () {
 
         $('.site__menu').each(function () {
@@ -365,7 +368,7 @@
 
                 }
 
-                if (direction < 0 && _header.hasClass('site__header_hidden') && !_showBtn.hasClass('opened') && _action) {
+                if (direction < 0 && _header.hasClass('site__header_hidden') && !_showBtn.hasClass('opened') && _action && globalScrollFlag) {
 
                     _header.removeClass('site__header_hidden');
 
