@@ -2,9 +2,20 @@
 
 $cat_obj = $wp_query->get_queried_object();
 
-$category_ID  = $cat_obj->term_id; ?>
+$category_ID  = $cat_obj->term_id;
 
-<div class="category category_filters">
+
+
+if( $cat_obj->parent != 0 ){
+    $category_sub = ' category_sub';
+} else {
+    $category_sub = '';
+}
+
+
+?>
+
+<div class="category category_filters<?= $category_sub ?>" data-id-category="<?= $category_ID ?>">
 
     <div class="category__head">
         <div>
@@ -27,19 +38,17 @@ $category_ID  = $cat_obj->term_id; ?>
                     <fieldset class="category__sorting-pages">
                         <label for="items-page">items per page</label>
                         <select name="items-page" id="items-page">
-                            <option value="0">30</option>
-                            <option value="1">40</option>
-                            <option value="2">50</option>
-                            <option value="3">60</option>
+                            <option selected value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
                         </select>
                     </fieldset>
                     <fieldset>
                         <label for="sorting-date">sorting</label>
                         <select name="sorting-date" id="sorting-date">
-                            <option value="0">date: new first</option>
-                            <option value="1">date: new first</option>
-                            <option value="2">date: new first</option>
-                            <option value="3">date: new first</option>
+                            <option selected value="DESC">date: new first</option>
+                            <option value="ASC">date: old first</option>
                         </select>
                     </fieldset>
 
@@ -118,28 +127,63 @@ $category_ID  = $cat_obj->term_id; ?>
 
                                     </span>
                         <div class="category__filters-list">
+
+                            <?php
+                            $maxCatPrice = wpq_get_max_price_per_product_cat( $category_ID );
+                            $minCatPrice = wpq_get_min_price_per_product_cat( $category_ID );
+                            $delta = ( $maxCatPrice - $minCatPrice )/5;
+                            $delta_min = $delta - 0.01;
+                            $rangeArray = array();
+
+                            if( $maxCatPrice > 0 ):
+
+                                for ( $i = 1; $i <= 5; $i++ ) {
+
+                                if( $i == 1 ){
+                                    $rangeArray[$i][0] += $minCatPrice;
+                                    $rangeArray[$i][1] = $rangeArray[$i][0] + $delta_min;
+                                }
+                                elseif( $i == 5 ){
+                                    $rangeArray[$i][0] += ( $i - 1 )*$delta;
+                                    $rangeArray[$i][1] = 9999999999;
+                                }
+                                else {
+                                    $rangeArray[$i][0] += ( $i - 1 )*$delta;
+                                    $rangeArray[$i][1] = $rangeArray[$i][0] + $delta_min;
+                                }
+
+                            }
+
+                            endif;
+
+                            $check = checkPrice( 0, 400, $category_ID ); ?>
+
+                            <?php if( $maxCatPrice > 0 ): ?>
+
                             <div>
-                                <div>
-                                    <input type="checkbox" name="name1" id="name1">
-                                    <label for="name1">$1,100.00 - $1,199.99 <span class="category__filters-count">1</span></label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="name2" id="name2">
-                                    <label for="name2">$1,400.00 - $1,499.99  <span class="category__filters-count">1</span></label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="name3" id="name3">
-                                    <label for="name3">$1,500.00 - $1,599.99  <span class="category__filters-count">1</span></label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="name4" id="name4">
-                                    <label for="name4">$1,600.00 - $1,699.99  <span class="category__filters-count">1</span></label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="name5" id="name5">
-                                    <label for="name5">$1,900.00 and above  <span class="category__filters-count">1</span></label>
-                                </div>
+
+                                <?php foreach ( $rangeArray as $item ):
+
+                                    $rangeString = $item[0].'-'.$item[1];
+
+                                    if($item[1] == 9999999999){
+                                        $second = ' and above';
+                                    } else {
+                                        $second = ' - $'.number_format($item[1], 2, '.', ' ');
+                                    }
+                                    
+                                    $countProducts = checkPrice( $item[0], $item[1], $category_ID );  ?>
+
+                                    <div>
+                                        <input type="checkbox" name="name1" id="<?= $rangeString ?>">
+                                        <label for="<?= $rangeString ?>">$<?= number_format($item[0], 2, '.', ' '); ?><?= $second ?> <span class="category__filters-count"><?= $countProducts ?></span></label>
+                                    </div>
+
+                                <?php endforeach; ?>
+
                             </div>
+
+                            <?php endif; ?>
                         </div>
                     </div>
 
@@ -301,186 +345,5 @@ $category_ID  = $cat_obj->term_id; ?>
 
     </div>
     <!-- /category__inner -->
-
-<?php $string = 'pa_brand=25';
-
-    parse_str($string,$output);
-
-    $value = $_GET['value'];
-    $pageSorting = $_GET['pageSorting'];
-    $sortingDate = $_GET['dateSorting'];
-    $currentPage = $_GET['currentPage'];
-
-    foreach ($output as $key => $item){
-        $atts[$key] = explode( ',',$item );
-    }
-
-    if( $string ){
-
-        $attributes_filter = '';
-
-        foreach ( $atts as $key => $item ){
-            $attributesQuery[] =  array(
-                'taxonomy' 		=> $key,
-                'terms' 		=> $item,
-                'operator' 		=> 'IN'
-            );
-        }
-
-    } else {
-        $attributes_filter = '';
-    }
-
-    $term_id = 10;
-
-    $args = array (
-        'post_type'  => 'product',
-        'fields' => 'ids',
-        'posts_per_page' => -1,
-        'meta_key'			=> '_price',
-        'orderby'			=> 'meta_value_num',
-        'order' => 'ASC',
-        'post_status' => 'publish',
-        'tax_query'  => array(
-            'relation' => 'AND',
-            array(
-                'taxonomy' => 'product_cat',
-                'field' => 'term_id',
-                'terms' => $term_id
-            ),
-
-            $attributesQuery
-
-        ),
-        'meta_query' => array(
-
-            array(
-                'key' => '_price',
-                'value' => array(0, 14000),
-                'compare' => 'BETWEEN',
-                'type' => 'NUMERIC'
-            )
-
-        ),
-
-    );
-
-    $attrProducts =  get_posts($args);
-
-    $products = '';
-
-    foreach ($attrProducts as $product_id){
-
-        $currentProduct = wc_get_product($product_id);
-
-        if( get_field('featured_product',$product_id) ){
-            $featured = 'featured';
-        } else {
-            $featured = '';
-        }
-
-        $thumb_id = get_post_thumbnail_id($product_id);
-        $thumb_url = wp_get_attachment_image_src($thumb_id,'full')[0];
-        $name = json_encode($currentProduct->get_name());
-        $rate = $currentProduct->get_rating_count();
-        $review = $currentProduct->get_review_count();
-        $link = get_permalink($product_id);
-        $review_link = $link.'?to_review=true';
-
-        if( $currentProduct->is_type('variable') ){
-
-            $regularPrice = $currentProduct->get_variation_regular_price();
-
-            $salePrice = $currentProduct->get_variation_sale_price();
-
-        } elseif( $currentProduct->is_type('simple') ) {
-
-            $regularPrice = $currentProduct->get_regular_price();
-
-            $salePrice = $currentProduct->get_sale_price();
-
-        }
-
-        ( $salePrice )? $salePrice = $salePrice.'$' : $salePrice = '' ;
-
-        ( $regularPrice )? $regularPrice = $regularPrice.'$' : $regularPrice = '' ;
-
-        $description = '';
-
-        if( have_rows('technical_specifications_block', $product_id) ):
-           $count = 0 ;
-            while ( have_rows('technical_specifications_block', $product_id) ) : the_row();
-
-                if( $count <= 2 ){
-                    $description .= '"'.get_sub_field('value').'",';
-                }
-
-            endwhile; $count++;
-            $description = substr( $description, 0, -1 );
-        endif;
-
-        $products .= ' {
-            "name": "'.$term_id.'",
-            "featured": "'.$featured.'",
-            "picture": "'.$thumb_url.'",
-            "title": '.$name.',
-            "rate": {
-                "starsCount": "'.$rate.'",
-                "reviewsCount": "'.$review.' Reviews",
-                "urlReviews": "'.$review_link.'"
-            },
-            "content": {
-                 "description": ['.$description.'],
-                  "specification": {
-                    "head": ["Top Speed","Drive Range","Seat Width","Foldable"],
-                    "content": ["3.5 mph","8.7 miles","17”","Yes"]
-                }
-            },
-            "price": "'.$salePrice.'",
-            "oldPrice": "'.$regularPrice.'",
-            "urlDetails": "'.$link.'"
-        },';
-
-
-    }
-
-    $products = substr( $products, 0, -1 );
-
-    $json_data = '{
-    "products": [
-       '.$products.'
-    ],
-    ,
-    "settings": {
-        "pagesAll": "10",
-        "currentPage": "5"
-    }
-}';
-
-?>
-
-    <?php
-
-   $min_price = wpq_get_min_price_per_product_cat(10);
-
-   $max_price = wpq_get_max_price_per_product_cat(10);
-
-   $delta = round( $max_price - $min_price )/5;
-
-   $ranges = array();
-
-    for( $i = 0; $i <=4; $i++ ){
-
-        if( $i==0 ){
-            $ranges[$i][] = $min_price;
-            $ranges[$i][] = ($min_price+$delta);
-        }
-
-    }
-
-    echo $delta;
-    echo $min_price;
-    echo $max_price;
-    ?>
 
 </div>

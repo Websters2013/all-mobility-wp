@@ -359,6 +359,45 @@ function checkProduct( $taxonomyName, $termid, $catID ){
     
 }
 
+function checkPrice( $min, $max, $catID ){
+
+    $args = array (
+        'post_type'  => 'product',
+        'posts_per_page' => -1,
+        'tax_query'  => array(
+            'relation' => 'AND',
+            array(
+                'taxonomy' => 'product_cat',
+                'field' => 'term_id',
+                'terms' => $catID
+            )
+        ),
+        'meta_query' => array(
+
+            array(
+                'key' => '_price',
+                'value' => array($min, $max),
+                'compare' => 'BETWEEN',
+                'type' => 'NUMERIC'
+            )
+
+        ),
+    );
+
+    $attrProducts =  get_posts($args);
+
+    $countPosts = count($attrProducts);
+
+    if(empty($attrProducts)){
+        $filterCount = 0;
+    } else {
+        $filterCount = $countPosts;
+    }
+
+    return $filterCount;
+
+}
+
 function main_search(){
 
     $query = $_GET['value'];
@@ -675,13 +714,15 @@ $currentPage = $_GET['currentPage'];
 
     $term_id = 10;
 
+
+
     $args = array (
+        'paged' => 1,
         'post_type'  => 'product',
         'fields' => 'ids',
-        'posts_per_page' => -1,
-        'meta_key'			=> '_price',
-        'orderby'			=> 'meta_value_num',
-        'order' => 'ASC',
+        'posts_per_page' => $pageSorting,
+        'orderby'			=> 'date',
+        'order' => $sortingDate,
         'post_status' => 'publish',
         'tax_query'  => array(
             'relation' => 'AND',

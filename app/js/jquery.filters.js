@@ -513,6 +513,7 @@
                 _request = $.ajax( {
                     url: _path,
                     data: {
+                        action : 'get_filtered_products',
                         value: _inputHidden.val(),
                         pageSorting: _sortingPage.val(),
                         dateSorting: _sortingDate.val(),
