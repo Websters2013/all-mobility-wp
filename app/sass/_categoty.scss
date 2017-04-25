@@ -186,11 +186,16 @@
     visibility: hidden;
 
     &:checked + label {
-      color: #F47920;
+
+      &:before {
+        display: block;
+      }
+
     }
 
   }
   label {
+    position: relative;
     display: block;
     padding: 10px 24px 10px 32px;
     margin: 0 0 13px;
@@ -198,6 +203,33 @@
     font-size: 20px;
     line-height: 20px;
     color: #fff;
+
+    &:after,
+    &:before {
+      position: absolute;
+      content: '';
+    }
+
+    &:after {
+      top: 1px;
+      left: 15px;
+      width: 14px;
+      height: 14px;
+      border-radius: 2px;
+      border: 1px solid #979797;
+    }
+
+    &:before {
+      display: none;
+      top: 7px;
+      left: 7px;
+      border-radius: 50%;
+      background: $nice-checkbox-after-color;
+      width: 5px;
+      height: 5px;
+      content: '';
+    }
+
   }
   .category__filters-count {
     float: right;
