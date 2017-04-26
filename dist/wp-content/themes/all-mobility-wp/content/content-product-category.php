@@ -177,7 +177,7 @@ if( $cat_obj->parent != 0 ){
                                     $countProducts = checkPrice( $item[0], $item[1], $category_ID );  ?>
 
                                     <div>
-                                        <input type="checkbox" name="name1" id="<?= $rangeString ?>">
+                                        <input type="checkbox"  data-id="<?= $rangeString ?>" name="price" id="price">
                                         <label for="<?= $rangeString ?>">$<?= number_format($item[0], 2, '.', ' '); ?><?= $second ?> <span class="category__filters-count"><?= $countProducts ?></span></label>
                                     </div>
 
@@ -219,7 +219,7 @@ if( $cat_obj->parent != 0 ){
 
 
                                         <div>
-                                            <input type="checkbox" name="<?= $item->taxonomy ?>" id="<?= $item->term_id ?>" value="<?= $item->term_id ?>">
+                                            <input type="checkbox" name="<?= $item->taxonomy ?>"  data-id="<?= $item->term_id ?>" id="<?= $item->term_id ?>" value="<?= $item->term_id ?>">
                                             <label for="<?= $item->term_id ?>"><?= $item->name ?> <span class="category__filters-count"><?= $item->count_posts ?></span></label>
                                         </div>
 

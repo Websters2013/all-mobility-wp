@@ -143,16 +143,18 @@
                 <div class="site__footer-payments">
                     <img src="<?= DIRECT ?>pic/visa.jpg" width="48" height="30" alt="visa">
                     <img src="<?= DIRECT ?>pic/mastercard.jpg" width="48" height="30" alt="mastercard">
+                    <img src="<?= DIRECT ?>pic/card-amex.jpg" width="50" height="30" alt="amex">
+                    <img src="<?= DIRECT ?>pic/card-discover.jpg" width="48" height="30" alt="amex">
                     <img src="<?= DIRECT ?>pic/paypal.jpg" width="48" height="30" alt="paypal">
-                    <img src="<?= DIRECT ?>pic/amazon.jpg" width="48" height="30" alt="amazon">
+                    <img src="<?= DIRECT ?>pic/card-pp-credit.jpg" width="66" height="30" alt="paypal">
                 </div>
                 <!-- /site__footer-payments -->
-
-                <a href="#" class="site__footer-free popup__open" data-popup="get">free catalog</a>
 
             </div>
             <div>
 
+                <a href="#" class="site__footer-free">free catalog</a>
+                
                 <!-- social -->
                 <div class="social">
 

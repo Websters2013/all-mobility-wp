@@ -53,12 +53,8 @@ add_action('wp_enqueue_scripts', 'add_js');
 function add_js()
 {
 
-    wp_deregister_script('jquery');
-
-    wp_register_script('jquery',get_template_directory_uri().'/assets/js/vendors/jquery-2.2.1.min.js');
-
+    wp_deregister_script('jquery');wp_register_script('jquery',get_template_directory_uri().'/assets/js/vendors/jquery-3.0.0.min.js');
     wp_register_script('swiper_js',get_template_directory_uri().'/assets/js/vendors/swiper.jquery.min.js');
-    
     wp_register_script('index_js',get_template_directory_uri().'/assets/js/index.min.js');
     wp_register_script('perfect_js',get_template_directory_uri().'/assets/js/vendors/perfect-scrollbar.jquery.min.js');
     wp_register_script('product_js',get_template_directory_uri().'/assets/js/product.min.js');
