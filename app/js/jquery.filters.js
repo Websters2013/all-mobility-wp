@@ -179,7 +179,7 @@
                         var curItem = $(this),
                             parent = curItem.parent(),
                             dataId = parent.data('id'),
-                            dataName =  parent.data('name');
+                            dataName = parent.data('name');
 
                         _clearSingleFilter( dataId, dataName );
 
@@ -203,7 +203,7 @@
                             label = curItem.next(),
                             labelText = label.text(),
                             name = curItem.attr('name'),
-                            id = curItem.attr('id');
+                            id = curItem.data('id');
 
                         _globalCheckFlag = curItem.prop('checked');
 
@@ -266,7 +266,7 @@
             },
             _clearSingleFilter = function( itemId, itemName ) {
 
-                _filterItem.find('input[id='+ itemId +']').prop('checked', false);
+                _filterItem.find('input[data-id='+ itemId +']').prop('checked', false);
                 _globalCheckFlag = false;
                 _addingFilteredBy( '', itemId );
                 _addLoading();
@@ -334,7 +334,6 @@
 
                     productsWrap += '<div class="products-subcategory__item">';
 
-                    console.log(product.featured)
                     if( product.featured != undefined && product.featured != "" ) {
 
                         productsWrap += '<span class="site__featured">'+ product.featured +'</span>';

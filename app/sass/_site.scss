@@ -107,6 +107,13 @@
         }
 
       }
+      &.site__menu-item_sub {
+
+        .site__menu-icon {
+          display: block;
+        }
+
+      }
 
       .site__menu-sub {
         display: none;
@@ -170,6 +177,7 @@
 
   }
   .site__menu-icon {
+    display: none;
     position: absolute;
     left: 7.5%;
     top: 50%;
@@ -931,7 +939,13 @@ textarea.site__input {
           }
 
         }
+        &.site__menu-item_sub {
 
+          .site__menu-icon {
+            display: none;
+          }
+
+        }
         .site__menu-sub {
           opacity: 0;
           visibility: hidden;

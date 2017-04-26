@@ -1,8 +1,1 @@
-/* Rectangle 4 Copy: */
-transform: rotate(45deg);
-background: #9C9C9C;
-border-radius: 8px;
-/* Rectangle 4 Copy 3: */
-transform: rotate(-45deg);
-background: #9C9C9C;
-border-radius: 8px;
+<svg width="17" height="17" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg"><g fill="#9C9C9C" fill-rule="evenodd"><rect transform="rotate(45 8.485 8.485)" x="-2.015" y="6.985" width="21" height="3" rx="1.5"/><rect transform="rotate(-45 8.485 8.485)" x="-2.015" y="6.985" width="21" height="3" rx="1.5"/></g></svg>
