@@ -26,6 +26,7 @@
     <form action="#">
         <input type="search" name="search" id="search1" autocomplete="off">
         <button type="submit">search</button>
+        <a href="#" class="search__cancel">cancel</a>
     </form>
 
     <!-- search__result -->

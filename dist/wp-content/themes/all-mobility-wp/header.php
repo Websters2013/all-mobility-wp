@@ -146,7 +146,7 @@
                 <!-- site__header-get -->
                 <a class="site__header-get popup__open" data-popup="get" href="#">
 
-                    <img src="img/book.png" width="17" height="18" alt="book">
+                    <img src="<?= DIRECT ?>img/book.png" width="17" height="18" alt="book">
 
                     GET A FREE CATALOG</a>
                 <!-- /site__header-get -->

@@ -111,6 +111,8 @@ if( $cat_obj->parent != 0 ){
 
                     </div>
 
+                    <?php if( false ): ?>
+
                     <div class="category__filters-item">
                                     <span>Price Range
 
@@ -171,7 +173,7 @@ if( $cat_obj->parent != 0 ){
                                     } else {
                                         $second = ' - $'.number_format($item[1], 2, '.', ' ');
                                     }
-                                    
+
                                     $countProducts = checkPrice( $item[0], $item[1], $category_ID );  ?>
 
                                     <div>
@@ -186,6 +188,8 @@ if( $cat_obj->parent != 0 ){
                             <?php endif; ?>
                         </div>
                     </div>
+
+                    <?php endif; ?>
 
                     <?php
                     if(!empty($attrs)):
