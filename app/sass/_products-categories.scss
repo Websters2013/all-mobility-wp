@@ -223,7 +223,19 @@
   //
   //}
 
+  .product-categories_2 {
 
+    .product-categories__item {
+      padding: 11px 9px 53px;
+    }
+    .product-categories__pic {
+      height: 135px;
+    }
+    .product-categories__footer {
+      padding-top: 10px;
+    }
+
+  }
 
 }
 @media (min-width: $desktop-hd) {

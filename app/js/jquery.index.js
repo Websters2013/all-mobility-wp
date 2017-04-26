@@ -56,10 +56,18 @@
                     paginationClickable: true,
                     speed: 600,
                     loop: true,
+                    loopedSlides: 1,
                     autoplay: 5000,
+                    touchRatio: 2,
                     autoplayDisableOnInteraction: false,
                     nextButton: _obj.find('.swiper-button-next'),
-                    prevButton: _obj.find('.swiper-button-prev')
+                    prevButton: _obj.find('.swiper-button-prev'),
+                    onSlideChangeEnd: function(swiper) {
+
+                        swiper.slides.find('.main-slider__content').removeClass('visible');
+                        swiper.slides.eq(swiper.activeIndex).find('.main-slider__content').addClass('visible');
+
+                    }
                 } );
 
             },

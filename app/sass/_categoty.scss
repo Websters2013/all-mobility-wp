@@ -154,8 +154,8 @@
   opacity: 0;
   visibility: hidden;
   position: fixed;
-  padding: 32px 0 0;
-  z-index: 10;
+  padding: 32px 0 70px;
+  z-index: 50;
   top: 0;
   left: 0;
   width: 100%;
@@ -340,6 +340,12 @@
   right: 32px;
   margin: -3px 0 0 8px;
 }
+.category__filters-apply {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 .category__head {
   position: relative;
   z-index: 3;
@@ -477,6 +483,7 @@
     overflow-y: inherit;
     position: relative;
     padding: 0;
+    z-index: 2;
     top: auto;
     left: auto;
     background: transparent;
@@ -646,6 +653,9 @@
   }
   .category__filtered-remove {
     margin: -1px 0 0 8px;
+  }
+  .category__filters-apply {
+    display: none;
   }
   .category__head {
     @include flexbox();

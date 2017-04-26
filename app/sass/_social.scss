@@ -7,8 +7,7 @@
 .social__item {
   display: inline-block;
   vertical-align: middle;
-  margin: 0 12px;
-  height: 39px;
+  margin: 0 7px;
 
   svg {
     height: 25px;
@@ -40,6 +39,7 @@
 @media (min-width: $phone-mini) {
 
   .social__item {
+    margin: 0 12px;
 
     svg {
       max-width: 45px;

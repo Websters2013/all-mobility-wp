@@ -185,6 +185,22 @@
     font-size: 16px;
     line-height: 16px;
   }
+  &_12 {
+    height: 70px;
+    border-radius: 0;
+    font-size: 26px;
+    line-height: 26px;
+    box-shadow: -4px -4px 4px 0 rgba(0,0,0,0.50);
+    background: #F47920;
+
+    &:hover {
+      background: #ea5438;
+    }
+
+    &:active {
+      background: #ea5438;
+    }
+  }
 
 }
 
@@ -224,6 +240,11 @@
     }
     &_11 {
       height: 40px;
+    }
+    &_12 {
+      height: 70px;
+      font-size: 26px;
+      line-height: 26px;
     }
 
   }

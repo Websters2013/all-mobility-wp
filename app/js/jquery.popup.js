@@ -84,7 +84,7 @@
                         return false;
                     }
                 } );
-                _wrap.on( {
+                _contents.find('>div').on( {
                     click: function( e ){
                         e.stopPropagation();
                     }
