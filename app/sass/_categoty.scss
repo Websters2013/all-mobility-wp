@@ -652,6 +652,7 @@
     @include justify-content(space-between);
     @include align-items(center);
     @include flex-direction();
+    min-height: 100px;
 
     >div {
       width: 516px;
