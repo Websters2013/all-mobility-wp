@@ -110,6 +110,14 @@ let paths = {
                 'app/js/jquery.websters-select.js',
                 'app/js/jquery.search.js'
             ]
+        },
+        {
+            dist: 'not-found.min.js',
+            contains: [
+                'app/js/jquery.main.js',
+                'app/js/jquery.popup.js',
+                'app/js/jquery.search.js'
+            ]
         }
     ],
     vendorScripts: 'app/js/vendors/**/*.js',

@@ -1,0 +1,22 @@
+.not-found {
+  text-align: center;
+  @include main-font5();
+  font-size: 16px;
+  line-height: 22px;
+  color: rgba(78, 78, 78, 0.8);
+}
+.not-found__pic {
+  max-width: 356px;
+  margin: 0 auto 20px;
+
+  svg {
+    width: 356px;
+    height: 200px;
+  }
+}
+
+@media (min-width: $desktop) {
+
+
+
+}

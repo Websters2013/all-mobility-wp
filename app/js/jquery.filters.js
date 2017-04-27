@@ -153,7 +153,7 @@
 
                             if( !( curItem.prev().hasClass('active') ) ) {
 
-                                _inputHiddenPage.val( parseInt( _inputHiddenPage.val() ) - 1 );
+                                _inputHiddenPage.val( parseInt( _inputHiddenPage.val() ) + 1 );
                                 _addLoading();
                                 _requestContent();
 
@@ -260,7 +260,7 @@
 
                 } else {
 
-                    _filteredList.find('li[data-id=' + itemId + ']').remove();
+                    _filteredList.find('li[data-id="' + itemId + '"]').remove();
 
                 }
                 _countFiltered = _filteredList.find('li').length;
@@ -325,7 +325,7 @@
             },
             _clearSingleFilter = function( itemId, itemName ) {
 
-                _filterItem.find('input[data-id='+ itemId +']').prop('checked', false);
+                _filterItem.find('input[data-id="'+ itemId +'"]').prop('checked', false);
                 _globalCheckFlag = false;
                 _addingFilteredBy( '', itemId, '', '' );
                 _addLoading();
@@ -365,7 +365,7 @@
 
                     if( pages <= 7 ) {
 
-                        for( var i = 1; i <= pages - 1; i++ ) {
+                        for( var i = 1; i <= pages; i++ ) {
 
                             if( i == activePage ) {
                                 paginationWrap +='<a href="#" class="active">'+ i +'</a>';
