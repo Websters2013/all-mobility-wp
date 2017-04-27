@@ -39,12 +39,7 @@
         var _addEvents = function () {
 
 
-                _window.on( {
-                    load: function() {
-
-                        _setHeight();
-
-                    },
+                _window.on({
                     resize: function () {
 
                         _setHeight();
@@ -416,6 +411,7 @@
             _init = function () {
                 _obj[0].obj = _self;
                 _addEvents();
+                _setHeight();
             };
 
         //public properties

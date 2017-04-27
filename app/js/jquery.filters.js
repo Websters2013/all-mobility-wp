@@ -74,12 +74,6 @@
                     },
                     load: function() {
 
-                        if( _obj.hasClass('category_sub') ) {
-
-                            _addLoading();
-                            _requestContent();
-
-                        }
 
                     }
                 } );
@@ -716,6 +710,14 @@
 
             _init = function () {
                 _addEvents();
+
+                if( _obj.hasClass('category_sub') ) {
+
+                    _addLoading();
+                    _requestContent();
+
+                }
+
             };
 
         //public properties

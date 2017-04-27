@@ -85,7 +85,7 @@ $json_data = '{
     ],
     "settings": {
         "pagesAll": "3",
-        "currentPage": "3"
+        "currentPage": "2"
     }
 }';
 

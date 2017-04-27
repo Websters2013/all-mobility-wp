@@ -2,15 +2,14 @@
 
     var globalScrollFlag = true;
 
-    $(function () {
+    window.onload = function() {
 
         $('.go_review').each(function () {
 
             new ReviewGo( $(this) );
 
         } );
-
-    } );
+    };
 
     var ReviewGo = function (obj) {
 
@@ -23,43 +22,37 @@
 
         //private methods
 
-        var _addEvents = function () {
+        var _scrollDown = function () {
 
-                _window.on( {
-                    load: function() {
+                var heightHeader = _header.innerHeight();
 
-                        var heightHeader = _header.innerHeight();
+                _dom.stop( true, false );
+                _dom.animate( {
+                    scrollTop: _reviews.offset().top - 30
 
-                        _dom.stop( true, false );
-                        _dom.animate( {
-                            scrollTop: _reviews.offset().top - 30
+                }, {
+                    duration: 500,
+                    progress: function () {
+                        globalScrollFlag = false;
+                        _header.addClass( 'site__header_hidden' );
+                        heightHeader = _header.innerHeight();
+                    },
+                    complete: function () {
 
-                        }, {
-                            duration: 500,
-                            progress: function () {
-                                globalScrollFlag = false;
-                                _header.addClass( 'site__header_hidden' );
-                                heightHeader = _header.innerHeight();
-                            },
-                            complete: function () {
+                        setTimeout( function() {
+                            globalScrollFlag = false;
+                        }, 200 );
 
-                                setTimeout( function() {
-                                    globalScrollFlag = false;
-                                }, 200 );
-
-                                setTimeout( function() {
-                                    globalScrollFlag = true
-                                }, 500 );
-
-                            }
-                        });
+                        setTimeout( function() {
+                            globalScrollFlag = true
+                        }, 500 );
 
                     }
-                } );
+                });
 
             },
             _init = function () {
-                _addEvents();
+                _scrollDown();
             };
 
         //public properties

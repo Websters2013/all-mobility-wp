@@ -39,13 +39,6 @@
                             });
 
                         }
-                    },
-                    load: function() {
-
-                        _slide.css( {
-                            minHeight: $('.swiper-container').height()
-                        } );
-
                     }
                 });
             },
@@ -68,6 +61,10 @@
                         swiper.slides.eq(swiper.activeIndex).find('.main-slider__content').addClass('visible');
 
                     }
+                } );
+
+                _slide.css( {
+                    minHeight: $('.swiper-container').height()
                 } );
 
             },
