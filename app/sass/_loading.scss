@@ -3,10 +3,10 @@
   visibility: visible;
   position: fixed;
   z-index: 20;
-  top: 0;
+  top: -10px;
   left: -30px;
   right: -30px;
-  height: 100%;
+  bottom: -10px;
   background: #fff;
   -webkit-transition: opacity 0.300s, visibility 0.300s;
   transition: opacity 0.300s, visibility 0.300s;

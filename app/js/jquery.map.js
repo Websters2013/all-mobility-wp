@@ -90,7 +90,7 @@
             },
             _init = function () {
 
-                google.maps.event.addDomListener( window, 'load', _initMap );
+                _initMap();
                 _addEvents();
 
             };

@@ -242,6 +242,9 @@
             _openSearch = $('.search-btn'),
             _closeSearch = $('.search__cancel'),
             _getFree = $('.site__hidden-btn'),
+            _site = $('.site'),
+            _dom = $( 'html' ),
+            siteScrollTop,
             _content = $('.site__content');
 
         //private methods
@@ -385,7 +388,21 @@
                     resize: function() {
 
                         if( _window.width()>=1024 ) {
-                            _content.removeClass('non-events');
+
+                            _site.css( {
+                                'height': ''
+                            } );
+
+                            setTimeout( function() {
+
+                                if( _site.height() > _window.height() ) {
+                                    _dom.css( {
+                                        'overflow-y': ''
+                                    } );
+                                }
+
+                            }, 10);
+
                         }
 
                     }
@@ -427,17 +444,36 @@
 
                 if (curItem.hasClass('opened')) {
 
-                    _content.removeClass('non-events');
                     curItem.removeClass('opened');
                     _hiddenBlockMenu.removeClass('opened');
 
                 } else {
 
-                    _content.addClass('non-events');
                     curItem.addClass('opened');
                     _hiddenBlockMenu.addClass('opened');
 
                 }
+
+                siteScrollTop = _window.scrollTop();
+
+
+                setTimeout( function() {
+
+                    if( _site.height() > _window.height() ) {
+                        _dom.css( {
+                            'overflow-y': 'scroll'
+                        } );
+                    }
+
+                    setTimeout( function() {
+
+                        _site.css( {
+                            'height': '100%'
+                        } );
+
+                    }, 10);
+
+                }, 300);
 
             },
             _openSearchBox = function (elem) {
@@ -463,8 +499,24 @@
 
                 _showBtn.removeClass('opened');
                 _hiddenBlockMenu.removeClass('opened');
-                _content.removeClass('non-events');
                 _search.find('input').focusout();
+
+
+                _site.css( {
+                    'height': ''
+                } );
+
+                setTimeout( function() {
+
+                    if( _site.height() > _window.height() ) {
+                        _dom.css( {
+                            'overflow-y': ''
+                        } );
+                    }
+
+                    _window.scrollTop( siteScrollTop );
+
+                }, 10);
 
             },
             _closeSearchBox = function () {
