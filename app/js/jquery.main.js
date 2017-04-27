@@ -232,6 +232,7 @@
             _menu = obj,
             _window = $(window),
             _action = false,
+            _actionScroll = false,
             _lastPos,
             _header = $('.site__header'),
             _hiddenBlockMenu = $('.site__hidden-items'),
@@ -245,7 +246,8 @@
             _site = $('.site'),
             _dom = $( 'html' ),
             siteScrollTop,
-            _content = $('.site__content');
+            _content = $('.site__content'),
+            _lastScrollTop = 0;
 
         //private methods
         var _addEvents = function () {
@@ -309,9 +311,14 @@
                     }
                 });
                 _window.on( {
-                    scroll: function () {
+                    scroll: function ( e ) {
                         _fixedHeader();
                         _action = _window.scrollTop() >= _headerHeight;
+
+
+                        if( _window.scrollTop() == 0 ) {
+                            _header.removeClass('site__header_hidden');
+                        }
 
                     },
                     DOMMouseScroll: function (e) {
@@ -411,7 +418,7 @@
             },
             _checkScroll = function (direction) {
 
-                if (direction > 0 && !_header.hasClass('site__header_hidden') && !_showBtn.hasClass('opened') && _action) {
+                if (direction > 0 && !_header.hasClass('site__header_hidden') && !_showBtn.hasClass('opened') && _action ) {
 
                     _header.addClass('site__header_hidden');
 

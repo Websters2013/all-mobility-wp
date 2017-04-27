@@ -135,6 +135,7 @@
                         if( !( _inputCoupon.val() == '' ) ) {
 
                             $('.my-cart__promo-loading').addClass('loading');
+                            _define.addClass('hidden');
 
                             if( !( cirItem.hasClass('ajax-loading') ) ) {
 
@@ -289,7 +290,8 @@
                     data: {
                         action: 'apply_coupon_to_order',
                         inputVal: _inputCoupon.val(),
-                        flag: 'coupon'
+                        flag: 'coupon',
+                        id: ''
                     },
                     dataType: 'json',
                     type: "get",

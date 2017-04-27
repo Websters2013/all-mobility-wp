@@ -303,7 +303,7 @@
       .advantages__list {
         @include flexbox();
         @include justify-content();
-        @include align-items();
+        @include align-items(center);
         @include flex-direction();
 
         >li {

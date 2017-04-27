@@ -97,17 +97,16 @@
 
   }
   &_5 {
-    height: 40px;
+    height: 70px;
     background: #F47920;
     border-radius: 4px;
     @include main-font10();
-    font-size: 16px;
-    line-height: 16px;
+    font-size: 26px;
+    line-height: 26px;
 
     &:hover {
       background: #ea5438;
     }
-
     &:active {
       background: #ea5438;
     }
@@ -201,6 +200,30 @@
       background: #ea5438;
     }
   }
+  &_13 {
+    min-width: 108px;
+    height: 48px;
+    background: #0094C1;
+    border-radius: 4px;
+    @include main-font10();
+    font-size: 16px;
+    line-height: 16px;
+  }
+  &_14 {
+    height: 59px;
+    min-width: 264px;
+    background: #F47920;
+    font-size: 24px;
+    line-height: 24px;
+
+    &:hover {
+      background: #ea5438;
+    }
+
+    &:active {
+      background: #ea5438;
+    }
+  }
 
 }
 
@@ -245,6 +268,11 @@
       height: 70px;
       font-size: 26px;
       line-height: 26px;
+    }
+    &_13 {
+      height: 40px;
+      min-width: 122px;
+      @include main-font1();
     }
 
   }

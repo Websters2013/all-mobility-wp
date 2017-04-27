@@ -1,18 +1,46 @@
 .contact-us {
+  position: relative;
   padding-top: 4px;
   margin-bottom: -29px;
-
 }
 .contact-us__head {
-  margin-bottom: 49px;
+  padding-top: 5px;
+  margin-bottom: 54px;
   text-align: center;
 
   >div {
-    margin: 0 0 30px;
+    margin: 0 0 40px;
+    padding: 0 0 44px;
+    border-bottom: 2px solid #ddd;
+
+    &:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+    &:nth-child(2) {
+      padding: 0 0 37px;
+      margin: 0 0 46px;
+
+      .contact-us__pic {
+
+        svg {
+          margin: 0 0 16px;
+        }
+
+      }
+
+    }
+
   }
+
+}
+.contact-us__pic {
+
   svg {
-    margin: 0 0 20px;
+    margin: 0 0 16px;
   }
+
 }
 .contact-us__caption {
   display: block;
@@ -24,16 +52,28 @@
 .contact-us__content {
   display: inline-block;
   @include main-font1();
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 24px;
+  line-height: 30px;
   color: #F47920;
 }
 .contact-us__map {
   margin: 0 -29px;
-  height: 300px;
+  height: 495px;
 }
 .contact-us__phone {
-  cursor: default;
+  @include inline-flex();
+  @include justify-content(center);
+  @include align-items(center);
+  @include flex-direction();
+  height: 59px;
+  min-width: 263px;
+  margin-top: 22px;
+  @include main-font1();
+  font-size: 24px;
+  line-height: 24px;
+  color: #FFFFFF;
+  background: #F47920;
+  border-radius: 100px;
 }
 .contact-us__mail {
   position: relative;
@@ -60,31 +100,128 @@
 
 }
 .contact-us__form {
+  padding: 0 0 40px;
 
+  .btn {
+    margin-top: 3px;
+  }
+
+}
+.contact-us__title {
+  position: relative;
+  margin: 0 0 34px;
+  @include main-font5();
+  font-size: 16px;
+  line-height: 22px;
+  color: rgba(78, 78, 78, 0.8);
+
+  svg {
+    display: block;
+    margin: 0 auto 32px;
+    width: 65px;
+    height: 65px;
+  }
+
+}
+.contact-us__row {
+  max-width: 310px;
+  margin: 0 auto 14px;
+
+  .site__label {
+    display: block;
+    margin: 0 0 4px;
+  }
+
+}
+.contact__us-open {
+  position: absolute;
+  left: 50%;
+  bottom: 46px;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
 }
 
 @media (min-width: $desktop) {
 
   .contact-us {
-    margin-bottom: -74px;
+    padding-top: 43px;
+    margin: 0;
   }
   .contact-us__head {
-    @include flexbox();
-    @include justify-content(space-between);
-    @include align-items();
-    @include flex-direction();
-    padding-top: 25px;
+    position: relative;
+    max-width: 1140px;
+    margin: 0 auto;
+    min-height: 430px;
+    padding-top: 54px;
+    padding-right: 49%;
+    margin-bottom: 75px;
+    text-align: left;
+
+    &:after {
+      position: absolute;
+      top: 25px;
+      left: 50%;
+      height: 91.5%;
+      width: 2px;
+      background: #D5D5D5;
+      content: '';
+    }
 
     >div {
-      width: 33.333%;
-      margin: 0;
-      padding: 12px 60px 20px;
-      border-left: 2px solid #D5D5D5;
+      position: relative;
+      margin: 0 0 73px 52px;
+      padding: 0 0 0 103px;
+      border: none;
 
       &:first-child {
         border-left: none;
       }
+      &:nth-child(2) {
+        padding: 0 0 0 103px;
+        margin: 0 0 73px 52px;
 
+        .contact-us__pic {
+
+          svg {
+            margin: 0;
+          }
+
+        }
+
+      }
+
+    }
+
+    .contact-us__form {
+      position: absolute;
+      top: 0;
+      right: 16px;
+      width: 39.6%;
+      padding: 37px 0 0;
+      margin: 0;
+
+      .btn {
+        margin-left: 31.7%;
+        margin-top: 0;
+      }
+
+    }
+
+  }
+  .contact-us__pic {
+    @include inline-flex();
+    @include justify-content(center);
+    @include align-items(center);
+    @include flex-direction();
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 57px;
+    text-align: center;
+
+    svg {
+      margin: 0;
     }
 
   }
@@ -93,8 +230,57 @@
     line-height: 28px;
   }
   .contact-us__map {
-    margin: 0 -40px;
-    height: 544px;
+    margin: 0;
+    height: 546px;
+  }
+  .contact-us__phone {
+    margin-top: 0;
+    height: auto;
+    min-width: 1px;
+    background: transparent;
+    @include main-font1();
+    line-height: 30px;
+    color: #F47920;
+    cursor: default;
+  }
+  .contact-us__title {
+    margin: 0 0 25px;
+    padding: 23px 0 23px 31.5%;
+    @include main-font1();
+    font-size: 18px;
+    line-height: 20px;
+    color: #373737;
+
+    svg {
+      position: absolute;
+      top: 0;
+      left: 15px;
+      margin: 0;
+      width: 65px;
+      height: 65px;
+    }
+
+  }
+  .contact-us__row {
+    @include inline-flex();
+    @include justify-content(space-between);
+    @include align-items();
+    @include flex-direction();
+    max-width: 100%;
+    width: 100%;
+    margin: 0 0 16px;
+
+    .site__label {
+      width: 28%;
+      margin: 7px 0 0;
+    }
+    .site__input {
+      width: 69% !important;
+    }
+
+  }
+  .contact__us-open {
+    display: none;
   }
 
 }

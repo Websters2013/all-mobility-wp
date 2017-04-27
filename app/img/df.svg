@@ -1,13 +1,15 @@
 
-<svg width="17px" height="17px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="15px" height="14px" viewBox="0 0 15 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="high-fildelity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="subcategory-mobile-filter-popup-with-appied-filters" transform="translate(-237.000000, -134.000000)" fill="#9C9C9C">
-            <g id="Group-2-Copy" transform="translate(237.000000, 134.000000)">
-                <rect id="Rectangle-4-Copy" transform="translate(8.485281, 8.485281) rotate(45.000000) translate(-8.485281, -8.485281) " x="-2.01471863" y="6.98528137" width="21" height="3" rx="1.5"></rect>
-                <rect id="Rectangle-4-Copy-3" transform="translate(8.485281, 8.485281) rotate(-45.000000) translate(-8.485281, -8.485281) " x="-2.01471863" y="6.98528137" width="21" height="3" rx="1.5"></rect>
+    <g id="high-fildelity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="cart-mobile" transform="translate(-370.000000, -189.000000)" stroke="#DDDDDD">
+            <g id="close-icon" transform="translate(371.000000, 190.000000)">
+                <g id="Group">
+                    <path d="M12.5,0.5 L0.5,11.5" id="Path-7-Copy-2" stroke-width="2"></path>
+                    <path d="M0.5,0.5 L12.5,11.5" id="Path-7-Copy-3" stroke-width="2"></path>
+                </g>
             </g>
         </g>
     </g>

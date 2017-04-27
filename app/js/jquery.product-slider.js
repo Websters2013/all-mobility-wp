@@ -149,48 +149,42 @@
         var _constructor = function() {
                 _obj[ 0 ].obj = _self;
                 _addEvents();
-                //_initSlider();
+
+                if( _window.width() <= 768 ) {
+
+                    _flag = false;
+
+                } else {
+
+                    _flag = true;
+                    _initSlider();
+
+                }
+
             },
             _addEvents = function () {
 
                 _window.on( {
-                    load: function () {
-
-                        if( _window.width() <= 768 ) {
-
-                            _flag = true;
-
-                        } else {
-
-                            _flag = true;
-
-                            if( _flag ) {
-                                _initSlider();
-                                _flag = false;
-                            }
-
-                        }
-
-                    },
                     resize: function () {
 
                         if( _window.width() <= 768 ) {
 
-                            //_flag = false;
+                            if( _flag ) {
 
-                            if( !_flag ) {
+                                _flag = false;
                                 _destroy();
-                                _flag = true;
+
                             }
 
                         } else {
 
-                            //_flag = true;
+                            if( !_flag ) {
 
-                            if( _flag ) {
+                                _flag = true;
                                 _initSlider();
-                                _flag = false;
+
                             }
+
 
                         }
 
@@ -221,6 +215,7 @@
                         }
                     }
                 } );
+
             };
 
         _constructor();
