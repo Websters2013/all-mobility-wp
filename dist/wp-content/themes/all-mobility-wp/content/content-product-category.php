@@ -110,8 +110,8 @@ if( $cat_obj->parent != 0 ){
                         <a href="#" class="btn btn_9">clear all</a>
 
                     </div>
-
-                    <?php if( false ): ?>
+        
+                    <?php if( get_field('show_this_filter','product_cat_'.$category_ID ) == 'show' ): ?>
 
                     <div class="category__filters-item">
                                     <span>Price Range
@@ -128,64 +128,43 @@ if( $cat_obj->parent != 0 ){
                                          </svg>
 
                                     </span>
+
                         <div class="category__filters-list">
 
                             <?php
-                            $maxCatPrice = wpq_get_max_price_per_product_cat( $category_ID );
-                            $minCatPrice = wpq_get_min_price_per_product_cat( $category_ID );
-                            $delta = ( $maxCatPrice - $minCatPrice )/5;
-                            $delta_min = $delta - 0.01;
-                            $rangeArray = array();
+                            $i = 0;
+                            if( have_rows('price_builder','product_cat_'.$category_ID) ):
+                                     
+                                        while ( have_rows('price_builder','product_cat_'.$category_ID ) ) : the_row();
+                                            $i++;
+                                            $last = get_sub_field('last_above_range');
+                                            $min = formatPriceForRanges( get_sub_field('start_price') );
+                                            $max = formatPriceForRanges( get_sub_field('end_price'), $last[0] );
 
-                            if( $maxCatPrice > 0 ):
+                                            if( $max[1] ){
+                                                $max_formated = 999999999999;
+                                                $max_text = $max[0];
+                                            } else {
+                                                $max_formated = $max[0];
+                                                $max_text = '$'.$max[0];
+                                            }
 
-                                for ( $i = 1; $i <= 5; $i++ ) {
+                                            $number = checkPrice( $min[0], $max_formated, $category_ID );
 
-                                if( $i == 1 ){
-                                    $rangeArray[$i][0] += $minCatPrice;
-                                    $rangeArray[$i][1] = $rangeArray[$i][0] + $delta_min;
-                                }
-                                elseif( $i == 5 ){
-                                    $rangeArray[$i][0] += ( $i - 1 )*$delta;
-                                    $rangeArray[$i][1] = 9999999999;
-                                }
-                                else {
-                                    $rangeArray[$i][0] += ( $i - 1 )*$delta;
-                                    $rangeArray[$i][1] = $rangeArray[$i][0] + $delta_min;
-                                }
+                                            ?>
 
-                            }
+                                            <div>
+                                                <input type="checkbox"  data-id="<?= $min[0].'-'.$max_formated ?>" name="price" id="price_<?= $i ?>">
+                                                <label for="price_<?= $i ?>"><?= '$'.$min[0] ?> - <?= $max_text ?> <span class="category__filters-count"><?= $number ?></span></label>
+                                            </div>
 
-                            endif;
-
-                            $check = checkPrice( 0, 400, $category_ID ); ?>
-
-                            <?php if( $maxCatPrice > 0 ): ?>
-
+                                            <?php
+                                        endwhile;
+                                    endif; ?>
+                            
                             <div>
 
-                                <?php foreach ( $rangeArray as $item ):
 
-                                    $rangeString = $item[0].'-'.$item[1];
-
-                                    if($item[1] == 9999999999){
-                                        $second = ' and above';
-                                    } else {
-                                        $second = ' - $'.number_format($item[1], 2, '.', ' ');
-                                    }
-
-                                    $countProducts = checkPrice( $item[0], $item[1], $category_ID );  ?>
-
-                                    <div>
-                                        <input type="checkbox" name="name1" id="<?= $rangeString ?>">
-                                        <label for="<?= $rangeString ?>">$<?= number_format($item[0], 2, '.', ' '); ?><?= $second ?> <span class="category__filters-count"><?= $countProducts ?></span></label>
-                                    </div>
-
-                                <?php endforeach; ?>
-
-                            </div>
-
-                            <?php endif; ?>
                         </div>
                     </div>
 
@@ -219,7 +198,7 @@ if( $cat_obj->parent != 0 ){
 
 
                                         <div>
-                                            <input type="checkbox" name="<?= $item->taxonomy ?>" id="<?= $item->term_id ?>" value="<?= $item->term_id ?>">
+                                            <input type="checkbox" name="<?= $item->taxonomy ?>"  data-id="<?= $item->term_id ?>" id="<?= $item->term_id ?>" value="<?= $item->term_id ?>">
                                             <label for="<?= $item->term_id ?>"><?= $item->name ?> <span class="category__filters-count"><?= $item->count_posts ?></span></label>
                                         </div>
 
@@ -321,6 +300,12 @@ if( $cat_obj->parent != 0 ){
             <!-- /product-categories -->
 
             </div>
+
+            <!-- pagination-wrap -->
+            <div class="pagination-wrap">
+
+            </div>
+            <!-- /pagination-wrap -->
 
             <!-- advantages -->
             <div class="advantages advantages_mob">
