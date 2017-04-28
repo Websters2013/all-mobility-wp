@@ -19,8 +19,8 @@ $json_data = '{
                     "content": ["3.5 mph","8.7 miles","17”","Yes"]
                 }
             },
-            "price": "$1,800.00",
-            "oldPrice": "$1,999",
+            "price": ["$39.55","$50.99","$6,999","$2,999","$3,999"],
+            "oldPrice": ["$1,999","$1,999","$6,999","$2,999","$3,999"],
             "urlDetails": "#"
         },
         {
@@ -35,12 +35,12 @@ $json_data = '{
             },
             "content": {
                 "specification": {
-                    "head": ["Top Speed","Drive Range","Seat Width","Foldable"],
-                    "content": ["3.5 mph","8.7 miles","17”","Yes"]
+                    "head": ["Top Speed","Drive Range","Seat Width"],
+                    "content": ["3.5 mph","8.7 miles","17”"]
                 }
             },
-            "price": "$1,800.00",
-            "oldPrice": "$1,999",
+           "price": ["$39.55","$50.99","$6,999","$2,999","$3,999"],
+            "oldPrice": ["$1,999","$1,999","$6,999","$2,999","$3,999"],
             "urlDetails": "#"
         },
         {
@@ -55,12 +55,12 @@ $json_data = '{
             "content": {
                 "description": ["Short bullet list of main characteristics of the product if it’s pretty long or short", "Should contain main keywords users will", "Will be limited to 3 points"],
                 "specification": {
-                    "head": ["Top Speed","Drive Range","Seat Width","Foldable"],
-                    "content": ["3.5 mph","8.7 miles","17”","Yes"]
+                    "head": ["Top Speed","Drive Range","Seat Width","Foldable","Foldable"],
+                    "content": ["3.5 mph","8.7 miles","17”","Yes","Yes"]
                 }
             },
-            "price": "$1,800.00",
-            "oldPrice": "$1,999",
+            "price": ["$39.55","$50.99","$6,999","$2,999","$3,999"],
+            "oldPrice": ["$1,999","$1,999","$6,999","$2,999","$3,999"],
             "urlDetails": "#"
         },
         {
@@ -74,12 +74,10 @@ $json_data = '{
             },
             "content": {
                 "description": ["Short bullet list of main characteristics of the product if it’s pretty long or short", "Should contain main keywords users will", "Will be limited to 3 points"],
-                "specification": {
-                    "head": ["Top Speed","Drive Range","Seat Width","Foldable"],
-                    "content": ["3.5 mph","8.7 miles","17”","Yes"]
-                }
+                "specification": ""
             },
-            "price": "$1,800.00",
+             "price": ["$39.55","$50.99","$6,999","$2,999","$3,999"],
+            "oldPrice": ["$1,999","","$6,999","$2,999","$3,999"],
             "urlDetails": "#"
         }
     ],

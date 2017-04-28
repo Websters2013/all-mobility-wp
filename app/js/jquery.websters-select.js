@@ -8,8 +8,6 @@
                 showType: 2
             } );
 
-            console.log('fghjkl')
-
         } );
     } );
 

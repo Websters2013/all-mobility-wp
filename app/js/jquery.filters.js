@@ -40,7 +40,9 @@
             _window = $(window),
             _objValue = {},
             _timeout = null,
-            _arr = [];
+            _arr = [],
+            _checkName = '',
+            _checkPrice = '';
 
         //private methods
 
@@ -204,7 +206,6 @@
                     change: function () {
 
                         var curItem = $(this),
-                            curItemName = curItem.attr('name'),
                             label = curItem.next(),
                             labelText = label.clone().children().remove().end().text(),
                             name = curItem.attr('name'),
@@ -213,7 +214,20 @@
 
                         _globalCheckFlag = curItem.prop('checked');
 
+                        if( _globalCheckFlag ) {
 
+                            _checkName = name;
+
+                            if( _checkName == 'price' ) {
+                                _checkPrice = id;
+                            }
+
+                        } else {
+
+                            _checkName = '';
+                            _checkPrice = '';
+
+                        }
 
                         if( _window.width() >= 1024 ) {
 
@@ -351,7 +365,7 @@
 
                 _inputHiddenPage.val(activePage);
 
-                if( pages != 1 ) {
+                if( pages != 1 &&  pages != 0 ) {
 
                     var paginationWrap = '<div class="pagination">';
 
@@ -488,12 +502,37 @@
             _pasteNewProducts = function( data ) {
 
                 var newData = data.products;
-
                 var productsWrap = '<div class="products-subcategory">';
 
                 $.each( newData, function() {
 
-                    var product = this;
+                    var product = this,
+                        price = product.price[0],
+                        salePrice = product.oldPrice[0];
+
+                    if( _checkName == 'price' ) {
+
+                        var priceFilter = parseFloat(_checkPrice);
+
+                        for (var i = 0; i <= product.price.length-1; i++ ) {
+
+                            var priceItem = parseFloat(product.price[i].replace('$','').replace(',',''));
+
+                            if( priceItem >= priceFilter ) {
+
+                                price = product.price[i];
+                                salePrice = product.oldPrice[i];
+
+                                break;
+
+                            }
+
+                        }
+
+                        console.log(price)
+                        console.log(salePrice)
+
+                    }
 
                     productsWrap += '<div class="products-subcategory__item">';
 
@@ -529,7 +568,7 @@
 
 
 
-                    if( product.content.description != undefined ) {
+                    if( product.content.description != undefined && product.content.description != "" ) {
 
                         productsWrap +='<div>\
                                         <ul class="products-subcategory__description">';
@@ -544,37 +583,41 @@
                     }
 
                     productsWrap +='<div>\
-                                            <div class="products-subcategory__items">\
-                                                <div>\
-                                                    <div class="products-subcategory__specification">\
+                                            <div class="products-subcategory__items">';
+
+                    if( product.content.specification != undefined && product.content.specification != "" ) {
+
+                        productsWrap +='<div>\
+                    <div class="products-subcategory__specification">\
                                                         <div class="products-subcategory__specification-head">';
 
-                    for( var i = 0; i <= product.content.specification.head.length-1; i++ ) {
-                        productsWrap +='<div>'+ product.content.specification.head[i] +'</div>'
-                    }
-                    productsWrap +='</div>\
+                        for( var i = 0; i <= product.content.specification.head.length-1; i++ ) {
+                            productsWrap +='<div style="width:'+ (100/product.content.specification.head.length) +'%">'+ product.content.specification.head[i] +'</div>'
+                        }
+                        productsWrap +='</div>\
                                                         <div class="products-subcategory__specification-content">';
 
-                    for( var i = 0; i <= product.content.specification.content.length-1; i++ ) {
-                        productsWrap +='<div>'+ product.content.specification.content[i] +'</div>'
-                    }
-
-                    productsWrap +='</div>\
+                        for( var i = 0; i <= product.content.specification.content.length-1; i++ ) {
+                            productsWrap +='<div style="width:'+ (100/product.content.specification.head.length) +'%">'+ product.content.specification.content[i] +'</div>'
+                        }
+                        productsWrap +='</div>\
                                                     </div>\
                                                 </div>';
 
-                    if( product.oldPrice != undefined ) {
+                    }
+
+                    if( salePrice != undefined && salePrice != "" ) {
 
                         productsWrap +='<div class="products-subcategory__footer">\
                                                     <div class="products-subcategory__price">\
-                                                        <del>'+ product.oldPrice +'</del> '+ product.price +'\
+                                                        <del>'+ salePrice +'</del> '+ price +'\
                                                     </div>';
 
                     } else {
 
                         productsWrap +='<div class="products-subcategory__footer">\
                                                     <div class="products-subcategory__price">\
-                                                        '+ product.price +'\
+                                                        '+ price +'\
                                                     </div>';
 
                     }
