@@ -214,21 +214,6 @@
 
                         _globalCheckFlag = curItem.prop('checked');
 
-                        if( _globalCheckFlag ) {
-
-                            _checkName = name;
-
-                            if( _checkName == 'price' ) {
-                                _checkPrice = id;
-                            }
-
-                        } else {
-
-                            _checkName = '';
-                            _checkPrice = '';
-
-                        }
-
                         if( _window.width() >= 1024 ) {
 
                             _addLoading();
@@ -501,8 +486,25 @@
             },
             _pasteNewProducts = function( data ) {
 
-                var newData = data.products;
-                var productsWrap = '<div class="products-subcategory">';
+                var newData = data.products,
+                    productsWrap = '<div class="products-subcategory">',
+                    newArrPriceRange = [];
+
+                if( _objValue['price'] != undefined ) {
+
+                    for (var i = 0; i <= _objValue['price'].length-1; i++ ) {
+
+                        var priceItem = parseFloat(_objValue['price'][i].replace('$','').replace(',',''));
+
+                        newArrPriceRange.push(priceItem);
+
+                    }
+
+                }
+
+                if( newArrPriceRange.length ) {
+                    var priceRange = Math.min.apply(null, newArrPriceRange);
+                }
 
                 $.each( newData, function() {
 
@@ -510,15 +512,13 @@
                         price = product.price[0],
                         salePrice = product.oldPrice[0];
 
-                    if( _checkName == 'price' ) {
-
-                        var priceFilter = parseFloat(_checkPrice);
+                    if( newArrPriceRange.length ) {
 
                         for (var i = 0; i <= product.price.length-1; i++ ) {
 
                             var priceItem = parseFloat(product.price[i].replace('$','').replace(',',''));
 
-                            if( priceItem >= priceFilter ) {
+                            if( priceItem >= priceRange ) {
 
                                 price = product.price[i];
                                 salePrice = product.oldPrice[i];
@@ -528,9 +528,6 @@
                             }
 
                         }
-
-                        console.log(price)
-                        console.log(salePrice)
 
                     }
 
