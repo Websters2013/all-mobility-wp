@@ -257,9 +257,7 @@ function wpq_get_min_price_per_product_cat( $term_id ) {
 
     AND {$wpdb->posts}.post_status = 'publish' 
 
-    AND {$wpdb->postmeta}.meta_key = '_price'
-
-  ";
+    AND {$wpdb->postmeta}.meta_key = '_price'";
     
 
     return $wpdb->get_var( $wpdb->prepare( $sql, $term_id ) );
@@ -618,21 +616,6 @@ function main_search(){
         
     endif;
 
-    $productsSearch .= '"products": [
-        {
-            "name": "Product1",
-            "src": "pic/lift-chairs.png",
-            "alt": "picture",
-            "href": "#",
-            "price": "10000$",
-            "oldPrice": "20000$",
-            "categories": {
-                "mainCategory": "main category 1",
-                "subcategories": ["subcategory1-1", "subcategory1-2", "subcategory1-3"]
-            }
-        }
-    ]';
-
     $json_data = '{'.$categories.','.$products .'}';
 
     $json_data = str_replace("\r\n",'',$json_data);
@@ -818,20 +801,65 @@ $categoryId = $_GET['idCategory'];
             $regularPrice = '';
         }
 
-
         $description = '"Short bullet list of main characteristics of the product if it’s pretty long or short", "Should contain main keywords users will", "Will be limited to 3 points"';
 
         if( have_rows('technical_specifications_block', $product_id) ):
-            $count = 0 ;
+            $count_ch = 1 ;
+            $count = 1 ;
+            $description_header_ch = '';
+            $description_value_ch = '';
+            $description_header = '';
+            $description_value = '';
+
+            $oneChecked = false;
             while ( have_rows('technical_specifications_block', $product_id) ) : the_row();
 
-                if( $count <= 2 ){
+                if( get_sub_field('show_in_preview_of_the_product')[0] == 'show' ){
+
+                    if( $count_ch <= 4 ):
+
+                        $oneChecked = true;
+                        $description_header_ch .= json_encode(get_sub_field('haracteristic')).',';
+                        $description_value_ch .= json_encode(get_sub_field('value')).',';
+
+                    endif;
 
                 }
 
-            endwhile; $count++;
-//            $description = substr( $description, 0, -1 );
+                if( $count <= 4 ):
+                    $description_header .= json_encode(get_sub_field('haracteristic')).',';
+                    $description_value .= json_encode(get_sub_field('value')).',';
+                    $count++;
+                endif;
+
+
+            endwhile;
+
+            if( $oneChecked ){
+
+                $result_h = $description_header_ch;
+                $result_v = $description_value_ch;
+
+            } else {
+                $result_h = $description_header;
+                $result_v = $description_value;
+            }
+
+            $result_h = substr( $result_h, 0, -1 );
+            $result_v = substr( $result_v, 0, -1 );
+
         endif;
+
+        if( $result_h ){
+            $specification = '{
+                    "head": ['.$result_h.'],
+                    "content": ['.$result_v.']
+                }';
+        } else {
+            $specification = '""';
+        }
+
+
 
         $products .= ' {
             "name": "'.$categoryId.'",
@@ -845,10 +873,7 @@ $categoryId = $_GET['idCategory'];
             },
             "content": {
                  "description": ['.$description.'],
-                  "specification": {
-                    "head": ["Top Speed","Drive Range","Seat Width","Foldable"],
-                    "content": ["3.5 mph","8.7 miles","17”","Yes"]
-                }
+                "specification": '.$specification.'
             },
             "price": "'.$salePrice.'",
             "oldPrice": "'.$regularPrice.'",

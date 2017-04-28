@@ -234,13 +234,3 @@
 
         </header>
         <!-- /site__header -->
-
-        <?php
-$pricess = '800.00-999999999999,600.00-799.99';
-$prices =  explode(',',$pricess );
-
-foreach ($prices as $price){
-    $finalPriceArray[] = explode('-', $price );
-}
-
-?>
