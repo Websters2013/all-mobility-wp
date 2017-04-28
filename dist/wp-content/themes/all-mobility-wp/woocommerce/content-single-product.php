@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 global $product;
 
-
+wc_print_notices();
 
 if($_POST['add-to-cart']){
 	$product_adding = 'product_adding';
@@ -29,7 +29,7 @@ if($_POST['add-to-cart']){
 	$product_adding = '';
 } ?>
 
-<div itemscope itemtype="<?php echo woocommerce_get_product_schema(); ?>" id="product-<?php the_ID(); ?>" class="<?= $product_adding ?>">
+<div itemscope itemtype="<?php echo woocommerce_get_product_schema(); ?>" id="product-<?php the_ID(); ?>" class="product <?= $product_adding ?>">
 
 	<!-- product__inner -->
 	<div class="product__inner">

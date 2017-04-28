@@ -10,14 +10,8 @@
         <title><?php document_title(); ?></title>
         <?php wp_head() ?>
     </head>
-
-    <?php if( is_page_template('page-cart.php') ){
-        $class = body_class();
-    }  else {
-        $class='';
-    }?>
     
-    <body data-action="<?php echo admin_url( 'admin-ajax.php' );?>" <?= $class ?>>
+    <body data-action="<?php echo admin_url( 'admin-ajax.php' );?>">
 
     <!-- site -->
     <div class="site">

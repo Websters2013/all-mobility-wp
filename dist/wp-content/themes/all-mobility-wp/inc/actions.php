@@ -66,7 +66,7 @@ function add_js()
 
     wp_register_script('app',get_template_directory_uri().'/assets/js/app.min.js');
 
-    if (is_page_template('page-home.php')){
+    if (is_page_template('page-home.php')|| is_page_template('page-cart.php')){
         wp_enqueue_style('index_css', get_template_directory_uri().'/assets/css/index.css');
         wp_enqueue_style('swiper_css',get_template_directory_uri().'/assets/css/swiper.min.css');
         wp_enqueue_script('swiper_js');
@@ -185,7 +185,7 @@ function get_preview_slider(){
     
     <?php foreach ($image_urls as $image_url) { ?>
         
-        <div class="swiper-slide" style="background-image:url(<?= $image_url ?>)" data-iamge="<?= $image_url ?>"></div>
+        <div class="swiper-slide" style="background-image:url(<?= $image_url ?>)" data-image="<?= $image_url ?>"></div>
         
    <?php  }  ?>
         </div></div>
@@ -965,7 +965,7 @@ add_action('woocommerce_add_to_cart', 'custome_add_to_cart');
 function custome_add_to_cart() {
 
     global $woocommerce;
-
+    
     $i = 0;
 
     do {
