@@ -536,6 +536,7 @@
             _init = function () {
                 _menu[0].obj = _self;
                 _addEvents();
+                _fixedHeader();
             };
 
         _init();

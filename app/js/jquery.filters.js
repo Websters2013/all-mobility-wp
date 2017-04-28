@@ -122,6 +122,7 @@
                 _clearFilters.on( {
                     click: function () {
 
+                        _inputHiddenPage.val('1');
                         _clearFilter();
 
                         return false;
@@ -179,6 +180,7 @@
                             dataId = parent.data('id'),
                             dataName = parent.data('name');
 
+                        _inputHiddenPage.val('1');
                         _clearSingleFilter( dataId, dataName );
 
                         return false;
@@ -222,6 +224,7 @@
                         }
 
                         _writeInHidden( name, id, _globalCheckFlag );
+                        _inputHiddenPage.val('1');
                         _addingFilteredBy( labelText, id, name, categoryName );
                         _requestContent();
 
@@ -230,6 +233,7 @@
                 _sortingPage.on( {
                     change: function () {
 
+                        _inputHiddenPage.val('1');
                         _addLoading();
                         _requestContent();
 
@@ -238,6 +242,7 @@
                 _sortingDate.on( {
                     change: function () {
 
+                        _inputHiddenPage.val('1');
                         _addLoading();
                         _requestContent();
 
