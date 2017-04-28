@@ -21,7 +21,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 global $product;
 
-wc_print_notices();
 
 if($_POST['add-to-cart']){
 	$product_adding = 'product_adding';
