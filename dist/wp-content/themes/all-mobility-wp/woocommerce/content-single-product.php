@@ -20,17 +20,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 global $product;
-?>
 
-<?php
-	/**
-	 * woocommerce_before_single_product hook.
-	 *
-	 * @hooked wc_print_notices - 10
-	 */
-	 do_action( 'woocommerce_before_single_product' ); ?>
 
-<div itemscope itemtype="<?php echo woocommerce_get_product_schema(); ?>" id="product-<?php the_ID(); ?>" class="product">
+
+if($_POST['add-to-cart']){
+	$product_adding = 'product_adding';
+} else {
+	$product_adding = '';
+} ?>
+
+<div itemscope itemtype="<?php echo woocommerce_get_product_schema(); ?>" id="product-<?php the_ID(); ?>" class="<?= $product_adding ?>">
 
 	<!-- product__inner -->
 	<div class="product__inner">

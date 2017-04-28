@@ -10,7 +10,14 @@
         <title><?php document_title(); ?></title>
         <?php wp_head() ?>
     </head>
-    <body data-action="<?php echo admin_url( 'admin-ajax.php' );?>">
+
+    <?php if( is_page_template('page-cart.php') ){
+        $class = body_class();
+    }  else {
+        $class='';
+    }?>
+    
+    <body data-action="<?php echo admin_url( 'admin-ajax.php' );?>" <?= $class ?>>
 
     <!-- site -->
     <div class="site">
@@ -127,12 +134,25 @@
 
                 <?= $end_wrap  ?>
 
+                <?php      $cart = WC()->cart;
+                $cart_url = $cart->get_cart_url();
+                $count_products = $cart->get_cart_contents_count();
+                if($cart->is_empty()){
+                    $content_cart = 'Cart';
+                } else{
+                    $content_cart = $cart->get_cart_total();
+                }
+                if($_GET['em']){
+                    $cart->empty_cart();
+                }
+                ?>
+
                 <!-- cart -->
-                <a href="#" class="cart">
+                <a href="<?= get_permalink(11) ?>" class="cart">
 
                     <img src="<?= DIRECT ?>img/shopping-cart-black-shape.png" width="32" height="28" alt="">
 
-                    Cart
+                    <span class=“cart__price”><?= $content_cart ?></span>
 
                 </a>
                 <!-- /cart -->
@@ -234,39 +254,3 @@
 
         </header>
         <!-- /site__header -->
-
-        <?php
-$currentProduct = wc_get_product(79);
-if( $currentProduct->is_type('variable') ){
-
-    $regularPrice = $currentProduct->get_variation_regular_price();
-
-    $salePrice = $currentProduct->get_variation_sale_price();
-
-    $available_variations = $currentProduct->get_available_variations();
-
-    foreach ($available_variations as $key => $variation){
-       $var[$variation['regular_price']] = $variation['sale_price'];
-    }
-    
-    ksort($var);
-    $old_price = '';
-    $new_price = '';
-    foreach ($var as  $key =>  $item){
-
-        $old_price .= $key.',';
-        
-        $new_price .= $item.',';
-        
-    }
-    $old_price = substr( $old_price, 0, -1 );
-    $new_price = substr( $new_price, 0, -1 );
-    
-
-} elseif( $currentProduct->is_type('simple') ) {
-
-    $regularPrice = $currentProduct->get_regular_price();
-
-    $salePrice = $currentProduct->get_sale_price();
-
-} ?>

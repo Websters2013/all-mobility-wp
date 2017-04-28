@@ -23,9 +23,10 @@ global $product;
 
 $attribute_keys = array_keys( $attributes );
 
-do_action( 'woocommerce_before_add_to_cart_form' ); 
+do_action( 'woocommerce_before_add_to_cart_form' );
 
-?>
+global $product;
+$upselsIDs = $product->get_upsell_ids(); ?>
 
 <div class="product__items">
 	<div class="product__add">
@@ -33,6 +34,23 @@ do_action( 'woocommerce_before_add_to_cart_form' );
 	<h2 class="product__add-title">Customize & Purchase</h2>
 
 <form class="variations_form" method="post" enctype='multipart/form-data' data-product_id="<?php echo absint( $product->get_id() ); ?>" data-product_variations="<?php echo htmlspecialchars( wp_json_encode( $available_variations ) ) ?>">
+
+	<?php if( $upselsIDs ):
+
+		foreach ( $upselsIDs as $key => $ID ){
+			$title = get_the_title($ID);
+			?>
+
+			<select name="<?= 'upsells_'.$key ?>">
+				<option value="0">no cup holder</option>
+				<option value="<?= $ID ?>"><?= $title ?></option>
+			</select>
+
+		<?php }
+
+	endif; ?>
+	
+
 	<?php do_action( 'woocommerce_before_variations_form' ); ?>
 
 	<?php if ( empty( $available_variations ) && false !== $available_variations ) : ?>
@@ -80,6 +98,7 @@ do_action( 'woocommerce_before_add_to_cart_form' );
 		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 	<?php endif; ?>
 
+	
 	<?php do_action( 'woocommerce_after_variations_form' ); ?>
 </form>
 </div>

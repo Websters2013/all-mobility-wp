@@ -25,120 +25,73 @@ function get_featured_product( $product_id ){ ?>
     </div>
 <?php }
 
-function get_featured_slider_products( $ids = null ){ ?>
+function get_featured_slider_products( $ids = null ){
+
+    global $product;
+
+    $product = wc_get_product(get_the_ID());
+
+    $crossSellsIds = $product->get_cross_sell_ids(); ?>
+
+    <?php if(!empty( $crossSellsIds )): ?>
+
     <!-- featured-products -->
     <div class="featured-products featured-products_2">
 
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
 
-                    <!-- featured-product -->
-                    <a href="#" class="featured-product">
-                        <h2 class="featured-product__title">Product Name </h2>
+                <?php foreach ($crossSellsIds as $crossSellsId):
+                    $link = get_permalink($crossSellsId);
+                    $title = get_the_title($crossSellsId);
+                    $thumb_id = get_post_thumbnail_id($crossSellsId);
+                    $thumb_url = wp_get_attachment_image_src($thumb_id,'full')[0];
 
-                        <div class="featured-product__pic" style="background-image: url(pic/lift-chairs.png)">
-                        </div>
+                    if( $product->is_type('variable') ){
 
-                        <div class="featured-product__footer">
-                            <span class="featured-product__price"><del>$1,800.00</del> $1,350.00</span>
-                            <span class="btn btn_6">SEE MORE</span>
-                        </div>
+                        $regularPrice = $product->get_variation_regular_price();
 
-                    </a>
-                    <!-- /featured-product -->
+                        $salePrice = $product->get_variation_sale_price();
 
-                </div>
-                <div class="swiper-slide">
+                    } elseif( $product->is_type('simple') ) {
 
-                    <!-- featured-product -->
-                    <a href="#" class="featured-product">
-                        <h2 class="featured-product__title">Product Name </h2>
+                        $regularPrice = $product->get_regular_price();
 
-                        <div class="featured-product__pic" style="background-image: url(pic/lift-chairs.png)">
-                        </div>
+                        $salePrice = $product->get_sale_price();
 
-                        <div class="featured-product__footer">
-                            <span class="featured-product__price"><del>$1,800.00</del> $1,350.00</span>
-                            <span class="btn btn_6">SEE MORE</span>
-                        </div>
+                    }
 
-                    </a>
-                    <!-- /featured-product -->
+                    if( !$salePrice || $salePrice == $regularPrice){
+                        $salePrice = $regularPrice.'$';
+                        $regularPrice = '';
+                    } else {
+                        $salePrice = $salePrice.'$';
+                        $regularPrice = $regularPrice.'$';
+                    }
 
-                </div>
-                <div class="swiper-slide">
+                    ?>
 
-                    <!-- featured-product -->
-                    <a href="#" class="featured-product">
-                        <h2 class="featured-product__title">Product Name </h2>
+                    <div class="swiper-slide">
 
-                        <div class="featured-product__pic" style="background-image: url(pic/lift-chairs.png)">
-                        </div>
+                        <!-- featured-product -->
+                        <a href="<?= $link ?>" class="featured-product">
+                            <h2 class="featured-product__title"><?= $title ?></h2>
 
-                        <div class="featured-product__footer">
-                            <span class="featured-product__price"><del>$1,800.00</del> $1,350.00</span>
-                            <span class="btn btn_6">SEE MORE</span>
-                        </div>
+                            <div class="featured-product__pic" style="background-image: url(<?= $thumb_url ?>)">
+                            </div>
 
-                    </a>
-                    <!-- /featured-product -->
+                            <div class="featured-product__footer">
+                                <span class="featured-product__price"><del><?= $regularPrice ?></del><?= $salePrice ?></span>
+                                <span class="btn btn_6">SEE MORE</span>
+                            </div>
 
-                </div>
-                <div class="swiper-slide">
+                        </a>
+                        <!-- /featured-product -->
 
-                    <!-- featured-product -->
-                    <a href="#" class="featured-product">
-                        <h2 class="featured-product__title">Product Name </h2>
+                    </div>
 
-                        <div class="featured-product__pic" style="background-image: url(pic/lift-chairs.png)">
-                        </div>
+                <?php endforeach; ?>
 
-                        <div class="featured-product__footer">
-                            <span class="featured-product__price"><del>$1,800.00</del> $1,350.00</span>
-                            <span class="btn btn_6">SEE MORE</span>
-                        </div>
-
-                    </a>
-                    <!-- /featured-product -->
-
-                </div>
-                <div class="swiper-slide">
-
-                    <!-- featured-product -->
-                    <a href="#" class="featured-product">
-                        <h2 class="featured-product__title">Product Name </h2>
-
-                        <div class="featured-product__pic" style="background-image: url(pic/lift-chairs.png)">
-                        </div>
-
-                        <div class="featured-product__footer">
-                            <span class="featured-product__price"><del>$1,800.00</del> $1,350.00</span>
-                            <span class="btn btn_6">SEE MORE</span>
-                        </div>
-
-                    </a>
-                    <!-- /featured-product -->
-
-                </div>
-                <div class="swiper-slide">
-
-                    <!-- featured-product -->
-                    <a href="#" class="featured-product">
-                        <h2 class="featured-product__title">Product Name </h2>
-
-                        <div class="featured-product__pic" style="background-image: url(pic/lift-chairs.png)">
-                        </div>
-
-                        <div class="featured-product__footer">
-                            <span class="featured-product__price"><del>$1,800.00</del> $1,350.00</span>
-                            <span class="btn btn_6">SEE MORE</span>
-                        </div>
-
-                    </a>
-                    <!-- /featured-product -->
-
-                </div>
             </div>
 
             <div class="featured-products__controls">
@@ -151,4 +104,7 @@ function get_featured_slider_products( $ids = null ){ ?>
 
     </div>
     <!-- /featured-products -->
+
+<?php endif; ?>
+
 <?php }

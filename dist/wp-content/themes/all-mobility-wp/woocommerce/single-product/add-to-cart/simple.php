@@ -31,9 +31,36 @@ if ( $product->is_in_stock() ) : ?>
 
 	<?php do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
-<div class="product__items product__items_non-customize">
+<?php
+	global $product;
+	$upselsIDs = $product->get_upsell_ids();
+	
+	if( empty($upselsIDs)){
+		$class_customize = 'product__items_non-customize';
+	} else {
+		$class_customize = '';
+	}
+
+	?>
+
+<div class="product__items <?= $class_customize ?>">
 	<div class="product__add">
 		<form method="post" enctype='multipart/form-data'>
+
+			<?php if( $upselsIDs ):
+
+				foreach ( $upselsIDs as $key => $ID ){
+					$title = get_the_title($ID); ?>
+
+					<select name="<?= 'upsells_'.$key ?>">
+						<option value="0">no cup holder</option>
+						<option value="<?= $ID ?>"><?= $title ?></option>
+					</select>
+
+				<?php }
+
+			endif; ?>
+
 		<?php
 			/**
 			 * @since 2.1.0.

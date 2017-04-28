@@ -30,10 +30,17 @@ get_header( 'shop' ); ?>
 		 * @hooked woocommerce_breadcrumb - 20
 		 */
 		do_action( 'woocommerce_before_main_content' );
+
+	if($_GET['to_review']){
+		$class_review = ' go_review';
+	} else{
+		$class_review= '';
+	}
+
 	?>
 
 
-		<div class="site__content site__content_inner site__white-back">
+		<div class="site__content site__content_inner site__white-back<?= $class_review ?>">
 
 			<?php while ( have_posts() ) : the_post(); ?>
 

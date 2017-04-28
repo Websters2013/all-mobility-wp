@@ -175,7 +175,7 @@ function get_preview_slider(){
     ?>
 
     <?php 
-    if(!empty($attachment_ids)): ?>
+    if(!empty($image_urls)): ?>
 
         <!-- product__slider -->
         <div class="product__slider">
@@ -184,8 +184,8 @@ function get_preview_slider(){
         <div class="swiper-wrapper">
     
     <?php foreach ($image_urls as $image_url) { ?>
-
-        <div class="swiper-slide" style="background-image:url(<?= $image_url ?>)"></div>
+        
+        <div class="swiper-slide" style="background-image:url(<?= $image_url ?>)" data-iamge="<?= $image_url ?>"></div>
         
    <?php  }  ?>
         </div></div>
@@ -568,7 +568,7 @@ function main_search(){
 
             }
 
-            $product_terms  = wp_get_object_terms( 79, 'product_cat');
+            $product_terms  = wp_get_object_terms( $product->get_id(), 'product_cat');
 
             $sub_cat = '';
 
@@ -795,12 +795,12 @@ $categoryId = $_GET['idCategory'];
             $new_price = '';
             foreach ($var as  $key =>  $item){
 
-                $old_price .= $key.'$,';
+                $old_price .= '"'.$key.'$"'.',';
 
                 if($item){
-                    $new_price .= $item.'$,';
+                    $new_price .= '"'.$item.'$"'.',';
                 } else {
-                    $new_price .= $item.',';
+                    $new_price .= '""'.',';
                 }
 
             }
@@ -818,14 +818,30 @@ $categoryId = $_GET['idCategory'];
 
             ($salePrice) ? $salePrice = $salePrice.'$' : $salePrice = '' ;
 
+            $regularPrice = json_encode($regularPrice);
+
+            $salePrice = json_encode($salePrice);
+
         }
 
-        $regularPrice = json_encode($regularPrice);
+        $description = '';
+        if( have_rows('three_line_preview_text', $product_id) ):
+                    $count = 0;
+                    while ( have_rows('three_line_preview_text', $product_id) ) : the_row();
 
-        $salePrice = json_encode($salePrice);
+                        if( $count < 3 ){
+                            $description .= '"'.get_sub_field('new_line').'",';
+                        }
 
 
-        $description = '"Short bullet list of main characteristics of the product if it’s pretty long or short", "Should contain main keywords users will", "Will be limited to 3 points"';
+                        $count++;
+                    endwhile;
+
+                    $description = substr( $description,0,-1 );
+
+                endif;
+
+
 
         if( have_rows('technical_specifications_block', $product_id) ):
             $count_ch = 1 ;
@@ -945,26 +961,38 @@ function formatPriceForRanges( $value, $last = false ){
 }
 
 add_action('woocommerce_add_to_cart', 'custome_add_to_cart');
+
 function custome_add_to_cart() {
-    
+
     global $woocommerce;
 
-    $product_id = $_POST['assessories'];
+    $i = 0;
 
-    $found = false;
+    do {
+        $allProducts[] = $_POST["upsells_$i"];
+        $i++;
+    } while ( $_POST["upsells_$i"] != null );
 
-    //check if product already in cart
-    if ( sizeof( WC()->cart->get_cart() ) > 0 ) {
-        foreach ( WC()->cart->get_cart() as $cart_item_key => $values ) {
-            $_product = $values['data'];
-            if ( $_product->id == $product_id )
-                $found = true;
-        }
-        // if product not found, add it
-        if ( ! $found )
+
+    foreach ($allProducts as $product_id){
+
+        $found = false;
+
+        if ( sizeof( WC()->cart->get_cart() ) > 0 ) {
+            foreach ( WC()->cart->get_cart() as $cart_item_key => $values ) {
+                $_product = $values['data'];
+                if ( $_product->id == $product_id )
+                    $found = true;
+            }
+            // if product not found, add it
+            if ( ! $found )
+                WC()->cart->add_to_cart( $product_id );
+        } else {
+            // if no products in cart, add it
             WC()->cart->add_to_cart( $product_id );
-    } else {
-        // if no products in cart, add it
-        WC()->cart->add_to_cart( $product_id );
+        }
+
     }
+
+
 }

@@ -161,8 +161,20 @@
                                 <?php endif; ?>
                             </div>
 
+
+                            <?php
+
+                            if( !$salePrice || $salePrice == $regularPrice){
+                                $salePrice = $regularPrice.'$';
+                                $regularPrice = '';
+                            } else {
+                                $salePrice = $salePrice.'$';
+                                $regularPrice = $regularPrice.'$';
+                            }
+                            ?>
+
                             <div class="featured-product__footer">
-                                <span class="featured-product__price"><del><?= $regularPrice.'$' ?></del><?= $salePrice.'$' ?></span>
+                                <span class="featured-product__price"><del><?= $regularPrice ?></del><?= $salePrice ?></span>
                                 <a href="<?= get_the_permalink($featured_product_id) ?>" class="btn">SEE More</a>
                             </div>
 
