@@ -53,17 +53,14 @@ add_action('wp_enqueue_scripts', 'add_js');
 function add_js()
 {
 
-    wp_deregister_script('jquery');
-
-    wp_register_script('jquery',get_template_directory_uri().'/assets/js/vendors/jquery-3.0.0.min.js');
-
+    wp_deregister_script('jquery');wp_register_script('jquery',get_template_directory_uri().'/assets/js/vendors/jquery-3.0.0.min.js');
     wp_register_script('swiper_js',get_template_directory_uri().'/assets/js/vendors/swiper.jquery.min.js');
-    
     wp_register_script('index_js',get_template_directory_uri().'/assets/js/index.min.js');
     wp_register_script('perfect_js',get_template_directory_uri().'/assets/js/vendors/perfect-scrollbar.jquery.min.js');
     wp_register_script('product_js',get_template_directory_uri().'/assets/js/product.min.js');
     wp_register_script('category_js',get_template_directory_uri().'/assets/js/category.min.js');
     wp_register_script('rating_js',get_template_directory_uri().'/assets/js/vendors/rating.js');
+    wp_register_script('checkout_js',get_template_directory_uri().'/assets/js/checkout.min.js');
 
     wp_enqueue_script('jquery');
 
@@ -74,6 +71,14 @@ function add_js()
         wp_enqueue_style('swiper_css',get_template_directory_uri().'/assets/css/swiper.min.css');
         wp_enqueue_script('swiper_js');
         wp_enqueue_script('index_js');
+    }
+
+    if( is_page_template('page-checkout.php') ){
+        wp_enqueue_style('checkout_css', get_template_directory_uri().'/assets/css/checkout-page.css');
+        wp_enqueue_style('swiper_css',get_template_directory_uri().'/assets/css/swiper.min.css');
+        wp_enqueue_script('swiper_js');
+        wp_enqueue_script('checkout_js');
+
     }
 
     if( is_singular( 'product' ) ){
@@ -255,6 +260,7 @@ function wpq_get_min_price_per_product_cat( $term_id ) {
     AND {$wpdb->postmeta}.meta_key = '_price'
 
   ";
+    
 
     return $wpdb->get_var( $wpdb->prepare( $sql, $term_id ) );
 
@@ -376,7 +382,7 @@ function checkPrice( $min, $max, $catID ){
 
             array(
                 'key' => '_price',
-                'value' => array($min, $max),
+                'value' => array( $min, $max ),
                 'compare' => 'BETWEEN',
                 'type' => 'NUMERIC'
             )
@@ -692,8 +698,20 @@ $sortingDate = $_GET['dateSorting'];
 
 $currentPage = $_GET['currentPage'];
 
+$categoryId = $_GET['idCategory'];
+
     foreach ($output as $key => $item){
-        $atts[$key] = explode(',',$item );
+
+        if( $key == 'price' ){
+            $prices =  explode(',',$item );
+        } else {
+            $atts[$key] = explode(',',$item );
+        }
+
+    }
+
+    foreach ($prices as $price){
+        $finalPriceArray[] = explode('-',$price );
     }
 
     if( $string ){
@@ -701,60 +719,67 @@ $currentPage = $_GET['currentPage'];
         $attributes_filter = '';
 
         foreach ( $atts as $key => $item ){
-            $attributesQuery[] =  array(
-                'taxonomy' 		=> $key,
-                'terms' 		=> $item,
-                'operator' 		=> 'IN'
-            );
+
+                $attributesQuery[] =  array(
+                    'taxonomy' 		=> $key,
+                    'terms' 		=> $item,
+                    'operator' 		=> 'IN'
+                );
         }
 
     } else {
+
         $attributes_filter = '';
+
     }
 
-    $term_id = 10;
+    $pricesRanges['relation'] = 'OR';
 
-
+    foreach ( $finalPriceArray as $price ){
+        $pricesRanges[] = array(
+            'key' => '_price',
+            'value' => $price,
+            'compare' => 'BETWEEN',
+            'type' => 'NUMERIC'
+        );
+    }
 
     $args = array (
-        'paged' => 1,
+        'paged' => $currentPage,
         'post_type'  => 'product',
         'fields' => 'ids',
         'posts_per_page' => $pageSorting,
-        'orderby'			=> 'date',
+        'orderby' => 'date',
         'order' => $sortingDate,
         'post_status' => 'publish',
+        'suppress_filters' => true,
         'tax_query'  => array(
             'relation' => 'AND',
             array(
                 'taxonomy' => 'product_cat',
                 'field' => 'term_id',
-                'terms' => $term_id
+                'terms' => $categoryId
             ),
 
             $attributesQuery
 
         ),
-        'meta_query' => array(
-
-            array(
-                'key' => '_price',
-                'value' => array(0, 14000),
-                'compare' => 'BETWEEN',
-                'type' => 'NUMERIC'
-            )
-
-        ),
-
+        'meta_query' => $pricesRanges
     );
 
-    $attrProducts =  get_posts($args);
+    $attrProducts = new WP_Query( $args );
+
+    $max = $attrProducts->max_num_pages;
+
+    $attrProducts = get_posts($args);
+
+    wp_reset_postdata();
 
     $products = '';
 
     foreach ($attrProducts as $product_id){
 
-        $currentProduct = wc_get_product($product_id);
+        $currentProduct = wc_get_product( $product_id );
 
         if( get_field('featured_product',$product_id) == 'yes' ){
             $featured = 'featured';
@@ -809,7 +834,7 @@ $currentPage = $_GET['currentPage'];
         endif;
 
         $products .= ' {
-            "name": "'.$term_id.'",
+            "name": "'.$categoryId.'",
             "featured": "'.$featured.'",
             "picture": "'.$thumb_url.'",
             "title": '.$name.',
@@ -840,7 +865,7 @@ $currentPage = $_GET['currentPage'];
        '.$products.'
     ],
     "settings": {
-        "pagesAll": "10",
+        "pagesAll": "'.$max.'",
         "currentPage": "'.$currentPage.'"
     }
 }';
@@ -856,3 +881,41 @@ exit;
 add_action('wp_ajax_get_filtered_products','get_filtered_products');
 
 add_action('wp_ajax_nopriv_get_filtered_products', 'get_filtered_products');
+
+function formatPriceForRanges( $value, $last = false ){
+
+    if( $last ){
+        $value  = 'and above';
+        $above_flag = true;
+    } else {
+        $value = number_format( $value, 2, '.', ' ' );
+        $above_flag = false;
+    }
+
+    return array($value,$above_flag);
+}
+
+add_action('woocommerce_add_to_cart', 'custome_add_to_cart');
+function custome_add_to_cart() {
+    
+    global $woocommerce;
+
+    $product_id = $_POST['assessories'];
+
+    $found = false;
+
+    //check if product already in cart
+    if ( sizeof( WC()->cart->get_cart() ) > 0 ) {
+        foreach ( WC()->cart->get_cart() as $cart_item_key => $values ) {
+            $_product = $values['data'];
+            if ( $_product->id == $product_id )
+                $found = true;
+        }
+        // if product not found, add it
+        if ( ! $found )
+            WC()->cart->add_to_cart( $product_id );
+    } else {
+        // if no products in cart, add it
+        WC()->cart->add_to_cart( $product_id );
+    }
+}

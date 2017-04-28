@@ -7,31 +7,29 @@
         <div class="swiper-wrapper">
 
             <?php   while ( have_rows('slider_constructor') ) : the_row();
-
                 $image = get_sub_field('choose_the_image');
                 $text = get_sub_field('description_text');
-                $link = get_sub_field('link_for_current_slide');
+                $link = get_sub_field('link_for_current_slide'); ?>
 
-                ?>
-
-                <div class="swiper-slide" style="background-image: url(<?= $image ?>)">
+                <a href="<?= $link ?>" class="swiper-slide" style="background-image: url(<?= $image ?>)">
 
                     <!-- main-slider__content -->
                     <div class="main-slider__content">
                         <h2 class="main-slider__title"><?= $text ?></h2>
 
                         <?php if($link): ?>
-                        <a href="<?= $link ?>" class="btn btn_5 btn_img-right">
+
+                        <span class="btn btn_5 btn_img-right">
                             learn more
 
                             <img src="<?= DIRECT ?>img/arrow-right.png" width="18" height="14" alt="">
-                        </a>
+                        </span>
                         <?php endif; ?>
 
                     </div>
                     <!-- /main-slider__content -->
 
-                </div>
+                </a>
 
                 <?php endwhile; ?>
 
