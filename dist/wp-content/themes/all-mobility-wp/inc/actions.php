@@ -784,22 +784,46 @@ $categoryId = $_GET['idCategory'];
 
             $salePrice = $currentProduct->get_variation_sale_price();
 
+            $available_variations = $currentProduct->get_available_variations();
+
+            foreach ($available_variations as $key => $variation){
+                $var[$variation['regular_price']] = $variation['sale_price'];
+            }
+
+            ksort($var);
+            $old_price = '';
+            $new_price = '';
+            foreach ($var as  $key =>  $item){
+
+                $old_price .= $key.'$,';
+
+                if($item){
+                    $new_price .= $item.'$,';
+                } else {
+                    $new_price .= $item.',';
+                }
+
+            }
+            $regularPrice = substr( $old_price, 0, -1 );
+            $salePrice = substr( $new_price, 0, -1 );
+
+
         } elseif( $currentProduct->is_type('simple') ) {
 
             $regularPrice = $currentProduct->get_regular_price();
 
+            ($regularPrice) ? $regularPrice = $regularPrice.'$' : $regularPrice = '' ;
+
             $salePrice = $currentProduct->get_sale_price();
 
+            ($salePrice) ? $salePrice = $salePrice.'$' : $salePrice = '' ;
+
         }
 
-        ( $regularPrice )? $regularPrice = $regularPrice.'$' : $regularPrice = '' ;
+        $regularPrice = json_encode($regularPrice);
 
-        if( $salePrice ){
-            $salePrice = $salePrice.'$';
-        } else {
-            $salePrice = $regularPrice;
-            $regularPrice = '';
-        }
+        $salePrice = json_encode($salePrice);
+
 
         $description = '"Short bullet list of main characteristics of the product if it’s pretty long or short", "Should contain main keywords users will", "Will be limited to 3 points"';
 
@@ -875,8 +899,8 @@ $categoryId = $_GET['idCategory'];
                  "description": ['.$description.'],
                 "specification": '.$specification.'
             },
-            "price": "'.$salePrice.'",
-            "oldPrice": "'.$regularPrice.'",
+            "price": ['.$regularPrice.'],
+            "oldPrice": ['.$salePrice.'],
             "urlDetails": "'.$link.'"
         },';
 
