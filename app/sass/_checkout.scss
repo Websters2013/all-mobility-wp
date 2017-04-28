@@ -295,7 +295,11 @@
 
 }
 .woocommerce-checkout-payment {
-  display: none;
+
+  .payment_methods {
+    display: none;
+  }
+
 }
 .checkout__payments {
 
@@ -326,6 +330,40 @@
   width: 194px;
   padding-right: 12px;
   line-height: 22px;
+}
+#place_order {
+  @include inline-flex();
+  @include justify-content(center);
+  @include align-items(center);
+  @include flex-direction();
+  background: #F47920;
+  border-radius: 4px;
+  padding: 0 10px;
+  height: 70px;
+  @include main-font1();
+  font-size: 26px;
+  line-height: 26px;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  border: none;
+  -webkit-transition: background 0.3s, color 0.3s;
+  transition: background 0.3s, color 0.3s;
+  text-align: center;
+  text-transform: uppercase;
+
+  span {
+    width: 100%;
+    text-align: center;
+  }
+
+  &:hover {
+    background: #ea5438;
+  }
+
+  &:active {
+    background: #ea5438;
+  }
+
 }
 
 @media (min-width: $phone-mini) {
