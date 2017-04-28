@@ -143,7 +143,8 @@
             _obj = obj,
             _slider,
             _window = $(window),
-            _flag;
+            _flag,
+            _loop = false;
 
         //private methods
         var _constructor = function() {
@@ -199,12 +200,14 @@
             },
             _initSlider = function () {
 
+                _addSomeParams();
+
                 _slider = new Swiper( _obj.find( '.swiper-container' ), {
                     pagination: _obj.find('.swiper-pagination'),
                     slidesPerView: 5,
                     paginationClickable: true,
                     speed: 600,
-                    loop: true,
+                    loop: _loop,
                     autoplay: 5000,
                     autoplayDisableOnInteraction: false,
                     nextButton: _obj.find('.swiper-button-next'),
@@ -215,6 +218,35 @@
                         }
                     }
                 } );
+
+            },
+            _addSomeParams = function() {
+
+                if( _window.width() >= 1024 ) {
+
+                    if( _obj.find('.swiper-slide').length >= 4 ) {
+
+                        _loop = true;
+
+                    }
+
+                } else  if( _window.width() >= 1425 ) {
+
+                    if( _obj.find('.swiper-slide').length >= 5 ) {
+
+                        _loop = true;
+
+                    }
+
+                }
+
+                if(!_loop) {
+
+                    _obj.find('.featured-products__controls').css({
+                        display: 'none'
+                    })
+
+                }
 
             };
 
