@@ -260,6 +260,7 @@ function wpq_get_min_price_per_product_cat( $term_id ) {
     AND {$wpdb->postmeta}.meta_key = '_price'
 
   ";
+    
 
     return $wpdb->get_var( $wpdb->prepare( $sql, $term_id ) );
 
