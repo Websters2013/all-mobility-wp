@@ -225,6 +225,21 @@
       background: #ea5438;
     }
   }
+  &_15 {
+    height: 40px;
+    min-width: 148px;
+    background: #A2A2A2;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 16px;
+
+    &:hover {
+      background: #747474;
+    }
+    &:active {
+      background: #747474;
+    }
+  }
 
 }
 
@@ -274,6 +289,10 @@
       height: 40px;
       min-width: 122px;
       @include main-font1();
+    }
+    &_15 {
+      height: 40px;
+      min-width: 148px;
     }
 
   }

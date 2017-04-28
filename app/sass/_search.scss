@@ -1,15 +1,6 @@
 .search {
-  opacity: 0;
-  visibility: hidden;
+  position: relative;
   display: block;
-  position: absolute;
-  z-index: 2;
-  top: 79px;
-  left: 33px;
-  right: 33px;
-  padding-right: 69px;
-  -webkit-transition: opacity 0.3s, visibility .3s ease;
-  transition: opacity 0.3s, visibility .3s ease;
 
   input[type=search] {
     display: inline-block;
@@ -32,7 +23,7 @@
   button {
     position: absolute;
     top: 0;
-    right: 69px;
+    right: 0;
     bottom: 0;
     width: 94px;
     background: #F47920;
@@ -137,11 +128,40 @@
 
 }
 
+.site__header {
+
+  .search {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    z-index: 2;
+    top: 79px;
+    left: 33px;
+    right: 33px;
+    padding-right: 69px;
+    -webkit-transition: opacity 0.3s, visibility .3s ease;
+    transition: opacity 0.3s, visibility .3s ease;
+
+    button {
+      right: 69px;
+    }
+
+    &.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+  }
+
+}
+
 @media (min-width: $desktop) {
 
+  .site__header .search,
   .search {
     opacity: 1;
     visibility: visible;
+    position: absolute;
     top: 29px;
     left: 279px;
     right: 450px;
@@ -210,6 +230,7 @@
 }
 @media (min-width: $desktop-hd) {
 
+  .site__header .search,
   .search {
     left: 259px;
     right: 539px;

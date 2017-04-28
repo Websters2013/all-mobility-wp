@@ -7,6 +7,9 @@
                 optionType: 1,
                 showType: 2
             } );
+
+            console.log('fghjkl')
+
         } );
     } );
 
@@ -81,7 +84,15 @@
             _onEvents = function(){
                 _obj.on( 'change', function() {
                     _text.text( $( this ).find( 'option:selected' ).text() );
+
                 } );
+                $(document).on(
+                    "change",
+                    "select",
+                    function() {
+                        $( this).prev().text( $( this ).find( 'option:selected' ).text() );
+                    }
+                );
 
                 if( _optionType == 1 && !_device ){
                     _wrap.on( {

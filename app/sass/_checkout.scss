@@ -5,11 +5,11 @@
   color: rgba(78, 78, 78, 0.81);
 
   h3 {
-    margin: 0 0 33px;
-    padding: 0 0 13px;
+    margin: 0 0 26px;
+    padding: 0 0 10px;
     @include main-font1();
-    font-size: 22px;
-    line-height: 24px;
+    font-size: 18px;
+    line-height: 22px;
     color: #373737;
     border-bottom: 1px solid #ddd;
   }
@@ -63,6 +63,7 @@
   color: rgba(78, 78, 78, 0.81);
 }
 #ship-to-different-address {
+  margin: 0 0 7px;
   padding-bottom: 0;
   border-bottom: none;
 }
@@ -73,8 +74,8 @@
 .woocommerce-page form .form-row-last {
   float: none;
   width: 100%;
+  overflow: hidden;
 }
-
 #billing_country_field,
 #billing_company_field,
 #shipping_company_field,
@@ -82,7 +83,6 @@
 #order_comments_field {
   display: none;
 }
-
 .woocommerce .col2-set .col-1,
 .woocommerce-page .col2-set .col-1
 .woocommerce .col2-set .col-2,
@@ -90,25 +90,26 @@
   overflow: hidden;
   float: none;
   width: 100%;
-  margin: 0 0 40px;
+  margin: 0 0 19px;
 }
 .woocommerce .col2-set {
   margin: 0 0 40px;
 }
 .woocommerce table.shop_table thead th {
   font-weight: 400;
-  padding: 0 0 20px;
+  padding: 0 0 9px;
   @include main-font5();
   font-size: 16px;
   line-height: 22px;
   color: rgba(78, 78, 78, 0.8);
   letter-spacing: 0;
+  border-bottom: 1px solid #DDDDDD;
 }
-
 .woocommerce table.shop_table tbody th,
 .woocommerce table.shop_table tbody td {
   font-weight: 400;
   padding: 5px 0;
+  padding-right: 14px;
   @include main-font5();
   font-size: 16px;
   line-height: 22px;
@@ -125,10 +126,17 @@
 .woocommerce table.shop_table tbody th {
   padding-right: 13px;
 }
+.woocommerce table.shop_table thead th {
+  padding-right: 13px;
+}
 .woocommerce table.shop_table thead th:nth-child(2),
 .woocommerce table.shop_table tfoot td:nth-child(2),
 .woocommerce table.shop_table tbody td:nth-child(2) {
   text-align: right;
+}
+.woocommerce table.shop_table tbody tr:first-child th,
+.woocommerce table.shop_table tbody tr:first-child td {
+  padding-top: 14px;
 }
 .woocommerce table.shop_table tbody tr:last-child th,
 .woocommerce table.shop_table tbody tr:last-child td {
@@ -159,7 +167,7 @@
 }
 .woocommerce table.shop_table tfoot tr.shipping th,
 .woocommerce table.shop_table tfoot tr.shipping td {
-  padding-bottom: 18px;
+  padding-bottom: 15px;
 }
 .woocommerce table.shop_table tfoot tr.order-total th,
 .woocommerce table.shop_table tfoot tr.order-total td {
@@ -178,6 +186,7 @@
 
     label {
       width: auto;
+      margin: 0 10px 0 0;
     }
 
     input.input-text {
@@ -194,6 +203,7 @@
   display: inline-block;
   vertical-align: top;
   user-select: none;
+  padding-left: 10px;
 
   input[ type = checkbox ] {
     position: absolute;
@@ -217,7 +227,8 @@
       cursor: pointer;
       width: 100%  !important;
       float: none !important;
-      padding: 0 0 10px 34px !important;
+      padding: 0 0 6px 34px !important;
+      margin: 0 0 0;
 
       &:after,
       &:before {
@@ -252,12 +263,104 @@
   }
 
 }
+.checkout__main {
+  @include flexbox();
+  @include justify-content(space-between);
+  @include align-items();
+  @include flex-direction(column-reverse);
+}
+.total-order {
+  padding-top: 22px;
+  margin: 0 0 52px;
 
+  table {
+    width: 100%;
+  }
+  #order_review_heading {
+    margin: 0 0 9px;
+    padding: 0 0 10px;
+    font-size: 22px;
+    line-height: 24px;
+  }
+
+}
+.checkout__row {
+  padding: 0 5px 0 10px;
+}
+.woocommerce-shipping-fields {
+
+  h3 {
+    margin-bottom: 14px;
+  }
+
+}
+.woocommerce-checkout-payment {
+  display: none;
+}
+.checkout__payments-more {
+
+}
+
+@media (min-width: $phone-mini) {
+
+  .woocommerce form .form-row label {
+    width: 30%;
+    float: left;
+    padding: 8px 0 0;
+  }
+  .woocommerce form .form-row input.input-text,
+  .woocommerce form .form-row .websters-select,
+  .woocommerce form .form-row textarea {
+    width: 68%;
+    float: right;
+    margin: 0 0 20px;
+  }
+  .woocommerce form .form-row .websters-select {
+    width: 95px;
+    margin: 0 16px 20px 0;
+  }
+  .woocommerce form #billing_state_field input.input-text,
+  .woocommerce form #shipping_state_field input.input-text {
+    width: calc( 61% - 87px );
+  }
+
+}
 @media (min-width: $desktop) {
 
   .checkout {
-  }
 
+    h3 {
+      margin: 0 0 19px;
+      padding: 0 0 14px;
+    }
+
+  }
+  .woocommerce-shipping-fields {
+
+    h3 {
+      margin: 0 0 19px;
+    }
+
+  }
+  .woocommerce table.shop_table thead th {
+    padding-right: 0;
+  }
+  .woocommerce table.shop_table thead th {
+    padding: 0 0 20px;
+    border-bottom: none;
+  }
+  .woocommerce table.shop_table tbody tr:first-child th,
+  .woocommerce table.shop_table tbody tr:first-child td {
+    padding-top: 5px;
+  }
+  .woocommerce table.shop_table tfoot tr.shipping th,
+  .woocommerce table.shop_table tfoot tr.shipping td {
+    padding-bottom: 18px;
+  }
+  .woocommerce table.shop_table tbody th,
+  .woocommerce table.shop_table tbody td {
+    padding-right: 0;
+  }
   .woocommerce form .form-row label {
     width: 30%;
     float: left;
@@ -285,15 +388,23 @@
   .woocommerce-page form .form-row-last {
     overflow: hidden;
   }
-
+  .woocommerce .col2-set .col-1,
+  .woocommerce-page .col2-set .col-1
+  .woocommerce .col2-set .col-2,
+  .woocommerce-page .col2-set .col-2 {
+    overflow: hidden;
+    float: none;
+    width: 100%;
+    margin: 0 0 51px;
+  }
   #customer_details {
     width: 70.4%;
   }
   .woocommerce form .form-row {
-    display: inline-block;
-    vertical-align: top;
-    width: 44.5%;
-    padding-right: 76px;
+    //display: inline-block;
+    //vertical-align: top;
+    //width: 44.5%;
+    //padding-right: 76px;
   }
   .clear {
     display: none;
@@ -301,11 +412,10 @@
   .woocommerce .create-account {
 
     p {
-      margin: 0 0 10px;
+      margin: 0 0 23px;
     }
     .form-row  {
       width: 100%;
-
 
       label {
         width: auto;
@@ -322,19 +432,72 @@
 
   }
   .form-row.create-account {
-    padding-top: 54px;
+    padding-top: 25px;
   }
 
   .total-order {
     position: absolute;
-    top: 90px;
+    top: 87px;
     right: 58px;
-    width: 305px;
+    padding-top: 0;
+    margin: 0;
+    max-width: 305px;
+    width: 22%;
 
-    .order_review_heading {
+    #order_review_heading {
       margin: 0 0 20px;
+      padding: 0 0 14px;
+    }
+  }
+
+  .checkout__row {
+    @include flexbox();
+    @include justify-content(space-between);
+    @include align-items();
+    @include flex-direction();
+    max-width: 767px;
+    padding-top: 14px;
+
+    >div {
+      width: 47.2%;
+
+
+      &:first-child {
+        width: 42.1%;
+      }
+      &:nth-child(2) {
+
+        .form-row input.input-text,
+        .form-row .websters-select,
+        .form-row textarea {
+          width: 57%;
+        }
+
+        .form-row .websters-select {
+          width: 87px;
+        }
+
+        #billing_state_field input.input-text,
+        #shipping_state_field input.input-text {
+          width: calc( 54.5% - 87px);
+        }
+
+      }
+
     }
 
+  }
+  .checkout__main {
+    display: block;
+  }
+  #ship-to-different-address {
+    padding-right: 0;
+  }
+}
+@media (min-width: $desktop-hd) {
+
+  .total-order {
+    width: 100%;
   }
 
 }

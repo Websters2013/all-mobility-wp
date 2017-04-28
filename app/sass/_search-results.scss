@@ -1,0 +1,65 @@
+.search-results {
+  padding-top: 8px;
+
+  .search {
+    margin-bottom: 25px;
+    padding: 0 18px;
+
+    input[type=search] {
+      height: 40px;
+    }
+    button {
+      right: 17px;
+      width: 104px;
+    }
+
+  }
+
+}
+.search-results__items {
+
+}
+.search-results__item {
+  margin: 0 0 47px;
+  @include main-font5();
+  font-size: 16px;
+  line-height: 22px;
+  color: rgba(78, 78, 78, 0.8);
+
+  p {
+    margin: 0 0 11px;
+  }
+
+}
+.search-results__title {
+  margin: 0 0 7px;
+  @include main-font1();
+  font-size: 22px;
+  line-height: 24px;
+
+  a {
+    color: #0094C1;
+
+    span {
+      color: #F47920;
+    }
+
+  }
+
+}
+
+@media (min-width: $desktop) {
+
+  .search-results {
+    padding-top: 0;
+
+    .search {
+      display: none;
+    }
+
+  }
+  .search-results__item {
+    margin: 0 0 29px;
+  }
+
+}
