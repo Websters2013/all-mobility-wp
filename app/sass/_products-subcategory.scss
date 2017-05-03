@@ -45,6 +45,7 @@
 
 }
 .products-subcategory__pic {
+  display: block;
   margin: 0 auto;
   width: 139px;
   height: 140px;
@@ -238,8 +239,8 @@
 
       &:before {
         position: absolute;
-        top: 7px;
-        left: 0;
+        top: 9px;
+        left: -1px;
       }
 
     }

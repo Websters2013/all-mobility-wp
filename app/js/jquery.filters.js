@@ -338,13 +338,18 @@
 
                     _btn2.removeClass('opened');
                     _filters.removeClass('opened');
-                    $('.site__content').attr( 'style', '' );
+                    $('.site__content').css( { 'z-index': '' } );
 
                 } else {
 
                     _btn2.addClass('opened');
                     _filters.addClass('opened');
-                    $('.site__content').css( { 'z-index': 100 } )
+
+                    if(  _window.width() < 1024 ) {
+
+                        $('.site__content').css( { 'z-index': 100 } );
+
+                    }
 
                 }
             },

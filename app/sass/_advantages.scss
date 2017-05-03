@@ -1,5 +1,5 @@
 .advantages {
-  padding: 24px 24px 7px;
+  padding: 24px 24px 17px;
   background: #F2F2F2;
   @include main-font2();
   font-size: 16px;
@@ -14,9 +14,15 @@
   text-align: center;
 }
 .advantages__list {
+  @include flexbox();
+  @include justify-content();
+  @include align-items();
+  @include flex-direction();
+  @include flex-wrap(wrap);
 
   li {
     position: relative;
+    width: 50%;
     padding: 0 17px 0 60px;
     margin: 0 0 19px;
     min-height: 34px;
@@ -86,35 +92,6 @@
   padding: 24px 53px 17px;
 }
 
-@media (min-width: $phone-mini) {
-
-  .advantages {
-    padding: 24px 24px 17px;
-    font-size: 16px;
-    line-height: 17px;
-  }
-  .advantages__list {
-    @include flexbox();
-    @include justify-content();
-    @include align-items();
-    @include flex-direction();
-    @include flex-wrap(wrap);
-
-    li {
-      width: 50%;
-    }
-
-  }
-  .advantages_2 {
-    padding: 24px 24px 14px;
-  }
-  .advantages_3 {
-    padding: 24px 0 14px;
-  }
-  .advantages_mob {
-    padding: 24px 53px 17px;
-  }
-}
 @media (min-width: $desktop) {
 
   .advantages {
