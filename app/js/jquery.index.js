@@ -34,9 +34,9 @@
                             _slide.css({
                                 minHeight: ''
                             });
-                            _slide.css({
+                            _obj.find( '.swiper-slide' ).css( {
                                 minHeight: $('.swiper-container').height()
-                            });
+                            } );
 
                         }
                     }
@@ -63,7 +63,7 @@
                     }
                 } );
 
-                _slide.css( {
+                _obj.find( '.swiper-slide' ).css( {
                     minHeight: $('.swiper-container').height()
                 } );
 

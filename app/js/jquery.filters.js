@@ -29,6 +29,7 @@
             _titleInner = _obj.find('.category__filters-title-inner'),
             _clearFilters = _obj.find('.category__filtered .btn, .category__filters-clear'),
             _clearSingle = _obj.find('.category__filtered-remove'),
+            _additionalParameters = _obj.find('.category__find-parameters'),
             _globalCheckFlag = false,
             _loading = $('<div class="loading"></div>'),
             _inputHidden = _obj.find('input[type=hidden].value-check'),
@@ -248,6 +249,22 @@
 
                     }
                 } );
+                _additionalParameters.on({
+                   submit: function() {
+
+                       if( _window.width() >= 1024 ) {
+
+                           _addLoading();
+
+                       }
+
+                       _inputHiddenPage.val('1');
+                       _requestContent();
+
+                       return false;
+
+                   }
+                });
 
             },
             _addingFilteredBy = function( itemText, itemId, itemName, categoryName ) {
@@ -338,13 +355,18 @@
 
                     _btn2.removeClass('opened');
                     _filters.removeClass('opened');
-                    $('.site__content').attr( 'style', '' );
+                    $('.site__content').css( { 'z-index': '' } );
 
                 } else {
 
                     _btn2.addClass('opened');
                     _filters.addClass('opened');
-                    $('.site__content').css( { 'z-index': 100 } )
+
+                    if(  _window.width() < 1024 ) {
+
+                        $('.site__content').css( { 'z-index': 100 } );
+
+                    }
 
                 }
             },
@@ -653,11 +675,14 @@
                         pageSorting: _sortingPage.val(),
                         dateSorting: _sortingDate.val(),
                         currentPage: _inputHiddenPage.val(),
-                        idCategory: _obj.data('id-category')
+                        idCategory: _obj.data('id-category'),
+                        additionalParameters: _additionalParameters.serialize()
                     },
                     dataType: 'json',
                     type: "get",
                     success: function ( m ) {
+
+                        console.log(_additionalParameters.serialize());
 
                         _pasteNewProducts( m );
                         _createPagination( m );

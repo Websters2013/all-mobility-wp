@@ -66,6 +66,8 @@
   &.fixed {
     position: fixed;
     height: 53px;
+    -webkit-transform: translateY( 0 );
+    transform: translateY( 0 );
     -webkit-transition:  -webkit-transform .5s ease, background-color .3s ease;
     transition: transform .5s ease, background-color .3s ease;
 
@@ -1056,7 +1058,7 @@ textarea.site__input {
         }
         >a {
           border-bottom: none;
-          padding: 10px 11px;
+          padding: 10px 7px;
           font-size: 14px;
           line-height: 14px;
           -webkit-transition: background 0.3s;
@@ -1239,6 +1241,7 @@ textarea.site__input {
         margin: 0 0 17px;
 
         a {
+          padding-right: 5px;
           @include main-font3();
           font-size: 18px;
           color: #FFFFFF;

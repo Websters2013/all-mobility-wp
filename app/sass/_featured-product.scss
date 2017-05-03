@@ -32,7 +32,6 @@
 
 }
 .featured-product__remark {
-  opacity: 0;
   position: absolute;
   top: -8px;
   left: 7px;
@@ -47,10 +46,6 @@
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.17);
   -webkit-transition: opacity 0.150s, visibility 0.150s;
   transition: opacity 0.150s, visibility 0.150s;
-
-  &.visible {
-    opacity: 1;
-  }
 
   span {
     @include flexbox();

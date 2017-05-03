@@ -11,7 +11,7 @@
   @include flex-wrap(wrap);
 
   >div {
-    width: 100%;
+    width: 50%;
     margin: 0 0 12px;
     padding: 0 7px;
     text-align: center;
@@ -20,11 +20,15 @@
 }
 .product-categories__item {
   position: relative;
-  display: inline-block;
-  vertical-align: top;
-  width: 183px;
+  @include flexbox();
+  @include justify-content(space-between);
+  @include align-items();
+  @include flex-direction(column);
+  @include flex-wrap(wrap);
+  width: 135px;
   height: 100%;
-  padding: 11px 9px 37px;
+  margin: 0 auto;
+  padding: 11px 9px 84px;
   background: #FFFFFF;
   border: 2px solid #DDDDDD;
   box-shadow: 3px 3px 4px 0 rgba(0,0,0,0.10);
@@ -38,10 +42,7 @@
   }
 
   .btn {
-    position: absolute;
-    left: 8px;
-    right: 8px;
-    bottom: 10px;
+    width: 100%;
   }
 
 }
@@ -89,11 +90,18 @@
 }
 .product-categories__footer {
   padding-top: 9px;
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 10px;
 }
 .product-categories_2 {
   padding: 0;
   margin: 0 0 14px;
 
+  .product-categories__title {
+    letter-spacing: 1px;
+  }
   .product-categories__inner {
     margin: 0 -7px;
 
@@ -103,7 +111,7 @@
 
   }
   .product-categories__item {
-    padding: 11px 9px 40px;
+    padding: 11px 9px 69px;
   }
   .product-categories__pic {
     height: 104px;
@@ -120,11 +128,9 @@
 
 @media (min-width: $phone-mini) {
 
-  .product-categories__inner {
-
-    >div {
-      width: 50%;
-    }
+  .product-categories__item {
+    width: 183px;
+    padding: 11px 9px 68px;
   }
 
 }
@@ -140,7 +146,7 @@
   }
   .product-categories__item {
     width: 210px;
-    padding: 11px 9px 40px;
+    padding: 11px 9px 68px;
   }
 
 }
@@ -148,7 +154,11 @@
 
   .product-categories {
     margin: 0 0 20px;
-    padding: 28px 17px 13px 26px;
+    //padding: 11px 9px 82px;
+    padding: 26px 24px 14px;
+  }
+  .product-categories__pic {
+    border-width: 2px;
   }
   .product-categories__inner {
 
@@ -159,74 +169,12 @@
 
   }
   .product-categories__item {
-    //width: 294px;
-    padding: 11px 9px 60px;
-    //
-    //.btn {
-    //  position: relative;
-    //  left: auto;
-    //  right: auto;
-    //  bottom: auto;
-    //  width: 100%;
-    //  margin-top: 3px;
-    //}
-
+    padding: 11px 9px 82px;
   }
-  //.product-categories__title {
-  //  margin: 0 6px 3px;
-  //  font-size: 18px;
-  //}
-  //.product-categories__pic {
-  //  overflow: hidden;
-  //  position: relative;
-  //  height: 214px;
-  //  margin: 0 0 8px;
-  //  border-bottom: none;
-  //
-  //  img {
-  //    position: absolute;
-  //    left: 50%;
-  //    top: 50%;
-  //    -webkit-transform: translate(-50%,-50%);
-  //    transform: translate(-50%,-50%);
-  //  }
-  //
-  //}
-  //.product-categories__footer {
-  //  position: absolute;
-  //  @include flexbox();
-  //  @include justify-content(space-between);
-  //  @include align-items(center);
-  //  @include flex-direction();
-  //  @include flex-wrap(wrap);
-  //  border-top: 2px solid #DDDDDD;
-  //  padding-top: 10px;
-  //  left: 16px;
-  //  bottom: 13px;
-  //  right: 16px;
-  //
-  //  >div {
-  //    width: 48%;
-  //  }
-  //}
-  //.product-categories__price {
-  //  display: block;
-  //  margin: 0;
-  //  font-size: 18px;
-  //  line-height: 18px;
-  //
-  //  span {
-  //    margin: 0;
-  //    font-size: 12px;
-  //    display: block;
-  //  }
-  //
-  //}
-
   .product-categories_2 {
 
     .product-categories__item {
-      padding: 11px 9px 53px;
+      padding: 11px 9px 88px;
     }
     .product-categories__pic {
       height: 135px;
@@ -240,13 +188,6 @@
 }
 @media (min-width: $desktop-hd) {
 
-  .product-categories__inner {
-
-    >div {
-      //width: 33.333%;
-    }
-
-  }
   .product-categories__item {
     width: 294px;
     padding: 28px 20px 64px;
@@ -266,7 +207,6 @@
     position: relative;
     height: 214px;
     margin: 0 0 8px;
-    border-bottom: none;
 
     img {
       position: absolute;
@@ -284,7 +224,6 @@
     @include align-items(center);
     @include flex-direction();
     @include flex-wrap(wrap);
-    border-top: 2px solid #DDDDDD;
     padding-top: 10px;
     left: 16px;
     bottom: 13px;
@@ -356,7 +295,7 @@
 
     }
     .product-categories__footer {
-      bottom: 15px;
+      bottom: 12px;
     }
 
   }
