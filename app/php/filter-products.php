@@ -4,6 +4,7 @@ $pageSorting = $_GET['pageSorting'];
 $sortingDate = $_GET['dateSorting'];
 $currentPage = $_GET['currentPage'];
 $idCategory = $_GET['idCategory'];
+$additionalParameters = $_GET['additionalParameters'];
 
 $json_data = '{
     "products": [

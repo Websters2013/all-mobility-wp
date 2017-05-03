@@ -41,7 +41,7 @@ if($flag == 'remove'){
     $json_data = '{
         "subtotal": "$8888",
         "total": "$9999",
-         "taxes": "200$",
+        "taxes": "200$",
         "status": 1
     }';
 
@@ -50,7 +50,9 @@ if($flag == 'remove'){
     $value = $_GET['inputVal'];
 
     $json_data = '{
-        "subtotal": "$10.75"
+        "subtotal": "$11",
+        "total": "$9999",
+        "taxes": "300$"
     }';
 
 }
