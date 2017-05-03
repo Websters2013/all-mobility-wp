@@ -13,4 +13,5 @@ function woocommerce_support() {
 
 require_once( TEMPLATEINC . '/template.php' );
 require_once( TEMPLATEINC . '/actions.php' );
+require_once( TEMPLATEINC . '/ajaxes.php' );
 require_once( TEMPLATEINC . '/often_parts.php' );

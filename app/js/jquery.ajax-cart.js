@@ -249,6 +249,7 @@
                         action: 'cart_quantity_changes',
                         id: elem.attr('data-product-id'),
                         key: elem.attr('data-product-key'),
+                        variation: elem.attr('data-variation-id'),
                         countProduct: elem.find('.count-product__input').val(),
                         flag: 'changeCount'
                     },

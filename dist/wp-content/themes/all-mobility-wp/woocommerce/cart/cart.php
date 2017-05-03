@@ -43,10 +43,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$thumb_url = wp_get_attachment_image_src($thumb_id,'full')[0];
 				$productTitle = $_product->get_title();
 				$link = get_permalink($product_id);
+
+				$_product_var = new WC_Product_Variation(138);
+
+
+				if( !$cart_item['variation_id'] ){
+					$variation_id = 0;
+				} else {
+					$variation_id = $cart_item['variation_id'];
+				}
+
 				?>
 
 				<!-- my-cart__product -->
-				<div class="my-cart__product" data-product-id="<?= $product_id ?>" data-product-key="<?= $cart_item_key ?>">
+				<div class="my-cart__product"  data-variation-id="<?= $variation_id ?>"  data-product-id="<?= $product_id ?>" data-product-key="<?= $cart_item_key ?>">
 					<div>
 
 						<!-- my-cart__product -->
@@ -195,38 +205,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<!-- advantages -->
 					<div class="advantages advantages_3">
 
-						<ul class="advantages__list">
-							<li>
-                                               <span>
-                                                    <img src="img/money-back.svg" width="32" height="32" alt="">
-                                                </span>
-								30-days Money Back
-								Guarantee</li>
-							<li>
-                                                <span>
-                                                    <img src="img/safe-secure.svg" width="46" height="46" alt="">
-                                                </span>
-								Safe & Secure
-								Online Payments</li>
-							<li>
-                                                 <span>
-                                                    <img src="img/free-shipping.svg" width="38" height="30" alt="">
-                                                </span>
-								Free Shipping
-								over $50</li>
-							<li>
-                                                <span>
-                                                     <img src="img/expert-support.svg" width="30" height="35" alt="">
-                                                </span>
-								Expert Support
-								at Your Service</li>
-							<li>
-                                                <span>
-                                                    <img src="img/local-store.svg" width="23" height="36" alt="">
-                                                </span>
-								Local Stores
-								Near You</li>
-						</ul>
+						<?php get_template_part('content/content','advantages') ?>
 
 					</div>
 					<!-- /advantages -->
