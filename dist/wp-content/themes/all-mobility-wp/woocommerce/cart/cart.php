@@ -80,7 +80,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<!-- count-product -->
 								<div class="count-product">
 									<a class="count-product__btn count-product_del" href="#"><span>-</span></a>
-									<input type="number" class="count-product__input site__input" min="1" value="1">
+									<input type="number" class="count-product__input site__input" value="<?= $cart_item['quantity'] ?>" min="1" value="1">
 									<a class="count-product__btn count-product_add" href="#"><span>+</span></a>
 								</div>
 								<!-- /count-product -->
