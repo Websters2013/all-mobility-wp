@@ -24,16 +24,21 @@ wc_print_notices();
 
 ?>
 
-<p class="cart-empty">
-	<?php _e( 'Your cart is currently empty.', 'woocommerce' ) ?>
-</p>
-
 <?php do_action( 'woocommerce_cart_is_empty' ); ?>
 
-<?php if ( wc_get_page_id( 'shop' ) > 0 ) : ?>
-	<p class="return-to-shop">
-		<a class="button wc-backward" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
-			<?php _e( 'Return to shop', 'woocommerce' ) ?>
-		</a>
-	</p>
-<?php endif; ?>
+<!-- my-cart__layout -->
+<div class="my-cart__layout">
+	
+	<!-- my-cart__empty -->
+	<div class="my-cart__empty">
+		<div>
+
+			<h2 class="site__title site__title_3">Your cart is currently empty.</h2>
+			<a class="btn btn_3" href="#">Return To Shop</a>
+
+		</div>
+	</div>
+	<!-- /my-cart__empty -->
+
+</div>
+<!-- /my-cart__layout -->
