@@ -325,7 +325,7 @@ if( $cat_obj->parent != 0 ){
 
             <h2 class="site__title site__title_2"><?= $title ?></h2>
 
-            <p>"<?= $description_shop ?>"</p>
+            <?= $description_shop ?>
 
             <?php endif; ?>
 

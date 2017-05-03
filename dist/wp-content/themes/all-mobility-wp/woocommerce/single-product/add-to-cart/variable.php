@@ -57,11 +57,22 @@ $upselsIDs = $product->get_upsell_ids(); ?>
 		<p class="stock out-of-stock"><?php _e( 'This product is currently out of stock and unavailable.', 'woocommerce' ); ?></p>
 	<?php else : ?>
 		<div class="variations" cellspacing="0">
-				<?php foreach ( $attributes as $attribute_name => $options ) : ?>
-				
+				<?php foreach ( $attributes as $attribute_name => $options ) :
+
+					$attributeTextname = str_replace( 'pa_' , '' ,$attribute_name);
+					 $attributeTextname = ucfirst($attributeTextname);
+					?>
+
 							<?php
 								$selected = isset( $_REQUEST[ 'attribute_' . sanitize_title( $attribute_name ) ] ) ? wc_clean( stripslashes( urldecode( $_REQUEST[ 'attribute_' . sanitize_title( $attribute_name ) ] ) ) ) : $product->get_variation_default_attribute( $attribute_name );
-								wc_dropdown_variation_attribute_options( array( 'options' => $options, 'attribute' => $attribute_name, 'product' => $product, 'selected' => $selected ) );
+								wc_dropdown_variation_attribute_options(
+									array( 'options' => $options,
+										'attribute' => $attribute_name,
+										'product' => $product,
+										'selected' => $selected,
+										'show_option_none' => $attributeTextname
+									)
+								);
 								echo end( $attribute_keys ) === $attribute_name ? apply_filters( 'woocommerce_reset_variations_link', '<a class="reset_variations" href="#">' . esc_html__( 'Clear', 'woocommerce' ) . '</a>' ) : '';
 							?>
 

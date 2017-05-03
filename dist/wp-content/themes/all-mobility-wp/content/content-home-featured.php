@@ -4,7 +4,7 @@
 
         foreach ( $product_ids as $key => $id ) {
 
-            if( $key%3 === 0 && $key !== 0 ){ break; }
+            if( $key%4 === 0 && $key !== 0 ){ break; }
 
             get_featured_product($id);
         }

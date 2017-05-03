@@ -84,9 +84,9 @@
                     }
 
                     if( $salePrice ){
-                        $flagIsSale = "true";
+                        $flagIsSale = true;
                     } else {
-                        $flagIsSale = "false";
+                        $flagIsSale = false;
                     }
 
 
@@ -156,8 +156,8 @@
                             <h2 class="featured-product__title"><?= $product->get_name() ?></h2>
 
                             <div class="featured-product__pic" style="background-image: url(<?= $thumb_url ?>)">
-                                <?php if($flagIsSale): ?>
-                                <span class="featured-product__remark"><span>ON SALE</span></span>
+                                <?php if( $flagIsSale ): ?>
+                                <span class="featured-product__remark visible"><span>ON SALE</span></span>
                                 <?php endif; ?>
                             </div>
 
@@ -187,7 +187,8 @@
                     </div>
 
                 </div>
-                <?php endif; ?>
+                <?php
+                endif; ?>
             </li>
 
       <?php } ?>

@@ -4,7 +4,14 @@
  */
 get_header(); ?>
 
-<div class="site__content">
+<!-- breadcrumbs -->
+<nav class="breadcrumbs">
+    <a href="#">Home</a>
+    <span>FAQ</span>
+</nav>
+<!-- /breadcrumbs -->
+
+<div class="site__content site__content_page site__white-back">
     <?php echo do_shortcode('[woocommerce_my_account]') ?>
 </div>
 

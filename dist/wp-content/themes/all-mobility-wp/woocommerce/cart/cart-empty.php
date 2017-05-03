@@ -24,11 +24,9 @@ wc_print_notices();
 
 ?>
 
-<?php do_action( 'woocommerce_cart_is_empty' ); ?>
-
 <!-- my-cart__layout -->
 <div class="my-cart__layout">
-	
+
 	<!-- my-cart__empty -->
 	<div class="my-cart__empty">
 		<div>
@@ -42,3 +40,4 @@ wc_print_notices();
 
 </div>
 <!-- /my-cart__layout -->
+

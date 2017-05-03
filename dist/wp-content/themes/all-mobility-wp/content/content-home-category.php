@@ -79,7 +79,7 @@ if(!empty($product_terms)): ?>
             $previewImage = $image;
         }
         
-        $fromPrice = '$'.number_format($fromPrice, 2, ',', ' ');  ?>
+        $fromPrice = '$'.number_format($fromPrice, 2, '.', ' ');  ?>
 
         <div>
 
