@@ -117,12 +117,28 @@ let paths = {
             contains: [
                 'app/js/jquery.main.js',
                 'app/js/jquery.popup.js',
+                'app/js/jquery.search.js'
+            ]
+        },
+        {
+            dist: 'search-results.min.js',
+            contains: [
+                'app/js/jquery.main.js',
+                'app/js/jquery.popup.js',
+                'app/js/jquery.search.js'
+            ]
+        },
+        {
+            dist: 'confirmation.min.js',
+            contains: [
+                'app/js/jquery.main.js',
+                'app/js/jquery.popup.js',
                 'app/js/jquery.search.js',
                 'app/js/jquery.not-found.js'
             ]
         },
         {
-            dist: 'search-results.min.js',
+            dist: 'my-account.min.js',
             contains: [
                 'app/js/jquery.main.js',
                 'app/js/jquery.popup.js',

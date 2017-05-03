@@ -1,0 +1,49 @@
+.confirmation {
+  max-width: 560px;
+  padding: 5px 15px 45px;
+  margin: 0 auto;
+  text-align: center;
+  @include main-font5();
+  font-size: 16px;
+  line-height: 22px;
+  color: rgba(78, 78, 78, 0.81);
+
+  p {
+
+    a {
+      color: #F47920;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+    }
+
+  }
+
+  svg {
+    margin: 0 0 20px;
+  }
+
+}
+.confirmation__info {
+  margin: 0 0 37px;
+}
+
+@media (min-width: $desktop) {
+
+  .confirmation {
+    padding: 56px 15px;
+
+    svg {
+      margin: 0 0 15px;
+    }
+
+  }
+  .confirmation__info {
+    margin: 0 0 42px;
+  }
+
+}
+
+
