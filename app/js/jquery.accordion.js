@@ -14,7 +14,7 @@
 
         //private properties
         var _obj = obj,
-            _btn = _obj.find('dt');
+            _btn = _obj.find('.accordion__title');
 
         //private methods
 

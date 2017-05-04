@@ -118,7 +118,6 @@
     border-radius: 2px;
     font-size: 14px;
     line-height: 14px;
-
   }
   &_7 {
     height: 40px;
@@ -247,7 +246,20 @@
     font-size: 22px;
     line-height: 22px;
   }
+  &_17 {
+    height: 48px;
+    background: #F47920;
+    font-size: 16px;
+    line-height: 16px;
 
+    &:hover {
+      background: #ea5438;
+    }
+
+    &:active {
+      background: #ea5438;
+    }
+  }
 }
 
 @media (min-width: $desktop) {
@@ -300,6 +312,9 @@
     &_15 {
       height: 40px;
       min-width: 148px;
+    }
+    &_15 {
+      height: 40px;
     }
   }
 
