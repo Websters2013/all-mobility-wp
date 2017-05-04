@@ -66,6 +66,7 @@ function add_js()
     wp_register_script('my-account_js',get_template_directory_uri().'/assets/js/my-account.min.js');
     wp_register_script('my-cart-single_js',get_template_directory_uri().'/assets/js/my-cart.min.js');
     wp_register_script('search-results_js',get_template_directory_uri().'/assets/js/search-results.min.js');
+    wp_register_script('faq_js',get_template_directory_uri().'/assets/js/faq.min.js');
     wp_register_script('google_map','https://maps.googleapis.com/maps/api/js?key=AIzaSyANuqKy3oM3UtHBZe9xle8dEm3_1H5GMh8');
 
     wp_enqueue_script('jquery');
@@ -77,6 +78,11 @@ function add_js()
         wp_enqueue_style('swiper_css',get_template_directory_uri().'/assets/css/swiper.min.css');
         wp_enqueue_script('swiper_js');
         wp_enqueue_script('index_js');
+    }
+
+    if( is_page_template('page-faq.php') ){
+        wp_enqueue_style('faq_css', get_template_directory_uri().'/assets/css/faq.css');
+        wp_enqueue_script('faq_js');
     }
 
     if( is_page_template('page-locations.php') ){

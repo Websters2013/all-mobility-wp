@@ -13,41 +13,13 @@
 
         <!-- why-us -->
         <div class="why-us why-us_2">
-            <h2 class="why-us__title-main">Choose between 15,000 products in our online store</h2>
+            <h2 class="why-us__title-main"><?php the_field('title_in_why_us_block',432) ?></h2>
             <div>
 
                 <h2 class="why-us__title">Why
                     Us?</h2>
 
-                <!-- why-us__advantages -->
-                <ul class="why-us__advantages">
-                    <li>
-                        <img src="img/money-back-white.svg" width="32" height="32" alt="">
-                        30-days Money
-                        Back Guarantee
-                    </li>
-                    <li>
-                        <img src="img/free-shipping-white.svg" width="35" height="35" alt="">
-                        Free Shipping
-                        over $50
-                    </li>
-                    <li>
-                        <img src="img/safe-secure-white.svg" width="44" height="44" alt="">
-                        Safe & Secure
-                        Online Payments
-                    </li>
-                    <li>
-                        <img src="img/expert-support-white.svg" width="36" height="36" alt="">
-                        Expert Support
-                        at Your Service
-                    </li>
-                    <li>
-                        <img src="img/local-store-white.svg" width="24" height="37" alt="">
-                        Local Stores
-                        Near You
-                    </li>
-                </ul>
-                <!-- /why-us__advantages -->
+                <?php get_template_part('content/content','advantages-why-us') ?>
 
             </div>
             <div class="why-us__resolve">
