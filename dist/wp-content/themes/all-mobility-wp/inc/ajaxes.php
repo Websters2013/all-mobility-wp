@@ -72,7 +72,6 @@ function remove_cart_item(){
 
     $taxes = json_encode( WC()->cart->get_tax_totals() );
 
-
     $json_data = '{
         "subtotal": '.$subTotal.',
         "discount": '.$discount.',
@@ -90,3 +89,64 @@ function remove_cart_item(){
 add_action('wp_ajax_remove_cart_item','remove_cart_item');
 
 add_action('wp_ajax_nopriv_remove_cart_item', 'remove_cart_item');
+
+function apply_coupon_to_order(){
+
+    $coupon_name = $_GET['inputVal'];
+    $discount = '';
+    $status = 0;
+    if( count(WC()->cart->applied_coupons)==0 ){
+
+        if( WC()->cart->add_discount($coupon_name)){
+            $discount = json_encode(WC()->cart->get_total_discount());
+            $status = 1;
+
+        }
+
+    } else {
+        $status = 0;
+        $discount = json_encode(WC()->cart->get_total_discount());
+    }
+
+    $cartTotal  = json_encode( WC()->cart->get_cart_total() );
+    $subTotal = json_encode(WC()->cart->get_cart_subtotal());
+    $taxes = json_encode( WC()->cart->get_tax_totals() );
+
+    $json_data = '{
+        "discount": '.$discount.',
+        "subtotal": '.$subTotal.',
+        "status": "'.$status.'",
+        "total": '.$cartTotal.'
+    }';
+
+    echo $json_data;
+    exit;
+
+}
+
+add_action('wp_ajax_apply_coupon_to_order','apply_coupon_to_order');
+
+add_action('wp_ajax_nopriv_apply_coupon_to_order', 'apply_coupon_to_order');
+
+function remove_coupon_to_order(){
+
+    $coupon_name = $_GET['inputVal'];
+
+    WC()->cart->remove_coupon($coupon_name);
+
+    $sub_cart = json_encode( WC()->cart->get_cart_subtotal() );
+    $taxes = json_encode( WC()->cart->get_tax_totals() );
+
+
+    $json_data = '{
+        "subtotal": '.$sub_cart.',
+        "total": '.$sub_cart.'
+    }';
+
+    echo $json_data;
+    exit;
+}
+
+add_action('wp_ajax_remove_coupon_to_order','remove_coupon_to_order');
+
+add_action('wp_ajax_nopriv_remove_coupon_to_order', 'remove_coupon_to_order');

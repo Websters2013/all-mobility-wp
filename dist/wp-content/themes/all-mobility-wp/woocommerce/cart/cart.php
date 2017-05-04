@@ -45,6 +45,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$link = get_permalink($product_id);
 				$quantity = $cart_item['quantity'];
 
+				$crossSells[] = $product_id;
+
 				if( !$cart_item['variation_id'] ){
 					$variation_id = 0;
 					$subtotal_product = WC()->cart->get_product_subtotal( $_product , $quantity );
@@ -134,18 +136,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<!-- my-cart__promo-code -->
 				<div class="my-cart__promo-code">
 
+					<?php
+					$coupons = WC()->cart->get_applied_coupons();
+					$discount = WC()->cart->get_coupon_discount_amount($coupons[0]);
+
+					$trueCoupon = count(WC()->cart->applied_coupons);
+
+					if($trueCoupon > 0){
+
+						$discount = WC()->cart->get_total_discount();
+
+						$my_cart__discount = 'visible';
+						$my_cart__define = 'hidden';
+						$my_cart__applied = 'visible';
+					} else {
+						$my_cart__discount = '';
+						$my_cart__define = '';
+						$my_cart__applied = '';
+					}
+
+					?>
+
+
 					<!-- my-cart__define -->
-					<div class="my-cart__define">
+					<div class="my-cart__define <?= $my_cart__define ?>">
 						<label for="promo-code">Have a promo code?</label>
 						<div>
-							<input type="text" class="site__input" name="promo-code" id="promo-code">
+							<input type="text" class="site__input" name="promo-code" id="promo-code" value="<?= $coupons[0] ?>">
 							<button type="button" class="btn btn_7"><span>APPLY</span></button>
 						</div>
 					</div>
 					<!-- /my-cart__define -->
 
 					<!-- my-cart__applied -->
-					<div class="my-cart__applied">
+					<div class="my-cart__applied <?= $my_cart__applied ?>">
 						Promo code applied
 						<a href="#">cancel</a>
 					</div>
@@ -166,6 +190,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				<!-- my-cart__result -->
 				<div class="my-cart__result">
+
+					<?php if( $my_cart__discount ): ?>
+
+						<dl class="my-cart__discount <?= $my_cart__discount ?>">
+							<dt>Discount</dt>
+							<dd><?= $discount ?></dd>
+						</dl>
+
+					<?php endif; ?>
 
 					<dl class="my-cart__subtotal">
 						<dt>Subtotal</dt>
@@ -228,13 +261,35 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<!-- /my-cart__end -->
 
 		</form>
-
-
-
-
-
-
 		
+		<?php
+
+
+
+		foreach ( $crossSells as $crossSell ){
+
+			$_productCross = wc_get_product($crossSell);
+
+			$crossSelss = $_productCross->get_cross_sell_ids();
+
+			foreach ( $crossSelss as $id ){
+
+				$crossSellCurent = wc_get_product($id);
+
+				if($crossSellCurent->get_parent_id() == 0 )
+					$allCrossSells[] = $id;
+			}
+
+		}
+
+		if( $allCrossSells ){
+			$crossSells = array_unique($allCrossSells);
+		} else {
+			$crossSells = null;
+		}
+
+		if( !empty($crossSells) ) { ?>
+
 		<!-- featured-products -->
 		<div class="featured-products featured-products_2">
 
@@ -242,17 +297,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
-					<div class="swiper-slide">
+
+					<?php foreach ( $crossSells as $product ):
+
+						$_product_cross = wc_get_product($product);
+
+						if( !$_product_cross->get_parent_id() ){
+							$_product_cross_id = $_product_cross->get_id();
+						} else {
+							$_product_cross_id = $_product_cross->get_parent_id();
+						}
+
+						$thumb_id = get_post_thumbnail_id($_product_cross_id);
+						$thumb_url = wp_get_attachment_image_src($thumb_id,'full')[0];
+						$productTitle = $_product_cross->get_title();
+						$link = get_permalink($product); ?>
+
+						<div class="swiper-slide">
 
 						<!-- featured-product -->
-						<a href="#" class="featured-product">
-							<h2 class="featured-product__title">Product Name </h2>
+						<a href="<?= $link ?>" class="featured-product">
+							<h2 class="featured-product__title"><?= $productTitle ?></h2>
 
-							<div class="featured-product__pic" style="background-image: url(<?= DIRECT ?>pic/lift-chairs.png)">
+							<div class="featured-product__pic" style="background-image: url(<?= $thumb_url ?>)">
 							</div>
 
 							<div class="featured-product__footer">
-								<span class="featured-product__price"><del>$1,800.00</del> $1,350.00</span>
+								<span class="featured-product__price"><?= $_product_cross->get_price_html(); ?>
 								<span class="btn btn_6">SEE MORE</span>
 							</div>
 
@@ -260,96 +331,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<!-- /featured-product -->
 
 					</div>
-					<div class="swiper-slide">
 
-						<!-- featured-product -->
-						<a href="#" class="featured-product">
-							<h2 class="featured-product__title">Product Name </h2>
+					<?php endforeach; ?>
 
-							<div class="featured-product__pic" style="background-image: url(<?= DIRECT ?>pic/lift-chairs.png)">
-							</div>
-
-							<div class="featured-product__footer">
-								<span class="featured-product__price"><del>$1,800.00</del> $1,350.00</span>
-								<span class="btn btn_6">SEE MORE</span>
-							</div>
-
-						</a>
-						<!-- /featured-product -->
-
-					</div>
-					<div class="swiper-slide">
-
-						<!-- featured-product -->
-						<a href="#" class="featured-product">
-							<h2 class="featured-product__title">Product Name </h2>
-
-							<div class="featured-product__pic" style="background-image: url(<?= DIRECT ?>pic/lift-chairs.png)">
-							</div>
-
-							<div class="featured-product__footer">
-								<span class="featured-product__price"><del>$1,800.00</del> $1,350.00</span>
-								<span class="btn btn_6">SEE MORE</span>
-							</div>
-
-						</a>
-						<!-- /featured-product -->
-
-					</div>
-					<div class="swiper-slide">
-
-						<!-- featured-product -->
-						<a href="#" class="featured-product">
-							<h2 class="featured-product__title">Product Name </h2>
-
-							<div class="featured-product__pic" style="background-image: url(<?= DIRECT ?>pic/lift-chairs.png)">
-							</div>
-
-							<div class="featured-product__footer">
-								<span class="featured-product__price"><del>$1,800.00</del> $1,350.00</span>
-								<span class="btn btn_6">SEE MORE</span>
-							</div>
-
-						</a>
-						<!-- /featured-product -->
-
-					</div>
-					<div class="swiper-slide">
-
-						<!-- featured-product -->
-						<a href="#" class="featured-product">
-							<h2 class="featured-product__title">Product Name </h2>
-
-							<div class="featured-product__pic" style="background-image: url(<?= DIRECT ?>pic/lift-chairs.png)">
-							</div>
-
-							<div class="featured-product__footer">
-								<span class="featured-product__price"><del>$1,800.00</del> $1,350.00</span>
-								<span class="btn btn_6">SEE MORE</span>
-							</div>
-
-						</a>
-						<!-- /featured-product -->
-
-					</div>
-					<div class="swiper-slide">
-
-						<!-- featured-product -->
-						<a href="#" class="featured-product">
-							<h2 class="featured-product__title">Product Name </h2>
-
-							<div class="featured-product__pic" style="background-image: url(<?= DIRECT ?>pic/lift-chairs.png)">
-							</div>
-
-							<div class="featured-product__footer">
-								<span class="featured-product__price"><del>$1,800.00</del> $1,350.00</span>
-								<span class="btn btn_6">SEE MORE</span>
-							</div>
-
-						</a>
-						<!-- /featured-product -->
-
-					</div>
 				</div>
 
 				<div class="featured-products__controls">
@@ -362,6 +346,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		</div>
 		<!-- /featured-products -->
+
+		<?php } ?>
 
 	</div>
 	<!-- /my-cart__products -->
