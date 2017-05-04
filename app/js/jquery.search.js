@@ -51,7 +51,7 @@
                                     var valueInput = $(this).val();
                                     var count = 0;
 
-                                    if( valueInput.length > 0 ) {
+                                    if( valueInput.length >= _obj.data('symbols') ) {
 
                                         _ajaxRequest( $(this), valueInput.length);
 
@@ -355,7 +355,9 @@
                     type: "get",
                     success: function ( msg ) {
 
-                        _addData( msg );
+                        if( Object.keys(msg).length != 0 ) {
+                            _addData( msg );
+                        }
 
                     },
                     error: function (XMLHttpRequest) {
