@@ -216,7 +216,7 @@
                             _cart.append('<span class="cart__price"></span>');
                             _cart.find('.cart__price').html(m.cartCountPrice);
                             _taxesPrice.find('dd').html( m.taxes );
-                            //_discount.find('dd').html( m.discount );
+                            _discount.find('dd').html( m.discount );
                             _cart.addClass('cart_fill');
 
                         }
@@ -258,6 +258,7 @@
                         _subTotalPrice.find('dd').html( m.subtotal );
                         _totalPrice.find('dd').html( m.total );
                         _cart.find('.cart__price').html(m.cartCountPrice);
+                        _discount.find('dd').html( m.discount );
                         _taxesPrice.find('dd').html( m.taxes );
 
                         setTimeout( function() {
@@ -300,7 +301,7 @@
                                 _totalPrice.find('dd').html( m.total );
                                 _subTotalPrice.find('dd').html( m.subtotal );
                                 _taxesPrice.find('dd').html( m.taxes );
-                                //_discount.find('dd').html( m.discount );
+                                _discount.find('dd').html( m.discount );
                                 _cart.find('.cart__price').html(m.total);
 
                             } else {
@@ -346,6 +347,7 @@
                             _cart.find('.cart__price').html(m.total);
                             _subTotalPrice.find('dd').html( m.subtotal );
                             _taxesPrice.find('dd').html( m.taxes );
+                            _discount.find('dd').html( m.discount );
                             _discount.removeClass('visible');
                             _define.removeClass('hidden');
                             _applied.removeClass('visible');

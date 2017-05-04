@@ -21,7 +21,8 @@ if($flag == 'remove'){
         "total": "600$",
         "subtotal":"20$",
         "productTotal":"20$",
-         "taxes": "200$",
+        "taxes": "200$",
+        "discount":"223230$",
         "cartCountPrice": "<span class=“woocommerce-Price-amount amount”><span class=“woocommerce-Price-currencySymbol”>&#36;</span>6.750,00</span>"
     }';
 
@@ -42,7 +43,8 @@ if($flag == 'remove'){
         "subtotal": "$8888",
         "total": "$9999",
         "taxes": "200$",
-        "status": 1
+        "status": 1,
+        "discount":"223230$"
     }';
 
 } else if($flag == 'couponRemove'){
@@ -52,7 +54,8 @@ if($flag == 'remove'){
     $json_data = '{
         "subtotal": "$11",
         "total": "$9999",
-        "taxes": "300$"
+        "taxes": "300$",
+        "discount":"223230$"
     }';
 
 }
