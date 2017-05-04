@@ -35,61 +35,6 @@ if ( $post_id > 0 ) {
 
 ?>
 
-<!-- add-review -->
-<div class="add-review">
-
-	<h2 class="site__title site__title_2">Add Your Review</h2>
-
-	<!-- add-review__form -->
-	<div class="add-review__form">
-		<form action="/wp-comments-post.php" method="post" id="commentform" class="comment-form">
-			<?php if( is_user_logged_in()): ?>
-
-			<?php $user = get_user_by( 'id', get_current_user_id() ); ?>
-
-			<p>You are adding review as <?= $user->user_login ?></p>
-
-			<?php endif; ?>
-			<div class="add-review__row">
-				<div><label class="site__label" for="name">Rate Product <span>*</span></label></div>
-				<div>
-
-					<div class="add-review__rate">
-						<input type="hidden" name="rating" value="0">
-						<div id="#el"></div>
-					</div>
-
-				</div>
-			</div>
-
-			<?php if( !is_user_logged_in()): ?>
-
-			<div class="add-review__row">
-				<div><label class="site__label" for="author">Your Name <span>*</span></label></div>
-				<div><input class="site__input" type="text" required name="author" id="author"></div>
-			</div>
-			<div class="add-review__row">
-				<div><label class="site__label" for="email">Your E-mail <span>*</span></label></div>
-				<div><input class="site__input" type="email" required name="email" id="email"></div>
-			</div>
-
-			<?php endif; ?>
-
-			<div class="add-review__row">
-				<div><label class="site__label" for="comment">Your Review <span>*</span></label></div>
-				<div><textarea class="site__input" name="comment" id="comment" cols="30" rows="10"></textarea></div>
-			</div>
-			<div class="add-review__send">
-				<button class="btn btn_11" id="submit" type="submit"><span>submit</span></button>
-				<input type="hidden" name="comment_post_ID" value="<?= $where ?>" id="comment_post_ID">
-				<input type="hidden" name="comment_parent" id="comment_parent" value="0">
-			</div>
-		</form>
-	</div>
-	<!-- /add-review__form -->
-
-</div>
-<!-- /add-review -->
 
 <!-- reviews -->
 <div class="reviews">
@@ -160,3 +105,59 @@ if ( $post_id > 0 ) {
 	</div>
 
 </div>
+
+<!-- add-review -->
+<div class="add-review">
+
+	<h2 class="site__title site__title_2">Add Your Review</h2>
+
+	<!-- add-review__form -->
+	<div class="add-review__form">
+		<form action="/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+			<?php if( is_user_logged_in()): ?>
+
+				<?php $user = get_user_by( 'id', get_current_user_id() ); ?>
+
+				<p>You are adding review as <?= $user->user_login ?></p>
+
+			<?php endif; ?>
+			<div class="add-review__row">
+				<div><label class="site__label" for="name">Rate Product <span>*</span></label></div>
+				<div>
+
+					<div class="add-review__rate">
+						<input type="hidden" name="rating" value="0">
+						<div id="#el"></div>
+					</div>
+
+				</div>
+			</div>
+
+			<?php if( !is_user_logged_in()): ?>
+
+				<div class="add-review__row">
+					<div><label class="site__label" for="author">Your Name <span>*</span></label></div>
+					<div><input class="site__input" type="text" required name="author" id="author"></div>
+				</div>
+				<div class="add-review__row">
+					<div><label class="site__label" for="email">Your E-mail <span>*</span></label></div>
+					<div><input class="site__input" type="email" required name="email" id="email"></div>
+				</div>
+
+			<?php endif; ?>
+
+			<div class="add-review__row">
+				<div><label class="site__label" for="comment">Your Review <span>*</span></label></div>
+				<div><textarea class="site__input" name="comment" id="comment" cols="30" rows="10"></textarea></div>
+			</div>
+			<div class="add-review__send">
+				<button class="btn btn_11" id="submit" type="submit"><span>submit</span></button>
+				<input type="hidden" name="comment_post_ID" value="<?= $where ?>" id="comment_post_ID">
+				<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+			</div>
+		</form>
+	</div>
+	<!-- /add-review__form -->
+
+</div>
+<!-- /add-review -->

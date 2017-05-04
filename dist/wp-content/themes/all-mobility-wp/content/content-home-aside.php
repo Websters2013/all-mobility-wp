@@ -42,7 +42,7 @@
         <h2 class="watch-video__title">video</h2>
         <!-- /watch-video__title -->
 
-        <a href="#" class="btn btn_3">watch video</a>
+        <a  target="_blank" href="<?= get_field('link_on_video') ?>" class="btn btn_3">watch video</a>
 
     </div>
     <!-- /watch-video -->

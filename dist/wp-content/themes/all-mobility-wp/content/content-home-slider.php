@@ -9,9 +9,17 @@
             <?php   while ( have_rows('slider_constructor') ) : the_row();
                 $image = get_sub_field('choose_the_image');
                 $text = get_sub_field('description_text');
-                $link = get_sub_field('link_for_current_slide'); ?>
 
-                <a href="<?= $link ?>" class="swiper-slide" style="background-image: url(<?= $image ?>)">
+                if( get_sub_field('check_if_link_go_to_popup')[0] == 'show') {
+                   $link = '#';
+                    $class_popup = ' popup__open';
+                } else {
+                    $link = get_sub_field('link_for_current_slide');
+                    $class_popup = '';
+                }
+                ?>
+
+                <a href="<?= $link ?>"  data-popup="get" class="swiper-slide<?= $class_popup ?>" style="background-image: url(<?= $image ?>)">
 
                     <!-- main-slider__content -->
                     <div class="main-slider__content">

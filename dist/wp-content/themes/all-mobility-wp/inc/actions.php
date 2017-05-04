@@ -65,6 +65,7 @@ function add_js()
     wp_register_script('locations_js',get_template_directory_uri().'/assets/js/locations.min.js');
     wp_register_script('my-account_js',get_template_directory_uri().'/assets/js/my-account.min.js');
     wp_register_script('my-cart-single_js',get_template_directory_uri().'/assets/js/my-cart.min.js');
+    wp_register_script('search-results_js',get_template_directory_uri().'/assets/js/search-results.min.js');
     wp_register_script('google_map','https://maps.googleapis.com/maps/api/js?key=AIzaSyANuqKy3oM3UtHBZe9xle8dEm3_1H5GMh8');
 
     wp_enqueue_script('jquery');
@@ -83,6 +84,12 @@ function add_js()
         wp_enqueue_style('perfect_scrollbar',get_template_directory_uri().'/assets/css/perfect-scrollbar.css');
         wp_enqueue_script('perfect_js');
         wp_enqueue_script('locations_js');
+
+    }
+
+    if( is_page_template('page-search.php') ){
+        wp_enqueue_style('search-results', get_template_directory_uri().'/assets/css/search-results-page.css');
+        wp_enqueue_script('search-results_js');
 
     }
 
@@ -682,14 +689,14 @@ add_action('wp_ajax_main_search','main_search');
 
 add_action('wp_ajax_nopriv_main_search', 'main_search');
 
-function getTermsForSearch( $query ){
+function getTermsForSearch( $query,$number = 12 ){
     
     $terms = get_terms(
         array(
             'taxonomy' => 'product_cat',
             'hide_empty' => false,
             'search' => $query,
-            'number' => 12,
+            'number' => $number,
             'fields' => 'id=>parent'
         )
     );
@@ -698,13 +705,13 @@ function getTermsForSearch( $query ){
     
 }
 
-function getProductsSearch( $query ){
+function getProductsSearch( $query, $count = 6 ){
 
     $products = get_posts(
 
         array(
             'post_type' => 'product',
-            'posts_per_page' => 6,
+            'posts_per_page' => $count,
             's' => $query,
             'post_status' => 'publish',
             'fields' => 'ids',
