@@ -33,7 +33,8 @@ function cart_quantity_changes(){
         "subtotal": '.$cartSubtotal.',
         "productTotal": '.$subtotal_product.',
          "taxes": '.$taxes.',
-        "cartCountPrice": '.$cartPrice.'
+        "cartCountPrice": '.$cartPrice.',
+        "discount": '.$discount.'
     }';
 
     echo $json_data;
@@ -41,3 +42,47 @@ function cart_quantity_changes(){
 }
 
 add_action('wp_ajax_cart_quantity_changes','cart_quantity_changes');
+
+add_action('wp_ajax_nopriv_cart_quantity_changes', 'cart_quantity_changes');
+
+function remove_cart_item(){
+
+    $keyProduct = $_GET['id'];
+
+    WC()->cart->remove_cart_item($keyProduct);
+    $cartTotal  = json_encode( WC()->cart->get_cart_total() );
+    $subTotal = json_encode(WC()->cart->get_cart_subtotal());
+    $item = '';
+    if ( WC()->cart->get_cart_contents_count() == 0 ) {
+        $cart_items = 0;
+    } else {
+        $cart_items = WC()->cart->get_cart_contents_count();
+        if($cart_items==1){
+            $item = ' item';
+        } else {
+            $item = ' items';
+        }
+    }
+
+
+    $discount = json_encode(WC()->cart->get_total_discount());
+
+    $taxes = json_encode( WC()->cart->get_tax_totals() );
+
+
+    $json_data = '{
+        "subtotal": '.$subTotal.',
+        "discount": '.$discount.',
+        "cartCountPrice": '.$cartTotal.',
+        "total": '.$cartTotal.',
+        "taxes": '.$taxes.'
+    }';
+
+    echo $json_data;
+    exit;
+
+}
+
+add_action('wp_ajax_remove_cart_item','remove_cart_item');
+
+add_action('wp_ajax_nopriv_remove_cart_item', 'remove_cart_item');
