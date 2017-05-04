@@ -152,6 +152,14 @@ let paths = {
                 'app/js/jquery.popup.js',
                 'app/js/jquery.search.js'
             ]
+        },
+        {
+            dist: 'sign-up.min.js',
+            contains: [
+                'app/js/jquery.main.js',
+                'app/js/jquery.popup.js',
+                'app/js/jquery.search.js'
+            ]
         }
     ],
     vendorScripts: 'app/js/vendors/**/*.js',

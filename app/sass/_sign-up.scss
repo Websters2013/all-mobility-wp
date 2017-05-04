@@ -1,0 +1,194 @@
+.sign-up {
+  position: relative;
+  width: 100%;
+  padding-bottom: 7px;
+  @include main-font5();
+  font-size: 16px;
+  color: rgba(78, 78, 78, 0.8);
+  line-height: 22px;
+  text-align: center;
+
+  &_reset {
+
+    .sign-up__form {
+      padding-top: 25px;
+      max-width: 380px;
+
+      div {
+        padding: 0 17px 0 0;
+
+        .site__label {
+          width: 36.5%;
+          text-align: right;
+        }
+        input[type="submit"].site__input,
+        input[type="text"].site__input,
+        input[type="password"].site__input,
+        input[type="email"].site__input,
+        input[type="tel"].site__input,
+        input[type="phone"].site__input,
+        input[type="number"].site__input {
+          width: 57.3%;
+        }
+
+      }
+      .sign-up__send {
+        padding: 0;
+        padding-top: 26px;
+
+        .btn {
+          min-width: 216px;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+.sign-up__form {
+  padding-top: 29px;
+  max-width: 345px;
+  margin: 0 auto;
+  text-align: center;
+
+  div {
+    @include flexbox();
+    @include justify-content(space-between);
+    @include align-items(center);
+    @include flex-direction();
+    margin: 0 0 20px;
+
+    .site__label {
+      width: 26%;
+      text-align: left;
+      line-height: 17px;
+    }
+    input[type="submit"].site__input,
+    input[type="text"].site__input,
+    input[type="password"].site__input,
+    input[type="email"].site__input,
+    input[type="tel"].site__input,
+    input[type="phone"].site__input,
+    input[type="number"].site__input {
+      width: 64.5%;
+    }
+
+  }
+  .sign-up__send {
+    display: block;
+    margin: 0 0 28px;
+    padding-top: 26px;
+
+    .btn {
+      min-width: 177px;
+    }
+
+  }
+
+}
+.sign-up__log {
+  @include main-font5();
+  font-size: 16px;
+  line-height: 22px;
+  color: rgba(244, 121, 32, 0.8);
+  text-decoration: underline;
+}
+.sign-up__remark {
+  display: block;
+  margin: 36px 0 0;
+  @include main-font4();
+  font-size: 16px;
+  line-height: 16px;
+  color: #4E4E4E;
+
+  span {
+    color: #F47920;
+  }
+
+}
+
+@media (min-width: $desktop) {
+
+  .sign-up {
+    padding-top: 26px;
+    padding-bottom: 35px;
+
+    &_reset {
+
+      .sign-up__form {
+
+        div {
+          padding: 0 58px 0 0;
+
+          .site__label {
+            width: 39.5%;
+          }
+          input[type="submit"].site__input,
+          input[type="text"].site__input,
+          input[type="password"].site__input,
+          input[type="email"].site__input,
+          input[type="tel"].site__input,
+          input[type="phone"].site__input,
+          input[type="number"].site__input {
+            width: 55.3%;
+          }
+
+        }
+        .sign-up__send {
+          padding: 0;
+          padding-top: 46px;
+
+          .btn {
+            min-width: 192px;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+  .sign-up__form {
+    padding-top: 16px;
+    max-width: 303px;
+
+    div {
+      padding: 0 11px 0 0;
+      margin: 0 0 10px;
+
+      .site__label {
+        width: 37%;
+      }
+      input[type="submit"].site__input,
+      input[type="text"].site__input,
+      input[type="password"].site__input,
+      input[type="email"].site__input,
+      input[type="tel"].site__input,
+      input[type="phone"].site__input,
+      input[type="number"].site__input {
+        width: 60.5%;
+      }
+
+    }
+    .sign-up__send {
+      margin: 0 0 50px;
+      padding-top: 34px;
+    }
+
+  }
+  .sign-up__remark {
+    position: absolute;
+    bottom: -37px;
+    left: 7px;
+    margin: 0;
+  }
+
+}
+@media (min-width: $desktop-hd) {
+
+
+
+}
