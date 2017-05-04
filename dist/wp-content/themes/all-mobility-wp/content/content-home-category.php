@@ -27,6 +27,12 @@ $cat_obj = $wp_query->get_queried_object();
 
 $category_ID  = $cat_obj->term_id;
 
+$args = array(
+    'parent'   => $category_ID,
+    'taxonomy' => 'product_cat'
+);
+
+$product_terms = get_terms($args);
 
 
 } elseif( is_singular('wpsl_stores') ){
