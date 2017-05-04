@@ -598,6 +598,9 @@
   &_center {
     text-align: center;
   }
+  &_hidden {
+    display: block;
+  }
 
 }
 .site__title-link {
@@ -1435,6 +1438,9 @@ textarea.site__input {
     }
     &_center {
       text-align: center;
+    }
+    &_hidden {
+      display: none;
     }
 
   }

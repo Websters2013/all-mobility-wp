@@ -1,4 +1,6 @@
 .locations {
+  position: relative;
+  padding: 0 11px;
   @include main-font5();
   font-size: 16px;
   color: rgba(78, 78, 78, 0.81);
@@ -7,26 +9,38 @@
   p {
     margin: 0 0 28px;
   }
+  .site__title {
+    display: none;
+  }
+  .product-categories {
+    display: none;
+  }
 
 }
 .locations__items {
-  margin: 0 0 35px;
+  position: relative;
+  margin: 0 0 25px;
+  padding: 0 0 79px;
 
   >div {
     margin: 0 -29px;
 
     &:first-child {
-      margin: 0 0 30px;
+      margin: 0 0 32px;
     }
 
   }
   .btn {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
     min-width: 274px;
   }
 
 }
 .locations__map {
-  height: 300px;
+  height: 397px;
 }
 .locations__info {
   padding: 20px 0 0;
@@ -63,16 +77,18 @@
   @include main-font5();
 }
 .locations__stores {
-  margin: 0 -20px;
+  margin: 0 -31px;
+  padding-top: 22px;
 
   #wpsl-wrap {
-    padding-bottom: 527px;
+    padding-bottom: 583px;
+    margin-bottom: 6px;
 
     .wpsl-search {
-      margin-bottom: 14px;
+      margin-bottom: 15px;
     }
     #wpsl-result-list {
-      margin-bottom: 55px;
+      margin-bottom: 0;
     }
 
     #wpsl-gmap {
@@ -93,7 +109,11 @@
       .wpsl-info-window {
 
         p {
+          margin: 0;
+
           strong {
+            display: block;
+            margin-bottom: 6px;
             @include main-font1();
             font-size: 22px;
             line-height: 26px;
@@ -106,9 +126,18 @@
           }
         }
         .wpsl-info-actions {
+          display: block;
+          margin: 20px 0!important;
+          overflow: hidden;
 
           a {
             color: #4E4E4E;
+            text-decoration: underline;
+
+            &:hover {
+               text-decoration: none;
+            }
+
           }
 
         }
@@ -117,8 +146,9 @@
 
     }
     #wpsl-stores {
+      position: relative;
       height: auto !important;
-      max-height: 580px;
+      max-height: 627px;
       @include main-font4();
       font-size: 16px;
       line-height: 22px;
@@ -257,6 +287,18 @@
 
   .locations {
     padding: 0 40px 14px;
+
+    .site__title {
+      display: block;
+    }
+    .product-categories {
+      display: block;
+    }
+    &_stores {
+      padding-top: 29px;
+      padding-bottom: 675px;
+    }
+
   }
   .locations__items {
     @include flexbox();
@@ -264,6 +306,7 @@
     @include align-items();
     @include flex-direction();
     margin: 0 0 57px;
+    padding: 0;
 
     >div {
       width: calc( 41.3% + 40px );
@@ -278,6 +321,10 @@
 
     }
     .btn {
+      position: relative;
+      left: auto;
+      right: auto;
+      bottom: auto;
       min-width: 340px;
     }
 
@@ -289,15 +336,14 @@
   .locations__map {
     height: 541px;
   }
-
   .locations__stores {
-    padding-bottom: 662px;
+    padding-top: 0;
+    position: absolute;
+    bottom: 0;
+    left: 31px;
+    right: 31px;
 
     #wpsl-wrap {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
       margin: 0;
       padding-right: 74%;
       padding-bottom: 0;
