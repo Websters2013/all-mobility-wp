@@ -22,7 +22,7 @@ if($flag == 'remove'){
         "subtotal":"20$",
         "productTotal":"20$",
          "taxes": "200$",
-        "cartCountPrice": "20000$"
+        "cartCountPrice": "<span class=“woocommerce-Price-amount amount”><span class=“woocommerce-Price-currencySymbol”>&#36;</span>6.750,00</span>"
     }';
 
 } else if($flag == 'addToCart'){

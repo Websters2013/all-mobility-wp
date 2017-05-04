@@ -63,9 +63,106 @@
   @include main-font5();
 }
 .locations__stores {
+  margin: 0 -20px;
 
+  #wpsl-wrap {
+    padding-bottom: 527px;
+
+    .wpsl-search {
+      margin-bottom: 14px;
+    }
+    #wpsl-result-list {
+      margin-bottom: 55px;
+    }
+
+    #wpsl-gmap {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 527px !important;
+      width: 100%;
+
+      .wpsl-info-window {
+        @include main-font4();
+        font-size: 16px;
+        line-height: 22px;
+        color: #4E4E4E;
+
+      }
+
+    }
+    #wpsl-stores {
+      height: auto !important;
+      max-height: 580px;
+      @include main-font4();
+      font-size: 16px;
+      line-height: 22px;
+      color: #4E4E4E;
+
+      ul {
+
+        li {
+          border-bottom: none;
+          padding: 19px 42px 17px 42px;
+
+          .wpsl-store-location {
+
+            >p {
+              margin: 0;
+
+              &:nth-child(3) {
+                display: none;
+              }
+            }
+
+          }
+          strong {
+            display: inline-block;
+            @include main-font1();
+            font-size: 16px;
+
+            a {
+              display: block;
+              margin: 0 0 7px;
+              font-size: 22px;
+              line-height: 22px;
+              color: #F47920;
+            }
+
+          }
+          .wpsl-direction-wrap {
+            display: none;
+          }
+          .wpsl-more-info-listings {
+            display: none;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
   #wpsl-search-wrap {
     position: relative;
+
+    div {
+      margin: 0;
+    }
+
+    form {
+      @include flexbox();
+      @include justify-content(center);
+      @include align-items(flex-start);
+      @include flex-direction();
+
+      div {
+        width: 38%;
+        margin: 0 8px;
+      }
+    }
 
     .wpsl-select-wrap {
       display: none;
@@ -76,6 +173,46 @@
         display: none;
       }
 
+      input {
+        display: inline-block;
+        width: 100% !important;
+        height: 48px;
+        background: transparent;
+        border: 2px solid #D1D1D1;
+        padding: 8px 5px;
+        font-size: 16px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: #000;
+        @include main-font5();
+        font-weight: 400;
+        font-style: normal;
+        -webkit-transition: border 0.3s ease;
+        transition: border 0.3s ease;
+      }
+
+    }
+    #wpsl-search-btn {
+      @include inline-flex();
+      @include justify-content(center);
+      @include align-items(center);
+      @include flex-direction();
+      background: #0094C1;
+      border-radius: 4px;
+      padding: 0 10px;
+      width: 100%;
+      height: 48px;
+      margin: 0;
+      @include main-font1();
+      font-size: 16px;
+      line-height: 16px;
+      color: #FFFFFF;
+      letter-spacing: 0;
+      border: none;
+      -webkit-transition: background 0.3s, color 0.3s;
+      transition: background 0.3s, color 0.3s;
+      text-align: center;
+      text-transform: uppercase !important;
     }
 
   }
@@ -121,6 +258,31 @@
   }
   .locations__map {
     height: 541px;
+  }
+
+  .locations__stores {
+
+    #wpsl-wrap {
+      position: relative;
+      padding-right: 70%;
+      padding-bottom: 0;
+
+      #wpsl-gmap {
+        position: absolute;
+        left: 30%;
+        right: 0;
+        top: 0;
+        bottom: auto;
+        height: 527px !important;
+        width: auto;
+
+      }
+      #wpsl-result-list {
+        width: 100%;
+      }
+
+    }
+
   }
 
 }

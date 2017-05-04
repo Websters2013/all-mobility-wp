@@ -102,8 +102,6 @@
 
                         var cirItem = $(this);
 
-                        console.log(cirItem.parents('.my-cart__product').attr('data-product-key'))
-
                         if( !( cirItem.hasClass('loading') ) ) {
 
                             _load.addClass('visible');
