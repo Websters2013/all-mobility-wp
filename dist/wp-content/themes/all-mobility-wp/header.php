@@ -146,7 +146,7 @@
 
                     <img src="<?= DIRECT ?>img/shopping-cart-black-shape.png" width="32" height="28" alt="">
 
-                    <span class=“cart__price”><?= $content_cart ?></span>
+                    <span class="cart__price"><?= $content_cart ?></span>
 
                 </a>
                 <!-- /cart -->

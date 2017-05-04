@@ -22,7 +22,7 @@ if($flag == 'remove'){
         "subtotal":"20$",
         "productTotal":"20$",
          "taxes": "200$",
-        "cartCountPrice": "20000$"
+        "cartCountPrice": "<span class=“woocommerce-Price-amount amount”><span class=“woocommerce-Price-currencySymbol”>&#36;</span>6.750,00</span>"
     }';
 
 } else if($flag == 'addToCart'){
@@ -41,7 +41,7 @@ if($flag == 'remove'){
     $json_data = '{
         "subtotal": "$8888",
         "total": "$9999",
-         "taxes": "200$",
+        "taxes": "200$",
         "status": 1
     }';
 
@@ -50,7 +50,9 @@ if($flag == 'remove'){
     $value = $_GET['inputVal'];
 
     $json_data = '{
-        "subtotal": "$10.75"
+        "subtotal": "$11",
+        "total": "$9999",
+        "taxes": "300$"
     }';
 
 }

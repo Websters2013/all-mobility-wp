@@ -32,8 +32,7 @@ wc_print_notices();
 		<div>
 
 			<h2 class="site__title site__title_3">Your cart is currently empty.</h2>
-			<a class="btn btn_3" href="#">Return To Shop</a>
-
+			
 		</div>
 	</div>
 	<!-- /my-cart__empty -->

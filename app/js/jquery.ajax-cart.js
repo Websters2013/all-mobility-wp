@@ -102,8 +102,6 @@
 
                         var cirItem = $(this);
 
-                        console.log(cirItem.parents('.my-cart__product').attr('data-product-key'))
-
                         if( !( cirItem.hasClass('loading') ) ) {
 
                             _load.addClass('visible');
@@ -249,6 +247,7 @@
                         action: 'cart_quantity_changes',
                         id: elem.attr('data-product-id'),
                         key: elem.attr('data-product-key'),
+                        variation: elem.attr('data-variation-id'),
                         countProduct: elem.find('.count-product__input').val(),
                         flag: 'changeCount'
                     },
@@ -334,7 +333,8 @@
                     data: {
                         action: 'remove_coupon_to_order',
                         inputVal: _inputCoupon.val(),
-                        flag: 'couponRemove'
+                        flag: 'couponRemove',
+                        id: ''
                     },
                     dataType: 'json',
                     type: "get",
@@ -342,7 +342,9 @@
 
                         setTimeout( function() {
 
-                            _totalPrice.find('dd').html( m.subtotal );
+                            _totalPrice.find('dd').html( m.total );
+                            _subTotalPrice.find('dd').html( m.subtotal );
+                            _taxesPrice.find('dd').html( m.taxes );
                             _discount.removeClass('visible');
                             _define.removeClass('hidden');
                             _applied.removeClass('visible');
