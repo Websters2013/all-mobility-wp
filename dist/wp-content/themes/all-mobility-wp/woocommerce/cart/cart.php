@@ -169,11 +169,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 					<dl class="my-cart__subtotal">
 						<dt>Subtotal</dt>
-						<dd>$1,425.00</dd>
+						<dd><?= WC()->cart->get_cart_subtotal()  ?></dd>
 					</dl>
 					<dl class="my-cart__taxes">
 						<dt>Taxes</dt>
-						<?php $taxes =WC()->cart->get_tax_totals();
+						<?php $taxes = WC()->cart->get_tax_totals();
 						if(empty($taxes)){
 							$tax = 0;
 						} else {
@@ -184,7 +184,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</dl>
 					<dl class="my-cart__total">
 						<dt>TOTAL</dt>
-						<dd>$1,525.00</dd>
+						<dd><?= WC()->cart->get_cart_total() ?></dd>
 					</dl>
 
 				</div>

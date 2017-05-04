@@ -27,6 +27,7 @@ function cart_quantity_changes(){
 
     $subtotal_product = json_encode( WC()->cart->get_product_subtotal( $_product , $new_quantity ) );
 
+    $count_products = json_encode( WC()->cart->get_cart_contents_count() );
 
     $json_data = '{
         "total": '.$cartTotal.',
@@ -34,7 +35,8 @@ function cart_quantity_changes(){
         "productTotal": '.$subtotal_product.',
          "taxes": '.$taxes.',
         "cartCountPrice": '.$cartPrice.',
-        "discount": '.$discount.'
+        "discount": '.$discount.',
+        "cartCountProducts" : '.$count_products.'
     }';
 
     echo $json_data;
@@ -53,6 +55,7 @@ function remove_cart_item(){
     $cartTotal  = json_encode( WC()->cart->get_cart_total() );
     $subTotal = json_encode(WC()->cart->get_cart_subtotal());
     $item = '';
+    $count_products = json_encode( WC()->cart->get_cart_contents_count() );
     if ( WC()->cart->get_cart_contents_count() == 0 ) {
         $cart_items = 0;
     } else {
@@ -74,6 +77,7 @@ function remove_cart_item(){
         "subtotal": '.$subTotal.',
         "discount": '.$discount.',
         "cartCountPrice": '.$cartTotal.',
+        "cartCountProducts": '.$count_products.',
         "total": '.$cartTotal.',
         "taxes": '.$taxes.'
     }';
