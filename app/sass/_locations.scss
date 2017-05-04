@@ -83,11 +83,35 @@
       height: 527px !important;
       width: 100%;
 
-      .wpsl-info-window {
+      .gm-style-iw {
+        width: 300px !important;
         @include main-font4();
         font-size: 16px;
         line-height: 22px;
         color: #4E4E4E;
+      }
+      .wpsl-info-window {
+
+        p {
+          strong {
+            @include main-font1();
+            font-size: 22px;
+            line-height: 26px;
+            color: #F47920;
+
+            a {
+              color: #F47920;
+            }
+
+          }
+        }
+        .wpsl-info-actions {
+
+          a {
+            color: #4E4E4E;
+          }
+
+        }
 
       }
 
@@ -105,6 +129,8 @@
         li {
           border-bottom: none;
           padding: 19px 42px 17px 42px;
+          -webkit-transition: background 0.3s, color 0.3s;
+          transition: background 0.3s, color 0.3s;
 
           .wpsl-store-location {
 
@@ -136,6 +162,10 @@
           }
           .wpsl-more-info-listings {
             display: none;
+          }
+
+          &:hover {
+            background: #F4F4F4;
           }
 
         }
@@ -261,24 +291,75 @@
   }
 
   .locations__stores {
+    padding-bottom: 662px;
 
     #wpsl-wrap {
-      position: relative;
-      padding-right: 70%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: 0;
+      padding-right: 74%;
       padding-bottom: 0;
+      height: 677px;
 
       #wpsl-gmap {
         position: absolute;
-        left: 30%;
+        left: 26%;
         right: 0;
         top: 0;
         bottom: auto;
-        height: 527px !important;
+        height: 677px !important;
         width: auto;
 
+
+
       }
+
       #wpsl-result-list {
+        position: relative;
         width: 100%;
+        margin: 0;
+
+        &:after {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 110px;
+          background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+          background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+          background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
+          content: '';
+        }
+
+      }
+      #wpsl-stores {
+        height: 615px !important;
+        max-height: 615px;
+        overflow-y:  hidden;
+      }
+      .wpsl-search {
+        padding-right: 15px;
+      }
+
+    }
+    #wpsl-search-wrap {
+
+      form {
+        @include justify-content(flex-end);
+
+        div {
+          width: 43%;
+          margin: 0 0 0 8px;
+
+          &:first-child {
+            width: 41%;
+          }
+
+        }
+
       }
 
     }

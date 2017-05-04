@@ -301,6 +301,7 @@
                                 _subTotalPrice.find('dd').html( m.subtotal );
                                 _taxesPrice.find('dd').html( m.taxes );
                                 //_discount.find('dd').html( m.discount );
+                                _cart.find('.cart__price').html(m.total);
 
                             } else {
 
@@ -342,6 +343,7 @@
                         setTimeout( function() {
 
                             _totalPrice.find('dd').html( m.total );
+                            _cart.find('.cart__price').html(m.total);
                             _subTotalPrice.find('dd').html( m.subtotal );
                             _taxesPrice.find('dd').html( m.taxes );
                             _discount.removeClass('visible');
