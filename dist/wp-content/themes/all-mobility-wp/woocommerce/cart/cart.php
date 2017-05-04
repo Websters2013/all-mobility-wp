@@ -43,14 +43,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$thumb_url = wp_get_attachment_image_src($thumb_id,'full')[0];
 				$productTitle = $_product->get_title();
 				$link = get_permalink($product_id);
-
-				$_product_var = new WC_Product_Variation(138);
-
+				$quantity = $cart_item['quantity'];
 
 				if( !$cart_item['variation_id'] ){
 					$variation_id = 0;
+					$subtotal_product = WC()->cart->get_product_subtotal( $_product , $quantity );
+
 				} else {
 					$variation_id = $cart_item['variation_id'];
+					$variationProduct = new WC_Product_Variation($variation_id);
+					$subtotal_product = WC()->cart->get_product_subtotal( $variationProduct , $quantity );
+
 				}
 
 				?>
@@ -73,7 +76,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<p>Customizable Parameter
 									Another Parameter
 									One more parameter</p>
-								<a href="#" class="my-cart__edit">edit</a>
+								<a href="<?= $link ?>" class="my-cart__edit">edit</a>
 							</div>
 
 						</div>
@@ -90,7 +93,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 								<!-- count-product -->
 								<div class="count-product">
 									<a class="count-product__btn count-product_del" href="#"><span>-</span></a>
-									<input type="number" class="count-product__input site__input" value="<?= $cart_item['quantity'] ?>" min="1" value="1">
+									<input type="number" class="count-product__input site__input" value="<?= $quantity ?>" min="1" value="1">
 									<a class="count-product__btn count-product_add" href="#"><span>+</span></a>
 								</div>
 								<!-- /count-product -->
@@ -99,7 +102,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 									<span class="my-cart__total-price-caption">Total</span>
 
-									$1,425.00
+									<?= $subtotal_product ?>
 								</div>
 
 							</div>
@@ -144,7 +147,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<!-- my-cart__applied -->
 					<div class="my-cart__applied">
 						Promo code applied
-						<!--<a href="#">cancel</a>-->
+						<a href="#">cancel</a>
 					</div>
 					<!-- /my-cart__applied -->
 
@@ -164,17 +167,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<!-- my-cart__result -->
 				<div class="my-cart__result">
 
-					<!--<dl class="my-cart__discount">-->
-					<!--<dt>Promo code discount:</dt>-->
-					<!--<dd>-$3.75</dd>-->
-					<!--</dl>-->
 					<dl class="my-cart__subtotal">
 						<dt>Subtotal</dt>
 						<dd>$1,425.00</dd>
 					</dl>
 					<dl class="my-cart__taxes">
 						<dt>Taxes</dt>
-						<dd>$100.00</dd>
+						<?php $taxes =WC()->cart->get_tax_totals();
+						if(empty($taxes)){
+							$tax = 0;
+						} else {
+							$tax = 0;
+						}
+						?>
+						<dd><?=  $tax ?></dd>
 					</dl>
 					<dl class="my-cart__total">
 						<dt>TOTAL</dt>
