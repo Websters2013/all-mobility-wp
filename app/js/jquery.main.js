@@ -24,6 +24,16 @@
 
         } );
 
+        $('#wpsl-stores').each(function () {
+
+            $(this).perfectScrollbar({
+                wheelPropagation: true
+            });
+
+        } );
+
+
+
     } );
 
     var SubMenu = function (obj) {

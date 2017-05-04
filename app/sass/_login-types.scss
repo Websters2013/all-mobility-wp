@@ -1,0 +1,66 @@
+.login-types {
+
+}
+.login-types__title {
+  margin: 0 0 10px;
+  @include main-font1();
+  font-size: 20px;
+  line-height: 24px;
+  color: #4E4E4E;
+  text-align: center;
+}
+.login-types__in {
+  text-align: center;
+
+  div {
+    @include flexbox();
+    @include justify-content(space-between);
+    @include align-items(center);
+    @include flex-direction();
+
+    .site__label {
+      width: 30%;
+    }
+    input[type="submit"].site__input,
+    input[type="text"].site__input,
+    input[type="password"].site__input,
+    input[type="email"].site__input,
+    input[type="tel"].site__input,
+    input[type="phone"].site__input,
+    input[type="number"].site__input {
+      width: 60%;
+    }
+
+  }
+
+}
+.login-types__forgot {
+  @include main-font5();
+  font-size: 16px;
+  line-height: 22px;
+  color: rgba(244, 121, 32, 0.8);
+}
+
+@media (min-width: $desktop) {
+
+  .login-types {
+    @include flexbox();
+    @include justify-content();
+    @include align-items();
+    @include flex-direction();
+
+    >div {
+      width: 33.333%;
+    }
+
+
+  }
+  .login-types__title {
+    text-align: left;
+  }
+  .login-types__in {
+    text-align: left;
+  }
+
+}
+

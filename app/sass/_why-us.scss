@@ -145,7 +145,7 @@
 .why-us_2 {
   display: block;
   padding: 15px 31px 27px 31px;
-  margin: 0 -19px 20px;
+  margin: 10px -10px 7px;
   //margin-bottom: 0;
   border-radius: 4px;
   background-color: #0094C1;
@@ -224,6 +224,7 @@
 
   .why-us_2 {
     @include flexbox();
+    margin: 0;
     padding: 16px 24px 20px 41px;
     background-position: -8px 45px;
     border-radius: 4px 4px 0 0;
