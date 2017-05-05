@@ -129,6 +129,12 @@
 .woocommerce table.shop_table thead th {
   padding-right: 13px;
 }
+.woocommerce table.shop_table thead th:nth-child(1),
+.woocommerce table.shop_table tfoot td:nth-child(1),
+.woocommerce table.shop_table tfoot th:nth-child(1),
+.woocommerce table.shop_table tbody td:nth-child(1) {
+  text-align: left;
+}
 .woocommerce table.shop_table thead th:nth-child(2),
 .woocommerce table.shop_table tfoot td:nth-child(2),
 .woocommerce table.shop_table tbody td:nth-child(2) {
@@ -318,8 +324,6 @@
 }
 .checkout__payments-pics {
   display: block;
-  float: left;
-  width: 125px;
 
   img {
     margin: 0 3px 1px 0;
@@ -327,7 +331,6 @@
 
 }
 .checkout__payments-text {
-  float: right;
   width: 194px;
   padding-right: 12px;
   line-height: 22px;
@@ -356,13 +359,24 @@
   text-transform: uppercase;
 
   span {
-    width: auto;
+    position: relative;
+    width: 100%;
     text-align: center;
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA8CAYAAAApK5mGAAAAAXNSR0IArs4c6QAAA29JREFUaAXtmslrFEEUxjMxGjQiuCGGiIYYXPDqEnNxQzx5EARD/ol4EO96FcFzxJMnQQTPCjkoQg6egltINHGJEXeJEDUZf98wGTKhX81Up6YmA/3gS8/Uq/d971V1V/V0J9dUA8vn883Qbgc7wDawAch+go/gLZjK5XJ5jkEtF4qNIlbBdQScBcdAN9gIkuwbjaNgCNwHTyhunmP9jUJaQB94BOaBrylGsRdAS10rIoEeMARCmbh6oheFaA5cBjMgtInzEgh2OTgHCKG14BaotQ0i0OpMZrlOCYA7ta5kEf9tPq/xydv3IrwG+fkqBUbo9xjoOF2M0RJ+APQWj8Vm89CP5zMYMHukdTBS/YtGzvXxHs6TwDxd5Cv2Ud9qrC9t3olxKLaD9xWUJ/CfSyRwNCoGTFbgfodfG3UYg+xGBcGn+HenVSO2G4jDZdfT8pfFodAJfjiUxvDtLAtK8QWOXWDcofMdX2cK6vIQSK46RGbxnSiPSP8NrlNAnJZdSc9OJKxtYNRip/3msgQSguF07XGv8K9LCKuuiWCtVpZpR99XHVP1veDcD35borQfd7HpNt9lpx3OB9whP3f4U7ngfEbgQ0fwGYevySyIkdC9lDZAy+5ajgDtLu7eYm5+MgRtBZ9Akul06/JjrL433FrGrdNuGt8Wi82cIQI6wGYj8DXtk4YvRPMEJG8MIuWkX8KJ5iqonQjLP8a5/jeRMUAj3H+gGTeo9MtYuSWalbA6W7Mj35T+1Nj07MGyTZbDVZBrvf9lEQZsd2mYubkKCphbKqp/jiitwIm2kgtKTLhSo6sg1wjNVSIO4HdpmLmVfrGytreRxB6wupiMnqtZ1kH/w5YzULu2Dcu0Ty3oa7V9yco4U+qMU4+jRsAcaDRTzsr9qArS46j1HIdB8BtNCUS0F2gd0jWkW5i9EYVrJaXLpUsFLVwztRKKyduigoK/AYhZwRKtwmuPJW2N/dW1DzVkZVlBK33ashnKZijyCGSnXOQB95bLZsh7yCIHZDMUecC95bIZ8h6yyAHZDEUecG+5bIa8hyxyQDZDkQfcWy6bIe8hixyQzVDkAfeW0wzpyan5RsybsX4BqqHw5FSv0D/UL49gyqphopkXRV/4cBHon8Mb1b6S+IBqKZ1qvCfSa5WDoLXBqpol32GKKfxfw3/g82ejOOfqagAAAABJRU5ErkJggg==');
-    background-position: left center;
-    background-repeat: no-repeat;
-    background-size: 26px;
-    padding: 6px 10px 2px 43px;
+    padding: 6px 10px 2px 10px;
+
+    &:before {
+      display: inline-block;
+      vertical-align: middle;
+      width: 26px;
+      height: 30px;
+      margin:-10px 15px 0 0;
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA8CAYAAAApK5mGAAAAAXNSR0IArs4c6QAAA29JREFUaAXtmslrFEEUxjMxGjQiuCGGiIYYXPDqEnNxQzx5EARD/ol4EO96FcFzxJMnQQTPCjkoQg6egltINHGJEXeJEDUZf98wGTKhX81Up6YmA/3gS8/Uq/d971V1V/V0J9dUA8vn883Qbgc7wDawAch+go/gLZjK5XJ5jkEtF4qNIlbBdQScBcdAN9gIkuwbjaNgCNwHTyhunmP9jUJaQB94BOaBrylGsRdAS10rIoEeMARCmbh6oheFaA5cBjMgtInzEgh2OTgHCKG14BaotQ0i0OpMZrlOCYA7ta5kEf9tPq/xydv3IrwG+fkqBUbo9xjoOF2M0RJ+APQWj8Vm89CP5zMYMHukdTBS/YtGzvXxHs6TwDxd5Cv2Ud9qrC9t3olxKLaD9xWUJ/CfSyRwNCoGTFbgfodfG3UYg+xGBcGn+HenVSO2G4jDZdfT8pfFodAJfjiUxvDtLAtK8QWOXWDcofMdX2cK6vIQSK46RGbxnSiPSP8NrlNAnJZdSc9OJKxtYNRip/3msgQSguF07XGv8K9LCKuuiWCtVpZpR99XHVP1veDcD35borQfd7HpNt9lpx3OB9whP3f4U7ngfEbgQ0fwGYevySyIkdC9lDZAy+5ajgDtLu7eYm5+MgRtBZ9Akul06/JjrL433FrGrdNuGt8Wi82cIQI6wGYj8DXtk4YvRPMEJG8MIuWkX8KJ5iqonQjLP8a5/jeRMUAj3H+gGTeo9MtYuSWalbA6W7Mj35T+1Nj07MGyTZbDVZBrvf9lEQZsd2mYubkKCphbKqp/jiitwIm2kgtKTLhSo6sg1wjNVSIO4HdpmLmVfrGytreRxB6wupiMnqtZ1kH/w5YzULu2Dcu0Ty3oa7V9yco4U+qMU4+jRsAcaDRTzsr9qArS46j1HIdB8BtNCUS0F2gd0jWkW5i9EYVrJaXLpUsFLVwztRKKyduigoK/AYhZwRKtwmuPJW2N/dW1DzVkZVlBK33ashnKZijyCGSnXOQB95bLZsh7yCIHZDMUecC95bIZ8h6yyAHZDEUecG+5bIa8hyxyQDZDkQfcWy6bIe8hixyQzVDkAfeW0wzpyan5RsybsX4BqqHw5FSv0D/UL49gyqphopkXRV/4cBHon8Mb1b6S+IBqKZ1qvCfSa5WDoLXBqpol32GKKfxfw3/g82ejOOfqagAAAABJRU5ErkJggg==');
+      background-position: left center;
+      background-repeat: no-repeat;
+      background-size: 26px;
+      content: '';
+    }
+
   }
 
   &:hover {
@@ -413,7 +427,12 @@
     margin-top: -23px;
   }
   .checkout__payments-pics {
+    float: left;
+    width: 125px;
     padding-top: 28px;
+  }
+  .checkout__payments-text {
+    float: right;
   }
 
 }
@@ -648,6 +667,9 @@
   }
   .checkout__payments-error {
     margin: 0 0 37px;
+  }
+  .woocommerce table.shop_table tfoot td {
+    padding-right: 0;
   }
 
 }
