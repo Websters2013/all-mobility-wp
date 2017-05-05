@@ -308,6 +308,10 @@
 
                 $('.category__content').append(_loading);
 
+                _loading.css({
+                    top: $('.category__wrap').position().top - 20
+                })
+
             },
             _closeLoading = function() {
 
