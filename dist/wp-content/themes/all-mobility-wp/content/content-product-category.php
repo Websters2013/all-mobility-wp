@@ -38,17 +38,17 @@ if( $cat_obj->parent != 0 ){
                     <fieldset class="category__sorting-pages">
                         <label for="items-page">items per page</label>
                         <select name="items-page" id="items-page">
-                            <option selected value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
+                            <option selected value="15">15</option>
+                            <option value="25">25</option>
+                            <option value="35">35</option>
                         </select>
                     </fieldset>
                     <fieldset>
                         <label for="sorting-date">sorting</label>
                         <select name="sorting-date" id="sorting-date">
-                            <option selected value="DESC">date: new first</option>
-                            <option value="ASC">date: old first</option>
+                            <option selected value="recomm">Recommended</option>
+                            <option  value="ASC">Price: low to high</option>
+                            <option value="DESC">Price: high to low</option>
                         </select>
                     </fieldset>
 

@@ -740,8 +740,26 @@ parse_str($string,$output);
 
 $pageSorting = $_GET['pageSorting'];
 
-$sortingDate = $_GET['dateSorting'];
+$sortingPrice = $_GET['dateSorting'];
 
+if( $sortingPrice == 'ASC' ){
+    $orderbyElem = 'meta_value_num';
+    $order = 'ASC';
+    $menu_key = '_price';
+
+}
+elseif( $sortingPrice == 'DESC'  ){
+    $orderbyElem = 'meta_value_num';
+    $order = 'DESC';
+    $menu_key = '_price';
+}
+
+elseif($sortingPrice == 'recomm' ) {
+    $orderbyElem = 'meta_value';
+    $order = 'DESC';
+    $menu_key = 'featured_product';
+}
+    
 $currentPage = $_GET['currentPage'];
 
 $categoryId = $_GET['idCategory'];
@@ -782,12 +800,14 @@ $categoryId = $_GET['idCategory'];
     $pricesRanges['relation'] = 'OR';
 
     foreach ( $finalPriceArray as $price ){
+
         $pricesRanges[] = array(
             'key' => '_price',
             'value' => $price,
             'compare' => 'BETWEEN',
             'type' => 'NUMERIC'
         );
+
     }
 
     $args = array (
@@ -795,8 +815,9 @@ $categoryId = $_GET['idCategory'];
         'post_type'  => 'product',
         'fields' => 'ids',
         'posts_per_page' => $pageSorting,
-        'orderby' => 'date',
-        'order' => $sortingDate,
+        'meta_key' => $menu_key,
+        'orderby' => $orderbyElem,
+        'order' => $order,
         'post_status' => 'publish',
         'suppress_filters' => true,
         'tax_query'  => array(
