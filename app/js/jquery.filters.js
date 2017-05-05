@@ -43,7 +43,10 @@
             _timeout = null,
             _arr = [],
             _checkName = '',
-            _checkPrice = '';
+            _checkPrice = '',
+            _priceCategory = _obj.find('input[name=_price]');
+
+        console.log(_priceCategory);
 
         //private methods
 
@@ -529,21 +532,70 @@
 
                 }
 
+                if( _priceCategory.length ) {
+
+                    var checkedPriceRange = _priceCategory.filter(':checked'),
+                        startingPrice = parseInt(checkedPriceRange.attr('value').split('-')[0]);
+
+                }
+
                 if( newArrPriceRange.length ) {
-                    var priceRange = Math.min.apply(null, newArrPriceRange);
+
+                    var priceRange;
+
+                    if( startingPrice == 0 ) {
+
+                        priceRange = Math.min.apply(null, newArrPriceRange);
+
+                    } else {
+
+                        for( var i = 0; i <= newArrPriceRange.length-1; i++ ) {
+
+                            if( newArrPriceRange[i] >= startingPrice ) {
+
+                                priceRange = newArrPriceRange[i];
+
+                                break;
+
+                            }
+
+                        }
+
+                    }
+
+
                 }
 
                 $.each( newData, function() {
 
                     var product = this,
                         price = product.price[0],
-                        salePrice = product.oldPrice[0];
+                        salePrice = product.oldPrice[0],
+                        priceItem;
 
+                    if( _priceCategory.length ) {
+
+                        for (var i = 0; i <= product.price.length-1; i++ ) {
+
+                            priceItem = parseFloat(product.price[i].replace('$','').replace(',',''));
+
+                            if( priceItem >= startingPrice ) {
+
+                                price = product.price[i];
+                                salePrice = product.oldPrice[i];
+
+                                break;
+
+                            }
+
+                        }
+
+                    }
                     if( newArrPriceRange.length ) {
 
                         for (var i = 0; i <= product.price.length-1; i++ ) {
 
-                            var priceItem = parseFloat(product.price[i].replace('$','').replace(',',''));
+                            priceItem = parseFloat(product.price[i].replace('$','').replace(',',''));
 
                             if( priceItem >= priceRange ) {
 
@@ -681,8 +733,6 @@
                     dataType: 'json',
                     type: "get",
                     success: function ( m ) {
-
-                        console.log(_additionalParameters.serialize());
 
                         _pasteNewProducts( m );
                         _createPagination( m );
