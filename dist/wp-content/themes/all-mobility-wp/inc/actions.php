@@ -742,17 +742,74 @@ $pageSorting = $_GET['pageSorting'];
 
 $sortingPrice = $_GET['dateSorting'];
 
-if( $sortingPrice == 'ASC' ){
-    $orderbyElem = 'meta_value_num';
-    $order = 'ASC';
-    $menu_key = '_price';
+$filter_weight = $_GET['additionalParameters'];
 
-}
-elseif( $sortingPrice == 'DESC'  ){
-    $orderbyElem = 'meta_value_num';
-    $order = 'DESC';
-    $menu_key = '_price';
-}
+$currentPage = $_GET['currentPage'];
+
+$categoryId = $_GET['idCategory'];
+
+    if($filter_weight) {
+
+
+
+            $unique_filter = explode('&', $filter_weight);
+
+            foreach ($unique_filter as $key =>  $item){
+                $uniqueItems[] = explode('=', $item);
+            }
+
+            foreach ($uniqueItems as $uniqueItem){
+
+                
+                if( $uniqueItem[0] == 'choose_frame_type' ):
+
+                    $allUniqueFields[] = array(
+                        'key'   => $uniqueItem[0],
+                        'value' => $uniqueItem[1]
+                    );
+
+                else:
+
+                    $range = explode('-', $uniqueItem[1]);
+
+                    $allUniqueFields[] = array(
+                        'key'   => $uniqueItem[0],
+                        'value' => array($range[0],$range[1]),
+                        'compare' => 'BETWEEN',
+                        'type' => 'NUMERIC'
+                    );
+
+                endif;
+
+
+
+            }
+
+
+
+
+    } else{
+        $unique_filter = '';
+    }
+    
+    $uniqueAttributes =  array(
+        'key'   => 'weight',
+        'value' => array(0,500),
+        'compare' => 'BETWEEN',
+        'type' => 'NUMERIC'
+    );
+
+    if( $sortingPrice == 'ASC' ){
+        $orderbyElem = 'meta_value_num';
+        $order = 'ASC';
+        $menu_key = '_price';
+
+    }
+    elseif( $sortingPrice == 'DESC'  ){
+        $orderbyElem = 'meta_value_num';
+        $order = 'DESC';
+        $menu_key = '_price';
+    }
 
 elseif($sortingPrice == 'recomm' ) {
     $orderbyElem = 'meta_value';
@@ -760,9 +817,7 @@ elseif($sortingPrice == 'recomm' ) {
     $menu_key = 'featured_product';
 }
     
-$currentPage = $_GET['currentPage'];
 
-$categoryId = $_GET['idCategory'];
 
     foreach ($output as $key => $item){
 
@@ -831,7 +886,13 @@ $categoryId = $_GET['idCategory'];
             $attributesQuery
 
         ),
-        'meta_query' => $pricesRanges
+        'meta_query' => array(
+            'relation' => 'AND',
+            $pricesRanges,
+            $allUniqueFields
+        )
+
+
     );
 
     $attrProducts = new WP_Query( $args );

@@ -110,7 +110,7 @@ if( $cat_obj->parent != 0 ){
                         <a href="#" class="btn btn_9">clear all</a>
 
                     </div>
-        
+
                     <?php if( get_field('show_this_filter','product_cat_'.$category_ID ) == 'show' ): ?>
 
                     <div class="category__filters-item">
@@ -134,7 +134,7 @@ if( $cat_obj->parent != 0 ){
                             <?php
                             $i = 0;
                             if( have_rows('price_builder','product_cat_'.$category_ID) ):
-                                     
+
                                         while ( have_rows('price_builder','product_cat_'.$category_ID ) ) : the_row();
                                             $i++;
                                             $last = get_sub_field('last_above_range');
@@ -161,7 +161,7 @@ if( $cat_obj->parent != 0 ){
                                             <?php
                                         endwhile;
                                     endif; ?>
-                            
+
                             <div>
 
 
@@ -231,57 +231,134 @@ if( $cat_obj->parent != 0 ){
             <!-- category__find-best -->
             <div class="category__find-best">
 
-                <h2 class="site__title site__title_3 site__title_white">Mobility Scooters</h2>
+                <h2 class="site__title site__title_3 site__title_white"><?= $cat_obj->name; ?></h2>
+
+
+
+                <?php
+                if( $category_ID == 10 || $category_ID == 113 || $category_ID == 116 ): ?>
 
                 <!-- category__find-parameters -->
-                <div class="category__find-parameters">
+                <form class="category__find-parameters">
                     <div>
 
                         <span class="category__find-title">WEIGHT</span>
 
                         <select name="weight" id="weight">
-                            <option value="0">weight1</option>
-                            <option value="1">weight2</option>
-                            <option value="2">weight3</option>
-                            <option value="3">weight4</option>
+                            <option selected value="0-999999999">All</option>
+                            <option value="0-250">250 lbs or less</option>
+                            <option value="251-300">251 - 300 lbs</option>
+                            <option value="351-999999999">351 lbs or more</option>
                         </select>
 
                     </div>
+
+                    <?php if( $category_ID == 10 ): ?>
+
+                        <div>
+
+                            <span class="category__find-title">Main Use</span>
+
+                            <div class="nice-radio">
+                                <input type="radio" name="main_use" id="usage1" value="0-40">
+                                <label for="usage1">Indoor</label>
+                            </div>
+                            <div class="nice-radio">
+                                <input type="radio" name="main_use" id="usage2" value="40-999999999">
+                                <label for="usage2">Outdoor</label>
+                            </div>
+
+                        </div>
+                        <div>
+
+                            <span class="category__find-title">Usage</span>
+
+                            <div class="nice-radio">
+                                <input type="radio" name="usage" id="reatures1" value="12-999999999">
+                                <label for="reatures1">Full-time</label>
+                            </div>
+                            <div class="nice-radio">
+                                <input type="radio" name="usage" id="reatures2" value="0-12">
+                                <label for="reatures2">Occasional</label>
+                            </div>
+
+                        </div>
+                    <?php endif;
+
+                    if( $category_ID == 113 ): ?>
+
+                        <div>
+
+                            <span class="category__find-title">Pricing Category</span>
+
+                            <div class="nice-radio">
+                                <input type="radio" name="_price" id="price1" value="0-3000">
+                                <label for="price1">Budget</label>
+                            </div>
+                            <div class="nice-radio">
+                                <input type="radio" name="_price" id="price2" value="3000-999999999">
+                                <label for="price2">Deluxe</label>
+                            </div>
+
+                        </div>
+                        <div>
+
+                            <span class="category__find-title">Usage</span>
+
+                            <div class="nice-radio">
+                                <input type="radio" name="usage" id="reatures1" value="12-999999999">
+                                <label for="reatures1">Full-time</label>
+                            </div>
+                            <div class="nice-radio">
+                                <input type="radio" name="usage" id="reatures2" value="0-12">
+                                <label for="reatures2">Occasional</label>
+                            </div>
+
+                        </div>
+                   <?php  endif;  ?>
+
+                    <?php
+
+                    if( $category_ID == 116 ): ?>
+
+                        <div>
+
+                            <span class="category__find-title">Pricing Category</span>
+
+                            <div class="nice-radio">
+                                <input type="radio" name="_price" id="price1" value="0-1000">
+                                <label for="price1">Budget</label>
+                            </div>
+                            <div class="nice-radio">
+                                <input type="radio" name="_price" id="price2" value="1000-999999999">
+                                <label for="price2">Deluxe</label>
+                            </div>
+
+                        </div>
+                        <div>
+
+                            <span class="category__find-title">Frame Type</span>
+
+                            <div class="nice-radio">
+                                <input type="radio" name="choose_frame_type" id="reatures1" value="folding">
+                                <label for="reatures1">Folding</label>
+                            </div>
+                            <div class="nice-radio">
+                                <input type="radio" name="choose_frame_type" id="reatures2" value="rigid">
+                                <label for="reatures2">Rigid</label>
+                            </div>
+
+                        </div>
+                   <?php  endif;  ?>
                     <div>
 
-                        <span class="category__find-title">USAGE</span>
-
-                        <div class="nice-radio">
-                            <input type="radio" name="radio" id="usage1">
-                            <label for="usage1">Full-time use</label>
-                        </div>
-                        <div class="nice-radio">
-                            <input type="radio" name="radio" id="usage2">
-                            <label for="usage2">Occasional use</label>
-                        </div>
+                        <button class="btn btn_3" type="submit"><span>search</span></button>
 
                     </div>
-                    <div>
-
-                        <span class="category__find-title">FEATURES</span>
-
-                        <div class="nice-radio">
-                            <input type="radio" name="reatures" id="reatures1">
-                            <label for="reatures1">Full-time use</label>
-                        </div>
-                        <div class="nice-radio">
-                            <input type="radio" name="reatures" id="reatures2">
-                            <label for="reatures2">Occasional use</label>
-                        </div>
-
-                    </div>
-                    <div>
-
-                        <button class="btn btn_3"><span>search</span></button>
-
-                    </div>
-                </div>
+                </form>
                 <!-- /category__find-parameters -->
+
+                <?php endif; ?>
 
             </div>
             <!-- /category__find-best -->

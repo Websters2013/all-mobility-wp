@@ -32,6 +32,7 @@ $category_ID  = $cat_obj->term_id;
         'taxonomy' => 'product_cat'
     );
 
+    $product_terms = get_terms($args);
 
 } elseif( is_singular('wpsl_stores') ){
 
