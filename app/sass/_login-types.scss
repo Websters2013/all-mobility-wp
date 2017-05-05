@@ -84,7 +84,7 @@
   text-decoration: underline;
 }
 .login-types__create {
-  padding: 0 63px 0;
+
   text-align: center;
 
   p {
@@ -125,6 +125,11 @@
 
 }
 
+@media (min-width: $phone-mini) {
+  .login-types__create {
+    padding: 0 63px 0;
+  }
+}
 @media (min-width: $desktop) {
 
   .login-types {
@@ -243,7 +248,7 @@
 
       svg {
         width: auto;
-        height: auto;
+        height: 33px;
       }
 
     }
