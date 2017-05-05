@@ -110,7 +110,7 @@ if( $cat_obj->parent != 0 ){
                         <a href="#" class="btn btn_9">clear all</a>
 
                     </div>
-        
+
                     <?php if( get_field('show_this_filter','product_cat_'.$category_ID ) == 'show' ): ?>
 
                     <div class="category__filters-item">
@@ -134,7 +134,7 @@ if( $cat_obj->parent != 0 ){
                             <?php
                             $i = 0;
                             if( have_rows('price_builder','product_cat_'.$category_ID) ):
-                                     
+
                                         while ( have_rows('price_builder','product_cat_'.$category_ID ) ) : the_row();
                                             $i++;
                                             $last = get_sub_field('last_above_range');
@@ -161,7 +161,7 @@ if( $cat_obj->parent != 0 ){
                                             <?php
                                         endwhile;
                                     endif; ?>
-                            
+
                             <div>
 
 
