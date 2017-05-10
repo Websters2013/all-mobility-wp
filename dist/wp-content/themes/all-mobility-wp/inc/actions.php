@@ -64,6 +64,7 @@ function add_js()
     wp_register_script('contact_js',get_template_directory_uri().'/assets/js/contact-us.min.js');
     wp_register_script('locations_js',get_template_directory_uri().'/assets/js/locations.min.js');
     wp_register_script('my-account_js',get_template_directory_uri().'/assets/js/my-account.min.js');
+    wp_register_script('login_js',get_template_directory_uri().'/assets/js/login.min.js');
     wp_register_script('my-cart-single_js',get_template_directory_uri().'/assets/js/my-cart.min.js');
     wp_register_script('search-results_js',get_template_directory_uri().'/assets/js/search-results.min.js');
     wp_register_script('faq_js',get_template_directory_uri().'/assets/js/faq.min.js');
@@ -92,7 +93,7 @@ function add_js()
         wp_enqueue_script('locations_js');
 
     }
-
+    
     if( is_page_template('page-search.php') ){
         wp_enqueue_style('search-results', get_template_directory_uri().'/assets/css/search-results-page.css');
         wp_enqueue_script('search-results_js');
@@ -112,7 +113,8 @@ function add_js()
 
     if( is_page_template('page-account.php') ){
         wp_enqueue_style('my-account-single', get_template_directory_uri().'/assets/css/my-account-page.css');
-        wp_enqueue_script('my-account_js');
+        wp_enqueue_style('login-types-page', get_template_directory_uri().'/assets/css/login-types-page.css');
+        wp_enqueue_script('login_js');
     }
     
     if( is_page_template('page-checkout.php') ){

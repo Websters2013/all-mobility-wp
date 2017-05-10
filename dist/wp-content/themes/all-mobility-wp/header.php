@@ -220,11 +220,15 @@
                     <!-- /logo-mobile -->
 
                     <!-- login -->
-                    <a href="#" class="login">
-
+                    <a href="<?= get_permalink(13) ?>" class="login">
+                    
                         <img src="<?= DIRECT ?>img/person.png" width="12" height="12" alt="">
 
-                        Log In
+                        <?php if( is_user_logged_in() ): ?>
+                            Profile
+                        <?php else: ?>
+                            Log In
+                        <?php endif; ?>
 
                     </a>
                     <!-- /login -->
