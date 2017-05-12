@@ -113,6 +113,7 @@ function add_js()
 
     if( is_page_template('page-account.php') ){
         wp_enqueue_style('my-account-single', get_template_directory_uri().'/assets/css/my-account-page.css');
+        wp_enqueue_style('sign-up_css', get_template_directory_uri().'/assets/css/sign-up-page.css');
         wp_enqueue_style('login-types-page', get_template_directory_uri().'/assets/css/login-types-page.css');
         wp_enqueue_script('login_js');
     }

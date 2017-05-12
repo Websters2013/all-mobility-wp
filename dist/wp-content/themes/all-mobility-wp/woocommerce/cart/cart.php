@@ -252,10 +252,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 				<div>
 
-					<button type="submit" class="btn btn_5"><span>
-
-                                        CHECK OUT</span></button>
-
+				
+					<?php woocommerce_button_proceed_to_checkout() ?>
 				</div>
 			</div>
 			<!-- /my-cart__end -->

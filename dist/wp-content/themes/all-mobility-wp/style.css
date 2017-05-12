@@ -7,3 +7,20 @@ Version: 1.0
 a.reset_variations {
     display: none !important;
 }
+
+small.woocommerce-password-hint {
+    display: none !important;
+}
+
+.woocommerce-password-strength {
+    position: absolute;
+    bottom: 0;
+}
+
+.woocommerce-password-strength.strong, .woocommerce-password-strength.good {
+    display: none;
+}
+
+.woocommerce-invalid input{
+    border-color: #F47920 !important;
+}

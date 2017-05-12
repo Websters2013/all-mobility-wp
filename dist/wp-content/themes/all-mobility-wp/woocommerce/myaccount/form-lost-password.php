@@ -22,24 +22,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 wc_print_notices(); ?>
 
-<form method="post" class="woocommerce-ResetPassword lost_reset_password">
+<!-- sign-up -->
+<div class="sign-up sign-up_reset">
 
-	<p><?php echo apply_filters( 'woocommerce_lost_password_message', __( 'Lost your password? Please enter your username or email address. You will receive a link to create a new password via email.', 'woocommerce' ) ); ?></p>
+	<h2 class="site__title site__title_3 site__title_center">Reset Password</h2>
 
-	<p class="woocommerce-form-row woocommerce-form-row--first form-row form-row-first">
-		<label for="user_login"><?php _e( 'Username or email', 'woocommerce' ); ?></label>
-		<input class="woocommerce-Input woocommerce-Input--text input-text" type="text" name="user_login" id="user_login" />
-	</p>
+	<div class="sign-up__form">
+		<form method="post">
+			<div>
+				<label class="site__label" for="user_login">
+					Username <span>*</span>
+				</label>
+				<input class="site__input" type="text" name="user_login" id="user_login" required>
+			</div>
+			<span class="sign-up__remark"><span>*</span> mandatory fields</span>
+			<div class="sign-up__send">
+				<input type="hidden" name="wc_reset_password" value="true" />
+				<button type="submit" class="btn btn_13"><span>RESET PASSWORD</span></button>
+				<?php wp_nonce_field( 'lost_password' ); ?>
+			</div>
+			<a href="<?= get_permalink(13) ?>" class="sign-up__log">Log in here</a>
+		</form>
+	</div>
 
-	<div class="clear"></div>
-
-	<?php do_action( 'woocommerce_lostpassword_form' ); ?>
-
-	<p class="woocommerce-form-row form-row">
-		<input type="hidden" name="wc_reset_password" value="true" />
-		<input type="submit" class="woocommerce-Button button" value="<?php esc_attr_e( 'Reset password', 'woocommerce' ); ?>" />
-	</p>
-
-	<?php wp_nonce_field( 'lost_password' ); ?>
-
-</form>
+</div>
+<!-- /sign-up -->

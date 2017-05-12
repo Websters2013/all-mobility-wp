@@ -108,6 +108,10 @@ function apply_coupon_to_order(){
         $discount = json_encode(WC()->cart->get_total_discount());
     }
 
+    if( !$discount ){
+        $discount= "0";
+    }
+
     $cartTotal  = json_encode( WC()->cart->get_cart_total() );
     $subTotal = json_encode(WC()->cart->get_cart_subtotal());
     $taxes = json_encode( WC()->cart->get_tax_totals() );

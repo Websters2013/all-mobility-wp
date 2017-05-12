@@ -23,23 +23,91 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<p><?php
-	/* translators: 1: user display name 2: logout url */
-	printf(
-		__( 'Hello %1$s (not %1$s? <a href="%2$s">Sign out</a>)', 'woocommerce' ),
-		'<strong>' . esc_html( $current_user->display_name ) . '</strong>',
-		esc_url( wc_logout_url( wc_get_page_permalink( 'myaccount' ) ) )
-	);
-?></p>
+<?php $user = new WC_Customer($current_user->ID); ?>
+<!-- my-account -->
+<div class="my-account">
 
-<p><?php
-	printf(
-		__( 'From your account dashboard you can view your <a href="%1$s">recent orders</a>, manage your <a href="%2$s">shipping and billing addresses</a> and <a href="%3$s">edit your password and account details</a>.', 'woocommerce' ),
-		esc_url( wc_get_endpoint_url( 'orders' ) ),
-		esc_url( wc_get_endpoint_url( 'edit-address' ) ),
-		esc_url( wc_get_endpoint_url( 'edit-account' ) )
-	);
-?></p>
+	<h2 class="site__title site__title_3"><?php the_title() ?></h2>
+
+
+	<!-- my-account__links -->
+	<div class="my-account__links">
+		<a href="<?= get_permalink(13) ?>" class="active">Account overview</a>
+		<a href="<?= wc_get_endpoint_url('orders') ?>">Purchase History</a>
+	</div>
+	<!-- /my-account__links -->
+
+	<!-- my-account__content -->
+	<div class="my-account__content">
+
+		<!-- my-account__overview -->
+		<div class="my-account__overview">
+
+			<p>
+				<span><?= $current_user->user_firstname.' '.$current_user->user_lastname?></span>
+				<span><?= $current_user->user_email ?></span>
+				<span><?php echo get_user_meta( $current_user->ID, 'billing_phone', true ) ?></span>
+			</p>
+
+			<p>
+				<span>Billing address:</span>
+
+				<?php
+				$billing_address = $user->get_billing_address();
+				$billing_state = $user->get_billing_state();
+				$billing_city = $user->get_billing_city();
+				$billing_zip = $user->get_billing_postcode();
+				?>
+				<?php if( $billing_address ): ?>
+				<span><?= $billing_address ?></span>
+				<?php endif; ?>
+
+				<?php if( $billing_city ): ?>
+					<span><?= $billing_city.', '.$billing_state.' '.$billing_zip ?></span>
+				<?php endif; ?>
+			</p>
+
+			<?php
+			$shipping_address = $user->get_shipping_address();
+			$shipping_state = $user->get_shipping_state();
+			$shipping_city = $user->get_shipping_city();
+			$shipping_zip = $user->get_shipping_postcode();
+			?>
+
+			<?php if( $shipping_address || $shipping_city ): ?>
+
+			<p>
+				<span>Shipping address:</span>
+
+				<?php if( $shipping_address ): ?>
+					<span><?= $shipping_address ?></span>
+				<?php endif; ?>
+
+				<?php if( $shipping_city ): ?>
+					<span><?= $shipping_city.', '.$shipping_state.' '.$shipping_zip ?></span>
+				<?php endif; ?>
+
+
+			</p>
+
+			<?php endif; ?>
+
+			<p>I’m signed up for e-mails from AAM</p>
+
+			<a href="#" class="my-account__edit">edit account settings</a>
+
+			<div class="my-account__log-out">
+				<a href="<?php echo wp_logout_url( get_home_url() ); ?> " class="btn btn_17"><span>LOG OUT</span></a>
+			</div>
+
+		</div>
+		<!-- /my-account__overview -->
+
+	</div>
+	<!-- /my-account__content -->
+
+</div>
+<!-- /my-account -->
 
 <?php
 	/**
@@ -63,4 +131,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	 */
 	do_action( 'woocommerce_after_my_account' );
 
-/* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */
+/* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */ ?>
+
+
+
+

@@ -15,3 +15,4 @@ require_once( TEMPLATEINC . '/template.php' );
 require_once( TEMPLATEINC . '/actions.php' );
 require_once( TEMPLATEINC . '/ajaxes.php' );
 require_once( TEMPLATEINC . '/often_parts.php' );
+require_once( TEMPLATEINC . '/woocommerce-func.php' );

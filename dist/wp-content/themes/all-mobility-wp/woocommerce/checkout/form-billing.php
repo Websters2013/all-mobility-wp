@@ -37,9 +37,37 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php do_action( 'woocommerce_before_checkout_billing_form', $checkout ); ?>
 
 	<div class="woocommerce-billing-fields__field-wrapper">
-		<?php foreach ( $checkout->get_checkout_fields( 'billing' ) as $key => $field ) : ?>
-			<?php woocommerce_form_field( $key, $field, $checkout->get_value( $key ) ); ?>
+		<div class="checkout__row">
+		<div>
+		<?php
+		$i = 0;
+		foreach ( $checkout->get_checkout_fields( 'billing' ) as $key => $field ) : ?>
+			<?php
+
+				if( $key == 'billing_country' ){
+
+					echo '<input type="hidden" name="billing_country" value="US"  />';
+
+				}
+			
+
+				if( $key == 'billing_country' || $key == 'billing_state' ){
+					continue;
+				}
+				if( $i == 4 ){
+					echo '</div><div>';
+				}
+
+				woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
+				
+				$i++;
+			?>
 		<?php endforeach; ?>
+
+			</div>
+
+		</div>
+
 	</div>
 
 	<?php do_action( 'woocommerce_after_checkout_billing_form', $checkout ); ?>

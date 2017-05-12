@@ -357,12 +357,7 @@
 
                 <!-- get-catalog__subscribe -->
                 <div class="get-catalog__subscribe">
-                    <form action="#">
-                        <input type="email" name="email" id="email" placeholder="your email">
-                        <button type="submit" class="btn btn_3">
-                            <span>GET IT!</span>
-                        </button>
-                    </form>
+                   <?= do_shortcode('[mc4wp_form id="477"]') ?>
                 </div>
                 <!-- /get-catalog__subscribe -->
 
