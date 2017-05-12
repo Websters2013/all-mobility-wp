@@ -23,11 +23,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <div class="woocommerce-shipping-fields">
 	<?php if ( true === WC()->cart->needs_shipping_address() ) : ?>
-
+		<h3><?php _e( 'Add your shipping information', 'woocommerce' ); ?></h3>
 		<h3 id="ship-to-different-address">
-			<label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
-				<input id="ship-to-different-address-checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox"  checked  type="checkbox" name="ship_to_different_address" value="1" /> <span><?php _e( 'Ship to a different address?', 'woocommerce' ); ?></span>
-			</label>
+			<input id="ship-to-different-address-checkbox" class="input-checkbox"  type="checkbox" name="ship_to_different_address" value="1" />
+			<label for="ship-to-different-address-checkbox" class="checkbox">Ship to a different address?</label>
 		</h3>
 
 		<div class="shipping_address">
@@ -46,6 +45,41 @@ if ( ! defined( 'ABSPATH' ) ) {
 					 if( $key == 'shipping_country' || $key == 'shipping_state' ){
 						 continue;
 					 }
+
+					 if( $key == 'shipping_postcode' ){ ?>
+
+						 <p class="form-row  form-row-first address-field validate-required validate-state validate-postcode" id="shipping_state_field">
+							 <label for="shipping_postcode" class="">State/ZIP<abbr class="required" title="required">*</abbr></label>
+
+							 <input type="text" class="input-text"  required name="shipping_postcode" id="shipping_postcode" placeholder=""  autocomplete="postal-code" value=""  />
+
+							 <?php $states = WC()->countries->get_states( 'US' );  ?>
+
+							 <?php if(is_array( $states ) && !empty( $states )): ?>
+
+								 <select name="shipping_state" id="shipping_state"  data-placeholder="" autocomplete="address-level1">
+									 <?php foreach ($states as $key => $state){
+
+										 if($checkout->get_value('shipping_state') == $key){
+											 $selected = 'selected';
+										 } else {
+											 $selected = '';
+										 }
+
+										 ?>
+
+										 <option  <?= $selected ?> value="<?= $key ?>"><?= $key ?></option>
+
+									 <?php } ?>
+								 </select>
+							 <?php endif; ?>
+
+						 </p>
+
+						 <?php
+						 continue;
+					 }
+
 					 if( $i == 4 ){
 						 echo '</div><div>';
 					 }

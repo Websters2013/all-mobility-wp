@@ -20,15 +20,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<li class="wc_payment_method payment_method_<?php echo $gateway->id; ?>">
-	<input id="payment_method_<?php echo $gateway->id; ?>" type="radio" class="input-radio" name="payment_method" value="<?php echo esc_attr( $gateway->id ); ?>" <?php checked( $gateway->chosen, true ); ?> data-order_button_text="<?php echo esc_attr( $gateway->order_button_text ); ?>" />
 
-	<label for="payment_method_<?php echo $gateway->id; ?>">
-		<?php echo $gateway->get_title(); ?> <?php echo $gateway->get_icon(); ?>
+<div class="nice-radio nice-radio_2 wc_payment_method payment_method_<?php echo $gateway->id; ?>" >
+	<input type="radio" name="payment_method"  value="<?php echo esc_attr( $gateway->id ); ?>" id="<?= $gateway->id ?>">
+	<label for="<?= $gateway->id ?>"><?= $gateway->get_title() ?>
+
+                                <span class="checkout__payments-more">
+									<span class="checkout__payments-pics">
+                                       <img src="<?= DIRECT ?>pic/paypal.jpg" width="48" height="30" alt="paypal">
+                                    </span>
+                                    <span class="checkout__payments-text"><?= $gateway->get_description() ?></span>
+
+
+                                </span>
+
 	</label>
-	<?php if ( $gateway->has_fields() || $gateway->get_description() ) : ?>
-		<div class="payment_box payment_method_<?php echo $gateway->id; ?>" <?php if ( ! $gateway->chosen ) : ?>style="display:none;"<?php endif; ?>>
-			<?php $gateway->payment_fields(); ?>
-		</div>
-	<?php endif; ?>
-</li>
+
+</div>
+

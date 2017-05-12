@@ -54,6 +54,42 @@ if ( ! defined( 'ABSPATH' ) ) {
 				if( $key == 'billing_country' || $key == 'billing_state' ){
 					continue;
 				}
+
+				if( $key == 'billing_postcode' ){ ?>
+
+				<p class="form-row  form-row-first address-field validate-required validate-state validate-postcode" id="billing_state_field">
+					<label for="billing_postcode" class="">State/ZIP<abbr class="required" title="required">*</abbr></label>
+
+					<input type="text" class="input-text"  required name="billing_postcode" id="billing_postcode" placeholder=""  autocomplete="postal-code" value=""  />
+
+					<?php $states = WC()->countries->get_states( 'US' );  ?>
+
+					<?php if(is_array( $states ) && !empty( $states )): ?>
+
+					<select name="billing_state" id="billing_state"  data-placeholder="" autocomplete="address-level1">
+						<?php foreach ($states as $key => $state){
+
+							if($checkout->get_value('billing_state') == $key){
+								$selected = 'selected';
+							} else {
+								$selected = '';
+							}
+
+							?>
+
+							<option  <?= $selected ?> value="<?= $key ?>"><?= $key ?></option>
+
+						<?php } ?>
+					</select>
+					<?php endif; ?>
+
+				</p>
+
+					<?php
+					continue;
+				}
+
+
 				if( $i == 4 ){
 					echo '</div><div>';
 				}

@@ -114,6 +114,14 @@
                     }
                 } );
 
+                _window.on( {
+                    'scroll': function(){
+                        if( _opened ){
+                            _hidePopup();
+                        }
+                    }
+                } );
+
             },
             _selectViewType = function(){
 
@@ -163,13 +171,13 @@
                 } );
 
                 _popup.append( list );
-                _wrap.append( _popup );
+                _body.append( _popup );
                 _wrap.addClass( 'websters-select_opened' );
 
                 _popup.css( {
                     width: _wrap.outerWidth(),
-                    left: -2,
-                    top: _wrap.outerHeight() - 4
+                    left: offset.left,
+                    top: offset.top + _wrap.outerHeight()
                 } );
 
                 maxHeight = _popup.outerHeight();

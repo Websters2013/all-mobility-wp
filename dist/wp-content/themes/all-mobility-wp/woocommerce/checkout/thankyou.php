@@ -21,62 +21,70 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 
-<div class="woocommerce-order">
 
-	<?php if ( $order ) : ?>
+<?php if ( $order ) : ?>
 
-		<?php if ( $order->has_status( 'failed' ) ) : ?>
+<!-- confirmation -->
+<div class="confirmation">
 
-			<p class="woocommerce-notice woocommerce-notice--error woocommerce-thankyou-order-failed"><?php _e( 'Unfortunately your order cannot be processed as the originating bank/merchant has declined your transaction. Please attempt your purchase again.', 'woocommerce' ); ?></p>
+	<?php if ( $order->has_status( 'failed' ) ) : ?>
 
-			<p class="woocommerce-notice woocommerce-notice--error woocommerce-thankyou-order-failed-actions">
-				<a href="<?php echo esc_url( $order->get_checkout_payment_url() ); ?>" class="button pay"><?php _e( 'Pay', 'woocommerce' ) ?></a>
-				<?php if ( is_user_logged_in() ) : ?>
-					<a href="<?php echo esc_url( wc_get_page_permalink( 'myaccount' ) ); ?>" class="button pay"><?php _e( 'My account', 'woocommerce' ); ?></a>
-				<?php endif; ?>
-			</p>
+		<h2 class="site__title site__title_9">Success!</h2>
 
-		<?php else : ?>
-
+		<!-- confirmation__info -->
+		<div class="confirmation__info">
 			<p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'woocommerce' ), $order ); ?></p>
 
-			<ul class="woocommerce-order-overview woocommerce-thankyou-order-details order_details">
+		</div>
+		<!-- /confirmation__info -->
 
-				<li class="woocommerce-order-overview__order order">
-					<?php _e( 'Order number:', 'woocommerce' ); ?>
-					<strong><?php echo $order->get_order_number(); ?></strong>
-				</li>
+		<a href="<?= get_home_url() ?>" class="btn btn_16">HOME PAGE</a>
 
-				<li class="woocommerce-order-overview__date date">
-					<?php _e( 'Date:', 'woocommerce' ); ?>
-					<strong><?php echo wc_format_datetime( $order->get_date_created() ); ?></strong>
-				</li>
+	<?php else :  ?>
 
-				<li class="woocommerce-order-overview__total total">
-					<?php _e( 'Total:', 'woocommerce' ); ?>
-					<strong><?php echo $order->get_formatted_order_total(); ?></strong>
-				</li>
+	<h2 class="site__title site__title_9">Success!</h2>
 
-				<?php if ( $order->get_payment_method_title() ) : ?>
+	<svg width="92px" height="92px" viewBox="0 0 92 92" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+		<desc>Created with Sketch.</desc>
+		<defs>
+			<circle id="path-1" cx="42" cy="42" r="42"></circle>
+			<filter x="-8.3%" y="-6.0%" width="116.7%" height="116.7%" filterUnits="objectBoundingBox" id="filter-2">
+				<feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+				<feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+				<feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.167940444 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+			</filter>
+		</defs>
+		<g id="high-fildelity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+			<g id="purchase-confirmation" transform="translate(-673.000000, -315.000000)">
+				<g id="Group" transform="translate(677.000000, 317.000000)">
+					<g id="Oval-6" opacity="0.900000036">
+						<use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+						<use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+					</g>
+					<circle id="Oval-6" fill="#F47920" opacity="0.5" cx="42" cy="42" r="39"></circle>
+					<circle id="Oval-6" fill="#F47920" opacity="0.5" cx="42" cy="42" r="35"></circle>
+					<circle id="Oval-6" fill="#F47920" cx="42" cy="42" r="30"></circle>
+					<polyline id="Path-8" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" points="32 46 38 52 46.3296033 42.7448852 56 32"></polyline>
+				</g>
+			</g>
+		</g>
+	</svg>
 
-				<li class="woocommerce-order-overview__payment-method method">
-					<?php _e( 'Payment method:', 'woocommerce' ); ?>
-					<strong><?php echo wp_kses_post( $order->get_payment_method_title() ); ?></strong>
-				</li>
+	<!-- confirmation__info -->
+	<div class="confirmation__info">
+		<p>Your order # <?= $order->get_order_number() ?> with a total of <?= $order->get_formatted_order_total() ?> was successfully confirmed
+			and currently is being processed by our team.</p>
+		<p>You will receive a confirmation e-mail within a few minutes.</p>
+		<p>You can track your oder on <a href="<?= get_permalink(13).'/orders/' ?>">this page</a></p>
+	</div>
+	<!-- /confirmation__info -->
 
-				<?php endif; ?>
-
-			</ul>
-
-		<?php endif; ?>
-
-		<?php do_action( 'woocommerce_thankyou_' . $order->get_payment_method(), $order->get_id() ); ?>
-		<?php do_action( 'woocommerce_thankyou', $order->get_id() ); ?>
-
-	<?php else : ?>
-
-		<p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'woocommerce' ), null ); ?></p>
-
-	<?php endif; ?>
+	<a href="<?= get_home_url() ?>" class="btn btn_16">HOME PAGE</a>
 
 </div>
+<!-- /confirmation -->
+
+<?php endif;
+
+endif; ?>
