@@ -172,6 +172,15 @@
 
                     }
                 } );
+                _inputCoupon.on( {
+                    keypress: function (event) {
+
+                        if ( ( event.which == 13 ) ) {
+                            event.preventDefault();
+                        }
+
+                    }
+                } );
 
             },
             _removeProduct = function( elem ) {

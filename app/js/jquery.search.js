@@ -246,7 +246,7 @@
 
                 productsWrap += '</div>';
 
-                _result.find('div').eq(1).find('.top-products').html(productsWrap);
+                _result.find('div').eq(1).find('.top-products').html('<h2 class="top-products__title">Top Products</h2>' + productsWrap);
 
                 var resultStr = '<ul class="search__found">';
 
