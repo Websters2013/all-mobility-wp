@@ -24,3 +24,25 @@ small.woocommerce-password-hint {
 .woocommerce-invalid input{
     border-color: #F47920 !important;
 }
+
+.mc4wp-response {
+    margin-top: 10px;
+    display: block;
+    width: 100%;
+}
+.wpcf7-not-valid-tip {
+    display: none !important;
+}
+
+.wpcf7-not-valid {
+    border-color: #F47920 !important;
+}
+
+.wpcf7-response-output {
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-top: 5px !important;
+    border: none !important;
+    text-align: center;
+    color: #F47920 !important;
+}

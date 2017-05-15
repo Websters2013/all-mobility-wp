@@ -60,30 +60,38 @@ get_header( 'shop' ); ?>
 				<!-- why-us__call -->
 				<div class="why-us__call">
 					<span>Call us now or leave a message</span>
-					<a class="why-us__phone" href="#">
-						<svg width="13px" height="18px" viewBox="0 0 13 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-							<!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
-							<desc>Created with Sketch.</desc>
-							<defs></defs>
-							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.5">
-								<g transform="translate(-230.000000, -79.000000)" fill="#FFFFFF">
-									<g transform="translate(230.000000, 79.000000)">
-										<circle id="Oval-5-Copy-2" cx="11.5" cy="1.5" r="1.5"></circle>
-										<circle id="Oval-5-Copy-5" cx="11.5" cy="6.5" r="1.5"></circle>
-										<circle id="Oval-5-Copy-8" cx="11.5" cy="11.5" r="1.5"></circle>
-										<circle id="Oval-5-Copy-3" cx="6.5" cy="1.5" r="1.5"></circle>
-										<circle id="Oval-5-Copy-6" cx="6.5" cy="6.5" r="1.5"></circle>
-										<circle id="Oval-5-Copy-9" cx="6.5" cy="11.5" r="1.5"></circle>
-										<circle id="Oval-5-Copy-11" cx="6.5" cy="16.5" r="1.5"></circle>
-										<circle id="Oval-5-Copy-4" cx="1.5" cy="1.5" r="1.5"></circle>
-										<circle id="Oval-5-Copy-7" cx="1.5" cy="6.5" r="1.5"></circle>
-										<circle id="Oval-5-Copy-10" cx="1.5" cy="11.5" r="1.5"></circle>
+					
+					<?php $phone = get_field('main_phone', 'options') ?>
+
+					<?php if( $phone ): ?>
+
+						<a class="why-us__phone" href="<?= $phone ?>">
+							<svg width="13px" height="18px" viewBox="0 0 13 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+								<!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+								<desc>Created with Sketch.</desc>
+								<defs></defs>
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.5">
+									<g transform="translate(-230.000000, -79.000000)" fill="#FFFFFF">
+										<g transform="translate(230.000000, 79.000000)">
+											<circle id="Oval-5-Copy-2" cx="11.5" cy="1.5" r="1.5"></circle>
+											<circle id="Oval-5-Copy-5" cx="11.5" cy="6.5" r="1.5"></circle>
+											<circle id="Oval-5-Copy-8" cx="11.5" cy="11.5" r="1.5"></circle>
+											<circle id="Oval-5-Copy-3" cx="6.5" cy="1.5" r="1.5"></circle>
+											<circle id="Oval-5-Copy-6" cx="6.5" cy="6.5" r="1.5"></circle>
+											<circle id="Oval-5-Copy-9" cx="6.5" cy="11.5" r="1.5"></circle>
+											<circle id="Oval-5-Copy-11" cx="6.5" cy="16.5" r="1.5"></circle>
+											<circle id="Oval-5-Copy-4" cx="1.5" cy="1.5" r="1.5"></circle>
+											<circle id="Oval-5-Copy-7" cx="1.5" cy="6.5" r="1.5"></circle>
+											<circle id="Oval-5-Copy-10" cx="1.5" cy="11.5" r="1.5"></circle>
+										</g>
 									</g>
 								</g>
-							</g>
-						</svg>
-						1-800-ALL-MOBI
-					</a>
+							</svg>
+							<?= $phone ?>
+						</a>
+
+					<?php endif; ?>
+
 				</div>
 				<!-- /why-us__call -->
 

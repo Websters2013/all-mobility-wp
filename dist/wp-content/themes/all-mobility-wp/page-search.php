@@ -4,12 +4,7 @@
  */
 get_header(); ?>
 
-    <!-- breadcrumbs -->
-    <nav class="breadcrumbs">
-        <a href="#">Home</a>
-        <span>Contact Us</span>
-    </nav>
-    <!-- /breadcrumbs -->
+    <?php woocommerce_breadcrumb(); ?>
 
     <!-- site__content -->
     <div class="site__content site__content_page site__white-back">
@@ -26,7 +21,7 @@ get_header(); ?>
                     <!-- search -->
                     <div class="search" data-path="php/search.php" data-action="http://www.erefre.com">
 
-                        <form action="#">
+                        <form action="<?= get_permalink(444) ?>">
                             <input type="search" name="search" id="search3" autocomplete="off" placeholder="Enter  your search here">
                             <button type="submit">search</button>
                         </form>

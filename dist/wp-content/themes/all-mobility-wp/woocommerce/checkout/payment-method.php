@@ -31,7 +31,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                                     </span>
                                     <span class="checkout__payments-text"><?= $gateway->get_description() ?></span>
 
-
                                 </span>
 
 	</label>

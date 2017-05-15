@@ -83,6 +83,7 @@
 
                     }
 
+
                     if( $salePrice ){
                         $flagIsSale = true;
                     } else {
@@ -169,8 +170,19 @@
                                 $regularPrice = '';
                             } else {
                                 $salePrice = $salePrice.'$';
+
+                                if($regularPrice){
+                                    $regularPrice = wc_price($regularPrice);
+                                }
+
                                 $regularPrice = $regularPrice.'$';
                             }
+
+                            if( $salePrice ){
+
+                                $salePrice = wc_price($salePrice);
+                            }
+
                             ?>
 
                             <div class="featured-product__footer">

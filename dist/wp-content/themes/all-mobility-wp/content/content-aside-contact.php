@@ -28,7 +28,7 @@
         <a href="tel:<?= $tel ?>"><?= $tel ?></a>
     </div>
 
-    <a href="#" class="btn btn_4">
+    <a href="<?=  get_permalink('7') ?>" class="btn btn_4">
         CONTACT US
     </a>
 

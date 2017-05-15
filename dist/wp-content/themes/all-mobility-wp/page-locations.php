@@ -4,13 +4,7 @@
  */
 get_header(); ?>
 
-<!-- breadcrumbs -->
-<nav class="breadcrumbs">
-    <a href="#">All Products</a>
-    <a href="#">Mobility Scooters</a>
-    <span> Heavy Duty & High Weight Capacity </span>
-</nav>
-<!-- /breadcrumbs -->
+<?php woocommerce_breadcrumb(); ?>
 
 <!-- site__content -->
 <div class="site__content site__content_inner site__white-back site__content_no-padding">
@@ -30,7 +24,7 @@ get_header(); ?>
         </div>
         <div class="why-us__resolve">
 
-            <a href="#" class="btn btn_8">
+            <a href="<?= get_home_url() ?>" class="btn btn_8">
                 VIEW ONLINE CATALOG
             </a>
 
@@ -50,6 +44,7 @@ get_header(); ?>
         <!-- /locations__stores -->
 
         <?php the_field('description_text') ?>
+
     </div>
     <!-- /locations -->
 

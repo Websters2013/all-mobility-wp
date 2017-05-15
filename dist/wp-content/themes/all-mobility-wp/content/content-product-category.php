@@ -260,7 +260,7 @@ if( $cat_obj->parent != 0 ){
                             <span class="category__find-title">Main Use</span>
 
                             <div class="nice-radio">
-                                <input type="radio" name="main_use" id="usage1" value="0-40">
+                                <input type="radio"  checked name="main_use" id="usage1" value="0-40">
                                 <label for="usage1">Indoor</label>
                             </div>
                             <div class="nice-radio">
@@ -274,7 +274,7 @@ if( $cat_obj->parent != 0 ){
                             <span class="category__find-title">Usage</span>
 
                             <div class="nice-radio">
-                                <input type="radio" name="usage" id="reatures1" value="12-999999999">
+                                <input type="radio" checked name="usage" id="reatures1" value="12-999999999">
                                 <label for="reatures1">Full-time</label>
                             </div>
                             <div class="nice-radio">
@@ -292,7 +292,7 @@ if( $cat_obj->parent != 0 ){
                             <span class="category__find-title">Pricing Category</span>
 
                             <div class="nice-radio">
-                                <input type="radio" name="_price" id="price1" value="0-3000">
+                                <input type="radio"  checked name="_price" id="price1" value="0-3000">
                                 <label for="price1">Budget</label>
                             </div>
                             <div class="nice-radio">
@@ -306,7 +306,7 @@ if( $cat_obj->parent != 0 ){
                             <span class="category__find-title">Usage</span>
 
                             <div class="nice-radio">
-                                <input type="radio" name="usage" id="reatures1" value="12-999999999">
+                                <input type="radio" checked name="usage" id="reatures1" value="12-999999999">
                                 <label for="reatures1">Full-time</label>
                             </div>
                             <div class="nice-radio">
@@ -326,7 +326,7 @@ if( $cat_obj->parent != 0 ){
                             <span class="category__find-title">Pricing Category</span>
 
                             <div class="nice-radio">
-                                <input type="radio" name="_price" id="price1" value="0-1000">
+                                <input type="radio" checked name="_price" id="price1" value="0-1000">
                                 <label for="price1">Budget</label>
                             </div>
                             <div class="nice-radio">
@@ -340,7 +340,7 @@ if( $cat_obj->parent != 0 ){
                             <span class="category__find-title">Frame Type</span>
 
                             <div class="nice-radio">
-                                <input type="radio" name="choose_frame_type" id="reatures1" value="folding">
+                                <input type="radio" checked name="choose_frame_type" id="reatures1" value="folding">
                                 <label for="reatures1">Folding</label>
                             </div>
                             <div class="nice-radio">

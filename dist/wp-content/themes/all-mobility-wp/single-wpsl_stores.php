@@ -1,12 +1,6 @@
 <?php get_header(); ?>
 
-    <!-- breadcrumbs -->
-    <nav class="breadcrumbs">
-        <a href="#">Home</a>
-        <a href="#">Locations</a>
-        <span>Mobility Plus</span>
-    </nav>
-    <!-- /breadcrumbs -->
+<?php woocommerce_breadcrumb(); ?>
 
     <!-- site__content -->
     <div class="site__content site__content_inner site__white-back site__content_no-padding">

@@ -92,7 +92,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<?php endif; ?>
 
-			<p>I’m signed up for e-mails from AAM</p>
+			<?php $email =  $current_user->user_email;
+			if($email):
+
+				$status = mc_checklist( $email );
+			
+				if( $status == 'subscribed' ): ?>
+
+					<p>I’m signed up for e-mails from AAM</p>
+
+				<?php endif; endif; ?>
 
 			<a href="#" class="my-account__edit">edit account settings</a>
 

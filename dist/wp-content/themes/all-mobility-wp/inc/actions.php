@@ -68,6 +68,7 @@ function add_js()
     wp_register_script('my-cart-single_js',get_template_directory_uri().'/assets/js/my-cart.min.js');
     wp_register_script('search-results_js',get_template_directory_uri().'/assets/js/search-results.min.js');
     wp_register_script('faq_js',get_template_directory_uri().'/assets/js/faq.min.js');
+    wp_register_script('not-found_js',get_template_directory_uri().'/assets/js/not-found.min.js');
     wp_register_script('google_map','https://maps.googleapis.com/maps/api/js?key=AIzaSyANuqKy3oM3UtHBZe9xle8dEm3_1H5GMh8');
 
     wp_enqueue_script('jquery');
@@ -84,6 +85,11 @@ function add_js()
     if( is_page_template('page-faq.php') ){
         wp_enqueue_style('faq_css', get_template_directory_uri().'/assets/css/faq.css');
         wp_enqueue_script('faq_js');
+    }
+
+    if( is_404() ){
+        wp_enqueue_style('css_404', get_template_directory_uri().'/assets/css/not-found-page.css');
+        wp_enqueue_script('not-found_js');
     }
 
     if( is_page_template('page-locations.php') ){
@@ -176,7 +182,8 @@ wp_enqueue_style('style', get_template_directory_uri().'/style.css');
 if ( function_exists( 'add_theme_support' ) ) add_theme_support( 'post-thumbnails' );
 
 register_nav_menus( array(
-    'menu' => 'menu'
+    'menu' => 'menu',
+    'footer_menu' => 'Footer Menu'
 ) );
 
 
@@ -762,9 +769,7 @@ $currentPage = $_GET['currentPage'];
 $categoryId = $_GET['idCategory'];
 
     if($filter_weight) {
-
-
-
+        
             $unique_filter = explode('&', $filter_weight);
 
             foreach ($unique_filter as $key =>  $item){
@@ -973,8 +978,11 @@ elseif($sortingPrice == 'recomm' ) {
             ($regularPrice) ? $regularPrice = $regularPrice.'$' : $regularPrice = '' ;
 
             $salePrice = $currentProduct->get_sale_price();
-
-            ($salePrice) ? $salePrice = $salePrice.'$' : $salePrice = '' ;
+            
+            if( !$salePrice ){
+                $salePrice = $regularPrice;
+                $regularPrice ='';
+            }
 
             $regularPrice = json_encode($regularPrice);
 
@@ -1073,8 +1081,8 @@ elseif($sortingPrice == 'recomm' ) {
                  "description": ['.$description.'],
                 "specification": '.$specification.'
             },
-            "price": ['.$regularPrice.'],
-            "oldPrice": ['.$salePrice.'],
+            "price": ['.$salePrice.'],
+            "oldPrice": ['.$regularPrice.'],
             "urlDetails": "'.$link.'"
         },';
 
@@ -1156,4 +1164,34 @@ function custome_add_to_cart() {
 }
 
 
-
+function mc_checklist(
+    $email, $debug = false,
+    $apikey = '73c564882b33fedb38ccb3e03fcb4101-us15',
+    $listid = '302397633b',
+    $server = 'us15' )
+{
+    $userid = md5($email);
+    $auth = base64_encode( 'user:'. $apikey );
+    $data = array(
+        'apikey'        => $apikey,
+        'email_address' => $email
+    );
+    $json_data = json_encode($data);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://'.$server.'.api.mailchimp.com/3.0/lists/'.$listid.'/members/' . $userid);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
+        'Authorization: Basic '. $auth));
+    curl_setopt($ch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+    $result = curl_exec($ch);
+    if ($debug) {
+        var_dump($result);
+    }
+    $json = json_decode($result);
+    return $json->{'status'};
+}

@@ -1,11 +1,6 @@
 <?php get_header(); ?>
 
-<!-- breadcrumbs -->
-<nav class="breadcrumbs">
-    <a href="#">Home</a>
-    <span>Terms of Usage</span>
-</nav>
-<!-- /breadcrumbs -->
+<?php woocommerce_breadcrumb(); ?>
 
 <!-- site__content -->
 <div class="site__content site__content_page site__white-back">

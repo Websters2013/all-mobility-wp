@@ -4,12 +4,7 @@
  */
 get_header(); ?>
 
-<!-- breadcrumbs -->
-<nav class="breadcrumbs">
-    <a href="#">Home</a>
-    <span>My Cart</span>
-</nav>
-<!-- /breadcrumbs -->
+<?php woocommerce_breadcrumb(); ?>
 
 <div class="site__content site__content_inner site__white-back">
 

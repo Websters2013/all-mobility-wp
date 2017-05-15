@@ -1,6 +1,6 @@
 <!-- site__footer -->
 <footer class="site__footer">
-
+    
     <!-- site__footer-layout -->
     <div class="site__footer-layout">
 
@@ -115,8 +115,18 @@
 
             <!-- site__footer-links -->
             <div class="site__footer-links">
-                <a href="#">Log In</a>/
-                <a href="#">Sign Up</a>
+
+                <?php if( is_user_logged_in() ): ?>
+
+                    <a href="<?= get_permalink(13) ?>" >Profile</a>
+
+                <?php else: ?>
+
+                    <a href="<?= get_permalink(13) ?>">Log In</a>/
+                    <a href="<?= get_permalink(13).'?reg=true' ?>">Sign Up</a>
+
+                <?php endif; ?>
+
             </div>
             <!-- /site__footer-links -->
 
@@ -127,13 +137,21 @@
 
                 <p class="site__footer-copyright">Copyright 2017</p>
 
-                <!-- site__footer-menu -->
-                <nav class="site__footer-menu">
-                    <a href="#">Legal Information </a>
-                    <a href="#">Terms of use </a>
-                    <a href="#">Contact Us</a>
-                    <a href="#">Delivery  & Refunds</a>
-                </nav>
+                <?php $locations = get_nav_menu_locations();
+
+                $menu_items = wp_get_nav_menu_items($locations['footer_menu']);
+            
+                if($menu_items):
+                echo '  <!-- site__footer-menu -->
+                <nav class="site__footer-menu">';
+                foreach ( (array) $menu_items as $key => $menu_item ) {
+
+                    echo '   <a href="'.get_permalink($menu_item->object_id).'">'.$menu_item->title.'</a>';
+                    
+                } 
+                echo ' </nav>';
+                endif; ?>
+
                 <!-- /site__footer-menu -->
 
             </div>
@@ -153,7 +171,7 @@
             </div>
             <div>
 
-                <a href="#" class="site__footer-free">free catalog</a>
+                <a href="#"  data-popup="get" class="site__footer-free popup__open">free catalog</a>
                 
                 <!-- social -->
                 <div class="social">

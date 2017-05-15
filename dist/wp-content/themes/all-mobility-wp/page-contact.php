@@ -5,12 +5,7 @@
 get_header(); ?>
 
 
-    <!-- breadcrumbs -->
-    <nav class="breadcrumbs">
-        <a href="#">Home</a>
-        <span>Contact Us</span>
-    </nav>
-    <!-- /breadcrumbs -->
+<?php woocommerce_breadcrumb(); ?>
 
     <!-- site__content -->
     <div class="site__content site__content_inner site__white-back site__content_no-padding">
@@ -91,24 +86,8 @@ get_header(); ?>
                         Send Us a Message
 
                     </h2>
-
-                    <form action="#">
-
-                        <div class="contact-us__row">
-                            <label class="site__label" for="name">Your Name <span>*</span></label>
-                            <input class="site__input" type="text" id="name" name="name">
-                        </div>
-                        <div class="contact-us__row">
-                            <label class="site__label" for="email">Your E-mail <span>*</span></label>
-                            <input class="site__input" type="email" id="email" name="email">
-                        </div>
-                        <div class="contact-us__row">
-                            <label class="site__label" for="message">Your Message <span>*</span></label>
-                            <textarea class="site__input" id="message" name="message" cols="30" rows="10"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn_13"><span>send</span></button>
-
-                    </form>
+                    
+                    <?= do_shortcode('[contact-form-7 id="503" title="Contact form 1"]') ?>
 
                 </div>
                 <div>

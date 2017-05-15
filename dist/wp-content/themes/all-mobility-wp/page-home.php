@@ -60,7 +60,7 @@ get_header(); ?>
 
                 <h2 class="site__title"><?= get_field( 'choose_the_title' ) ?>
 
-                    <a class="site__title-link" href="#">store locator</a>
+                    <a class="site__title-link" href="<?= get_permalink(432) ?>">store locator</a>
 
                 </h2>
 
