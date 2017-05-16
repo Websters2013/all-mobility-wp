@@ -277,6 +277,14 @@
     .site__input {
       width: 69% !important;
     }
+    .wpcf7-form-control-wrap {
+      width: 69% !important;
+
+      .site__input {
+        width: 100% !important;
+      }
+
+    }
 
   }
   .contact__us-open {
