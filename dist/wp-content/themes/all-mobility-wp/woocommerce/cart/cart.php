@@ -92,6 +92,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 									<?= $_product->get_price_html(); ?>
 								</div>
 
+							<div>
+
 								<!-- count-product -->
 								<div class="count-product">
 									<a class="count-product__btn count-product_del" href="#"><span>-</span></a>
@@ -99,6 +101,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 									<a class="count-product__btn count-product_add" href="#"><span>+</span></a>
 								</div>
 								<!-- /count-product -->
+
+								<div class="my-cart__count">
+									<select name="count" id="count">
+										<?php for( $i = 1; $i<=10;$i++ ): ?>
+											<option value="<?= $i ?>"><?= $i ?></option>
+										<?php endfor; ?>
+									</select>
+								</div>
+
+							</div>
 
 								<div class="my-cart__total-price">
 
@@ -355,8 +367,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div>
 
 			<h2 class="site__title site__title_3">Your cart is currently empty.</h2>
-			<a class="btn btn_3" href="#">Return To Shop</a>
-
+			
 		</div>
 	</div>
 	<!-- /my-cart__empty -->
