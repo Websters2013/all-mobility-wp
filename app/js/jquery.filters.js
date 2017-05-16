@@ -46,8 +46,6 @@
             _checkPrice = '',
             _priceCategory = _obj.find('input[name=_price]');
 
-        console.log(_priceCategory);
-
         //private methods
 
         var _addEvents = function () {
