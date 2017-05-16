@@ -44,7 +44,8 @@ if ( ! is_ajax() ) {
 	</div>
 
 
-	<p class="checkout__payments-error">Please try another payment method or call us at 1-800-ALL-MOBI for assistance.</p>
+<!--	<p class="checkout__payments-error">Please try another payment method or call us at 1-800-ALL-MOBI for assistance.</p>-->
+
 	<?php endif; ?>
 	<div class="form-row place-order">
 		<noscript>
