@@ -32,6 +32,7 @@ if ( ! is_ajax() ) {
 		<h3>Choose payment method</h3>
 
 		<?php
+		
 		if ( ! empty( $available_gateways ) ) {
 			foreach ( $available_gateways as $gateway ) {
 				wc_get_template( 'checkout/payment-method.php', array( 'gateway' => $gateway ) );
@@ -43,13 +44,11 @@ if ( ! is_ajax() ) {
 		
 	</div>
 
-
-<!--	<p class="checkout__payments-error">Please try another payment method or call us at 1-800-ALL-MOBI for assistance.</p>-->
-
 	<?php endif; ?>
+
 	<div class="form-row place-order">
 		<noscript>
-			<?php _e( 'Since your browser does not support JavaScript, or it is disabled, please ensure you click the <em>Update Totals</em> button before placing your order. You may be charged more than the amount stated above if you fail to do so.', 'woocommerce' ); ?>
+			<?php _e( '<p class="checkout__payments-error">Please try another payment method or call us at 1-800-ALL-MOBI for assistance.</p>', 'woocommerce' ); ?>
 			<br/><input type="submit" class="button alt" name="woocommerce_checkout_update_totals" value="<?php esc_attr_e( 'Update totals', 'woocommerce' ); ?>" />
 		</noscript>
 
@@ -64,8 +63,6 @@ if ( ! is_ajax() ) {
 		<?php wp_nonce_field( 'woocommerce-process_checkout' ); ?>
 	</div>
 </div>
-
-
 
 <?php
 if ( ! is_ajax() ) {

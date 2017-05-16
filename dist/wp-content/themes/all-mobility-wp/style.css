@@ -12,6 +12,10 @@ small.woocommerce-password-hint {
     display: none !important;
 }
 
+div.wpcf7-mail-sent-ok {
+    width: 100% !important;
+}
+
 .woocommerce-password-strength {
     position: absolute;
     bottom: 0;

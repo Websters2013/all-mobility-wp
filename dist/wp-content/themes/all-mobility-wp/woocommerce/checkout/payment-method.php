@@ -22,18 +22,57 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <div class="nice-radio nice-radio_2 wc_payment_method payment_method_<?php echo $gateway->id; ?>" >
-	<input type="radio" name="payment_method"  value="<?php echo esc_attr( $gateway->id ); ?>" id="<?= $gateway->id ?>">
-	<label for="<?= $gateway->id ?>"><?= $gateway->get_title() ?>
 
-                                <span class="checkout__payments-more">
-									<span class="checkout__payments-pics">
-                                       <img src="<?= DIRECT ?>pic/paypal.jpg" width="48" height="30" alt="paypal">
-                                    </span>
-                                    <span class="checkout__payments-text"><?= $gateway->get_description() ?></span>
+    <?php if( $gateway->id != 'stripe' ): ?>
 
-                                </span>
+    <input type="radio" name="payment_method"  value="<?php echo esc_attr( $gateway->id ); ?>" id="<?= $gateway->id ?>">
+
+    <?php
+
+        $label_class = '';
+
+    else :
+        $label_class = 'payment_method_';
+        ?>
+
+    <input type="radio" name="payment_method" value="stripe" id="payment_method_stripe" checked>
+
+	<?php endif; ?>
+
+    <label for="<?= $label_class.$gateway->id ?>"><?= $gateway->get_title() ?>
+
+        <span class="checkout__payments-more">
+            <span class="checkout__payments-pics">
+
+
+
+                <?php if( $gateway->id == 'paypal' ): ?>
+
+                    <img src="<?= DIRECT ?>pic/paypal.jpg" width="48" height="30" alt="paypal">
+
+                    <?php else: ?>
+
+                    <?= $image = $gateway->get_icon(); ?>
+
+                <?php endif; ?>
+
+            </span>
+            <span class="checkout__payments-text"><?= $gateway->get_description() ?></span>
+
+        </span>
 
 	</label>
 
-</div>
+    <?php if ( $gateway->has_fields() || $gateway->get_description() ) : ?>
+        <div class="payment_box payment_method_<?php echo $gateway->id; ?>" <?php if ( ! $gateway->chosen ) : ?>style="display:none;"<?php endif; ?>>
+            <?php $gateway->payment_fields(); ?>
+        </div>
+    <?php endif; ?>
 
+    <?php if( $gateway == 'stripe' ): ?>
+        <div class="payment_box payment_method_stripe">
+            <div id="stripe-payment-data" data-panel-label="" data-description="" data-email="alexksnikol@gmail.com" data-amount="130000" data-name="All About Mobility" data-currency="usd" data-image="" data-bitcoin="true" data-locale="en" data-allow-remember-me="false"><p>Pay with your credit card via Stripe. TEST MODE ENABLED. In test mode, you can use the card number 4242424242424242 with any CVC and a valid expiration date or check the documentation "<a href="https://stripe.com/docs/testing">Testing Stripe</a>" for more card numbers.</p>
+            </div>		</div>
+    <?php endif; ?>
+
+</div>

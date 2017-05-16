@@ -375,7 +375,7 @@
 
                 <!-- get-catalog__subscribe -->
                 <div class="get-catalog__subscribe">
-                   <?= do_shortcode('[mc4wp_form id="477"]') ?>
+                   <?= do_shortcode('[contact-form-7 id="510" title="Subscribe Form"]') ?>
                 </div>
                 <!-- /get-catalog__subscribe -->
 

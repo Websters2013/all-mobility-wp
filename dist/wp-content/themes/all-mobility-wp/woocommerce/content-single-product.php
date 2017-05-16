@@ -80,7 +80,7 @@ if($_POST['add-to-cart']){
 
 		<!-- product__download -->
 		<div class="product__download">
-			<a href="#">Download Manual</a>
+			<a href="<?= get_site_url().'/wp-content/uploads/wpallimport/files/'.get_field('file_name') ?>">Download Manual</a>
 		</div>
 		<!-- /product__download -->
 
