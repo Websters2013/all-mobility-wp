@@ -33,6 +33,7 @@
             _define = $('.my-cart__define'),
             _applied = $('.my-cart__applied'),
             _invalid = $('.my-cart__invalid'),
+            _selectCount = _obj.find('.my-cart__count select'),
             _window = $(window);
 
         //private methods
@@ -52,7 +53,7 @@
 
                         if ( !(( event.which != 46 || $( this ).val().indexOf( '.' ) != -1 ) && ( event.which < 48 || event.which > 57 )) ) {
 
-                            _requestCountChange( $(this).parents('.my-cart__product') );
+                            _requestCountChange( $(this).parents('.my-cart__product'), $(this).val() );
 
                         }
 
@@ -62,10 +63,12 @@
                 _input.on( {
                     keyup: function () {
 
+                        var curItem = $(this);
+
                         setTimeout( function() {
 
                             _writeInCart();
-                            _requestCountChange( _obj );
+                            _requestCountChange( _obj, curItem.val() );
                         }, 100 );
 
                     }
@@ -74,11 +77,15 @@
                 _btnChangeCount.on( {
                     click: function () {
 
+                        var curItem = $(this),
+                            parent = curItem.parent(),
+                            input = parent.find('.count-product__input');
+
                         _btnRemoveProduct.addClass('loading');
 
                         setTimeout( function() {
 
-                            _requestCountChange( _obj );
+                            _requestCountChange( _obj, input.val() );
                           
                         }, 500 );
 
@@ -172,12 +179,21 @@
 
                     }
                 } );
+
                 _inputCoupon.on( {
                     keypress: function (event) {
 
                         if ( ( event.which == 13 ) ) {
                             event.preventDefault();
                         }
+
+                    }
+                } );
+
+                _selectCount.on( {
+                    change: function() {
+
+                        _requestCountChange( $(this).parents('.my-cart__product'), $(this).val() );
 
                     }
                 } );
@@ -247,7 +263,7 @@
                 } );
 
             },
-            _requestCountChange = function ( elem ) {
+            _requestCountChange = function ( elem, value ) {
                 
                 _request.abort();
                 _request = $.ajax( {
@@ -256,8 +272,7 @@
                         action: 'cart_quantity_changes',
                         id: elem.attr('data-product-id'),
                         key: elem.attr('data-product-key'),
-                        variation: elem.attr('data-variation-id'),
-                        countProduct: elem.find('.count-product__input').val(),
+                        countProduct: value,
                         flag: 'changeCount'
                     },
                     dataType: 'json',

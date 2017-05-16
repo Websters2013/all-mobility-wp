@@ -372,7 +372,7 @@
   text-align: center;
 
   &:hover {
-    background: rgb(234, 84, 56);
+    background: #DF5D00;
   }
 
   img {
@@ -395,7 +395,7 @@
   background: #0094C1;
 
   &:hover {
-    background: #00a9e6;
+    background: #007497;
   }
 
   svg {
@@ -1061,7 +1061,7 @@ textarea.site__input {
         }
         >a {
           border-bottom: none;
-          padding: 10px 7px;
+          padding: 8px 7px;
           font-size: 14px;
           line-height: 14px;
           -webkit-transition: background 0.3s;
@@ -1304,7 +1304,7 @@ textarea.site__input {
     text-transform: uppercase;
 
     &:hover {
-      background: rgb(234, 84, 56);
+      background: #DF5D00;
     }
 
   }
@@ -1511,6 +1511,7 @@ textarea.site__input {
 
         >a {
           font-size: 18px;
+          line-height: 18px;
         }
 
       }

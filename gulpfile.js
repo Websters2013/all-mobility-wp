@@ -81,6 +81,7 @@ let paths = {
                 'app/js/jquery.popup.js',
                 'app/js/jquery.ajax-cart.js',
                 'app/js/jquery.number-spinner.js',
+                'app/js/jquery.websters-select.js',
                 'app/js/jquery.product-slider.js',
                 'app/js/jquery.search.js'
             ]
