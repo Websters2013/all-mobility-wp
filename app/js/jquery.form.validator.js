@@ -70,6 +70,7 @@
                 _rate.on( {
                     click: function() {
                         var field = $( this ).find( 'input' );
+
                         field.removeClass( 'not-touched' );
                         _validateField( field );
 
@@ -129,9 +130,9 @@
                     }
                 }
 
-                if( type === 'hidden' && name === 'stars' ){
-
-                    if ( field.val() === '' ) {
+                if( type === 'hidden' && name === 'rating' ){
+console.log(field.val())
+                    if ( field.val() <= 0 || field.val() === ''  ) {
                         _makeNotValid( field );
                         return false;
                     }

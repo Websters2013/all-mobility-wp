@@ -315,7 +315,7 @@ function custom_price_html( $price, $product ){
 
     if( is_singular('product') ){
 
-        $price_formated = str_replace('<del>','<div>List Price:<del>',$price);
+        $price_formated = str_replace('<del>','<div>List Price: <del>',$price);
         $price_formated = str_replace('</del>','</del></div>',$price_formated);
 
         return str_replace( '<ins>', '', $price_formated );
