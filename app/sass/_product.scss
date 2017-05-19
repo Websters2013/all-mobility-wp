@@ -85,7 +85,7 @@
   color: #4E4E4E;
   text-align: center;
 
-  del {
+  > div {
     display: block;
     @include main-font3();
     font-weight: 400;
