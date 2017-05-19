@@ -412,7 +412,7 @@
 .site__footer-layout {
   position: relative;
   max-width: 1442px;
-  padding: 0 20px;
+  padding: 0 10px;
   margin: 0 auto;
 }
 .site__footer-top {
@@ -746,7 +746,7 @@ input[type="number"].site__input {
 
   &.not-touched,
   &.not-valid {
-    border-color: #ed1b24 !important;
+    border-color: red !important;
   }
   &:focus {
     border-color: #F47920;

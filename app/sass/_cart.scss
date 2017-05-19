@@ -22,11 +22,17 @@
   }
 
 }
+.cart__price {
+  margin: 0 -25px 0 0 ;
+}
 @media (min-width: $desktop) {
 
   .cart {
     top: 46px;
     right: 145px;
+  }
+  .cart__price {
+    margin: 0 0 0 0 ;
   }
 
 }
