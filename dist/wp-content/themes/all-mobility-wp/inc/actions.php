@@ -790,7 +790,7 @@ $currentPage = $_GET['currentPage'];
 $categoryId = $_GET['idCategory'];
 
     if($filter_weight) {
-        
+
             $unique_filter = explode('&', $filter_weight);
 
             foreach ($unique_filter as $key =>  $item){
@@ -799,7 +799,7 @@ $categoryId = $_GET['idCategory'];
 
             foreach ($uniqueItems as $uniqueItem){
 
-                
+
                 if( $uniqueItem[0] == 'choose_frame_type' ):
 
                     $allUniqueFields[] = array(
@@ -857,7 +857,6 @@ elseif($sortingPrice == 'recomm' ) {
 }
     
 
-
     foreach ($output as $key => $item){
 
         if( $key == 'price' ){
@@ -876,6 +875,8 @@ elseif($sortingPrice == 'recomm' ) {
 
         $attributes_filter = '';
 
+        if(!empty($atts)):
+        
         foreach ( $atts as $key => $item ){
 
                 $attributesQuery[] =  array(
@@ -885,6 +886,8 @@ elseif($sortingPrice == 'recomm' ) {
                 );
         }
 
+        endif;     
+        
     } else {
 
         $attributes_filter = '';
@@ -944,6 +947,8 @@ elseif($sortingPrice == 'recomm' ) {
 
     $products = '';
 
+    if(!empty($attrProducts)):
+
     foreach ($attrProducts as $product_id){
 
         $currentProduct = wc_get_product( $product_id );
@@ -970,11 +975,16 @@ elseif($sortingPrice == 'recomm' ) {
 
             $available_variations = $currentProduct->get_available_variations();
 
+            if(!empty($available_variations)):
+
             foreach ($available_variations as $key => $variation){
                 $var[$variation['regular_price']] = $variation['sale_price'];
             }
 
+
             ksort($var);
+
+
             $old_price = '';
             $new_price = '';
             foreach ($var as  $key =>  $item){
@@ -992,7 +1002,7 @@ elseif($sortingPrice == 'recomm' ) {
             }
             $regularPrice = substr( $old_price, 0, -1 );
             $salePrice = substr( $new_price, 0, -1 );
-
+            endif;
 
         } elseif( $currentProduct->is_type('simple') ) {
 
@@ -1113,6 +1123,8 @@ elseif($sortingPrice == 'recomm' ) {
 
 
     }
+
+    endif;
 
     $products = substr( $products, 0, -1 );
 
