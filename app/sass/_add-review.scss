@@ -2,6 +2,7 @@
   margin: 0 0 50px;
 }
 .add-review__form {
+  position: relative;
   max-width: 592px;
   padding-top: 3px;
 }
@@ -9,7 +10,20 @@
   margin: 0 0 16px;
 }
 .add-review__rate {
+  display: inline-block;
   margin: 0 0 6px;
+
+  &-not-valide {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    font-size: smaller;
+    color: red;
+  }
+}
+.not-valid + .add-review__rate-not-valide {
+  display: block;
 }
 
 @media (min-width: $desktop) {
@@ -49,5 +63,8 @@
     margin-top: -8px;
   }
 
+  .add-review__rate-not-valide {
+    left: 24.3%;
+  }
 }
 

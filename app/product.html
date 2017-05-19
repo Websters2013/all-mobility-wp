@@ -1527,17 +1527,18 @@
 
                     <!-- add-review__form -->
                     <div class="add-review__form">
-                        <form action="#">
+                        <form class="validator" action="#" novalidate>
                             <p>You are adding review as Jonathan Smith, San Francisco, CA</p>
 
                             <div class="add-review__row">
-                                <div><label class="site__label" for="name">Your Name <span>*</span></label></div>
+                                <div><label class="site__label" for="name">Rate Product <span>*</span></label></div>
                                 <div>
 
-                                    <div class="add-review__rate">
-                                        <input type="hidden" name="stars">
+                                    <label class="add-review__rate">
+                                        <input type="hidden" name="stars" value="" required>
+                                        <span class="add-review__rate-not-valide">Please rate the product.</span>
                                         <div id="#el"></div>
-                                    </div>
+                                    </label>
 
                                 </div>
                             </div>
@@ -1551,10 +1552,10 @@
                             </div>
                             <div class="add-review__row">
                                 <div><label class="site__label" for="review">Your Review <span>*</span></label></div>
-                                <div><textarea class="site__input" name="review" id="review" cols="30" rows="10"></textarea></div>
+                                <div><textarea class="site__input" name="review" id="review" cols="30" rows="10" required></textarea></div>
                             </div>
                             <div class="add-review__send">
-                                <button class="btn btn_11"><span>submit</span></button>
+                                <button class="btn btn_11" type="submit"><span>submit</span></button>
                             </div>
                         </form>
                     </div>
