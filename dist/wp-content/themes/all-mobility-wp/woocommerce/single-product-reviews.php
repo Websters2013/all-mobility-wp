@@ -35,7 +35,6 @@ if ( $post_id > 0 ) {
 
 ?>
 
-
 <!-- reviews -->
 <div class="reviews">
 
@@ -125,10 +124,13 @@ if ( $post_id > 0 ) {
 				<div><label class="site__label" for="name">Rate Product <span>*</span></label></div>
 				<div>
 
-					<div class="add-review__rate">
-						<input type="hidden" name="rating" value="0">
+
+					<label class="add-review__rate">
+
+						<input type="hidden"  required name="rating" value="">
+						<span class="add-review__rate-not-valide">Please rate the product.</span>
 						<div id="#el"></div>
-					</div>
+					</label>
 
 				</div>
 			</div>

@@ -118,10 +118,7 @@
 
                 }
 
-            }
-
-
-            ?>
+            }  ?>
 
             <li class="site__menu-item<?= $sub_menu_class.$active ?>">
                 <a href="<?= $menu_item->url ?>">

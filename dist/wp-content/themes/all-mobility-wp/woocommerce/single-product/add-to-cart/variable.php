@@ -42,7 +42,7 @@ $upselsIDs = $product->get_upsell_ids(); ?>
 			?>
 
 			<select name="<?= 'upsells_'.$key ?>">
-				<option value="0">no cup holder</option>
+				<option value="0">Add-Ons</option>
 				<option value="<?= $ID ?>"><?= $title ?></option>
 			</select>
 

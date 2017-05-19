@@ -10,12 +10,26 @@
         <title><?php document_title(); ?></title>
         <?php wp_head() ?>
     </head>
-    
+
+
+
     <body data-action="<?php echo admin_url( 'admin-ajax.php' );?>" <?php body_class() ?> >
 
-    <!-- site -->
-    <div class="site">
+    <?php
 
+    if( is_page_template('page-checkout.php') ){
+        $checkoutClass = 'site_no-footer site_checkout';
+    } else {
+        $checkoutClass = '';
+    }
+
+
+?>
+
+
+    <!-- site -->
+    <div class="site <?= $checkoutClass ?>">
+        
         <!-- site__header -->
         <header class="site__header">
 

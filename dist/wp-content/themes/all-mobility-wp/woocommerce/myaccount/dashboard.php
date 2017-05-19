@@ -21,7 +21,16 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-?>
+
+if( $success_reg = $_SESSION['wb_reg'] ){
+
+	$_SESSION['wb_reg'] = 0;
+
+	echo "<div class='success_registration'>$success_reg</div>";
+
+} ?>
+
+
 
 <?php $user = new WC_Customer($current_user->ID); ?>
 <!-- my-account -->

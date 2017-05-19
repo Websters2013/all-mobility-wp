@@ -303,7 +303,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<!-- featured-products -->
 		<div class="featured-products featured-products_2">
 
-			<h2 class="site__title site__title_5 site__title_center">With this product customers also purchase</h2>
+			<h2 class="site__title site__title_5 site__title_center"><?= get_field('cross_sell_products_title','options') ?></h2>
 
 			<div class="swiper-container">
 				<div class="swiper-wrapper">

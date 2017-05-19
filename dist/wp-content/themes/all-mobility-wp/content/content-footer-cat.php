@@ -1,31 +1,63 @@
 
-    <?php $terms = get_terms(array(
-        'taxonomy'=>'product_cat',
-        'hide_empty' => false,
-        'parent'=> 0
-    )) ;
- ?>
+    <?php
+
+    $locations = get_nav_menu_locations();
+
+    $menu_items = wp_get_nav_menu_items($locations['footer_cat_menu']);
+
+    $countItems = count($menu_items);
+    
+    if($menu_items): ?>
 
     <!-- site__footer-categories -->
     <div class="site__footer-categories">
 
-        <?php foreach ($terms as $term){
-            $termId = $term->term_id;
-            ?>
-            <dl>
-                <dt><a href="<?= get_term_link($termId) ?>"><?= $term->name ?></a></dt>
+        <?php for($i = 0; $i<$countItems; $i++){
 
-                <?php $terms_inner = get_terms(array(
-                    'taxonomy'=>'product_cat',
-                    'hide_empty' => false,
-                    'parent'=> $termId
-                )) ; ?>
+            //1 lvl
+            if($menu_items[$i]->menu_item_parent == 0){
 
-                <?php foreach ($terms_inner as $item): ?>
-                    <dd><a href="<?= get_term_link($item->term_id) ?>"><?= $item->name ?></a></dd>
-                <?php endforeach; ?>
-            </dl>
-        <?php } ?>
+                $menusArray .= '<dl>';
+                
+                $menu_id = $menu_items[$i]->ID;
+
+                $t_id = $menu_items[$i]->object_id;
+
+                ($menu_items[$i+1]->menu_item_parent == $menu_items[$i]->ID )? $flag_i = true : $flag_i = false;
+
+
+                $menusArray .= '<dt><a href="">'.$menu_items[$i]->title.'</a></dt>';
+                
+                if( $flag_i ){
+
+                    for($j = 0; $j<$countItems; $j++){
+
+                        if( $menu_items[$j]->menu_item_parent ==  $menu_items[$i]->ID ):
+
+                        $menusArray .= '<dd><a href="">'.$menu_items[$j]->title.'</a></dd>';
+
+                        endif;
+                        
+                    }
+                    
+                } ?>
+
+                    
+
+            <?php
+
+                $menusArray .= '</dl>';
+            
+            }
+
+
+        } ?>
+
+        <?php echo $menusArray; ?>
 
     </div>
     <!-- /site__footer-categories -->
+        
+   <?php  endif;
+    
+ ?>

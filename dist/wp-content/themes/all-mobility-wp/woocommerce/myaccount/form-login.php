@@ -67,7 +67,7 @@ $register_part = $_GET['reg'];
 				<h2 class="login-types__title">Create Account</h2>
 
 				<div class="login-types__social">
-					<a href="http://mobility.websters.com.ua/wp-login.php?ywsl_social=facebook&amp;redirect=http%3A%2F%2Fmobility.websters.com.ua%2Fwp-login.php%3Fredirect_to%3Dhttp%253A%252F%252Fmobility.websters.com.ua%252Fwp-admin%252F%26reauth%3D1">
+					<a href="https://allaroundmob.wpengine.com/wp-login.php?ywsl_social=facebook&amp;redirect=https%3A%2F%2Fallaroundmob.wpengine.com%2Fwp-login.php%3Fredirect_to%3Dhttps%253A%252F%252Fallaroundmob.wpengine.com%252Fwp-admin%252F%26reauth%3D1">
 
 						<svg width="16px" height="33px" viewBox="0 0 16 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -80,7 +80,7 @@ $register_part = $_GET['reg'];
 						</svg>
 
 					</a>
-					<a href="http://mobility.websters.com.ua/wp-login.php?ywsl_social=twitter&amp;redirect=http%3A%2F%2Fmobility.websters.com.ua%2Fwp-login.php%3Floggedout%3Dtrue">
+					<a href="https://allaroundmob.wpengine.com/wp-login.php?ywsl_social=twitter&amp;redirect=https%3A%2F%2Fallaroundmob.wpengine.com%2Fwp-login.php%3Fredirect_to%3Dhttps%253A%252F%252Fallaroundmob.wpengine.com%252Fwp-admin%252F%26reauth%3D1">
 
 						<svg width="42px" height="30px" viewBox="0 0 42 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
@@ -93,7 +93,7 @@ $register_part = $_GET['reg'];
 							</g>
 						</svg>
 					</a>
-					<a href="http://mobility.websters.com.ua/wp-login.php?ywsl_social=google&amp;redirect=http%3A%2F%2Fmobility.websters.com.ua%2Fwp-login.php%3Floggedout%3Dtrue">
+					<a href="https://allaroundmob.wpengine.com/wp-login.php?ywsl_social=google&amp;redirect=https%3A%2F%2Fallaroundmob.wpengine.com%2Fwp-login.php%3Fredirect_to%3Dhttps%253A%252F%252Fallaroundmob.wpengine.com%252Fwp-admin%252F%26reauth%3D1">
 
 						<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -111,6 +111,7 @@ $register_part = $_GET['reg'];
 				</div>
 
 			</div>
+			
 			<div>
 
 				<h2 class="login-types__title">Create Account</h2>
@@ -128,8 +129,7 @@ $register_part = $_GET['reg'];
 <?php endif; ?>
 
 <?php if ( get_option( 'woocommerce_enable_myaccount_registration' ) === 'yes' && $register_part ) : ?>
-
-
+	
 	<!-- sign-up -->
 	<div class="sign-up">
 

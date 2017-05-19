@@ -6,6 +6,13 @@ add_filter('xmlrpc_enabled', '__return_false');
 remove_action('wp_head', 'wlwmanifest_link');
 // close required actions
 
+add_action('init', 'myStartSession', 1);
+function myStartSession() {
+    if(!session_id()) {
+        session_start();
+    }
+}
+
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('wp_print_styles', 'print_emoji_styles');
 remove_action('wp_head', 'feed_links', 2);
@@ -183,7 +190,8 @@ if ( function_exists( 'add_theme_support' ) ) add_theme_support( 'post-thumbnail
 
 register_nav_menus( array(
     'menu' => 'menu',
-    'footer_menu' => 'Footer Menu'
+    'footer_menu' => 'Footer Menu',
+    'footer_cat_menu' => 'Category Footer Menu'
 ) );
 
 
@@ -307,7 +315,8 @@ function custom_price_html( $price, $product ){
 
     if( is_singular('product') ){
 
-        $price_formated = str_replace('<del>','<del>List Price: ',$price);
+        $price_formated = str_replace('<del>','<div>List Price:<del>',$price);
+        $price_formated = str_replace('</del>','</del></div>',$price_formated);
 
         return str_replace( '<ins>', '', $price_formated );
     } else {
@@ -544,7 +553,12 @@ function main_search(){
 
         $catName = $catObj->name;
 
-        $catName = str_replace($query,"<span>$query</span>",$catName);
+//        $catName = str_replace($query,"<span>$query</span>",$catName);
+
+        $pattern = preg_quote($query);
+        $catName  = preg_replace("/($pattern)/i",
+            '<span>$1</span>', $catName);
+
 
         $categories .= '{
             "name": "'.$catName.'",
@@ -579,7 +593,11 @@ function main_search(){
 
                 $catName = $catObj->name;
 
-                $catName = str_replace($query,"<span>$query</span>",$catName);
+//                $catName = str_replace($query,"<span>$query</span>",$catName);
+
+                $pattern = preg_quote($query);
+                $catName  = preg_replace("/($pattern)/i",
+                    '<span>$1</span>', $catName);
 
                 $categories .= '"'.$catName.'"'.',';
 
@@ -671,16 +689,19 @@ function main_search(){
 
             $sub_cat = substr( $sub_cat, 0, -1 );
 
-            ( $salePrice )? $salePrice = $salePrice.'$' : $salePrice = '' ;
-            ( $regularPrice )? $regularPrice = $regularPrice.'$' : $regularPrice = '' ;
+            ( $salePrice )? $salePrice = $salePrice : $salePrice = '' ;
+            ( $regularPrice )? $regularPrice = $regularPrice : $regularPrice = '' ;
 
+            $salePrice = json_encode(wc_price($salePrice));
+            $regularPrice = json_encode(wc_price($regularPrice));
+            
             $products .= ' {
             "name": '.$name.',
             "src": "'.$thumb_url.'",
             "alt": '.$name.',
             "href": "'.get_the_permalink($item).'",
-            "price": "'.$regularPrice.'",
-            "oldPrice": "'.$salePrice.'",
+            "price": '.$regularPrice.',
+            "oldPrice": '.$salePrice.',
             "categories": {
                 "mainCategory": '.$main_cat.',
                 "subcategories": ['.$sub_cat.']
@@ -958,10 +979,12 @@ elseif($sortingPrice == 'recomm' ) {
             $new_price = '';
             foreach ($var as  $key =>  $item){
 
-                $old_price .= '"'.$key.'$"'.',';
+//                $old_price .= '"'.$key.'$"'.',';
+                $old_price .= json_encode(wc_price($key)).',';
 
                 if($item){
-                    $new_price .= '"'.$item.'$"'.',';
+//                    $new_price .= '"'.$item.'$"'.',';
+                    $new_price .= json_encode(wc_price($item)).',';
                 } else {
                     $new_price .= '""'.',';
                 }
@@ -975,7 +998,7 @@ elseif($sortingPrice == 'recomm' ) {
 
             $regularPrice = $currentProduct->get_regular_price();
 
-            ($regularPrice) ? $regularPrice = $regularPrice.'$' : $regularPrice = '' ;
+            ($regularPrice) ? $regularPrice = $regularPrice : $regularPrice = '' ;
 
             $salePrice = $currentProduct->get_sale_price();
             
@@ -984,9 +1007,11 @@ elseif($sortingPrice == 'recomm' ) {
                 $regularPrice ='';
             }
 
-            $regularPrice = json_encode($regularPrice);
+            $regularPrice = json_encode(wc_price($regularPrice));
 
-            $salePrice = json_encode($salePrice);
+            $salePrice = json_encode(wc_price($salePrice));
+
+
 
         }
 
@@ -1195,3 +1220,96 @@ function mc_checklist(
     $json = json_decode($result);
     return $json->{'status'};
 }
+
+    function custom_registration_redirect() {
+        
+        $_SESSION['wb_reg'] = 'Successfully Registration !';
+        
+        return get_permalink(13);
+        
+    }
+
+    add_action('woocommerce_registration_redirect', 'custom_registration_redirect', 2);
+
+
+add_filter( 'wpsl_templates', 'custom_templates' );
+
+function custom_templates( $templates ) {
+    
+    $templates[] = array (
+        'id'   => 'custom',
+        'name' => 'AAM template',
+        'path' => get_stylesheet_directory() . '/' . 'wpsl-templates/custom.php',
+    );
+
+    return $templates;
+}
+
+add_filter( 'wpsl_listing_template', 'wb_wpsl_create_underscore_templates' );
+
+function wb_wpsl_create_underscore_templates() {
+
+        global $wpsl, $wpsl_settings;
+
+    
+        $listing_template = '<li data-store-id="<%= id %>">' . "\r\n";
+        $listing_template .= '<a href="<%= permalink %>"></a>'. "\r\n";
+        $listing_template .= "\t\t" . '<div class="wpsl-store-location">' . "\r\n";
+        $listing_template .= "\t\t\t" . '<p><%= thumb %>' . "\r\n";
+        $listing_template .= "\t\t\t\t" . wpsl_store_header_template( 'listing' ) . "\r\n"; // Check which header format we use
+        $listing_template .= "\t\t\t\t" . '<span class="wpsl-street"><%= address %></span>' . "\r\n";
+        $listing_template .= "\t\t\t\t" . '<% if ( address2 ) { %>' . "\r\n";
+        $listing_template .= "\t\t\t\t" . '<span class="wpsl-street"><%= address2 %></span>' . "\r\n";
+        $listing_template .= "\t\t\t\t" . '<% } %>' . "\r\n";
+        $listing_template .= "\t\t\t\t" . '<span>' . wpsl_address_format_placeholders() . '</span>' . "\r\n"; // Use the correct address format
+
+        if ( !$wpsl_settings['hide_country'] ) {
+            $listing_template .= "\t\t\t\t" . '<span class="wpsl-country"><%= country %></span>' . "\r\n";
+        }
+
+        $listing_template .= "\t\t\t" . '</p>' . "\r\n";
+
+
+
+        // Show the phone, fax or email data if they exist.
+        if ( $wpsl_settings['show_contact_details'] ) {
+            $listing_template .= "\t\t\t" . '<p class="wpsl-contact-details">' . "\r\n";
+            $listing_template .= "\t\t\t" . '<% if ( phone ) { %>' . "\r\n";
+            $listing_template .= "\t\t\t" . '<span><strong>' . esc_html( $wpsl->i18n->get_translation( 'phone_label', __( 'Phone', 'wpsl' ) ) ) . '</strong>: <%= formatPhoneNumber( phone ) %></span>' . "\r\n";
+            $listing_template .= "\t\t\t" . '<% } %>' . "\r\n";
+            $listing_template .= "\t\t\t" . '<% if ( fax ) { %>' . "\r\n";
+            $listing_template .= "\t\t\t" . '<span><strong>' . esc_html( $wpsl->i18n->get_translation( 'fax_label', __( 'Fax', 'wpsl' ) ) ) . '</strong>: <%= fax %></span>' . "\r\n";
+            $listing_template .= "\t\t\t" . '<% } %>' . "\r\n";
+            $listing_template .= "\t\t\t" . '<% if ( email ) { %>' . "\r\n";
+            $listing_template .= "\t\t\t" . '<span><strong>' . esc_html( $wpsl->i18n->get_translation( 'email_label', __( 'Email', 'wpsl' ) ) ) . '</strong>: <%= email %></span>' . "\r\n";
+            $listing_template .= "\t\t\t" . '<% } %>' . "\r\n";
+            $listing_template .= "\t\t\t" . '</p>' . "\r\n";
+        }
+
+        $listing_template .= "\t\t\t" . wpsl_more_info_template() . "\r\n"; // Check if we need to show the 'More Info' link and info
+        $listing_template .= "\t\t" . '</div>' . "\r\n";
+        $listing_template .= "\t\t" . '<div class="wpsl-direction-wrap">' . "\r\n";
+
+        if ( !$wpsl_settings['hide_distance'] ) {
+            $listing_template .= "\t\t\t" . '<%= distance %> ' . esc_html( $wpsl_settings['distance_unit'] ) . '' . "\r\n";
+        }
+
+        $listing_template .= "\t\t\t" . '<%= createDirectionUrl() %>' . "\r\n";
+        $listing_template .= "\t\t" . '</div>' . "\r\n";
+
+        $listing_template .= "\t" . '</li>';
+
+        return $listing_template;
+  }
+
+
+add_filter( 'wpsl_admin_marker_dir', 'custom_admin_marker_dir' );
+
+function custom_admin_marker_dir() {
+
+    $admin_marker_dir = get_stylesheet_directory() . '/wpsl-markers/';
+
+    return $admin_marker_dir;
+}
+
+define( 'WPSL_MARKER_URI', dirname( get_bloginfo( 'stylesheet_url') ) . '/wpsl-markers/' );

@@ -53,7 +53,7 @@ if ( $product->is_in_stock() ) : ?>
 					$title = get_the_title($ID); ?>
 
 					<select name="<?= 'upsells_'.$key ?>">
-						<option value="0">no cup holder</option>
+						<option value="0">Add-Ons</option>
 						<option value="<?= $ID ?>"><?= $title ?></option>
 					</select>
 
