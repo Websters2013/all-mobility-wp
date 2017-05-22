@@ -1,7 +1,7 @@
 <?php
 
 function cart_quantity_changes(){
-
+    
     $new_quantity = $_GET['countProduct'];
     $idProduct = $_GET['id'];
     $keyProduct  = $_GET['key'];
