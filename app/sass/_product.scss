@@ -119,12 +119,17 @@
   }
 
   .variations_form {
-    display: flex;
-    flex-direction: column;
+    position: relative;
 
     .woocommerce-variation {
-      order: 1;
+      position: absolute;
+      top: 100%;
+      left: 0;
     }
+  }
+
+  .featured-product__price div {
+    margin-left: 0;
   }
 
 }
