@@ -46,15 +46,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 
-                <?php if( $gateway->id == 'paypal' ): ?>
+                <?php if( $gateway->id == 'paypal' ){ ?>
 
                     <img src="<?= DIRECT ?>pic/paypal.jpg" width="48" height="30" alt="paypal">
+                <?php }
 
-                    <?php else: ?>
-
+                elseif( $gateway->id == 'stripe' ) { ?>
+                    <img src="<?= DIRECT ?>pic/visa.jpg" width="48" height="30" alt="visa">
+                    <img src="<?= DIRECT ?>pic/mastercard.jpg" width="48" height="30" alt="mastercard">
+                    <img src="<?= DIRECT ?>pic/card-amex.jpg" width="50" height="30" alt="amex">
+                    <img src="<?= DIRECT ?>pic/card-discover.jpg" width="48" height="30" alt="amex">
+                <?php } else { ?>
                     <?= $image = $gateway->get_icon(); ?>
-
-                <?php endif; ?>
+               <?php } ?>
 
             </span>
             <span class="checkout__payments-text"><?= $gateway->get_description() ?></span>
@@ -62,12 +66,6 @@ if ( ! defined( 'ABSPATH' ) ) {
         </span>
 
 	</label>
-
-    <?php if ( $gateway->has_fields() || $gateway->get_description() ) : ?>
-        <div class="payment_box payment_method_<?php echo $gateway->id; ?>" <?php if ( ! $gateway->chosen ) : ?>style="display:none;"<?php endif; ?>>
-            <?php $gateway->payment_fields(); ?>
-        </div>
-    <?php endif; ?>
 
     <?php if( $gateway == 'stripe' ): ?>
         <div class="payment_box payment_method_stripe">
