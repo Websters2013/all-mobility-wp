@@ -228,8 +228,7 @@
 
                     productsWrap += '<div>\
                                             <div class="top-products__item">\
-                                                <div class="top-products__pic">\
-                                                    <img src="'+ product.src +'" width="414" height="414" alt="'+ product.alt +'">\
+                                                <div class="top-products__pic" style="background-image: url('+ product.src +')">\
                                                 </div>\
                                                 <span class="top-products__price"><del>'+ product.oldPrice +'</del> '+ product.price +'</span>\
                                                 <h3 class="top-products__item-title">'+ product.name +'</h3>\
