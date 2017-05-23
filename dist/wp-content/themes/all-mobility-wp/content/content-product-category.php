@@ -236,7 +236,7 @@ if( $cat_obj->parent != 0 ){
 
 
                 <?php
-                if( $category_ID == 135 || $category_ID == 126 || $category_ID == 116 ): ?>
+                if( $category_ID == 145 || $category_ID == 125 || $category_ID == 116 ): ?>
 
                 <!-- category__find-parameters -->
                 <form class="category__find-parameters">
@@ -253,7 +253,7 @@ if( $cat_obj->parent != 0 ){
 
                     </div>
 
-                    <?php if( $category_ID == 135 ): ?>
+                    <?php if( $category_ID == 145 ): ?>
 
                         <div>
 
@@ -285,7 +285,7 @@ if( $cat_obj->parent != 0 ){
                         </div>
                     <?php endif;
 
-                    if( $category_ID == 126 ): ?>
+                    if( $category_ID == 125 ): ?>
 
                         <div>
 
