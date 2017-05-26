@@ -306,7 +306,17 @@ add_filter( 'woocommerce_shipping_fields' , 'custom_override_shipping_fields' );
 function custom_override_checkout_fields( $fields ) {
     unset($fields['billing']['billing_company']);
 
+    $fields['account']['account_password'] = array(
+        'label'     => __('Create Password', 'woocommerce'),
+        'required' => true
+    );
+    $fields['account']['account_password-2'] = array(
+        'label'     => __('Repeat Password', 'woocommerce'),
+        'type'     => __('password', 'woocommerce'),
+        'required' => true
 
+    );
+    
     return $fields;
 }
 
@@ -337,4 +347,16 @@ function custom_override_shipping_fields( $fields ) {
     );
 
     return $fields;
+}
+
+add_action( 'woocommerce_after_checkout_validation', 'wc_check_confirm_password_matches_checkout', 10, 1 );
+function wc_check_confirm_password_matches_checkout( $posted ) {
+//    wc_add_notice( __( 'Passwords do not match.', 'woocommerce' ), 'error' );
+
+    if ( ! is_user_logged_in() &&  ! empty( $posted['createaccount'] ) )  {
+        if ( strcmp( $posted['account_password'], $posted['account_password-2'] ) !== 0 ) {
+            wc_add_notice( __( 'Passwords do not match.', 'woocommerce' ), 'error' );
+            return false;
+        }
+    }
 }

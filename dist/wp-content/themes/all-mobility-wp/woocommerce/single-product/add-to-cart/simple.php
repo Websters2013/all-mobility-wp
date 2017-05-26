@@ -48,16 +48,21 @@ if ( $product->is_in_stock() ) : ?>
 		<form method="post" enctype='multipart/form-data'>
 
 			<?php if( $upselsIDs ):
+				$termsArray = array();
 
+				if(!empty($upselsIDs)):
 				foreach ( $upselsIDs as $key => $ID ){
-					$title = get_the_title($ID); ?>
+					$title = get_the_title($ID);
+					$termUpsell = get_the_terms($ID,'upsell_category');
 
-					<select name="<?= 'upsells_'.$key ?>">
-						<option value="0">Add-Ons</option>
-						<option value="<?= $ID ?>"><?= $title ?></option>
-					</select>
 
-				<?php }
+					if(!empty($termUpsell)):
+						foreach ($termUpsell as $upsell) {
+							
+						}
+					endif;
+				  	}
+				endif;
 
 			endif; ?>
 

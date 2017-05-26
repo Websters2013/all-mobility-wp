@@ -171,12 +171,16 @@ if( $cat_obj->parent != 0 ){
                     <?php endif; ?>
 
                     <?php
-                    if(!empty($attrs)):
-                    foreach ( $attrs as $key =>  $attr ):
-                        ?>
+                    
+                    $allFilters = getFilters($category_ID);
+
+                    if(!empty($allFilters['ranges'])):
+
+                    foreach ( $allFilters['ranges'] as $key => $filter ):
+                        $unit = $filter['unit']; ?>
 
                         <div class="category__filters-item">
-                                    <span><?= $key ?>
+                                    <span><?= $filter['name'] ?>
 
                                          <svg width="6px" height="8px" viewBox="0 0 6 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                              <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
@@ -190,27 +194,89 @@ if( $cat_obj->parent != 0 ){
                                          </svg>
 
                                     </span>
-
                             <div class="category__filters-list">
                                 <div>
 
-                                    <?php foreach ($attr as $sub_key => $item): ?>
+                                    <?php foreach ( $filter as $sub_key => $item ) {
 
+                                        if( !is_array($item) ){
+                                            continue;
+                                        }
+
+                                        $range = $item[0].'-'.$item[1];
+
+                                        if( $item[1] == 9999999999 ){
+                                            $rightRange = 'and above' ;
+                                        } else {
+                                            $rightRange = $item[1];
+                                        }
+
+                                        $range_for_display = $item[0].' - '.$rightRange.' '.$unit;
+
+                                        $countRe = checkProductCountByField($item[0],$item[1],$key,$category_ID);
+                                        ?>
 
                                         <div>
-                                            <input type="checkbox" name="<?= $item->taxonomy ?>"  data-id="<?= $item->term_id ?>" id="<?= $item->term_id ?>" value="<?= $item->term_id ?>">
-                                            <label for="<?= $item->term_id ?>"><?= $item->name ?> <span class="category__filters-count"><?= $item->count_posts ?></span></label>
+                                            <input type="checkbox" name="<?= $key ?>" id="<?= $sub_key ?>" data-id="<?= $range ?>">
+                                            <label for="<?= $sub_key ?>"><?= $range_for_display ?> <span class="category__filters-count"><?= $countRe ?></span></label>
                                         </div>
 
-                                    <?php
-                                    endforeach; ?>
+                                    <?php } ?>
 
                                 </div>
                             </div>
-
                         </div>
 
                     <?php endforeach;
+                    endif;
+
+                    if(!empty($allFilters['list'])):
+                        foreach ( $allFilters['list'] as $key => $filter ):
+
+                            ?>
+
+                            <div class="category__filters-item">
+                                    <span>Brand
+
+                                         <svg width="6px" height="8px" viewBox="0 0 6 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                             <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+                                             <desc>Created with Sketch.</desc>
+                                             <defs></defs>
+                                             <g id="high-fildelity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                                                 <g id="HD-category" transform="translate(-207.000000, -947.000000)" stroke-width="2" stroke="#444444">
+                                                     <polyline id="Path-3-Copy-10" transform="translate(209.500000, 951.000000) rotate(-90.000000) translate(-209.500000, -951.000000) " points="206.5 949.5 209.5 952.5 212.5 949.5"></polyline>
+                                                 </g>
+                                             </g>
+                                         </svg>
+
+                                    </span>
+                                <div class="category__filters-list">
+                                    <div>
+                                        <div>
+                                            <input type="checkbox" name="brand" id="name11" data-id="name11">
+                                            <label for="name11">Brand1 <span class="category__filters-count">1</span></label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" name="brand" id="name12" data-id="name12">
+                                            <label for="name12">Brand1  <span class="category__filters-count">1</span></label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" name="brand" id="name13" data-id="name13">
+                                            <label for="name13">Brand1  <span class="category__filters-count">1</span></label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" name="brand" id="name14" data-id="name14">
+                                            <label for="name14">Brand1  <span class="category__filters-count">1</span></label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" name="brand" id="name15" data-id="name15">
+                                            <label for="name15">Brand1  <span class="category__filters-count">1</span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <?php endforeach;
                     endif;
                     ?>
 
@@ -413,3 +479,9 @@ if( $cat_obj->parent != 0 ){
     <!-- /category__inner -->
 
 </div>
+
+<?php
+var_dump(getFilters($category_ID));
+?>
+
+<?php  ?>

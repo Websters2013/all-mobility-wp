@@ -60,3 +60,15 @@ div.wpcf7-mail-sent-ok {
 .apple-pay-button-wrapper {
     display: none;
 }
+
+.site_checkout .woocommerce-message {
+    display: none;
+}
+
+.site_checkout .woocommerce-info {
+    display: none;
+}
+
+.site_checkout .woocommerce-password-strength {
+    display: none;
+}

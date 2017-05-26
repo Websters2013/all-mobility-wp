@@ -54,7 +54,19 @@ if (function_exists('acf_add_options_page')) {
     acf_add_options_page();
 }
 
+function upsellCategory() {
 
+    register_taxonomy(
+        'upsell_category',
+        'product',
+        array(
+            'label' => __( 'Add a Upsell Category' ),
+            'hierarchical' => false
+        )
+    );
+}
+
+add_action( 'init', 'upsellCategory' );
 
 add_action('wp_enqueue_scripts', 'add_js');
 
@@ -1327,3 +1339,278 @@ function custom_admin_marker_dir() {
 }
 
 define( 'WPSL_MARKER_URI', dirname( get_bloginfo( 'stylesheet_url') ) . '/wpsl-markers/' );
+
+
+function getFilters( $catId ){
+
+    $fieldsList = array();
+
+    
+    $filtersFieldsRanges = array(
+        'seat_width',
+        'weight',
+        'top_speed',
+        'main_use',
+        'drive_range',
+        'chair_size',
+        'overall_width',
+        'base_width_open'
+    );
+
+    $filtersFieldsRangesLabels = array(
+        "Seat Width",
+        "Weight Capacity",
+        "Top speed",
+        "Turning radius",
+        "Drive Range",
+        "Chair size",
+        "Overall width",
+        "Base width open"
+    );
+
+    $filtersFieldsLists = array(
+        "brand",
+        "frame_color",
+        "choose_frame_type"
+    );
+
+    $filtersFieldsListsLabels = array(
+        "Brand",
+        "Frame Color",
+        "Frame Type"
+    );
+
+    foreach ( $filtersFieldsLists as $key => $field ) {
+
+        if( $allValues = checkFiledInCategory( $field, $catId ) ) {
+
+            $fieldsList[$field] = $allValues;
+
+            $fieldsList[$field]['name'] = $filtersFieldsListsLabels[$key];
+
+        }
+
+    }
+
+    $resultsArray['list'] = $fieldsList;
+
+    foreach ( $filtersFieldsRanges as $key => $field ) {
+
+        $range = getRangesByFiled( $field, $catId );
+
+        if( !empty($range) ){
+
+            $resultsArray['ranges'][$field] = $range;
+
+            $resultsArray['ranges'][$field]['name'] = $filtersFieldsRangesLabels[$key];
+            $resultsArray['ranges'][$field]['unit'] = $filtersFieldsRanges[$key];
+
+        }
+
+    }
+
+    return $resultsArray;
+
+}
+
+function checkFiledInCategory( $field, $catId ){
+
+    $args = array (
+        'post_type'  => 'product',
+        'posts_per_page' => -1,
+        'meta_value' => '',
+        'fields' => 'ids',
+        'tax_query'  => array(
+            'relation' => 'AND',
+            array(
+                'taxonomy' => 'product_cat',
+                'field' => 'term_id',
+                'terms' => $catId
+            ),
+            
+        ),
+        'meta_query' => array(
+            array(
+                'key' => $field,
+                'value'   => array(''),
+                'compare' => 'NOT IN'
+            )
+        )
+    );
+
+    $attrProducts = get_posts($args);
+
+    if( count($attrProducts) > 0 ){
+
+        foreach ( $attrProducts as $attrProduct ){
+
+            $result[] = get_field( $field, $attrProduct );
+
+        }
+
+        $result = array_count_values($result);
+    } else {
+
+        $result  = false;
+
+    }
+
+    return $result;
+
+}
+
+function getRangesByFiled( $field, $catId ){
+
+    $args = array (
+        'post_type'  => 'product',
+        'posts_per_page' => -1,
+        'meta_value' => '',
+        'fields' => 'ids',
+        'tax_query'  => array(
+            'relation' => 'AND',
+            array(
+                'taxonomy' => 'product_cat',
+                'field' => 'term_id',
+                'terms' => $catId
+            ),
+
+        ),
+        'meta_query' => array(
+            array(
+                'key' => $field,
+                'value'   => array(''),
+                'compare' => 'NOT IN'
+            )
+        )
+    );
+
+
+    $attrProducts = get_posts($args);
+
+    $fieldsValues = array();
+
+    if(!empty($attrProducts)):
+
+    foreach ( $attrProducts as $productId ) {
+
+        $fieldsValues[$field][] = intval( get_field( $field, $productId ) );
+
+    }
+
+    $uniqueArray  = array_unique($fieldsValues[$field]);
+
+    $uniqueArrayCount = count($uniqueArray);
+
+    if( $uniqueArrayCount >= 4 ){
+        $rangeCount = 4;
+    }
+    elseif( $uniqueArrayCount == 1 ){
+        $rangeCount = -1;
+    }
+    else {
+        $rangeCount = $uniqueArrayCount;
+    }
+
+        if( $rangeCount != -1 ):
+
+        $max = max($fieldsValues[$field]);
+
+        $min = min($fieldsValues[$field]);
+
+        $values = $max - $min;
+
+        $perRangeValue = ceil( $values/$rangeCount );
+
+        $rangesArray = array();
+
+            for( $i = 1; $i <= ( $rangeCount + 1 ) ; $i++ ){
+
+                $maxRange = intval( floor ( $perRangeValue*$i ) );
+
+                $minRange = intval( floor (  $perRangeValue*( $i-1 ) ) );
+
+                if( $i == 1 ){
+
+                    $minRange = $min;
+
+                }
+                elseif( ( $rangeCount + 1 ) == $i ) {
+
+                    $maxRange = 9999999999;
+
+                }
+
+                $rangesArray[$i] = array( $minRange, $maxRange );
+
+            }
+
+        else :
+
+            $rangesArray = array();
+
+        endif;
+
+    endif;
+
+    return $rangesArray;
+
+}
+
+function checkProductCountByField( $min, $max, $field,  $catID ){
+
+    $args = array (
+        'post_type'  => 'product',
+        'posts_per_page' => -1,
+        'tax_query'  => array(
+            'relation' => 'AND',
+            array(
+                'taxonomy' => 'product_cat',
+                'field' => 'term_id',
+                'terms' => $catID
+            )
+        ),
+        'meta_query' => array(
+
+            array(
+                'key' => $field,
+                'value' => array( $min, $max ),
+                'compare' => 'BETWEEN',
+                'type' => 'NUMERIC'
+            )
+
+        )
+    );
+
+    $attrProducts =  get_posts($args);
+
+    $countPosts = count($attrProducts);
+
+    if(empty($attrProducts)){
+        
+        $filterCount = 0;
+        
+    } else {
+        
+        $filterCount = $countPosts;
+        
+    }
+
+    return $filterCount;
+
+}
+
+function getUnitByKey( $key ){
+
+    $filtersFieldsRangesUnits = array(
+        "1" => '”',
+        "2" => ' lbs',
+        "3" => 'mph',
+        "4" => '”',
+        "5" => ' miles',
+        "6" => '',
+        "7" => '”',
+        "8" => ''
+    );
+    
+    return $filtersFieldsRangesUnits[$key];
+}

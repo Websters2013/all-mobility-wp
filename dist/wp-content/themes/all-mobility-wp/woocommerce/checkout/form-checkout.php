@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-//wc_print_notices();
+
 
 do_action( 'woocommerce_before_checkout_form', $checkout );
 
@@ -47,7 +47,40 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 			<div class="col-2">
 				<?php do_action( 'woocommerce_checkout_shipping' ); ?>
+				<?php if ( ! is_user_logged_in() && $checkout->is_registration_enabled() ) : ?>
+					<div class="woocommerce-account-fields">
+						<?php if ( ! $checkout->is_registration_required() ) : ?>
+
+							<p class="form-row form-row-wide create-account">
+								<input class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" id="createaccount" <?php checked( ( true === $checkout->get_value( 'createaccount' ) || ( true === apply_filters( 'woocommerce_create_account_default_checked', false ) ) ), true ) ?> type="checkbox" name="createaccount" value="1" />
+
+								<label for="createaccount" class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
+									<?php _e( 'Save this information and create an account with us to get discounts and special offers', 'woocommerce' ); ?>
+								</label>
+							</p>
+
+						<?php endif; ?>
+
+						<?php do_action( 'woocommerce_before_checkout_registration_form', $checkout ); ?>
+
+						<?php if ( $checkout->get_checkout_fields( 'account' ) ) : ?>
+
+							<div class="create-account">
+								<?php foreach ( $checkout->get_checkout_fields( 'account' )  as $key => $field ) : ?>
+									<?php woocommerce_form_field( $key, $field, $checkout->get_value( $key ) ); ?>
+								<?php endforeach; ?>
+								<div class="clear"></div>
+							</div>
+
+						<?php endif; ?>
+
+						<?php do_action( 'woocommerce_after_checkout_registration_form', $checkout ); ?>
+					</div>
+				<?php endif; ?>
 			</div>
+
+
+
 		</div>
 <!---->
 <!--		--><?php //do_action( 'woocommerce_checkout_after_customer_details' ); ?>
