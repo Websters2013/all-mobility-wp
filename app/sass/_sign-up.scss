@@ -62,7 +62,7 @@
     margin: 0 0 20px;
 
     .site__label {
-      width: 26%;
+      width: 34%;
       text-align: left;
       line-height: 17px;
     }
@@ -142,6 +142,7 @@
         .sign-up__send {
           padding: 0;
           padding-top: 46px;
+          text-align: center;
 
           .btn {
             min-width: 192px;
@@ -179,6 +180,7 @@
     .sign-up__send {
       margin: 0 0 50px;
       padding-top: 34px;
+      text-align: right;
     }
 
   }

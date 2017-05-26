@@ -74,6 +74,9 @@
     .site__header-layout {
       height: 53px;
     }
+    .site__header-view {
+      display: block;
+    }
 
   }
 
@@ -403,6 +406,24 @@
     vertical-align: middle;
     margin: 0 10px 0 0;
   }
+}
+.site__header-view {
+  display: none;
+  position: absolute;
+  height: 78px;
+  left: 0;
+  right: 0;
+  bottom: -78px;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.20);
+
+  .btn {
+    @include absoluteCenter();
+    max-width: 335px;
+    width: 81%;
+  }
+
 }
 .site__footer {
   position: relative;
@@ -768,6 +789,7 @@ textarea.site__input {
   color: #4E4E4E;
 
   span {
+    margin-left: 4px;
     color: #F47920;
   }
 
@@ -1025,6 +1047,9 @@ textarea.site__input {
     }
 
   }
+  .site__header-view {
+    display: none;
+  }
   .site__menu {
     position: absolute;
     left: 36px;
@@ -1125,7 +1150,7 @@ textarea.site__input {
             max-width: 317px;
           }
           ul {
-            width: 213px;
+            width: 270px;
             padding: 20px 0 0;
             -webkit-column-rule: 1px solid #E8E8E8; /* Chrome, Safari, Opera */
             -moz-column-rule: 1px solid #E8E8E8; /* Firefox */
