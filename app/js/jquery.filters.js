@@ -765,7 +765,6 @@
                         }
 
 
-
                     } else {
 
                         _objValue[name] = [value]
@@ -798,7 +797,6 @@
 
                 }
 
-
                 var strFinish = '',
                     strValues = '',
                     strFull = '',
@@ -829,7 +827,6 @@
                 _inputHidden.val( strFinish );
 
             },
-
             _init = function () {
                 _addEvents();
 

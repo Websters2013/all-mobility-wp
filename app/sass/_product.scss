@@ -213,6 +213,24 @@
   }
 
 }
+.product__upsals-price {
+  opacity: 0;
+  visibility: hidden;
+  margin: 20px 0 18px;
+  @include main-font1();
+  font-size: 30px;
+  line-height: 32px;
+  color: #4E4E4E;
+  text-align: center;
+  -webkit-transition: opacity 0.3s, visibility 0.3s;
+  transition: opacity 0.3s, visibility 0.3s;
+
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+}
 
 @media (min-width: $desktop) {
 
@@ -425,6 +443,9 @@
       }
 
     }
+  }
+  .product__upsals-price {
+    text-align: left;
   }
 
 }

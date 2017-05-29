@@ -218,6 +218,7 @@
                     data: {
                         action: 'remove_cart_item',
                         id: elem.attr('data-product-key'),
+                        upsals: elem.attr('data-upsals'),
                         flag: 'remove'
                     },
                     dataType: 'json',
@@ -272,6 +273,7 @@
                         action: 'cart_quantity_changes',
                         id: elem.attr('data-product-id'),
                         key: elem.attr('data-product-key'),
+                        upsals: elem.attr('data-upsals'),
                         countProduct: value,
                         flag: 'changeCount'
                     },
