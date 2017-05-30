@@ -17,7 +17,6 @@ if($flag == 'remove') {
 } else if($flag == 'changeCount') {
 
     $count = $_GET['countProduct'];
-    $upsals = $_GET['upsals'];
 
     $json_data = '{
         "total": "600$",
