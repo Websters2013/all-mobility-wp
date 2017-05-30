@@ -95,6 +95,20 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 		<div id="order_review" class="woocommerce-checkout-review-order">
 			<?php do_action( 'woocommerce_checkout_order_review' ); ?>
 		</div>
+
+		<div class="resolve resolve_2">
+
+			<h2 class="resolve__title">
+				<?= get_field('contact_text') ?>
+			</h2>
+			<?php $phone = get_field('phone_ch') ?>
+			<div class="resolve__call">
+				<span>Call now:</span>
+				<a href="tel:<?= $phone ?>"><?= $phone ?></a>
+			</div>
+
+		</div>
+
 	</div>
 
 	</div>

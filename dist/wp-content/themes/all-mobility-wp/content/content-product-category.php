@@ -480,8 +480,5 @@ if( $cat_obj->parent != 0 ){
 
 </div>
 
-<?php
-var_dump(getFilters($category_ID));
-?>
 
 <?php  ?>

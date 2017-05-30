@@ -1177,43 +1177,61 @@ function formatPriceForRanges( $value, $last = false ){
     return array($value,$above_flag);
 }
 
-add_action('woocommerce_add_to_cart', 'custome_add_to_cart');
+add_action('woocommerce_add_to_cart', 'custome_add_to_cart',2);
 
 function custome_add_to_cart() {
 
     global $woocommerce;
-    
-    $i = 0;
+
+    $mainProduct = $_POST['add-to-cart'];
+
+    if( WC()->session->get('upsellFlag') == 0 ):
+
+        WC()->session->set('upsellFlag',1);
+
+         $i = 0;
+
+        $upSellsArray = array();
 
     do {
-        $allProducts[] = $_POST["upsells_$i"];
-        $i++;
-    } while ( $_POST["upsells_$i"] != null );
 
+        $allProducts[] = $_POST["upsells_$i"];
+
+        $i++;
+
+    } while ( $_POST["upsells_$i"] != null );
 
     foreach ($allProducts as $product_id){
 
-        $found = false;
-
-        if ( sizeof( WC()->cart->get_cart() ) > 0 ) {
-            foreach ( WC()->cart->get_cart() as $cart_item_key => $values ) {
-                $_product = $values['data'];
-                if ( $_product->id == $product_id )
-                    $found = true;
-            }
-            // if product not found, add it
-            if ( ! $found )
-                WC()->cart->add_to_cart( $product_id );
-        } else {
-            // if no products in cart, add it
-            WC()->cart->add_to_cart( $product_id );
+        if( $product_id == 0 ){
+            continue;
         }
+
+        if( $newUpsells = WC()->session->get($mainProduct) ){
+
+            if( isset( $newUpsells[$product_id]) ){
+                $newUpsells[$product_id]++;
+            } else {
+                $newUpsells[$product_id] = 1;
+            }
+
+        } else {
+            $newUpsells[$product_id] = 1;
+        }
+
+        WC()->session->set($mainProduct,$newUpsells);
 
     }
 
 
-}
+        WC()->session->set('needUpdate',1);
 
+        WC()->session->set('upsellFlag',0);
+
+    endif;
+
+
+}
 
 function mc_checklist(
     $email, $debug = false,
@@ -1261,7 +1279,7 @@ function mc_checklist(
 add_filter( 'wpsl_templates', 'custom_templates' );
 
 function custom_templates( $templates ) {
-    
+
     $templates[] = array (
         'id'   => 'custom',
         'name' => 'AAM template',
@@ -1277,7 +1295,7 @@ function wb_wpsl_create_underscore_templates() {
 
         global $wpsl, $wpsl_settings;
 
-    
+
         $listing_template = '<li data-store-id="<%= id %>">' . "\r\n";
         $listing_template .= '<a href="<%= permalink %>"></a>'. "\r\n";
         $listing_template .= "\t\t" . '<div class="wpsl-store-location">' . "\r\n";
@@ -1328,6 +1346,16 @@ function wb_wpsl_create_underscore_templates() {
         return $listing_template;
   }
 
+add_filter( 'wpsl_marker_props', 'custom_marker_props' );
+
+function custom_marker_props( $marker_props ) {
+
+    $marker_props['scaledSize'] = '50,66'; // Set this to 50% of the original size
+    $marker_props['origin'] = '0,0';
+    $marker_props['anchor'] = '12,35';
+
+    return $marker_props;
+}
 
 add_filter( 'wpsl_admin_marker_dir', 'custom_admin_marker_dir' );
 
@@ -1339,7 +1367,6 @@ function custom_admin_marker_dir() {
 }
 
 define( 'WPSL_MARKER_URI', dirname( get_bloginfo( 'stylesheet_url') ) . '/wpsl-markers/' );
-
 
 function getFilters( $catId ){
 
@@ -1613,4 +1640,74 @@ function getUnitByKey( $key ){
     );
     
     return $filtersFieldsRangesUnits[$key];
+}
+
+function addUpselssToCart(){
+
+    
+    $cart = WC()->cart->get_cart();
+    
+    if(!empty($cart)):
+
+        $upsellsHides = array();
+
+        foreach ( $cart as $cart_item_key => $cart_item ) {
+
+        $product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
+     
+        if( $upsellsProduct = WC()->session->get($product_id) ){
+
+            foreach ( $upsellsProduct as $key => $value ){
+
+                if( is_cart() && WC()->session->get('needUpdate') ) {
+
+                    $found = false;
+
+                    if ( sizeof( WC()->cart->get_cart() ) > 0 ) {
+
+                        foreach ( WC()->cart->get_cart() as $cart_item_key => $values ) {
+                            $_product = $values['data'];
+                            $_quanity = $values['quantity'];
+
+                            if ( $_product->id == $key ) {
+
+                                if( $_quanity < $value ){
+
+                                    WC()->cart->set_quantity( $cart_item_key, $value );
+
+                                }
+
+                                $found = true;
+                            }
+                        }
+                        // if product not found, add it
+                        if ( ! $found ) {
+                            WC()->cart->add_to_cart( $key, $value );
+                        }
+                    }
+                    
+                }
+
+                if( isset($upsellsHides[$key]) ){
+                    $upsellsHides[$key] = $upsellsHides[$key] + $value;
+                } else {
+                    $upsellsHides[$key] = $value;
+                }
+
+            }
+
+        }
+        
+    }
+
+        endif;
+
+
+    if( is_cart() && WC()->session->get('needUpdate') ) {
+        WC()->session->set('needUpdate', 0);
+    }
+
+
+    WC()->session->set('upsellsHides', $upsellsHides);
+
 }

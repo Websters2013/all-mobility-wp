@@ -51,22 +51,83 @@ if ( $product->is_in_stock() ) : ?>
 				$termsArray = array();
 
 				if(!empty($upselsIDs)):
-				foreach ( $upselsIDs as $key => $ID ){
-					$title = get_the_title($ID);
-					$termUpsell = get_the_terms($ID,'upsell_category');
 
+					foreach ( $upselsIDs as $key => $ID ){
 
-					if(!empty($termUpsell)):
-						foreach ($termUpsell as $upsell) {
-							
-						}
-					endif;
-				  	}
+						$title = get_the_title($ID);
+
+						$termUpsell = get_the_terms($ID,'upsell_category');
+
+							if(!empty($termUpsell)):
+
+								foreach ($termUpsell as $upsell) {
+
+									$currentTerm[] = $ID;
+
+								}
+
+							else:
+
+								$defaultProducts[] = $ID;
+
+							endif;
+					}
+
 				endif;
 
-			endif; ?>
+				if( !empty($currentTerm) ){
+
+					$j = 0;
+
+					$countTerm = count($currentTerm);
+
+					foreach ($currentTerm as $key => $item){
+
+						if( $j == 0 ){
+							echo '<select name="upsells_'.$j.'">
+							<option value="0">Add-Ons</option>';
+						}
+
+						echo '<option value="'.$item.'" >'.get_the_title($item).'</option>';
+
+
+						if( $j == ( $countTerm - 1 ) ){
+							echo '</select>';
+						}
+
+						$j++;
+
+					}
+
+				}
+
+				if( !empty($defaultProducts) ){
+
+					$k  = $j;
+
+					$countTerm = count( $defaultProducts );
+
+					foreach ($defaultProducts as $key => $item){ ?>
+
+						<select name="<?= 'upsells_'.$k ?>">
+							<option value="0">Add-Ons</option>
+							<option value="<?= $item ?>"><?= get_the_title($item) ?></option>
+						</select>
+
+						<?php  $k++;
+
+					}
+
+
+				}
+
+			endif;
+				
+					
+			?>
 
 		<?php
+		
 			/**
 			 * @since 2.1.0.
 			 */
@@ -86,7 +147,7 @@ if ( $product->is_in_stock() ) : ?>
 			/**
 			 * @since 3.0.0.
 			 */
-//			do_action( 'woocommerce_after_add_to_cart_quantity' );
+			do_action( 'woocommerce_after_add_to_cart_quantity' );
 		?>
 
 		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="btn btn_2 btn_img-left single_add_to_cart_button button alt">

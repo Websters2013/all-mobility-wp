@@ -18,7 +18,10 @@
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+	
 } ?>
+
+
 
 <!-- my-cart__layout -->
 <div class="my-cart__layout">
@@ -35,7 +38,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="my-cart__caption">Total</div>
 			</div>
 
-			<?php foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+			<?php
+
+			$upsellsHides = WC()->session->get('upsellsHides');
+
+			var_dump($upsellsHides);
+
+			foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 
 				$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
 				$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
@@ -44,6 +53,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$productTitle = $_product->get_title();
 				$link = get_permalink($product_id);
 				$quantity = $cart_item['quantity'];
+
+				//Upsells products
+				$customizableParametres = '';
+
+				if( $upsellsProduct = WC()->session->get($product_id) ){
+
+					if(!empty($upsellsProduct)):
+
+					foreach ($upsellsProduct as $key => $value){
+
+						$customizableParametres .= get_the_title($key);
+					}
+
+					endif;
+
+				}
+
+				// \Upsells products
 
 				$crossSells[] = $product_id;
 
@@ -55,10 +82,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					$variation_id = $cart_item['variation_id'];
 					$variationProduct = new WC_Product_Variation($variation_id);
 					$subtotal_product = WC()->cart->get_product_subtotal( $variationProduct , $quantity );
-
-				}
-
-				?>
+				} ?>
 
 				<!-- my-cart__product -->
 				<div class="my-cart__product"  data-variation-id="<?= $variation_id ?>"  data-product-id="<?= $product_id ?>" data-product-key="<?= $cart_item_key ?>">
@@ -75,9 +99,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 							<div>
 								<h2 class="my-cart__title"><a href="<?= $link ?>"><?= $productTitle ?></a></h2>
-								<p>Customizable Parameter
-									Another Parameter
-									One more parameter</p>
+								<p><?= $customizableParametres ?></p>
 								<a href="<?= $link ?>" class="my-cart__edit">edit</a>
 							</div>
 
@@ -117,6 +139,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 									<span class="my-cart__total-price-caption">Total</span>
 
 									<?= $subtotal_product ?>
+
 								</div>
 
 							</div>

@@ -72,3 +72,11 @@ div.wpcf7-mail-sent-ok {
 .site_checkout .woocommerce-password-strength {
     display: none;
 }
+
+.site_checkout  .woocommerce-error {
+    display: none;
+}
+
+/*.upsells_added {*/
+    /*display: none;*/
+/*}*/
