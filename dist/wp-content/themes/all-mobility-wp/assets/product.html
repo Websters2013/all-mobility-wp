@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/product-single.css">
 
 </head>
-<body>
+<body data-action="php/products-cart.php">
 
     <!-- site -->
     <div class="site">
@@ -968,7 +968,7 @@
         <div class="site__content site__content_inner site__white-back">
 
             <!-- product -->
-            <div class="product product_adding">
+            <div class="product product_adding" data-id="6">
 
                 <!-- product__inner -->
                 <div class="product__inner">
@@ -1032,30 +1032,64 @@
                     <div class="product__items">
                         <div class="product__add">
 
-                            <form action="#">
-                                <h2 class="product__add-title">Customize & Purchase</h2>
-                                <select name="parameter1" id="parameter1">
+                            <h2 class="product__add-title">Customize & Purchase</h2>
+                            <select name="parameter1" id="parameter1">
+                                <option value="0">customizable parameter</option>
+                                <option value="1">parameter1</option>
+                                <option value="2">parameter2</option>
+                                <option value="3">parameter3</option>
+                                <option value="4">parameter4</option>
+                            </select>
+                            <select name="parameter2" id="parameter2">
+                                <option value="0">customizable parameter</option>
+                                <option value="1">parameter1</option>
+                                <option value="2">parameter2</option>
+                                <option value="3">parameter3</option>
+                                <option value="4">parameter4</option>
+                            </select>
+                            <select name="parameter3" id="parameter3">
+                                <option value="0">customizable parameter</option>
+                                <option value="1">parameter1</option>
+                                <option value="2">parameter2</option>
+                                <option value="3">parameter3</option>
+                                <option value="4">parameter4</option>
+                            </select>
+                            <select name="parameter4" id="parameter4">
+                                <option value="0">customizable parameter</option>
+                                <option value="1">parameter1</option>
+                                <option value="2">parameter2</option>
+                                <option value="3">parameter3</option>
+                                <option value="4">parameter4</option>
+                                <option value="4">parameter4</option>
+                                <option value="4">parameter4</option>
+                                <option value="4">parameter4</option>
+                                <option value="4">parameter4</option>
+                            </select>
+
+                            <div class="products__upsals">
+                                <input type="hidden" name="upsals">
+                                <select name="parameter5" id="parameter5" class="products__upsals-choice">
                                     <option value="0">customizable parameter</option>
                                     <option value="1">parameter1</option>
                                     <option value="2">parameter2</option>
                                     <option value="3">parameter3</option>
                                     <option value="4">parameter4</option>
                                 </select>
-                                <select name="parameter2" id="parameter2">
+                                <select name="parameter6" id="parameter6" class="products__upsals-choice">
                                     <option value="0">customizable parameter</option>
                                     <option value="1">parameter1</option>
                                     <option value="2">parameter2</option>
                                     <option value="3">parameter3</option>
                                     <option value="4">parameter4</option>
                                 </select>
-                                <select name="parameter3" id="parameter3">
+                                <select name="parameter7" id="parameter7" class="products__upsals-choice">
                                     <option value="0">customizable parameter</option>
                                     <option value="1">parameter1</option>
                                     <option value="2">parameter2</option>
                                     <option value="3">parameter3</option>
                                     <option value="4">parameter4</option>
                                 </select>
-                                <select name="parameter4" id="parameter4">
+                                <select name="parameter8" id="parameter8" class="products__upsals-choice">
                                     <option value="0">customizable parameter</option>
                                     <option value="1">parameter1</option>
                                     <option value="2">parameter2</option>
@@ -1066,16 +1100,19 @@
                                     <option value="4">parameter4</option>
                                     <option value="4">parameter4</option>
                                 </select>
-                                <button type="submit" class="btn btn_2 btn_img-left">
+                            </div>
 
-                                    <span>
+                            <button type="submit" class="btn btn_2 btn_img-left">
 
-                                        <img src="img/cart.png" width="30" height="26px" alt="">
+                                <span>
 
-                                        add to cart</span>
+                                    <img src="img/cart.png" width="30" height="26px" alt="">
 
-                                </button>
-                            </form>
+                                    add to cart</span>
+
+                            </button>
+
+                            <div class="product__upsals-price">Total price: <span></span></div>
 
                         </div>
                         <div>

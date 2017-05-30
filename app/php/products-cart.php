@@ -2,7 +2,8 @@
 $idProd = $_GET['id'];
 $flag = $_GET['flag'];
 
-if($flag == 'remove'){
+if($flag == 'remove') {
+    $upsals = $_GET['upsals'];
 
     $json_data = '{
         "cartCountProducts": "2",
@@ -13,7 +14,7 @@ if($flag == 'remove'){
         "discount":"223230$"
     }';
 
-} else if($flag == 'changeCount'){
+} else if($flag == 'changeCount') {
 
     $count = $_GET['countProduct'];
 
@@ -26,7 +27,7 @@ if($flag == 'remove'){
         "cartCountPrice": "<span class=“woocommerce-Price-amount amount”><span class=“woocommerce-Price-currencySymbol”>&#36;</span>6.750,00</span>"
     }';
 
-} else if($flag == 'addToCart'){
+} else if($flag == 'addToCart') {
 
     $count = $_GET['countProduct'];
     $price = $_GET['price'];
@@ -35,7 +36,7 @@ if($flag == 'remove'){
         "cartCountProducts": "2 item"
     }';
 
-} else if($flag == 'coupon'){
+} else if($flag == 'coupon') {
 
     $value = $_GET['inputVal'];
 
@@ -47,7 +48,7 @@ if($flag == 'remove'){
         "discount":"223230$"
     }';
 
-} else if($flag == 'couponRemove'){
+} else if($flag == 'couponRemove') {
 
     $value = $_GET['inputVal'];
 
@@ -58,8 +59,23 @@ if($flag == 'remove'){
         "discount":"223230$"
     }';
 
-}
+} else if($flag == 'upsals') {
 
+    $value = $_GET['value'];
+
+    $json_data = '{
+        "totalPrice":"4000$"
+    }';
+
+} else if($flag == 'edit') {
+
+    $upsals = $_GET['upsals'];
+
+    $json_data = '{
+        "send":"Ok"
+    }';
+
+}
 $json_data = str_replace("\r\n",'',$json_data);
 $json_data = str_replace("\n",'',$json_data);
 

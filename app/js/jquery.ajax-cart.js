@@ -33,12 +33,12 @@
             _define = $('.my-cart__define'),
             _applied = $('.my-cart__applied'),
             _invalid = $('.my-cart__invalid'),
+            _edit = _obj.find('.my-cart__edit'),
             _selectCount = _obj.find('.my-cart__count select'),
             _window = $(window);
 
         //private methods
         var _addEvents = function () {
-
 
                 _window.on({
                     resize: function () {
@@ -198,6 +198,20 @@
                     }
                 } );
 
+                _edit.on( {
+                    click: function() {
+
+                        var curItem = $(this),
+                            parent = curItem.parents('.my-cart__product'),
+                            link = parent.find('.my-cart__pic').attr('href');
+
+                        _removeEditProduct( parent, link );
+
+                        return false;
+
+                    }
+                } );
+
             },
             _removeProduct = function( elem ) {
 
@@ -210,6 +224,32 @@
                 }, 500 );
 
             },
+            _removeEditProduct = function( elem, href ) {
+
+                _request.abort();
+                _request = $.ajax( {
+                    url: $('body').attr('data-action'),
+                    data: {
+                        action: 'edt_cart_item',
+                        id: elem.attr('data-product-key'),
+                        upsals: elem.attr('data-upsals'),
+                        flag: 'edit'
+                    },
+                    dataType: 'json',
+                    type: "get",
+                    success: function (m) {
+
+                        window.location = href;
+
+                    },
+                    error: function (XMLHttpRequest) {
+                        if ( XMLHttpRequest.statusText != "abort" ) {
+                            alert("ERROR!!!");
+                        }
+                    }
+                } );
+
+            },
             _requestProductRemove = function ( elem ) {
 
                 _request.abort();
@@ -218,6 +258,7 @@
                     data: {
                         action: 'remove_cart_item',
                         id: elem.attr('data-product-key'),
+                        upsals: elem.attr('data-upsals'),
                         flag: 'remove'
                     },
                     dataType: 'json',

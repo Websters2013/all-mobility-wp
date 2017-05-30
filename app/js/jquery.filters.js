@@ -44,6 +44,8 @@
             _arr = [],
             _checkName = '',
             _checkPrice = '',
+            _clearFlagSelect = false,
+            _clearFlagRadio = false,
             _priceCategory = _obj.find('input[name=_price]');
 
         //private methods
@@ -214,7 +216,8 @@
                             labelText = label.clone().children().remove().end().text(),
                             name = curItem.attr('name'),
                             id = curItem.data('id'),
-                            categoryName = curItem.parents('.category__filters-item').find('span')[0].innerText;
+                            categoryName = curItem.parents('.category__filters-item').find('span')[0].innerText,
+                            countGroupCheck = _filterItem.find('input[name='+ name +']:checked').length;
 
                         _globalCheckFlag = curItem.prop('checked');
 
@@ -225,7 +228,9 @@
 
                         }
 
-                        _writeInHidden( name, id, _globalCheckFlag );
+                        console.log(countGroupCheck);
+
+                        _writeInHidden( name, id, _globalCheckFlag, countGroupCheck );
                         _inputHiddenPage.val('1');
                         _addingFilteredBy( labelText, id, name, categoryName );
                         _requestContent();
@@ -250,7 +255,7 @@
 
                     }
                 } );
-                _additionalParameters.on({
+                _additionalParameters.on( {
                    submit: function() {
 
                        if( _window.width() >= 1024 ) {
@@ -259,13 +264,36 @@
 
                        }
 
+                       _additionalParameters.find('select').each( function() {
+
+                           var curItem = $(this),
+                               name = curItem.attr('name'),
+                               id = curItem.val();
+
+                           _writeInHidden( name, id, 'select', '');
+
+                           _clearGroupFilters(name);
+
+                       } );
+                       _additionalParameters.find('input[type=radio]:checked').each( function() {
+
+                           var curItem = $(this),
+                               name = curItem.attr('name'),
+                               id = curItem.val();
+
+                           _writeInHidden( name, id, 'radio', '');
+
+                           _clearGroupFilters(name);
+
+                       } );
+
                        _inputHiddenPage.val('1');
                        _requestContent();
 
                        return false;
 
                    }
-                });
+                } );
 
             },
             _addingFilteredBy = function( itemText, itemId, itemName, categoryName ) {
@@ -349,9 +377,22 @@
                 _globalCheckFlag = false;
                 _addingFilteredBy( '', itemId, '', '' );
                 _addLoading();
-                _writeInHidden( itemName, itemId, _globalCheckFlag );
+                _writeInHidden( itemName, itemId, _globalCheckFlag, '' );
                 _requestContent();
 
+            },
+            _clearGroupFilters = function( itemName ) {
+
+                _filterItem.find('input[name="'+ itemName +'"]').each( function() {
+
+                    var curItem = $(this),
+                        itemId = curItem.data('id');
+
+                    _filterItem.find('input[data-id="'+ itemId +'"]').prop('checked', false);
+                    _globalCheckFlag = false;
+                    _addingFilteredBy( '', itemId, '', '' );
+
+                } );
 
             },
             _closeFilter = function() {
@@ -748,56 +789,83 @@
                 } );
 
             },
-            _writeInHidden = function(name, value, checkFlag) {
+            _writeInHidden = function(name, value, checkFlag, countGroupCheck) {
 
-                if( checkFlag ) {
+                if( checkFlag == 'radio' ) {
 
-                    if(_objValue.hasOwnProperty(name)) {
-
-                        for (var prop in _objValue) {
-
-                            if( prop == name ) {
-
-                                _objValue[prop].push(value);
-
-                            }
-
-                        }
+                    _objValue[name] = [value];
 
 
+                } else if( checkFlag == 'select' ) {
+
+                    if( value != 0 ) {
+
+                        _objValue[name] = [value];
 
                     } else {
-
-                        _objValue[name] = [value]
-
-                    }
-
-                } else {
-
-                    for (var prop in _objValue) {
-
-                        if( prop == name ) {
-
-                            var i = _objValue[prop].indexOf(value);
-
-                            if(i != -1) {
-
-                                _objValue[prop].splice(i, 1);
-
-                            }
-
-                        }
-
-                    }
-
-                    if( _objValue[name].length == 0 ) {
 
                         delete _objValue[name];
 
                     }
 
-                }
 
+                } else {
+
+                    if( checkFlag ) {
+
+                       if( _objValue.hasOwnProperty(name) ) {
+
+                           if( countGroupCheck == 1 ) {
+
+                               _objValue[name] = [value];
+
+                           } else {
+
+                               for (var prop in _objValue) {
+
+                                   if( prop == name ) {
+
+                                       _objValue[prop].push(value);
+
+                                   }
+
+                               }
+
+                           }
+
+                       } else {
+
+                           _objValue[name] = [value]
+
+                       }
+
+                    } else {
+
+                       for (var prop in _objValue) {
+
+                           if( prop == name ) {
+
+                               var i = _objValue[prop].indexOf(value);
+
+                               if(i != -1) {
+
+                                   _objValue[prop].splice(i, 1);
+
+                               }
+
+                           }
+
+                       }
+
+                       if( _objValue[name].length == 0 ) {
+
+                           delete _objValue[name];
+
+                       }
+
+                    }
+
+                }
 
                 var strFinish = '',
                     strValues = '',
@@ -829,7 +897,6 @@
                 _inputHidden.val( strFinish );
 
             },
-
             _init = function () {
                 _addEvents();
 

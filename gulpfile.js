@@ -50,7 +50,8 @@ let paths = {
                 'app/js/jquery.form.validator.js',
                 'app/js/jquery.rate.js',
                 'app/js/jquery.review-go.js',
-                'app/js/jquery.animation-add.js'
+                'app/js/jquery.animation-add.js',
+                'app/js/jquery.product-ajax.js'
             ]
         },
         {
