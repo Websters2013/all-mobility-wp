@@ -40,7 +40,6 @@
         //private methods
         var _addEvents = function () {
 
-
                 _window.on({
                     resize: function () {
 
