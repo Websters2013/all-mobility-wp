@@ -231,6 +231,13 @@
   }
 
 }
+.product__brand {
+  margin: 0 0 10px;
+  @include main-font3();
+  font-size: 16px;
+  color: #4E4E4E;
+  line-height: 20px;
+}
 
 @media (min-width: $desktop) {
 
