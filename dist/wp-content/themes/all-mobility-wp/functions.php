@@ -51,6 +51,16 @@ function creating_a_new_product($new_status, $old_status, $post) {
 }
 
 
+function add_favicon() {
+	$favicon_url = get_stylesheet_directory_uri() . '/faviconit/favicon.ico';
+	echo '<link rel="shortcut icon" href="' . $favicon_url . '" />';
+}
+
+
+add_action('login_head', 'add_favicon');
+add_action('admin_head', 'add_favicon');
+
+
 require_once( TEMPLATEINC . '/template.php' );
 require_once( TEMPLATEINC . '/actions.php' );
 require_once( TEMPLATEINC . '/ajaxes.php' );

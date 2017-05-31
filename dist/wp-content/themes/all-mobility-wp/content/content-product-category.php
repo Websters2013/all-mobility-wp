@@ -13,7 +13,9 @@ if( $cat_obj->parent != 0 ){
 }
 
 
-?>
+$mobilityScootersId = 145;
+
+$powerWheelChairs = 125; ?>
 
 <div class="category category_filters<?= $category_sub ?>" data-id-category="<?= $category_ID ?>">
 
@@ -154,7 +156,7 @@ if( $cat_obj->parent != 0 ){
                                             ?>
 
                                             <div>
-                                                <input type="checkbox"  data-id="<?= $min[0].'-'.$max_formated ?>" name="price" id="price_<?= $i ?>">
+                                                <input type="checkbox"  data-id="<?= $min[0].'-'.$max_formated ?>" name="_price" id="price_<?= $i ?>">
                                                 <label for="price_<?= $i ?>"><?= '$'.$min[0] ?> - <?= $max_text ?> <span class="category__filters-count"><?= $number ?></span></label>
                                             </div>
 
@@ -208,17 +210,18 @@ if( $cat_obj->parent != 0 ){
                                         if( $item[1] == 9999999999 ){
                                             $rightRange = 'and above' ;
                                         } else {
-                                            $rightRange = $item[1];
+                                            $rightRange = $item[1].' '.$unit;
                                         }
 
-                                        $range_for_display = $item[0].' - '.$rightRange.' '.$unit;
+                                        $range_for_display = $item[0].' - '.$rightRange;
 
                                         $countRe = checkProductCountByField($item[0],$item[1],$key,$category_ID);
+
                                         ?>
 
                                         <div>
-                                            <input type="checkbox" name="<?= $key ?>" id="<?= $sub_key ?>" data-id="<?= $range ?>">
-                                            <label for="<?= $sub_key ?>"><?= $range_for_display ?> <span class="category__filters-count"><?= $countRe ?></span></label>
+                                            <input type="checkbox" name="<?= $key ?>" id="<?= $key.'_'.$sub_key ?>" data-id="<?= $range ?>">
+                                            <label for="<?= $key.'_'.$sub_key ?>"><?= $range_for_display ?> <span class="category__filters-count"><?= $countRe ?></span></label>
                                         </div>
 
                                     <?php } ?>
@@ -231,12 +234,11 @@ if( $cat_obj->parent != 0 ){
                     endif;
 
                     if(!empty($allFilters['list'])):
-                        foreach ( $allFilters['list'] as $key => $filter ):
 
-                            ?>
+                        foreach ( $allFilters['list'] as $key => $filter ): ?>
 
                             <div class="category__filters-item">
-                                    <span>Brand
+                                    <span><?= $filter['name'] ?>
 
                                          <svg width="6px" height="8px" viewBox="0 0 6 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                              <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
@@ -252,26 +254,23 @@ if( $cat_obj->parent != 0 ){
                                     </span>
                                 <div class="category__filters-list">
                                     <div>
-                                        <div>
-                                            <input type="checkbox" name="brand" id="name11" data-id="name11">
-                                            <label for="name11">Brand1 <span class="category__filters-count">1</span></label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" name="brand" id="name12" data-id="name12">
-                                            <label for="name12">Brand1  <span class="category__filters-count">1</span></label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" name="brand" id="name13" data-id="name13">
-                                            <label for="name13">Brand1  <span class="category__filters-count">1</span></label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" name="brand" id="name14" data-id="name14">
-                                            <label for="name14">Brand1  <span class="category__filters-count">1</span></label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" name="brand" id="name15" data-id="name15">
-                                            <label for="name15">Brand1  <span class="category__filters-count">1</span></label>
-                                        </div>
+
+                                        <?php  foreach ( $filter as $sub_key => $item ) {
+
+                                            if( $sub_key == 'name' ){
+                                                continue;
+                                            }
+
+                                            ?>
+
+                                            <div>
+
+                                                <input type="checkbox" name="<?= $key ?>" id="<?= $sub_key ?>" data-id="<?= $sub_key ?>">
+                                                <label for="<?= $sub_key ?>"><?= $sub_key ?> <span class="category__filters-count"><?= $item ?></span></label>
+                                            </div>
+
+                                        <?php  } ?>
+
                                     </div>
                                 </div>
                             </div>
@@ -302,7 +301,7 @@ if( $cat_obj->parent != 0 ){
 
 
                 <?php
-                if( $category_ID == 145 || $category_ID == 125 || $category_ID == 116 ): ?>
+                if( $mobilityScootersId == $category_ID || $powerWheelChairs == $category_ID || $category_ID == 116 ): ?>
 
                 <!-- category__find-parameters -->
                 <form class="category__find-parameters">
@@ -319,7 +318,7 @@ if( $cat_obj->parent != 0 ){
 
                     </div>
 
-                    <?php if( $category_ID == 145 ): ?>
+                    <?php if( $category_ID == $mobilityScootersId ): ?>
 
                         <div>
 
@@ -340,29 +339,29 @@ if( $cat_obj->parent != 0 ){
                             <span class="category__find-title">Usage</span>
 
                             <div class="nice-radio">
-                                <input type="radio" checked name="usage" id="reatures1" value="12-999999999">
+                                <input type="radio" checked name="drive_range" id="reatures1" value="12-999999999">
                                 <label for="reatures1">Full-time</label>
                             </div>
                             <div class="nice-radio">
-                                <input type="radio" name="usage" id="reatures2" value="0-12">
+                                <input type="radio" name="drive_range" id="reatures2" value="0-12">
                                 <label for="reatures2">Occasional</label>
                             </div>
 
                         </div>
                     <?php endif;
 
-                    if( $category_ID == 125 ): ?>
+                    if( $category_ID == $powerWheelChairs ): ?>
 
                         <div>
 
                             <span class="category__find-title">Pricing Category</span>
 
                             <div class="nice-radio">
-                                <input type="radio"  checked name="_price" id="price1" value="0-3000">
+                                <input type="radio"  checked name="_price" id="price1" data-id="0-3000" value="1">
                                 <label for="price1">Budget</label>
                             </div>
                             <div class="nice-radio">
-                                <input type="radio" name="_price" id="price2" value="3000-999999999">
+                                <input type="radio" name="_price" id="price2" data-id="3000-999999999" value="2">
                                 <label for="price2">Deluxe</label>
                             </div>
 
@@ -392,11 +391,11 @@ if( $cat_obj->parent != 0 ){
                             <span class="category__find-title">Pricing Category</span>
 
                             <div class="nice-radio">
-                                <input type="radio" checked name="_price" id="price1" value="0-1000">
+                                <input type="radio" checked name="_price" id="price1" data-id="0-1000" value="3">
                                 <label for="price1">Budget</label>
                             </div>
                             <div class="nice-radio">
-                                <input type="radio" name="_price" id="price2" value="1000-999999999">
+                                <input type="radio" name="_price" id="price2" data-id="1000-999999999" value="3">
                                 <label for="price2">Deluxe</label>
                             </div>
 
@@ -481,4 +480,68 @@ if( $cat_obj->parent != 0 ){
 </div>
 
 
-<?php  ?>
+<?php
+$string = 'brand=Brand 1';
+
+parse_str($string,$output);
+
+foreach ($output as $key => $item){
+
+    $technicals[$key] = explode(',',$item );
+
+}
+$allCharacters = array();
+foreach ( $technicals as $key => $technical){
+
+    if(  $key == 'brand' || $key == 'frame_color' || $key == 'choose_frame_type' ){
+
+        if(!empty($item)):
+
+            $currentHar = array();
+
+            $currentHar['relation'] = 'OR';
+
+            foreach ( $technical as $item ){
+
+                $currentHar[] =  array(
+                    'key' => $key,
+                    'value' => $item,
+                    'compare'	=> 'IN'
+                );
+
+            }
+
+        endif;
+
+        $allCharacters[] = $currentHar;
+
+    } else {
+
+        if(!empty($item)):
+
+            $currentHar = array();
+
+            $currentHar['relation'] = 'OR';
+
+            foreach ( $technical as $item ){
+
+                $item = explode('-',$item);
+
+                $currentHar[] =  array(
+                    'key' => $key,
+                    'value' => $item,
+                    'compare'	=> 'BETWEEN'
+                );
+
+            }
+
+        endif;
+    }
+
+}
+
+
+
+var_dump($allCharacters);
+
+?>

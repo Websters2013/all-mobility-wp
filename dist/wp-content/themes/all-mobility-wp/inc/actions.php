@@ -797,61 +797,74 @@ $pageSorting = $_GET['pageSorting'];
 
 $sortingPrice = $_GET['dateSorting'];
 
-$filter_weight = $_GET['additionalParameters'];
-
 $currentPage = $_GET['currentPage'];
 
 $categoryId = $_GET['idCategory'];
 
-    if($filter_weight) {
+    parse_str($string,$output);
 
-            $unique_filter = explode('&', $filter_weight);
+    foreach ($output as $key => $item){
 
-            foreach ($unique_filter as $key =>  $item){
-                $uniqueItems[] = explode('=', $item);
-            }
+        $technicals[$key] = explode(',',$item );
 
-            foreach ($uniqueItems as $uniqueItem){
+    }
+    $allCharacters = array();
+    foreach ( $technicals as $key => $technical){
 
+        if(  $key == 'brand' || $key == 'frame_color' || $key == 'choose_frame_type' ){
 
-                if( $uniqueItem[0] == 'choose_frame_type' ):
+            if(!empty($item)):
 
-                    $allUniqueFields[] = array(
-                        'key'   => $uniqueItem[0],
-                        'value' => $uniqueItem[1]
+                $currentHar = array();
+
+                $currentHar['relation'] = 'OR';
+
+                foreach ( $technical as $item ){
+
+                    $outwed = $item;
+
+                    $currentHar[] =  array(
+                        'key' => $key,
+                        'value' => $item,
+                        'compare'	=> '='
                     );
 
-                else:
+                }
 
-                    $range = explode('-', $uniqueItem[1]);
+            endif;
 
-                    $allUniqueFields[] = array(
-                        'key'   => $uniqueItem[0],
-                        'value' => array($range[0],$range[1]),
-                        'compare' => 'BETWEEN',
-                        'type' => 'NUMERIC'
+            $allCharacters[] = $currentHar;
+
+        } else {
+
+            if(!empty($item)):
+
+                $currentHar = array();
+
+                $currentHar['relation'] = 'OR';
+
+                foreach ( $technical as $item ){
+
+                    $item = explode('-',$item);
+
+                    $currentHar[] =  array(
+                        'key' => $key,
+                        'value' => $item,
+                        'compare'	=> 'BETWEEN'
                     );
 
-                endif;
+                }
 
+            endif;
 
+            $allCharacters[] = $currentHar;
 
-            }
+        }
 
-
-
-
-    } else{
-        $unique_filter = '';
     }
     
-    $uniqueAttributes =  array(
-        'key'   => 'weight',
-        'value' => array(0,500),
-        'compare' => 'BETWEEN',
-        'type' => 'NUMERIC'
-    );
-
+    
+    
     if( $sortingPrice == 'ASC' ){
         $orderbyElem = 'meta_value_num';
         $order = 'ASC';
@@ -864,62 +877,12 @@ $categoryId = $_GET['idCategory'];
         $menu_key = '_price';
     }
 
-elseif($sortingPrice == 'recomm' ) {
-    $orderbyElem = 'meta_value';
-    $order = 'DESC';
-    $menu_key = 'featured_product';
-}
-    
-
-    foreach ($output as $key => $item){
-
-        if( $key == 'price' ){
-            $prices =  explode(',',$item );
-        } else {
-            $atts[$key] = explode(',',$item );
-        }
-
+    elseif($sortingPrice == 'recomm' ) {
+        $orderbyElem = 'meta_value';
+        $order = 'DESC';
+        $menu_key = 'featured_product';
     }
 
-    foreach ($prices as $price){
-        $finalPriceArray[] = explode('-',$price );
-    }
-
-    if( $string ){
-
-        $attributes_filter = '';
-
-        if(!empty($atts)):
-        
-        foreach ( $atts as $key => $item ){
-
-                $attributesQuery[] =  array(
-                    'taxonomy' 		=> $key,
-                    'terms' 		=> $item,
-                    'operator' 		=> 'IN'
-                );
-        }
-
-        endif;     
-        
-    } else {
-
-        $attributes_filter = '';
-
-    }
-
-    $pricesRanges['relation'] = 'OR';
-
-    foreach ( $finalPriceArray as $price ){
-
-        $pricesRanges[] = array(
-            'key' => '_price',
-            'value' => $price,
-            'compare' => 'BETWEEN',
-            'type' => 'NUMERIC'
-        );
-
-    }
 
     $args = array (
         'paged' => $currentPage,
@@ -937,17 +900,13 @@ elseif($sortingPrice == 'recomm' ) {
                 'taxonomy' => 'product_cat',
                 'field' => 'term_id',
                 'terms' => $categoryId
-            ),
-
-            $attributesQuery
+            )
 
         ),
         'meta_query' => array(
             'relation' => 'AND',
-            $pricesRanges,
-            $allUniqueFields
+            $allCharacters
         )
-
 
     );
 
@@ -1087,7 +1046,6 @@ elseif($sortingPrice == 'recomm' ) {
                     $count++;
                 endif;
 
-
             endwhile;
 
             if( $oneChecked ){
@@ -1113,8 +1071,6 @@ elseif($sortingPrice == 'recomm' ) {
         } else {
             $specification = '""';
         }
-
-
 
         $products .= ' {
             "name": "'.$categoryId.'",
@@ -1148,7 +1104,8 @@ elseif($sortingPrice == 'recomm' ) {
     ],
     "settings": {
         "pagesAll": "'.$max.'",
-        "currentPage": "'.$currentPage.'"
+        "currentPage": "'.$currentPage.'",
+        "oput" : '.json_encode($outwed).'
     }
 }';
 
@@ -1430,7 +1387,7 @@ function getFilters( $catId ){
             $resultsArray['ranges'][$field] = $range;
 
             $resultsArray['ranges'][$field]['name'] = $filtersFieldsRangesLabels[$key];
-            $resultsArray['ranges'][$field]['unit'] = $filtersFieldsRanges[$key];
+            $resultsArray['ranges'][$field]['unit'] = getUnitByKey($key);
 
         }
 
@@ -1544,18 +1501,22 @@ function getRangesByFiled( $field, $catId ){
 
         $min = min($fieldsValues[$field]);
 
-        $values = $max - $min;
+        
 
-        $perRangeValue = ceil( $values/$rangeCount );
-
-        $rangesArray = array();
+            $values = $max - $min;
+    
+            $perRangeValue = ceil( $values/$rangeCount );
+                
+            
+            $rangesArray = array();
 
             for( $i = 1; $i <= ( $rangeCount + 1 ) ; $i++ ){
 
-                $maxRange = intval( floor ( $perRangeValue*$i ) );
+                $maxRange = intval( floor ( $perRangeValue*$i ) ) + $min - 0.01;
 
-                $minRange = intval( floor (  $perRangeValue*( $i-1 ) ) );
+                $minRange = intval( floor (  $perRangeValue*( $i-1 ) ) ) + $min;
 
+                
                 if( $i == 1 ){
 
                     $minRange = $min;
@@ -1578,6 +1539,8 @@ function getRangesByFiled( $field, $catId ){
         endif;
 
     endif;
+
+
 
     return $rangesArray;
 
@@ -1706,7 +1669,6 @@ function addUpselssToCart(){
     if( is_cart() && WC()->session->get('needUpdate') ) {
         WC()->session->set('needUpdate', 0);
     }
-
 
     WC()->session->set('upsellsHides', $upsellsHides);
 
