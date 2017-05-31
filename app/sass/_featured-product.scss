@@ -72,7 +72,7 @@
   font-size: 20px;
   color: #4E4E4E;
 
-  div {
+  div, del {
     display: inline-block;
     margin: 0 10px 0 -3px;
     @include main-font1();

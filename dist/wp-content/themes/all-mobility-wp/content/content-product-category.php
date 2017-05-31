@@ -146,17 +146,18 @@ $powerWheelChairs = 125; ?>
                                             if( $max[1] ){
                                                 $max_formated = 999999999999;
                                                 $max_text = $max[0];
+
                                             } else {
-                                                $max_formated = $max[0];
+                                                $max_formated = $max[2];
                                                 $max_text = '$'.$max[0];
                                             }
-
-                                            $number = checkPrice( $min[0], $max_formated, $category_ID );
+                                            
+                                            $number = checkPrice( $min[2], $max_formated, $category_ID );
 
                                             ?>
 
                                             <div>
-                                                <input type="checkbox"  data-id="<?= $min[0].'-'.$max_formated ?>" name="_price" id="price_<?= $i ?>">
+                                                <input type="checkbox"  data-id="<?= $min[2].'-'.$max_formated ?>" name="_price" id="price_<?= $i ?>">
                                                 <label for="price_<?= $i ?>"><?= '$'.$min[0] ?> - <?= $max_text ?> <span class="category__filters-count"><?= $number ?></span></label>
                                             </div>
 
@@ -371,11 +372,11 @@ $powerWheelChairs = 125; ?>
                             <span class="category__find-title">Usage</span>
 
                             <div class="nice-radio">
-                                <input type="radio" checked name="usage" id="reatures1" value="12-999999999">
+                                <input type="radio" checked name="drive_range" id="reatures1" data-id="12-999999999" value="12-999999999">
                                 <label for="reatures1">Full-time</label>
                             </div>
                             <div class="nice-radio">
-                                <input type="radio" name="usage" id="reatures2" value="0-12">
+                                <input type="radio" name="drive_range" id="reatures2" data-id="0-12" value="0-12">
                                 <label for="reatures2">Occasional</label>
                             </div>
 
@@ -481,15 +482,21 @@ $powerWheelChairs = 125; ?>
 
 
 <?php
-$string = 'brand=Brand 1';
+$string = 'weight=0-999999999&_price=1 000.00-999999999999&drive_range=12-999999999';
+
+
 
 parse_str($string,$output);
+
+
 
 foreach ($output as $key => $item){
 
     $technicals[$key] = explode(',',$item );
 
 }
+
+
 $allCharacters = array();
 foreach ( $technicals as $key => $technical){
 
@@ -503,10 +510,12 @@ foreach ( $technicals as $key => $technical){
 
             foreach ( $technical as $item ){
 
+                $outwed = $item;
+
                 $currentHar[] =  array(
                     'key' => $key,
                     'value' => $item,
-                    'compare'	=> 'IN'
+                    'compare'	=> '='
                 );
 
             }
@@ -530,18 +539,18 @@ foreach ( $technicals as $key => $technical){
                 $currentHar[] =  array(
                     'key' => $key,
                     'value' => $item,
-                    'compare'	=> 'BETWEEN'
+                    'compare'	=> 'BETWEEN',
+                    'type' => 'NUMERIC'
                 );
 
             }
 
         endif;
+
+        $allCharacters[] = $currentHar;
+
     }
 
 }
-
-
-
-var_dump($allCharacters);
 
 ?>

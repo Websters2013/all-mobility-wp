@@ -55,11 +55,7 @@
         
         <!-- site__header -->
         <header class="site__header">
-
-            <p class="upsells_added">
-                <?php addUpselssToCart(); ?>
-            </p>
-
+            
             <!-- site__header-layout -->
             <div class="site__header-layout">
 

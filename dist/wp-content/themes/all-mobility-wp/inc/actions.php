@@ -850,7 +850,8 @@ $categoryId = $_GET['idCategory'];
                     $currentHar[] =  array(
                         'key' => $key,
                         'value' => $item,
-                        'compare'	=> 'BETWEEN'
+                        'compare'	=> 'BETWEEN',
+                        'type' => 'NUMERIC'
                     );
 
                 }
@@ -1127,11 +1128,14 @@ function formatPriceForRanges( $value, $last = false ){
         $value  = 'and above';
         $above_flag = true;
     } else {
+
+        $trueValue = $value;
+        
         $value = number_format( $value, 2, '.', ' ' );
         $above_flag = false;
     }
 
-    return array($value,$above_flag);
+    return array($value,$above_flag,$trueValue);
 }
 
 add_action('woocommerce_add_to_cart', 'custome_add_to_cart',2);
@@ -1179,15 +1183,12 @@ function custome_add_to_cart() {
         WC()->session->set($mainProduct,$newUpsells);
 
     }
-
-
         WC()->session->set('needUpdate',1);
 
         WC()->session->set('upsellFlag',0);
 
     endif;
-
-
+    
 }
 
 function mc_checklist(
