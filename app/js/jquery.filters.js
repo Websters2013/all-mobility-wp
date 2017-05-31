@@ -279,7 +279,7 @@
 
                            var curItem = $(this),
                                name = curItem.attr('name'),
-                               id = curItem.val();
+                               id = curItem.data('id');
 
                            _writeInHidden( name, id, 'radio', '');
 
@@ -575,12 +575,12 @@
 
                 }
 
-                if( _priceCategory.length ) {
-
-                    var checkedPriceRange = _priceCategory.filter(':checked'),
-                        startingPrice = parseInt(checkedPriceRange.attr('value').split('-')[0]);
-
-                }
+                //if( _priceCategory.length ) {
+                //
+                //    var checkedPriceRange = _priceCategory.filter(':checked'),
+                //        startingPrice = parseInt(checkedPriceRange.attr('data-id').split('-')[0]);
+                //
+                //}
 
                 if( newArrPriceRange.length ) {
 
@@ -616,24 +616,24 @@
                         salePrice = product.oldPrice[0],
                         priceItem;
 
-                    if( _priceCategory.length ) {
-
-                        for (var i = 0; i <= product.price.length-1; i++ ) {
-
-                            priceItem = parseFloat(product.price[i].replace('$','').replace(',',''));
-
-                            if( priceItem >= startingPrice ) {
-
-                                price = product.price[i];
-                                salePrice = product.oldPrice[i];
-
-                                break;
-
-                            }
-
-                        }
-
-                    }
+                    //if( _priceCategory.length ) {
+                    //
+                    //    for (var i = 0; i <= product.price.length-1; i++ ) {
+                    //
+                    //        priceItem = parseFloat(product.price[i].replace('$','').replace(',',''));
+                    //
+                    //        if( priceItem >= startingPrice ) {
+                    //
+                    //            price = product.price[i];
+                    //            salePrice = product.oldPrice[i];
+                    //
+                    //            break;
+                    //
+                    //        }
+                    //
+                    //    }
+                    //
+                    //}
                     if( newArrPriceRange.length ) {
 
                         for (var i = 0; i <= product.price.length-1; i++ ) {
