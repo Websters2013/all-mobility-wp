@@ -157,13 +157,29 @@
       ul {
 
         li {
+          position: relative;
           border-bottom: none;
           padding: 19px 42px 17px 42px;
           -webkit-transition: background 0.3s, color 0.3s;
           transition: background 0.3s, color 0.3s;
 
+          >a {
+
+            &:first-child {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              z-index: 2;
+            }
+
+          }
           .wpsl-store-location {
 
+            a {
+              color: #4E4E4E;
+            }
             >p {
               margin: 0;
 
@@ -385,6 +401,37 @@
         height: 615px !important;
         max-height: 615px;
         overflow-y:  hidden;
+
+        ul {
+
+          li {
+
+            &:after {
+              opacity: 0;
+              @include absoluteCenterY();
+              right: 35px;
+              width: 15px;
+              height: 15px;
+              border-top: 3px solid #54b5d2;
+              border-right: 3px solid #54b5d2;
+              content: '';
+              -webkit-transform: translateY(-50%) rotate(45deg);
+              transform: translateY(-50%) rotate(45deg);
+              -webkit-transition: opacity 0.3s;
+              transition: opacity 0.3s;
+            }
+
+            &:hover {
+
+              &:after {
+                opacity: 1;
+              }
+
+            }
+
+          }
+        }
+
       }
       .wpsl-search {
         padding-right: 15px;
