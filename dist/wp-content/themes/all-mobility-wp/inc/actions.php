@@ -1664,7 +1664,7 @@ function addUpselssToCart(){
         
     }
 
-        endif;
+    endif;
 
 
     if( is_cart() && WC()->session->get('needUpdate') ) {
