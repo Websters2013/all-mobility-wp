@@ -1355,13 +1355,11 @@ function getFilters( $catId ){
 
     $filtersFieldsLists = array(
         "brand",
-        "frame_color",
         "choose_frame_type"
     );
 
     $filtersFieldsListsLabels = array(
         "Brand",
-        "Frame Color",
         "Frame Type"
     );
 
@@ -1388,7 +1386,7 @@ function getFilters( $catId ){
             $resultsArray['ranges'][$field] = $range;
 
             $resultsArray['ranges'][$field]['name'] = $filtersFieldsRangesLabels[$key];
-            $resultsArray['ranges'][$field]['unit'] = getUnitByKey($key);
+            $resultsArray['ranges'][$field]['unit'] = getUnitByKey($field);
 
         }
 
@@ -1593,14 +1591,14 @@ function checkProductCountByField( $min, $max, $field,  $catID ){
 function getUnitByKey( $key ){
 
     $filtersFieldsRangesUnits = array(
-        "1" => '”',
-        "2" => ' lbs',
-        "3" => 'mph',
-        "4" => '”',
-        "5" => ' miles',
-        "6" => '',
-        "7" => '”',
-        "8" => ''
+        "seat_width" => '”',
+        "weight" => ' lb',
+        "drive_range" => 'miles',
+        "top_speed" => ' mph',
+        "chair_size" => '',
+        "overall_width" => '”',
+        "base_width_open" => '',
+        "main_use" => "”"
     );
     
     return $filtersFieldsRangesUnits[$key];
@@ -1608,7 +1606,6 @@ function getUnitByKey( $key ){
 
 function addUpselssToCart(){
 
-    
     $cart = WC()->cart->get_cart();
     
     if(!empty($cart)):

@@ -5,28 +5,28 @@
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="format-detection" content="telephone=no">
         <meta name="format-detection" content="address=no">
-        <link rel='shortcut icon' type='image/x-icon' href='<?php echo TEMPLATEURI; ?>/assets/img/favicon.ico' />
+        <link rel='shortcut icon' type='image/x-icon' href='https://allaroundmobility.com/wp-content/themes/all-mobility-wp/assets/img/favicon.ico' />
 
-        <link rel="shortcut icon" href="<?= TEMPLATEURI ?>/faviconit/favicon.ico">
-        <link rel="icon" sizes="16x16 32x32 64x64" href="<?= TEMPLATEURI ?>/faviconit/favicon.ico">
-        <link rel="icon" type="image/png" sizes="196x196" href="<?= TEMPLATEURI ?>/faviconit/favicon-192.png">
-        <link rel="icon" type="image/png" sizes="160x160" href="<?= TEMPLATEURI ?>/faviconit/favicon-160.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="<?= TEMPLATEURI ?>/faviconit/favicon-96.png">
-        <link rel="icon" type="image/png" sizes="64x64" href="<?= TEMPLATEURI ?>/faviconit/favicon-64.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="<?= TEMPLATEURI ?>/faviconit/favicon-32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="<?= TEMPLATEURI ?>/faviconit/favicon-16.png">
-        <link rel="apple-touch-icon" href="<?= TEMPLATEURI ?>/faviconit/favicon-57.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="<?= TEMPLATEURI ?>/faviconit/favicon-114.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="<?= TEMPLATEURI ?>/faviconit/favicon-72.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="<?= TEMPLATEURI ?>/faviconit/favicon-144.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="<?= TEMPLATEURI ?>/faviconit/favicon-60.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="<?= TEMPLATEURI ?>/faviconit/favicon-120.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="<?= TEMPLATEURI ?>/faviconit/favicon-76.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="<?= TEMPLATEURI ?>/faviconit/favicon-152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="<?= TEMPLATEURI ?>/faviconit/favicon-180.png">
+        <link rel="shortcut icon" href="https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/favicon.ico">
+        <link rel="icon" sizes="16x16 32x32 64x64" href="<https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/favicon.ico">
+        <link rel="icon" type="image/png" sizes="196x196" href="https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/favicon-192.png">
+        <link rel="icon" type="image/png" sizes="160x160" href="https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/favicon-160.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/favicon-96.png">
+        <link rel="icon" type="image/png" sizes="64x64" href="https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/favicon-64.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/favicon-32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/favicon-16.png">
+        <link rel="apple-touch-icon" href="https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/favicon-57.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/favicon-114.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/favicon-72.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/favicon-144.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/favicon-60.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/favicon-120.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/favicon-76.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/favicon-152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/favicon-180.png">
         <meta name="msapplication-TileColor" content="#FFFFFF">
-        <meta name="msapplication-TileImage" content="<?= TEMPLATEURI ?>/faviconit/favicon-144.png">
-        <meta name="msapplication-config" content="<?= TEMPLATEURI ?>/faviconit/browserconfig.xml">
+        <meta name="msapplication-TileImage" content="https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/favicon-144.png">
+        <meta name="msapplication-config" content="https://allaroundmobility.com/wp-content/themes/all-mobility-wp/faviconit/browserconfig.xml">
 
 
 
