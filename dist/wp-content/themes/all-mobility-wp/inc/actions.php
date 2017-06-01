@@ -120,7 +120,7 @@ function add_js()
         wp_enqueue_script('locations_js');
 
     }
-    
+
     if( is_page_template('page-search.php') ){
         wp_enqueue_style('search-results', get_template_directory_uri().'/assets/css/search-results-page.css');
         wp_enqueue_script('search-results_js');
@@ -144,7 +144,7 @@ function add_js()
         wp_enqueue_style('login-types-page', get_template_directory_uri().'/assets/css/login-types-page.css');
         wp_enqueue_script('login_js');
     }
-    
+
     if( is_page_template('page-checkout.php') ){
         wp_enqueue_style('checkout_css', get_template_directory_uri().'/assets/css/checkout-page.css');
         wp_enqueue_style('confirmation_css', get_template_directory_uri().'/assets/css/confirmation-page.css');
@@ -240,11 +240,11 @@ function wb_get_content (){
 }
 
 function wb_woocommerce_template_single_rating (){
-    
+
     global $product;
-    
+
     if ( get_option( 'woocommerce_enable_review_rating' ) === 'no' ){
-        return; 
+        return;
     }
 
     $ratingCount =  round( $product->get_average_rating() );
@@ -266,7 +266,7 @@ function wb_woocommerce_template_single_rating (){
 function get_preview_slider(){
 
     global $product;
-    
+
     $attachment_ids = $product->get_gallery_attachment_ids();
     $thumb_id = get_post_thumbnail_id();
     $thumb_url = wp_get_attachment_image_src($thumb_id,'full')[0];
@@ -279,7 +279,7 @@ function get_preview_slider(){
 
     ?>
 
-    <?php 
+    <?php
     if(!empty($image_urls)): ?>
 
         <!-- product__slider -->
@@ -287,11 +287,11 @@ function get_preview_slider(){
 
         <div class="swiper-container gallery-top">
         <div class="swiper-wrapper">
-    
+
     <?php foreach ($image_urls as $image_url) { ?>
-        
+
         <div class="swiper-slide" style="background-image:url(<?= $image_url ?>)" data-image="<?= $image_url ?>"></div>
-        
+
    <?php  }  ?>
         </div></div>
           <div class="swiper-container gallery-thumbs">
@@ -305,7 +305,7 @@ function get_preview_slider(){
         <?php }
         ?>
         </div></div></div>
-        
+
    <?php  endif;?>
 
 <?php }
@@ -322,7 +322,7 @@ function woo_remove_product_tabs( $tabs ) {
 add_filter( 'woocommerce_taxonomy_archive_description', 'wb_woocommerce_taxonomy_archive_description_formating' );
 
 function wb_woocommerce_taxonomy_archive_description_formating (){
-    
+
 }
 
 function custom_price_html( $price, $product ){
@@ -334,7 +334,7 @@ function custom_price_html( $price, $product ){
 
         return str_replace( '<ins>', '', $price_formated );
     } else {
-        
+
         return str_replace( '<ins>', '', $price );
     }
 
@@ -364,7 +364,7 @@ function wpq_get_min_price_per_product_cat( $term_id ) {
     AND {$wpdb->posts}.post_status = 'publish' 
 
     AND {$wpdb->postmeta}.meta_key = '_price'";
-    
+
 
     return $wpdb->get_var( $wpdb->prepare( $sql, $term_id ) );
 
@@ -432,11 +432,11 @@ function getAttrForCategory( $catID ){
     }
 
     return $outPutAttr;
-    
+
 }
 
 function checkProduct( $taxonomyName, $termid, $catID ){
-    
+
     $args = array (
         'post_type'  => 'product',
         'posts_per_page' => -1,
@@ -458,7 +458,7 @@ function checkProduct( $taxonomyName, $termid, $catID ){
     $attrProducts =  get_posts($args);
 
     $countPosts = count($attrProducts);
-    
+
     if(empty($attrProducts)){
         $attrProducts = array( false, $countPosts );
     } else {
@@ -466,7 +466,7 @@ function checkProduct( $taxonomyName, $termid, $catID ){
     }
 
     return $attrProducts;
-    
+
 }
 
 function checkPrice( $min, $max, $catID ){
@@ -562,7 +562,7 @@ function main_search(){
         if( $counterCat >= $limit ){ break; }
 
         $counterCat++;
-        
+
         $catObj = get_term( $key,'product_cat' );
 
         $catName = $catObj->name;
@@ -654,7 +654,7 @@ function main_search(){
     endif;
 
     $productsSearch = getProductsSearch( $query );
-    
+
     if( $productsSearch ):
 
         $products = '"products": [';
@@ -708,7 +708,7 @@ function main_search(){
 
             $salePrice = json_encode(wc_price($salePrice));
             $regularPrice = json_encode(wc_price($regularPrice));
-            
+
             $products .= ' {
             "name": '.$name.',
             "src": "'.$thumb_url.'",
@@ -727,11 +727,11 @@ function main_search(){
         $products = substr( $products, 0, -1 );
 
         $products .=']';
-    
+
     else:
 
         $products = '"products": []';
-        
+
     endif;
 
     $json_data = '{'.$categories.','.$products .'}';
@@ -743,7 +743,7 @@ function main_search(){
     echo $json_data;
 
     exit;
-    
+
 }
 
 add_action('wp_ajax_main_search','main_search');
@@ -751,7 +751,7 @@ add_action('wp_ajax_main_search','main_search');
 add_action('wp_ajax_nopriv_main_search', 'main_search');
 
 function getTermsForSearch( $query,$number = 12 ){
-    
+
     $terms = get_terms(
         array(
             'taxonomy' => 'product_cat',
@@ -761,9 +761,9 @@ function getTermsForSearch( $query,$number = 12 ){
             'fields' => 'id=>parent'
         )
     );
-    
+
     return $terms;
-    
+
 }
 
 function getProductsSearch( $query, $count = 6 ){
@@ -780,11 +780,11 @@ function getProductsSearch( $query, $count = 6 ){
             'orderby'			=> 'meta_value',
             'order'				=> 'DESC'
         )
-    
+
     );
-    
+
     return $products;
-    
+
 }
 
 function get_filtered_products(){
@@ -863,9 +863,9 @@ $categoryId = $_GET['idCategory'];
         }
 
     }
-    
-    
-    
+
+
+
     if( $sortingPrice == 'ASC' ){
         $orderbyElem = 'meta_value_num';
         $order = 'ASC';
@@ -985,7 +985,7 @@ $categoryId = $_GET['idCategory'];
             ($regularPrice) ? $regularPrice = $regularPrice : $regularPrice = '' ;
 
             $salePrice = $currentProduct->get_sale_price();
-            
+
             if( !$salePrice ){
                 $salePrice = $regularPrice;
                 $regularPrice ='';
@@ -1130,7 +1130,7 @@ function formatPriceForRanges( $value, $last = false ){
     } else {
 
         $trueValue = $value;
-        
+
         $value = number_format( $value, 2, '.', ' ' );
         $above_flag = false;
     }
@@ -1168,17 +1168,21 @@ function custome_add_to_cart() {
             continue;
         }
 
+        WC()->cart->add_to_cart( $product_id );
+
         if( $newUpsells = WC()->session->get($mainProduct) ){
 
             if( isset( $newUpsells[$product_id]) ){
-                $newUpsells[$product_id]++;
+                $newUpsells[$product_id]['count']++;
             } else {
-                $newUpsells[$product_id] = 1;
+                $newUpsells[$product_id]['count'] = 1;
             }
 
         } else {
-            $newUpsells[$product_id] = 1;
+            $newUpsells = array();
+            $newUpsells[$product_id]['count'] = 1;
         }
+
 
         WC()->session->set($mainProduct,$newUpsells);
 
@@ -1187,8 +1191,10 @@ function custome_add_to_cart() {
 
         WC()->session->set('upsellFlag',0);
 
+        $newUpsells = WC()->session->get($mainProduct);
+        var_dump($newUpsells);
     endif;
-    
+
 }
 
 function mc_checklist(
@@ -1224,11 +1230,11 @@ function mc_checklist(
 }
 
     function custom_registration_redirect() {
-        
+
         $_SESSION['wb_reg'] = 'Successfully Registration !';
-        
+
         return get_permalink(13);
-        
+
     }
 
     add_action('woocommerce_registration_redirect', 'custom_registration_redirect', 2);
@@ -1330,7 +1336,7 @@ function getFilters( $catId ){
 
     $fieldsList = array();
 
-    
+
     $filtersFieldsRanges = array(
         'seat_width',
         'weight',
@@ -1412,7 +1418,7 @@ function checkFiledInCategory( $field, $catId ){
                 'field' => 'term_id',
                 'terms' => $catId
             ),
-            
+
         ),
         'meta_query' => array(
             array(
@@ -1502,13 +1508,13 @@ function getRangesByFiled( $field, $catId ){
 
         $min = min($fieldsValues[$field]);
 
-        
+
 
             $values = $max - $min;
-    
+
             $perRangeValue = ceil( $values/$rangeCount );
-                
-            
+
+
             $rangesArray = array();
 
             for( $i = 1; $i <= ( $rangeCount + 1 ) ; $i++ ){
@@ -1517,7 +1523,7 @@ function getRangesByFiled( $field, $catId ){
 
                 $minRange = intval( floor (  $perRangeValue*( $i-1 ) ) ) + $min;
 
-                
+
                 if( $i == 1 ){
 
                     $minRange = $min;
@@ -1577,13 +1583,13 @@ function checkProductCountByField( $min, $max, $field,  $catID ){
     $countPosts = count($attrProducts);
 
     if(empty($attrProducts)){
-        
+
         $filterCount = 0;
-        
+
     } else {
-        
+
         $filterCount = $countPosts;
-        
+
     }
 
     return $filterCount;
@@ -1602,75 +1608,6 @@ function getUnitByKey( $key ){
         "7" => '”',
         "8" => ''
     );
-    
+
     return $filtersFieldsRangesUnits[$key];
-}
-
-function addUpselssToCart(){
-
-    
-    $cart = WC()->cart->get_cart();
-    
-    if(!empty($cart)):
-
-        $upsellsHides = array();
-
-        foreach ( $cart as $cart_item_key => $cart_item ) {
-
-        $product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
-     
-        if( $upsellsProduct = WC()->session->get($product_id) ){
-
-            foreach ( $upsellsProduct as $key => $value ){
-
-                if( is_cart() && WC()->session->get('needUpdate') ) {
-
-                    $found = false;
-
-                    if ( sizeof( WC()->cart->get_cart() ) > 0 ) {
-
-                        foreach ( WC()->cart->get_cart() as $cart_item_key => $values ) {
-                            $_product = $values['data'];
-                            $_quanity = $values['quantity'];
-
-                            if ( $_product->id == $key ) {
-
-                                if( $_quanity < $value ){
-
-                                    WC()->cart->set_quantity( $cart_item_key, $value );
-
-                                }
-
-                                $found = true;
-                            }
-                        }
-                        // if product not found, add it
-                        if ( ! $found ) {
-                            WC()->cart->add_to_cart( $key, $value );
-                        }
-                    }
-                    
-                }
-
-                if( isset($upsellsHides[$key]) ){
-                    $upsellsHides[$key] = $upsellsHides[$key] + $value;
-                } else {
-                    $upsellsHides[$key] = $value;
-                }
-
-            }
-
-        }
-        
-    }
-
-        endif;
-
-
-    if( is_cart() && WC()->session->get('needUpdate') ) {
-        WC()->session->set('needUpdate', 0);
-    }
-
-    WC()->session->set('upsellsHides', $upsellsHides);
-
 }

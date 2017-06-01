@@ -47,7 +47,13 @@
     }
 
 
+//    if( $_GET['ses'] == 'em' ){
+//        $sd =  WC()->session->set(59,array());
+//    }
+
+
 ?>
+
 
 
     <!-- site -->
@@ -173,9 +179,7 @@
                 } else{
                     $content_cart = $cart->get_cart_total();
                 }
-                if($_GET['em']){
-                    $cart->empty_cart();
-                }
+
                 ?>
 
                 <!-- cart -->

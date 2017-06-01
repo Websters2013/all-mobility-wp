@@ -40,10 +40,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<?php
 
-			$upsellsHides = WC()->session->get('upsellsHides');
-
-			var_dump($upsellsHides);
-
 			foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 
 				$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
@@ -53,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$productTitle = $_product->get_title();
 				$link = get_permalink($product_id);
 				$quantity = $cart_item['quantity'];
-
+				echo $product_id;
 				//Upsells products
 				$customizableParametres = '';
 
@@ -397,5 +393,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 </div>
 <!-- /my-cart__layout -->
+
+<?php
+$f =  WC()->session->get(59);
+$a =  WC()->session->get('upsellFlag');
+
+var_dump($f);
+var_dump($a);
+
+?>
 
 

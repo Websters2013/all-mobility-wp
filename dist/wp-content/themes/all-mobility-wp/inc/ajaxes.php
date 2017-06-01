@@ -49,7 +49,40 @@ add_action('wp_ajax_nopriv_cart_quantity_changes', 'cart_quantity_changes');
 
 function remove_cart_item(){
 
-    $keyProduct = $_GET['id'];
+    $keyProduct = $_GET['key'];
+
+    $idProduct = $_GET['id'];
+
+   if( $checkUpsells = WC()->session->get($idProduct) ){
+
+       if( !empty($checkUpsells) ){
+
+           foreach ($checkUpsells as $upselID => $checkUpsell) {
+
+               foreach( WC()->cart->get_cart() as $cart_key => $cart_item ){
+
+                   if( $upselID == $cart_item['product_id'] ){
+                            $checkUpsellKey = $cart_key;
+                       break;
+                   }
+
+               }
+
+
+               if( $upsellCartItem = WC()->cart->get_cart_item($checkUpsellKey) ){
+
+                   $upsellCartItemQty = $upsellCartItem['quantity'];
+
+                   WC()->cart->set_quantity( $checkUpsellKey, ( $upsellCartItemQty - $checkUpsell['count'] ) );
+
+               }
+
+           }
+
+       }
+
+   }
+
 
     WC()->cart->remove_cart_item($keyProduct);
     $cartTotal  = json_encode( WC()->cart->get_cart_total() );

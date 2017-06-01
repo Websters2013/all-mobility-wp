@@ -257,7 +257,8 @@
                     url: $('body').attr('data-action'),
                     data: {
                         action: 'remove_cart_item',
-                        id: elem.attr('data-product-key'),
+                        key: elem.attr('data-product-key'),
+                        id: elem.attr('data-product-id'),
                         upsals: elem.attr('data-upsals'),
                         flag: 'remove'
                     },

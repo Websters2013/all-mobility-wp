@@ -31,10 +31,10 @@ if ( $product->is_in_stock() ) : ?>
 
 	<?php do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
-<?php
+	<?php
 	global $product;
 	$upselsIDs = $product->get_upsell_ids();
-	
+
 	if( empty($upselsIDs)){
 		$class_customize = 'product__items_non-customize';
 	} else {
@@ -43,24 +43,26 @@ if ( $product->is_in_stock() ) : ?>
 
 	?>
 
-<div class="product__items <?= $class_customize ?>">
-	<div class="product__add">
-		<form method="post" enctype='multipart/form-data'>
+	<div class="product__items <?= $class_customize ?>">
+		<div class="product__add">
+			<form method="post" enctype='multipart/form-data'>
 
-			<?php if( $upselsIDs ):
-				$termsArray = array();
+				<?php if( $upselsIDs ):
+					$termsArray = array();
 
-				if(!empty($upselsIDs)):
+					if(!empty($upselsIDs)):
 
-					foreach ( $upselsIDs as $key => $ID ){
+						foreach ( $upselsIDs as $key => $ID ){
 
-						$title = get_the_title($ID);
+							$title = get_the_title($ID);
 
-						$termUpsell = get_the_terms($ID,'upsell_category');
+							$termUpsell = get_the_terms($ID,'upsell_category');
 
 							if(!empty($termUpsell)):
 
 								foreach ($termUpsell as $upsell) {
+
+									$product = wc_get_product($ID);
 
 									$currentTerm[] = $ID;
 
@@ -71,105 +73,107 @@ if ( $product->is_in_stock() ) : ?>
 								$defaultProducts[] = $ID;
 
 							endif;
-					}
+						}
 
-				endif;
+					endif;
 
-				if( !empty($currentTerm) ){
+					if( !empty($currentTerm) ){
+						
+						$j = 0;
 
-					$j = 0;
+						$countTerm = count($currentTerm);
 
-					$countTerm = count($currentTerm);
+						foreach ($currentTerm as $key => $item){
 
-					foreach ($currentTerm as $key => $item){
 
-						if( $j == 0 ){
-							echo '<select name="upsells_'.$j.'">
+
+							if( $j == 0 ){
+								echo '<select name="upsells_'.$j.'">
 							<option value="0">Add-Ons</option>';
+							}
+
+
+
+							echo '<option value="'.$item.'" >'.get_the_title($item).'</option>';
+
+
+
+							if( $j == ( $countTerm - 1 ) ){
+								echo '</select>';
+							}
+
+							$j++;
+
 						}
-
-						echo '<option value="'.$item.'" >'.get_the_title($item).'</option>';
-
-
-						if( $j == ( $countTerm - 1 ) ){
-							echo '</select>';
-						}
-
-						$j++;
 
 					}
 
-				}
+					if( !empty($defaultProducts ) ){
 
-				if( !empty($defaultProducts) ){
+						$k  = $j-1;
 
-					$k  = $j;
+						$countTerm = count( $defaultProducts );
 
-					$countTerm = count( $defaultProducts );
+						foreach ($defaultProducts as $key => $item){ ?>
 
-					foreach ($defaultProducts as $key => $item){ ?>
+							<select name="<?= 'upsells_'.$k ?>">
+								<option value="0">Add-Ons</option>
+								<option value="<?= $item ?>"><?= get_the_title($item) ?></option>
+							</select>
 
-						<select name="<?= 'upsells_'.$k ?>">
-							<option value="0">Add-Ons</option>
-							<option value="<?= $item ?>"><?= get_the_title($item) ?></option>
-						</select>
+							<?php  $k++;
 
-						<?php  $k++;
+						}
+
 
 					}
 
+				endif; ?>
 
-				}
+				<?php
 
-			endif;
-				
-					
-			?>
+				/**
+				 * @since 2.1.0.
+				 */
+				do_action( 'woocommerce_before_add_to_cart_button' );
 
-		<?php
-		
-			/**
-			 * @since 2.1.0.
-			 */
-			do_action( 'woocommerce_before_add_to_cart_button' );
+				/**
+				 * @since 3.0.0.
+				 */
+				do_action( 'woocommerce_before_add_to_cart_quantity' );
 
-			/**
-			 * @since 3.0.0.
-			 */
-			do_action( 'woocommerce_before_add_to_cart_quantity' );
+				//			woocommerce_quantity_input( array(
+				//				'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
+				//				'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $product->get_max_purchase_quantity(), $product ),
+				//				'input_value' => isset( $_POST['quantity'] ) ? wc_stock_amount( $_POST['quantity'] ) : $product->get_min_purchase_quantity(),
+				//			) );
 
-//			woocommerce_quantity_input( array(
-//				'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
-//				'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $product->get_max_purchase_quantity(), $product ),
-//				'input_value' => isset( $_POST['quantity'] ) ? wc_stock_amount( $_POST['quantity'] ) : $product->get_min_purchase_quantity(),
-//			) );
+				/**
+				 * @since 3.0.0.
+				 */
+				do_action( 'woocommerce_after_add_to_cart_quantity' );
+				?>
 
-			/**
-			 * @since 3.0.0.
-			 */
-			do_action( 'woocommerce_after_add_to_cart_quantity' );
-		?>
-
-		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="btn btn_2 btn_img-left single_add_to_cart_button button alt">
+				<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="btn btn_2 btn_img-left single_add_to_cart_button button alt">
 			<span>
 
                                         <img src="<?= DIRECT ?>img/cart.png" width="30" height="26px" alt="">
 
 				<?php echo esc_html( $product->single_add_to_cart_text() ); ?></span>
-		</button>
+				</button>
 
-		<?php
-			/**
-			 * @since 2.1.0.
-			 */
-			do_action( 'woocommerce_after_add_to_cart_button' );
-		?>
-	</form>
+				<?php
+				/**
+				 * @since 2.1.0.
+				 */
+				do_action( 'woocommerce_after_add_to_cart_button' );
+				?>
+			</form>
+		</div>
+		<div class="advantages advantages_2">
+			<?php get_template_part('content/content','advantages') ?>
+		</div>
 	</div>
-	<div class="advantages advantages_2">
-		<?php get_template_part('content/content','advantages') ?>
-	</div>
-</div>
 	<?php do_action( 'woocommerce_after_add_to_cart_form' ); ?>
 
 <?php endif; ?>
