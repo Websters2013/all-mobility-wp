@@ -35,18 +35,91 @@ $upselsIDs = $product->get_upsell_ids(); ?>
 
 <form class="variations_form" method="post" enctype='multipart/form-data' data-product_id="<?php echo absint( $product->get_id() ); ?>" data-product_variations="<?php echo htmlspecialchars( wp_json_encode( $available_variations ) ) ?>">
 
+
 	<?php if( $upselsIDs ):
+		$termsArray = array();
 
-		foreach ( $upselsIDs as $key => $ID ){
-			$title = get_the_title($ID);
-			?>
+		if(!empty($upselsIDs)):
 
-			<select name="<?= 'upsells_'.$key ?>">
-				<option value="0">Add-Ons</option>
-				<option value="<?= $ID ?>"><?= $title ?></option>
-			</select>
+			foreach ( $upselsIDs as $key => $ID ){
 
-		<?php }
+				$title = get_the_title($ID);
+
+				$termUpsell = get_the_terms($ID,'upsell_category');
+
+				if(!empty($termUpsell)):
+
+					foreach ($termUpsell as $upsell) {
+
+						$product = wc_get_product($ID);
+
+						$currentTerm[] = $ID;
+
+					}
+
+				else:
+
+					$defaultProducts[] = $ID;
+
+				endif;
+			}
+
+		endif;
+
+		if( !empty($currentTerm) ){
+
+			$j = 0;
+
+			$countTerm = count($currentTerm);
+
+			foreach ($currentTerm as $key => $item){
+
+
+				if( $j == 0 ){
+					echo '<select name="upsells_'.$j.'">
+							<option value="0">Add-Ons</option>';
+				}
+
+
+
+				echo '<option value="'.$item.'" >'.get_the_title($item).'</option>';
+
+
+
+				if( $j == ( $countTerm - 1 ) ){
+					echo '</select>';
+				}
+
+				$j++;
+
+			}
+
+		}
+
+		if( !empty($defaultProducts ) ){
+
+			if( $j > 0 ){
+				$k  = $j-1;
+			} else {
+				$k = 0;
+			}
+
+
+			$countTerm = count( $defaultProducts );
+
+			foreach ($defaultProducts as $key => $item){ ?>
+
+				<select name="<?= 'upsells_'.$k ?>">
+					<option value="0">Add-Ons</option>
+					<option value="<?= $item ?>"><?= get_the_title($item) ?></option>
+				</select>
+
+				<?php  $k++;
+
+			}
+
+
+		}
 
 	endif; ?>
 	

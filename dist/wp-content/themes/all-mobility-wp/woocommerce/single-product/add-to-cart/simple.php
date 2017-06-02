@@ -57,7 +57,7 @@ if ( $product->is_in_stock() ) : ?>
 							$title = get_the_title($ID);
 
 							$termUpsell = get_the_terms($ID,'upsell_category');
-
+							
 							if(!empty($termUpsell)):
 
 								foreach ($termUpsell as $upsell) {
@@ -86,7 +86,6 @@ if ( $product->is_in_stock() ) : ?>
 						foreach ($currentTerm as $key => $item){
 
 
-
 							if( $j == 0 ){
 								echo '<select name="upsells_'.$j.'">
 							<option value="0">Add-Ons</option>';
@@ -110,7 +109,12 @@ if ( $product->is_in_stock() ) : ?>
 
 					if( !empty($defaultProducts ) ){
 
-						$k  = $j-1;
+						if( $j > 0 ){
+							$k  = $j-1;
+						} else {
+							$k = 0;
+						}
+
 
 						$countTerm = count( $defaultProducts );
 
@@ -154,7 +158,9 @@ if ( $product->is_in_stock() ) : ?>
 				do_action( 'woocommerce_after_add_to_cart_quantity' );
 				?>
 
-				<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="btn btn_2 btn_img-left single_add_to_cart_button button alt">
+			
+
+				<button type="submit" name="add-to-cart" value="<?php echo esc_attr( get_the_ID() ); ?>" class="btn btn_2 btn_img-left single_add_to_cart_button button alt">
 			<span>
 
                                         <img src="<?= DIRECT ?>img/cart.png" width="30" height="26px" alt="">

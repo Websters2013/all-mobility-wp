@@ -40,6 +40,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<?php
 
+			$allUpsells = countHidenUpsells();
+
 			foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 
 				$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
@@ -48,8 +50,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$thumb_url = wp_get_attachment_image_src($thumb_id,'full')[0];
 				$productTitle = $_product->get_title();
 				$link = get_permalink($product_id);
-				$quantity = $cart_item['quantity'];
-				echo $product_id;
+
+				if( $inUpsells =  $allUpsells[$product_id] ){
+					$quantity = $cart_item['quantity'] - $inUpsells;
+				} else {
+					$quantity = $cart_item['quantity'];
+				}
+
+				if( !$quantity ){
+					continue;
+				}
+
 				//Upsells products
 				$customizableParametres = '';
 
@@ -59,8 +70,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 					foreach ($upsellsProduct as $key => $value){
 
-						$customizableParametres .= get_the_title($key);
+						$upsellProduct = wc_get_product($key);
+
+						$upsellSum +=  $upsellProduct->get_price()*$value['count'];
+
+
+						$customizableParametres .= get_the_title($key).' ('.$value['count'].')<br/>';
 					}
+
 
 					endif;
 
@@ -72,13 +89,32 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				if( !$cart_item['variation_id'] ){
 					$variation_id = 0;
-					$subtotal_product = WC()->cart->get_product_subtotal( $_product , $quantity );
+					
+					if( $upsellsProduct ){
+						$subtotal_product = wc_price(  $_product->get_price()*$quantity + $upsellSum );
+					} else {
+						$subtotal_product = WC()->cart->get_product_subtotal( $_product , $quantity );
+					}
+
+
 
 				} else {
 					$variation_id = $cart_item['variation_id'];
 					$variationProduct = new WC_Product_Variation($variation_id);
-					$subtotal_product = WC()->cart->get_product_subtotal( $variationProduct , $quantity );
-				} ?>
+
+					if( $upsellsProduct ){
+						$subtotal_product =  wc_price( $variationProduct->get_price()*$quantity + $upsellSum );
+					} else {
+						$subtotal_product = WC()->cart->get_product_subtotal( $variationProduct , $quantity );
+					}
+
+				} 
+				
+				//Full subtotal
+				if( $upsellsProduct ){
+
+				}
+				// \Full subtotal  ?>
 
 				<!-- my-cart__product -->
 				<div class="my-cart__product"  data-variation-id="<?= $variation_id ?>"  data-product-id="<?= $product_id ?>" data-product-key="<?= $cart_item_key ?>">
@@ -283,14 +319,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 				<div>
 
-				
+
 					<?php woocommerce_button_proceed_to_checkout() ?>
 				</div>
 			</div>
 			<!-- /my-cart__end -->
 
 		</form>
-		
+
 		<?php
 
 
@@ -386,21 +422,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div>
 
 			<h2 class="site__title site__title_3">Your cart is currently empty.</h2>
-			
+
 		</div>
 	</div>
 	<!-- /my-cart__empty -->
 
 </div>
 <!-- /my-cart__layout -->
-
-<?php
-$f =  WC()->session->get(59);
-$a =  WC()->session->get('upsellFlag');
-
-var_dump($f);
-var_dump($a);
-
-?>
 
 

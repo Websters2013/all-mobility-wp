@@ -230,9 +230,10 @@
                 _request = $.ajax( {
                     url: $('body').attr('data-action'),
                     data: {
-                        action: 'edt_cart_item',
-                        id: elem.attr('data-product-key'),
-                        upsals: elem.attr('data-upsals'),
+                        action: 'remove_cart_item',
+                        key: elem.attr('data-product-key'),
+                        id: elem.attr('data-product-id'),
+                        value: elem.find('.count-product__input').val(),
                         flag: 'edit'
                     },
                     dataType: 'json',
@@ -251,7 +252,7 @@
 
             },
             _requestProductRemove = function ( elem ) {
-
+                
                 _request.abort();
                 _request = $.ajax( {
                     url: $('body').attr('data-action'),
@@ -260,6 +261,7 @@
                         key: elem.attr('data-product-key'),
                         id: elem.attr('data-product-id'),
                         upsals: elem.attr('data-upsals'),
+                        value: elem.find('.count-product__input').val(),
                         flag: 'remove'
                     },
                     dataType: 'json',

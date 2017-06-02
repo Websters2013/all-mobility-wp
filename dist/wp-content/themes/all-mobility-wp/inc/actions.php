@@ -1192,7 +1192,7 @@ function custome_add_to_cart() {
         WC()->session->set('upsellFlag',0);
 
         $newUpsells = WC()->session->get($mainProduct);
-        var_dump($newUpsells);
+      
     endif;
 
 }
@@ -1223,7 +1223,7 @@ function mc_checklist(
     curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
     $result = curl_exec($ch);
     if ($debug) {
-        var_dump($result);
+        
     }
     $json = json_decode($result);
     return $json->{'status'};
@@ -1610,4 +1610,44 @@ function getUnitByKey( $key ){
     );
 
     return $filtersFieldsRangesUnits[$key];
+}
+
+function  countHidenUpsells(){
+
+    $allUpsellsProducts = array();
+
+    foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+
+        $product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
+
+        $allUpsellsProducts[] = WC()->session->get($product_id);
+
+    }
+
+    $mainRepeat = array();
+
+    foreach ( $allUpsellsProducts as $eachMainUpsells ){
+
+        if( is_array($eachMainUpsells) ):
+
+        foreach (  $eachMainUpsells as  $key => $eachMainUpsell ){
+
+            if( $mainRepeat[$key] ){
+
+                $mainRepeat[$key] += $eachMainUpsell['count'];
+
+            } else {
+
+                $mainRepeat[$key] = $eachMainUpsell['count'];
+
+            }
+
+        }
+
+        endif;
+    }
+
+
+    return $mainRepeat;
+
 }

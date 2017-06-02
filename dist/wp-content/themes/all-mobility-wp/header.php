@@ -54,8 +54,6 @@
 
 ?>
 
-
-
     <!-- site -->
     <div class="site <?= $checkoutClass ?>">
         
@@ -293,3 +291,4 @@
 
         </header>
         <!-- /site__header -->
+
