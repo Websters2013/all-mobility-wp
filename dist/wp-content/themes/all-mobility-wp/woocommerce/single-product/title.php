@@ -20,4 +20,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-the_title( '<h1 itemprop="name" class="product__title">', '</h1>' );
+global $product;
+
+the_title( '<h1 itemprop="name" class="product__title">', '</h1>' ); ?>
+
+<?php
+
+$brand  = get_field('brand',get_the_ID());
+
+if( $brand ): ?>
+
+<div class="product__brand">Brand: <?= $brand ?></div>
+
+<?php endif; ?>
+

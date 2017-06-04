@@ -25,16 +25,20 @@
 
                 ($menu_items[$i+1]->menu_item_parent == $menu_items[$i]->ID )? $flag_i = true : $flag_i = false;
 
+                $link = get_term_link( (int)$t_id, 'product_cat' );
 
-                $menusArray .= '<dt><a href="">'.$menu_items[$i]->title.'</a></dt>';
+                $menusArray .= '<dt><a href="'.$link.'">'.$menu_items[$i]->title.'</a></dt>';
                 
                 if( $flag_i ){
 
                     for($j = 0; $j<$countItems; $j++){
 
+                        $t_jd = $menu_items[$j]->object_id;
+                        $link = get_term_link( (int)$t_jd, 'product_cat' );
+
                         if( $menu_items[$j]->menu_item_parent ==  $menu_items[$i]->ID ):
 
-                        $menusArray .= '<dd><a href="">'.$menu_items[$j]->title.'</a></dd>';
+                        $menusArray .= '<dd><a href="'.$link.'">'.$menu_items[$j]->title.'</a></dd>';
 
                         endif;
                         

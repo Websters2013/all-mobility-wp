@@ -80,11 +80,16 @@
   font-size: 16px;
   color: #4E4E4E;
 
-  span {
+  >span:first-child:not(.woocommerce-Price-currencySymbol) {
     margin: 1px 0 0;
     font-size: 12px;
     color: #F47920;
     text-transform: uppercase;
+  }
+  .woocommerce-Price-currencySymbol {
+    margin: 0;
+    font-size: 16px;
+    color: #4E4E4E;
   }
 
 }
@@ -247,10 +252,15 @@
     font-size: 24px;
     line-height: 24px;
 
-    span {
+    >span:first-child {
       margin: 0;
       font-size: 14px;
       display: block;
+    }
+    .woocommerce-Price-currencySymbol {
+      display: inline-block !important;
+      font-size: 24px !important;
+      line-height: 24px !important;
     }
 
   }
@@ -295,11 +305,16 @@
       margin: 0 0 7px;
       padding: 0 4px;
 
-      span {
+      >span:first-child {
         @include main-font3();
         font-weight: 400;
         font-size: 16px;
         text-transform: none;
+      }
+      .woocommerce-Price-currencySymbol {
+        display: inline-block;
+        font-size: 24px;
+        line-height: 24px;
       }
 
     }
