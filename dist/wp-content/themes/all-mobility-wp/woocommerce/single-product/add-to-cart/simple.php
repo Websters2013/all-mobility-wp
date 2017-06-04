@@ -57,7 +57,7 @@ if ( $product->is_in_stock() ) : ?>
 							$title = get_the_title($ID);
 
 							$termUpsell = get_the_terms($ID,'upsell_category');
-							
+
 							if(!empty($termUpsell)):
 
 								foreach ($termUpsell as $upsell) {
