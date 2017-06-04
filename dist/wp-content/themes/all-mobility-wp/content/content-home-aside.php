@@ -37,11 +37,7 @@
 
     <!-- watch-video -->
     <div class="watch-video" style="background-image: url(<?= get_field('video_image') ?>)">
-
-        <!-- watch-video__title -->
-        <h2 class="watch-video__title">video</h2>
-        <!-- /watch-video__title -->
-
+        
         <a  target="_blank" href="<?= get_field('link_on_video') ?>" class="btn btn_3">watch video</a>
 
     </div>

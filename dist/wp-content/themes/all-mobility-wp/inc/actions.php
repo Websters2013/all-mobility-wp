@@ -1394,7 +1394,7 @@ function getFilters( $catId ){
             $resultsArray['ranges'][$field] = $range;
 
             $resultsArray['ranges'][$field]['name'] = $filtersFieldsRangesLabels[$key];
-            $resultsArray['ranges'][$field]['unit'] = getUnitByKey($key);
+            $resultsArray['ranges'][$field]['unit'] = getUnitByKey($field);
 
         }
 
@@ -1599,14 +1599,14 @@ function checkProductCountByField( $min, $max, $field,  $catID ){
 function getUnitByKey( $key ){
 
     $filtersFieldsRangesUnits = array(
-        "1" => '”',
-        "2" => ' lbs',
-        "3" => 'mph',
-        "4" => '”',
-        "5" => ' miles',
-        "6" => '',
-        "7" => '”',
-        "8" => ''
+         'seat_width' => '”',
+        'weight' => 'lbs',
+        'top_speed' => 'Mph',
+        'main_use' => '”',
+        'drive_range' => 'Miles',
+        'chair_size',
+        'overall_width' => '”',
+        'base_width_open' => '”'
     );
 
     return $filtersFieldsRangesUnits[$key];
