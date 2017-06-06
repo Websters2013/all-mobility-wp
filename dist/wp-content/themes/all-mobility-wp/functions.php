@@ -31,9 +31,9 @@ function custom_meta_box_fields( $meta_fields ) {
 	 *
 	 * Supported field types are checkbox, textarea and dropdown.
 	 */
-	$meta_fields[ __( 'Filter Input Example', 'wpsl' ) ] = array(
+	$meta_fields[ __( 'Service Type', 'wpsl' ) ] = array(
 		'my_textinput' => array(
-			'label'    => __( 'Text input', 'wpsl' ),
+			'label'    => __( 'Service', 'wpsl' ),
 			'required' => false
 		),
 	);

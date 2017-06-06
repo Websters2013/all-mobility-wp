@@ -1266,6 +1266,9 @@ function wb_wpsl_create_underscore_templates() {
         $listing_template .= "\t\t" . '<div class="wpsl-store-location">' . "\r\n";
         $listing_template .= "\t\t\t" . '<p><%= thumb %>' . "\r\n";
         $listing_template .= "\t\t\t\t" . wpsl_store_header_template( 'listing' ) . "\r\n"; // Check which header format we use
+        $listing_template .= '<% if ( my_textinput ) { %>' . "\r\n";
+        $listing_template .= "\t\t" . '<span class="service_type"><%= my_textinput %></span>' . "\r\n";
+        $listing_template .= '<% } %>' . "\r\n";
         $listing_template .= "\t\t\t\t" . '<span class="wpsl-street"><strong>Address:</strong> <%= address %></span>' . "\r\n";
         $listing_template .= "\t\t\t\t" . '<% if ( address2 ) { %>' . "\r\n";
         $listing_template .= "\t\t\t\t" . '<span class="wpsl-street"><%= address2 %></span>' . "\r\n";
@@ -1661,9 +1664,6 @@ function custom_info_window_template() {
     $info_window_template = '<div  data-store-id="<%= id %>" class="wpsl-info-window">'. "\r\n";
     $info_window_template .= "\t\t" . '<p>' . "\r\n";
     $info_window_template .= "\t\t\t" .  wpsl_store_header_template() . "\r\n";
-    $info_window_template .= '<% if ( my_textinput ) { %>' . "\r\n";
-    $info_window_template .= "\t\t" . '<span class="service_type"><%= my_textinput %></span>' . "\r\n";
-    $info_window_template .= '<% } %>' . "\r\n";
     $info_window_template .= "\t\t\t" . '<span><span class="wpsl-info-window-label">Address:</span> <%= address %></span>' . "\r\n";
     $info_window_template .= "\t\t\t" . '<% if ( address2 ) { %>' . "\r\n";
     $info_window_template .= "\t\t\t" . '<span><%= address2 %></span>' . "\r\n";
@@ -1692,10 +1692,9 @@ function custom_info_window_template() {
 
     $info_window_template .= "\t\t" . '<%= createInfoWindowActions( id ) %>' . "\r\n";
 
-    $info_window_template .= "\t" . '<a href="<%= permalink %>">View More</a>' . "\r\n";
+    $info_window_template .= "\t" . '<a class="wpsl-info-actions_view_more" href="<%= permalink %>">View More</a>' . "\r\n";
     $info_window_template .= "\t" . '</div>' . "\r\n";
 
     return $info_window_template;
 
 }
-

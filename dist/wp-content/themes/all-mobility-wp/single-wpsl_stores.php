@@ -32,14 +32,18 @@
             <!-- locations__items -->
             <div class="locations__items">
                 <div>
+                    <?php  $id = get_the_ID(); ?>
 
                     <h2 class="site__title site__title_3"><?= get_the_title() ?>
-
-                        <span class="locations__repair"><?php the_field('shop_type_field') ?></span>
+                        <?php $service_type  = get_post_meta( $id, 'wpsl_my_textinput', true );
+                        if($service_type):
+                        ?>
+                            <span class="locations__repair"><?php echo $service_type; ?></span>
+                        <?php endif; ?>
                     </h2>
 
                     <?php
-                    $id = get_the_ID();
+
                         $address       = get_post_meta( $id, 'wpsl_address', true );
                         $city          = get_post_meta( $id, 'wpsl_city', true );
                         $country       = get_post_meta( $id, 'wpsl_country', true );
