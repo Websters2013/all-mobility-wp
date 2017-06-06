@@ -1121,7 +1121,6 @@ textarea.site__input {
           @include justify-content(space-between);
           @include align-items();
           @include flex-direction();
-          padding: 0 0 34px;
           position: absolute;
           top: 36px;
           left: 0;
@@ -1148,13 +1147,12 @@ textarea.site__input {
           .featured-product {
             display: block;
             max-width: 317px;
+            padding-bottom: 34px;
           }
           ul {
             width: 270px;
-            padding: 20px 0 0;
-            -webkit-column-rule: 1px solid #E8E8E8; /* Chrome, Safari, Opera */
-            -moz-column-rule: 1px solid #E8E8E8; /* Firefox */
-            column-rule: 1px solid #E8E8E8;
+            padding: 20px 0 34px;
+            border-right: 1px solid #E8E8E8;
 
             li {
               //width: 210px;
