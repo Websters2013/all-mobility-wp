@@ -37,6 +37,7 @@ $upselsIDs = $product->get_upsell_ids(); ?>
 
 
 	<?php if( $upselsIDs ):
+
 		$termsArray = array();
 
 		if(!empty($upselsIDs)):
@@ -47,15 +48,10 @@ $upselsIDs = $product->get_upsell_ids(); ?>
 
 				$termUpsell = get_the_terms($ID,'upsell_category');
 
+
 				if(!empty($termUpsell)):
-
-					foreach ($termUpsell as $upsell) {
-
-						$product = wc_get_product($ID);
-
-						$currentTerm[] = $ID;
-
-					}
+					$term_id = $termUpsell[0]->term_id;
+					$currentTerm[$term_id][] = $ID;
 
 				else:
 
@@ -74,21 +70,20 @@ $upselsIDs = $product->get_upsell_ids(); ?>
 
 			foreach ($currentTerm as $key => $item){
 
+				$term = get_term( $key, 'upsell_category' );
 
-				if( $j == 0 ){
-					echo '<select name="upsells_'.$j.'">
-							<option value="0">Add-Ons</option>';
+
+				echo '<select name="upsells_'.$j.'">
+							<option value="0">'.$term->name.'</option>';
+
+				foreach ( $item as  $attr ){
+
+					echo '<option value="'.$attr.'" >'.get_the_title($attr).'</option>';
 				}
 
 
+				echo '</select>';
 
-				echo '<option value="'.$item.'" >'.get_the_title($item).'</option>';
-
-
-
-				if( $j == ( $countTerm - 1 ) ){
-					echo '</select>';
-				}
 
 				$j++;
 
@@ -96,14 +91,15 @@ $upselsIDs = $product->get_upsell_ids(); ?>
 
 		}
 
+
+
 		if( !empty($defaultProducts ) ){
 
 			if( $j > 0 ){
-				$k  = $j-1;
+				$k  = $j;
 			} else {
 				$k = 0;
 			}
-
 
 			$countTerm = count( $defaultProducts );
 
@@ -122,7 +118,7 @@ $upselsIDs = $product->get_upsell_ids(); ?>
 		}
 
 	endif; ?>
-	
+
 
 	<?php do_action( 'woocommerce_before_variations_form' ); ?>
 
@@ -182,7 +178,7 @@ $upselsIDs = $product->get_upsell_ids(); ?>
 		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 	<?php endif; ?>
 
-	
+
 	<?php do_action( 'woocommerce_after_variations_form' ); ?>
 </form>
 </div>

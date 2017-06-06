@@ -6,6 +6,8 @@
   color: rgba(78, 78, 78, 0.81);
   line-height: 22px;
 
+
+
   p {
     margin: 0 0 28px;
   }
@@ -17,6 +19,11 @@
   }
 
 }
+
+.wpsl-info-window-label {
+  font-weight: bold !important;
+}
+
 .locations__items {
   position: relative;
   margin: 0 0 25px;

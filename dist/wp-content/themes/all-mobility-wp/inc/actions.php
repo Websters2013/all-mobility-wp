@@ -809,6 +809,8 @@ $categoryId = $_GET['idCategory'];
 
     }
     $allCharacters = array();
+
+    if(!empty($technicals)):
     foreach ( $technicals as $key => $technical){
 
         if(  $key == 'brand' || $key == 'frame_color' || $key == 'choose_frame_type' ){
@@ -863,7 +865,7 @@ $categoryId = $_GET['idCategory'];
         }
 
     }
-
+    endif;
 
 
     if( $sortingPrice == 'ASC' ){
@@ -1259,13 +1261,12 @@ function wb_wpsl_create_underscore_templates() {
 
         global $wpsl, $wpsl_settings;
 
-
         $listing_template = '<li data-store-id="<%= id %>">' . "\r\n";
         $listing_template .= '<a href="<%= permalink %>"></a>'. "\r\n";
         $listing_template .= "\t\t" . '<div class="wpsl-store-location">' . "\r\n";
         $listing_template .= "\t\t\t" . '<p><%= thumb %>' . "\r\n";
         $listing_template .= "\t\t\t\t" . wpsl_store_header_template( 'listing' ) . "\r\n"; // Check which header format we use
-        $listing_template .= "\t\t\t\t" . '<span class="wpsl-street"><%= address %></span>' . "\r\n";
+        $listing_template .= "\t\t\t\t" . '<span class="wpsl-street"><strong>Address:</strong> <%= address %></span>' . "\r\n";
         $listing_template .= "\t\t\t\t" . '<% if ( address2 ) { %>' . "\r\n";
         $listing_template .= "\t\t\t\t" . '<span class="wpsl-street"><%= address2 %></span>' . "\r\n";
         $listing_template .= "\t\t\t\t" . '<% } %>' . "\r\n";
@@ -1335,7 +1336,6 @@ define( 'WPSL_MARKER_URI', dirname( get_bloginfo( 'stylesheet_url') ) . '/wpsl-m
 function getFilters( $catId ){
 
     $fieldsList = array();
-
 
     $filtersFieldsRanges = array(
         'seat_width',
@@ -1651,3 +1651,51 @@ function  countHidenUpsells(){
     return $mainRepeat;
 
 }
+
+add_filter( 'wpsl_info_window_template', 'custom_info_window_template' );
+
+function custom_info_window_template() {
+
+    global $wpsl;
+
+    $info_window_template = '<div  data-store-id="<%= id %>" class="wpsl-info-window">'. "\r\n";
+    $info_window_template .= "\t\t" . '<p>' . "\r\n";
+    $info_window_template .= "\t\t\t" .  wpsl_store_header_template() . "\r\n";
+    $info_window_template .= '<% if ( my_textinput ) { %>' . "\r\n";
+    $info_window_template .= "\t\t" . '<span class="service_type"><%= my_textinput %></span>' . "\r\n";
+    $info_window_template .= '<% } %>' . "\r\n";
+    $info_window_template .= "\t\t\t" . '<span><span class="wpsl-info-window-label">Address:</span> <%= address %></span>' . "\r\n";
+    $info_window_template .= "\t\t\t" . '<% if ( address2 ) { %>' . "\r\n";
+    $info_window_template .= "\t\t\t" . '<span><%= address2 %></span>' . "\r\n";
+    $info_window_template .= "\t\t\t" . '<% } %>' . "\r\n";
+    $info_window_template .= "\t\t\t" . '<span>' . wpsl_address_format_placeholders() . '</span>' . "\r\n";
+    $info_window_template .= "\t\t" . '</p>' . "\r\n";
+    $info_window_template .= "\t\t" . '<% if ( phone ) { %>' . "\r\n";
+    $info_window_template .= "\t\t" . '<span><strong>' . esc_html( $wpsl->i18n->get_translation( 'phone_label', __( 'Phone', 'wpsl' ) ) ) . '</strong>: <%= formatPhoneNumber( phone ) %></span>' . "\r\n";
+    $info_window_template .= "\t\t" . '<% } %>' . "\r\n";
+    $info_window_template .= "\t\t" . '<% if ( fax ) { %>' . "\r\n";
+    $info_window_template .= "\t\t" . '<span><strong>' . esc_html( $wpsl->i18n->get_translation( 'fax_label', __( 'Fax', 'wpsl' ) ) ) . '</strong>: <%= fax %></span>' . "\r\n";
+    $info_window_template .= "\t\t" . '<% } %>' . "\r\n";
+    $info_window_template .= "\t\t" . '<% if ( email ) { %>' . "\r\n";
+    $info_window_template .= "\t\t" . '<span><strong>' . esc_html( $wpsl->i18n->get_translation( 'email_label', __( 'Email', 'wpsl' ) ) ) . '</strong>: <%= email %></span>' . "\r\n";
+    $info_window_template .= "\t\t" . '<% } %>' . "\r\n";
+
+    /**
+     * Include the data from a custom field called 'my_textinput'.
+     *
+     * Before you can access the 'my_textinput' data in the template,
+     * you first need to make sure the data is included in the JSON output.
+     *
+     * You can make the data accessible through the wpsl_frontend_meta_fields filter.
+     */
+
+
+    $info_window_template .= "\t\t" . '<%= createInfoWindowActions( id ) %>' . "\r\n";
+
+    $info_window_template .= "\t" . '<a href="<%= permalink %>">View More</a>' . "\r\n";
+    $info_window_template .= "\t" . '</div>' . "\r\n";
+
+    return $info_window_template;
+
+}
+

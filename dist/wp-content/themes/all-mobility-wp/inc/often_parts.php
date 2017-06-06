@@ -46,27 +46,28 @@ function get_featured_slider_products( $ids = null ){
                     $title = get_the_title($crossSellsId);
                     $thumb_id = get_post_thumbnail_id($crossSellsId);
                     $thumb_url = wp_get_attachment_image_src($thumb_id,'full')[0];
+                    $product = wc_get_product($crossSellsId);
 
                     if( $product->is_type('variable') ){
 
-                        $regularPrice = $product->get_variation_regular_price();
+                        $regularPrice =  $product->get_variation_regular_price();
 
                         $salePrice = $product->get_variation_sale_price();
 
                     } elseif( $product->is_type('simple') ) {
 
-                        $regularPrice = $product->get_regular_price();
+                        $regularPrice =  $product->get_regular_price();
 
                         $salePrice = $product->get_sale_price();
 
                     }
 
                     if( !$salePrice || $salePrice == $regularPrice){
-                        $salePrice = $regularPrice.'$';
+                        $salePrice = wc_price( $regularPrice );
                         $regularPrice = '';
                     } else {
-                        $salePrice = $salePrice.'$';
-                        $regularPrice = $regularPrice.'$';
+                        $salePrice = wc_price( $salePrice );
+                        $regularPrice = wc_price( $regularPrice );
                     }
 
                     ?>

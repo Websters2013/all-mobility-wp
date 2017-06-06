@@ -11,6 +11,36 @@ function woocommerce_support() {
 	add_theme_support( 'woocommerce' );
 }
 
+add_filter( 'wpsl_frontend_meta_fields', 'custom_frontend_meta_fields' );
+
+function custom_frontend_meta_fields( $store_fields ) {
+
+	$store_fields['wpsl_my_textinput'] = array(
+		'name' => 'my_textinput'
+	);
+
+	return $store_fields;
+}
+
+add_filter( 'wpsl_meta_box_fields', 'custom_meta_box_fields' );
+
+function custom_meta_box_fields( $meta_fields ) {
+
+	/**
+	 * If no 'type' is defined it will show a normal text input field.
+	 *
+	 * Supported field types are checkbox, textarea and dropdown.
+	 */
+	$meta_fields[ __( 'Filter Input Example', 'wpsl' ) ] = array(
+		'my_textinput' => array(
+			'label'    => __( 'Text input', 'wpsl' ),
+			'required' => false
+		),
+	);
+
+	return $meta_fields;
+}
+
 //Comments
 
 // Updating all products that have a 'comment_status' => 'closed' to 'open'
@@ -35,7 +65,7 @@ function updating_existing_products_once(){
 	}
 }
 
-//updating_existing_products_once();
+updating_existing_products_once();
 
 add_action('transition_post_status', 'creating_a_new_product', 10, 3);
 function creating_a_new_product($new_status, $old_status, $post) {

@@ -140,25 +140,25 @@ $powerWheelChairs = 125; ?>
                                         while ( have_rows('price_builder','product_cat_'.$category_ID ) ) : the_row();
                                             $i++;
                                             $last = get_sub_field('last_above_range');
-                                            $min = formatPriceForRanges( get_sub_field('start_price') );
-                                            $max = formatPriceForRanges( get_sub_field('end_price'), $last[0] );
+                                            $min = get_sub_field('start_price');
+                                            $max =  get_sub_field('end_price');
 
-                                            if( $max[1] ){
-                                                $max_formated = 999999999999;
-                                                $max_text = $max[0];
-
+                                            if( $last[0] ){
+                                                $maxDisplay = 'and above';
+                                                $max = 999999999999;
                                             } else {
-                                                $max_formated = $max[2];
-                                                $max_text = '$'.$max[0];
+                                                $maxDisplay = wc_price($max);
                                             }
-                                            
-                                            $number = checkPrice( $min[2], $max_formated, $category_ID );
+
+                                            $minDisplay = wc_price($min);
+
+                                            $number = checkPrice( $min, $max, $category_ID );
 
                                             ?>
 
                                             <div>
-                                                <input type="checkbox"  data-id="<?= $min[2].'-'.$max_formated ?>" name="_price" id="price_<?= $i ?>">
-                                                <label for="price_<?= $i ?>"><?= '$'.$min[0] ?> - <?= $max_text ?> <span class="category__filters-count"><?= $number ?></span></label>
+                                                <input type="checkbox"  data-id="<?= $min.'-'.$max ?>" name="_price" id="price_<?= $i ?>">
+                                                <label for="price_<?= $i ?>"><?= $minDisplay ?> - <?= $maxDisplay ?> <span class="category__filters-count"><?= $number ?></span></label>
                                             </div>
 
                                             <?php
@@ -326,11 +326,11 @@ $powerWheelChairs = 125; ?>
                             <span class="category__find-title">Main Use</span>
 
                             <div class="nice-radio">
-                                <input type="radio"  checked name="main_use" id="usage1" value="0-40">
+                                <input type="radio"  checked name="main_use" id="usage1" data-id="0-40" value="0-40">
                                 <label for="usage1">Indoor</label>
                             </div>
                             <div class="nice-radio">
-                                <input type="radio" name="main_use" id="usage2" value="40-999999999">
+                                <input type="radio" name="main_use" id="usage2" data-id="40-999999999" value="40-999999999">
                                 <label for="usage2">Outdoor</label>
                             </div>
 
@@ -340,11 +340,11 @@ $powerWheelChairs = 125; ?>
                             <span class="category__find-title">Usage</span>
 
                             <div class="nice-radio">
-                                <input type="radio" checked name="drive_range" id="reatures1" value="12-999999999">
+                                <input type="radio" checked name="drive_range" id="reatures1" data-id="12-999999999" value="12-999999999">
                                 <label for="reatures1">Full-time</label>
                             </div>
                             <div class="nice-radio">
-                                <input type="radio" name="drive_range" id="reatures2" value="0-12">
+                                <input type="radio" name="drive_range" id="reatures2" data-id="0-12" value="0-12">
                                 <label for="reatures2">Occasional</label>
                             </div>
 
@@ -406,11 +406,11 @@ $powerWheelChairs = 125; ?>
                             <span class="category__find-title">Frame Type</span>
 
                             <div class="nice-radio">
-                                <input type="radio" checked name="choose_frame_type" id="reatures1" value="folding">
-                                <label for="reatures1">Folding</label>
+                                <input type="radio" checked name="choose_frame_type" id="reatures1" data-id="disassembles" value="Disassembles">
+                                <label for="reatures1">Disassembles</label>
                             </div>
                             <div class="nice-radio">
-                                <input type="radio" name="choose_frame_type" id="reatures2" value="rigid">
+                                <input type="radio" name="choose_frame_type" id="reatures2" data-id="rigid" value="rigid">
                                 <label for="reatures2">Rigid</label>
                             </div>
 

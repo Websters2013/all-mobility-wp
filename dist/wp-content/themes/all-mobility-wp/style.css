@@ -62,11 +62,11 @@ div.wpcf7-mail-sent-ok {
 }
 
 .site_checkout .woocommerce-message {
-    /*display: none;*/
+    display: none;
 }
 
 .site_checkout .woocommerce-info {
-    /*display: none;*/
+    display: none;
 }
 
 .site_checkout .woocommerce-password-strength {
@@ -74,9 +74,10 @@ div.wpcf7-mail-sent-ok {
 }
 
 .site_checkout  .woocommerce-error {
-    /*display: none;*/
+    display: none;
 }
 
 /*.upsells_added {*/
     /*display: none;*/
 /*}*/
+

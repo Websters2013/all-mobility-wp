@@ -48,6 +48,7 @@ if ( $product->is_in_stock() ) : ?>
 			<form method="post" enctype='multipart/form-data'>
 
 				<?php if( $upselsIDs ):
+
 					$termsArray = array();
 
 					if(!empty($upselsIDs)):
@@ -58,15 +59,10 @@ if ( $product->is_in_stock() ) : ?>
 
 							$termUpsell = get_the_terms($ID,'upsell_category');
 
+
 							if(!empty($termUpsell)):
-
-								foreach ($termUpsell as $upsell) {
-
-									$product = wc_get_product($ID);
-
-									$currentTerm[] = $ID;
-
-								}
+								$term_id = $termUpsell[0]->term_id;
+								$currentTerm[$term_id][] = $ID;
 
 							else:
 
@@ -78,28 +74,27 @@ if ( $product->is_in_stock() ) : ?>
 					endif;
 
 					if( !empty($currentTerm) ){
-						
+
 						$j = 0;
 
 						$countTerm = count($currentTerm);
 
 						foreach ($currentTerm as $key => $item){
 
+							$term = get_term( $key, 'upsell_category' );
 
-							if( $j == 0 ){
-								echo '<select name="upsells_'.$j.'">
-							<option value="0">Add-Ons</option>';
+
+							echo '<select name="upsells_'.$j.'">
+							<option value="0">'.$term->name.'</option>';
+
+							foreach ( $item as  $attr ){
+
+								echo '<option value="'.$attr.'" >'.get_the_title($attr).'</option>';
 							}
 
 
+							echo '</select>';
 
-							echo '<option value="'.$item.'" >'.get_the_title($item).'</option>';
-
-
-
-							if( $j == ( $countTerm - 1 ) ){
-								echo '</select>';
-							}
 
 							$j++;
 
@@ -107,14 +102,15 @@ if ( $product->is_in_stock() ) : ?>
 
 					}
 
+
+
 					if( !empty($defaultProducts ) ){
 
 						if( $j > 0 ){
-							$k  = $j-1;
+							$k  = $j;
 						} else {
 							$k = 0;
 						}
-
 
 						$countTerm = count( $defaultProducts );
 

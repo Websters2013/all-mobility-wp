@@ -67,7 +67,7 @@ $register_part = $_GET['reg'];
 				<h2 class="login-types__title">Create Account</h2>
 
 				<div class="login-types__social">
-					<a href="https://allaroundmob.wpengine.com/wp-login.php?ywsl_social=facebook&amp;redirect=https%3A%2F%2Fallaroundmob.wpengine.com%2Fwp-login.php%3Fredirect_to%3Dhttps%253A%252F%252Fallaroundmob.wpengine.com%252Fwp-admin%252F%26reauth%3D1">
+					<a href="https://allaroundmobility.com/wp-login.php?ywsl_social=facebook&amp;redirect=https%3A%2F%2Fallaroundmob.wpengine.com%2Fwp-login.php%3Fredirect_to%3Dhttps%253A%252F%252Fallaroundmob.wpengine.com%252Fwp-admin%252F%26reauth%3D1">
 
 						<svg width="16px" height="33px" viewBox="0 0 16 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -80,7 +80,7 @@ $register_part = $_GET['reg'];
 						</svg>
 
 					</a>
-					<a href="https://allaroundmob.wpengine.com/wp-login.php?ywsl_social=twitter&amp;redirect=https%3A%2F%2Fallaroundmob.wpengine.com%2Fwp-login.php%3Fredirect_to%3Dhttps%253A%252F%252Fallaroundmob.wpengine.com%252Fwp-admin%252F%26reauth%3D1">
+					<a href="https://allaroundmobility.com/wp-login.php?ywsl_social=twitter&amp;redirect=https%3A%2F%2Fallaroundmob.wpengine.com%2Fwp-login.php%3Fredirect_to%3Dhttps%253A%252F%252Fallaroundmob.wpengine.com%252Fwp-admin%252F%26reauth%3D1">
 
 						<svg width="42px" height="30px" viewBox="0 0 42 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 
@@ -93,7 +93,7 @@ $register_part = $_GET['reg'];
 							</g>
 						</svg>
 					</a>
-					<a href="https://allaroundmob.wpengine.com/wp-login.php?ywsl_social=google&amp;redirect=https%3A%2F%2Fallaroundmob.wpengine.com%2Fwp-login.php%3Fredirect_to%3Dhttps%253A%252F%252Fallaroundmob.wpengine.com%252Fwp-admin%252F%26reauth%3D1">
+					<a href="https://allaroundmobility.com/wp-login.php?ywsl_social=google&redirect=https%3A%2F%2Fallaroundmobility.com%2Fwp-login.php%3Fredirect_to%3Dhttps%253A%252F%252Fallaroundmobility.com%252Fwp-admin%252F%26reauth%3D1">
 
 						<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 							<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

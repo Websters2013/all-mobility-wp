@@ -66,7 +66,7 @@ get_header(); ?>
 
                 <div class="check-out__map" style="background-image: url(<?= get_field( 'choose_the_map_image' ) ?>)">
 
-                    <a href="#" class="btn btn_3">store locator</a>
+                    <a href="<?= get_permalink(432) ?>" class="btn btn_3">store locator</a>
 
                 </div>
 
