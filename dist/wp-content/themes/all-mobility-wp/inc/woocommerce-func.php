@@ -326,6 +326,7 @@ function custom_override_billing_fields( $fields ) {
 
     $fields['billing_email'] = array(
         'label'     => __('Email', 'woocommerce'),
+        'required' => true
     );
 
     $fields['billing_address_2'] = array(

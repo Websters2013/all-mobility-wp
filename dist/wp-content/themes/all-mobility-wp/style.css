@@ -81,3 +81,6 @@ div.wpcf7-mail-sent-ok {
     /*display: none;*/
 /*}*/
 
+.payment_box {
+    display: none !important;
+}

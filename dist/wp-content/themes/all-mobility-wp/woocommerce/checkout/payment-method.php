@@ -39,13 +39,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<?php endif; ?>
 
-    <label for="<?= $label_class.$gateway->id ?>"><?= $gateway->get_title() ?>
-
+    <label for="<?= $label_class.$gateway->id ?>">
+        <?= ucfirst($gateway->id)  ?>
         <span class="checkout__payments-more">
+            <span class="checkout__payments-text"><?= $gateway->get_title() ?></span>
             <span class="checkout__payments-pics">
-
-
-
+                
                 <?php if( $gateway->id == 'paypal' ){ ?>
 
                     <img src="<?= DIRECT ?>pic/paypal.jpg" width="48" height="30" alt="paypal">
@@ -67,11 +66,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	</label>
 
-    <?php if( $gateway == 'stripe' ): ?>
-        <div class="payment_box payment_method_stripe">
-            <div id="stripe-payment-data" data-panel-label="" data-description="" data-email="alexksnikol@gmail.com" data-amount="130000" data-name="All About Mobility" data-currency="usd" data-image="" data-bitcoin="true" data-locale="en" data-allow-remember-me="false"><p>Pay with your credit card via Stripe. TEST MODE ENABLED. In test mode, you can use the card number 4242424242424242 with any CVC and a valid expiration date or check the documentation "<a href="https://stripe.com/docs/testing">Testing Stripe</a>" for more card numbers.</p>
-            </div>		</div>
-    <?php endif; ?>
+<!--    --><?php //if( $gateway == 'stripe' ): ?>
+<!--        <div class="payment_box payment_method_stripe">-->
+<!--            <div id="stripe-payment-data" data-panel-label="" data-description="" data-email="alexksnikol@gmail.com" data-amount="130000" data-name="All About Mobility" data-currency="usd" data-image="" data-bitcoin="true" data-locale="en" data-allow-remember-me="false"><p>Pay with your credit card via Stripe. TEST MODE ENABLED. In test mode, you can use the card number 4242424242424242 with any CVC and a valid expiration date or check the documentation "<a href="https://stripe.com/docs/testing">Testing Stripe</a>" for more card numbers.</p>-->
+<!--            </div>		</div>-->
+<!--    --><?php //endif; ?>
 
 </div>
 
