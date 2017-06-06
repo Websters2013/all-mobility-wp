@@ -126,7 +126,8 @@
           }
         }
         .wpsl-info-actions {
-          display: block;
+          display: inline-block;
+          vertical-align: top;
           margin: 20px 0!important;
           overflow: hidden;
 
@@ -138,6 +139,21 @@
                text-decoration: none;
             }
 
+          }
+
+        }
+        .wpsl-info-actions_view_more {
+          display: inline-block;
+          vertical-align: top;
+          margin: 20px 0!important;
+          @include main-font4();
+          font-size: 16px;
+          line-height: 22px;
+          color: #4E4E4E;
+          text-decoration: underline;
+
+          &:hover {
+            text-decoration: none;
           }
 
         }
