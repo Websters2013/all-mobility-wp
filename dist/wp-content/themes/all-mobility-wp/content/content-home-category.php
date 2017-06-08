@@ -36,11 +36,14 @@ $category_ID  = $cat_obj->term_id;
 
 } elseif( is_singular('wpsl_stores') ){
 
+    $categories = get_field('choose_categories',432);
+
     $product_terms  = get_terms( array(
         'taxonomy' => 'product_cat',
         'hide_empty' => false,
         'number' => 4,
-        'orderby' => 'rand'
+        'orderby' => 'include',
+        'include' => $categories
     ) );
 
 }

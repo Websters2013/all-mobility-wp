@@ -40,7 +40,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php endif; ?>
 
     <label for="<?= $label_class.$gateway->id ?>">
-        <?= ucfirst($gateway->id)  ?>
+
+        <?php if( $gateway->id == 'stripe' ){
+            $name = 'Credit Card';
+        } else {
+            $name = ucfirst($gateway->id);
+        } ?>
+
+
+        <?= $name  ?>
         <span class="checkout__payments-more">
             <span class="checkout__payments-text"><?= $gateway->get_title() ?></span>
             <span class="checkout__payments-pics">

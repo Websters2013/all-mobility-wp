@@ -78,6 +78,32 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 </div>
 <!-- /my-account -->
 
+<?php
+else : ?>
+
+    <!-- my-account -->
+    <div class="my-account">
+
+        <h2 class="site__title site__title_3">My Account</h2>
+
+        <!-- my-account__links -->
+        <div class="my-account__links">
+            <a href="<?= get_permalink(13) ?>" >Account overview</a>
+            <a href="<?= wc_get_endpoint_url('orders') ?>" class="active">Purchase History</a>
+        </div>
+        <!-- /my-account__links -->
+
+        <!-- my-account__content -->
+        <div class="my-account__content">
+
+          No orders yet
+
+        </div>
+        <!-- /my-account__content -->
+
+    </div>
+    <!-- /my-account -->
+
 <?php endif; ?>
 
 <?php do_action( 'woocommerce_after_account_orders', $has_orders ); ?>
