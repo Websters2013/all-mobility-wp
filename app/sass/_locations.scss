@@ -212,9 +212,9 @@
             }
             .service_type {
               display: block;
-              margin: 7px 0;
-              font-size: 12px;
-              line-height: 12px;
+              margin: 0 0 7px;
+              font-size: 16px;
+              line-height: 16px;
               color: #a0a0a0;
             }
 
@@ -229,7 +229,7 @@
               margin: 0 0 7px;
               font-size: 22px;
               line-height: 22px;
-              color: #F47920;
+              color: #F47920 !important;
             }
 
           }

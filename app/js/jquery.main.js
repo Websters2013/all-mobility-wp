@@ -1,6 +1,5 @@
 ( function(){
 
-
     var globalScrollFlag = true;
 
     $(function () {
@@ -29,6 +28,12 @@
             $(this).perfectScrollbar({
                 wheelPropagation: true
             });
+
+        } );
+
+        $('.checkout').each(function () {
+
+            new CheckoutHeight( $(this) );
 
         } );
 
@@ -587,13 +592,40 @@
             },
             _setHeight = function() {
 
-                console.log(34)
-
                 _obj.css( {
                     minHeight: ''
                 } );
                 _obj.css( {
                     minHeight: _window.height() - $('.site__header').innerHeight() - $('.site__footer').innerHeight() - $('.breadcrumbs').innerHeight()
+                } );
+
+            },
+            _init = function () {
+                _addEvents();
+                _setHeight();
+            };
+
+        //public properties
+
+        //public methods
+
+        _init();
+    };
+    var CheckoutHeight = function (obj) {
+
+        //private properties
+        var _obj = obj,
+            _totalOrder = _obj.find('.total-order');
+
+        //private methods
+
+        var _addEvents = function () {
+
+            },
+            _setHeight = function() {
+
+                _obj.css( {
+                    minHeight: _totalOrder.innerHeight()
                 } );
 
             },
