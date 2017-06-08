@@ -167,7 +167,7 @@ $powerWheelChairs = 125; ?>
 
                             <div>
 
-
+                            </div>
                         </div>
                     </div>
 

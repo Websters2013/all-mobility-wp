@@ -91,6 +91,7 @@ add_action('login_head', 'add_favicon');
 add_action('admin_head', 'add_favicon');
 
 
+
 require_once( TEMPLATEINC . '/template.php' );
 require_once( TEMPLATEINC . '/actions.php' );
 require_once( TEMPLATEINC . '/ajaxes.php' );
