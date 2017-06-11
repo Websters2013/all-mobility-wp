@@ -91,6 +91,14 @@ add_action('login_head', 'add_favicon');
 add_action('admin_head', 'add_favicon');
 
 
+function my_filter_plugin_updates( $value ) {
+
+    if( isset( $value->response['advanced-custom-fields-pro/acf.php'] ) ) {
+        unset( $value->response['advanced-custom-fields-pro/acf.php'] );
+    }
+    return $value;
+}
+add_filter( 'site_transient_update_plugins', 'my_filter_plugin_updates' );
 
 require_once( TEMPLATEINC . '/template.php' );
 require_once( TEMPLATEINC . '/actions.php' );

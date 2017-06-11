@@ -1233,7 +1233,7 @@ function mc_checklist(
 
     function custom_registration_redirect() {
 
-        $_SESSION['wb_reg'] = 'Successfully Registration !';
+        $_SESSION['wb_reg'] = 'Successful Registration';
 
         return get_permalink(13);
 
