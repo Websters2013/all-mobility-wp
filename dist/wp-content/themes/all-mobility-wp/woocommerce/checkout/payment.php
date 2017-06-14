@@ -32,11 +32,13 @@ if ( ! is_ajax() ) {
 		<h3>Choose payment method</h3>
 
 		<?php
-		
+
 		if ( ! empty( $available_gateways ) ) {
+
 			foreach ( $available_gateways as $gateway ) {
 				wc_get_template( 'checkout/payment-method.php', array( 'gateway' => $gateway ) );
 			}
+
 		} else {
 			echo '<div class="woocommerce-notice woocommerce-notice--info woocommerce-info">' . apply_filters( 'woocommerce_no_available_payment_methods_message', WC()->customer->get_billing_country() ? __( 'Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.', 'woocommerce' ) : __( 'Please fill in your details above to see available payment methods.', 'woocommerce' ) ) . '</div>';
 		}
@@ -55,6 +57,9 @@ if ( ! is_ajax() ) {
 		<?php wc_get_template( 'checkout/terms.php' ); ?>
 
 		<?php do_action( 'woocommerce_review_order_before_submit' ); ?>
+
+<!--        <a class="paypal_checkout_button" href="https://allaroundmobility.com/?wc-api=WC_Gateway_PayPal_Express_AngellEYE&amp;pp_action=set_express_checkout&amp;use_paypal_credit=true">
+<img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/ppcredit-logo-small.png" width="148" height="26" class="ppcreditlogo ec_checkout_page_button_type_pc" align="top" alt="Check out with PayPal Credit"></a>-->
 
 		<button type="submit" class="button alt" id="place_order" name="woocommerce_checkout_place_order" id="place_order" value="Place order" data-value="Place order">
 			<span>PURCHASE</span>

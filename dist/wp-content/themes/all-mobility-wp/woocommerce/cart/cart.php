@@ -271,17 +271,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<dt>Subtotal</dt>
 						<dd><?= WC()->cart->get_cart_subtotal()  ?></dd>
 					</dl>
-					<dl class="my-cart__taxes">
-						<dt>Taxes</dt>
-						<?php $taxes = WC()->cart->get_tax_totals();
-						if(empty($taxes)){
-							$tax = 0;
-						} else {
-							$tax = 0;
-						}
-						?>
-						<dd><?=  $tax ?></dd>
-					</dl>
+
 					<dl class="my-cart__total">
 						<dt>TOTAL</dt>
 						<dd><?= WC()->cart->get_cart_total() ?></dd>

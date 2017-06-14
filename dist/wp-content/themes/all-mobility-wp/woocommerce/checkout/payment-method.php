@@ -41,21 +41,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     <label for="<?= $label_class.$gateway->id ?>">
 
-        <?php if( $gateway->id == 'stripe' ){
-            $name = 'Credit Card';
-        } else {
-            $name = ucfirst($gateway->id);
-        } ?>
+        <?php
+        $name = ucfirst($gateway->get_title());
+        ?>
 
 
         <?= $name  ?>
         <span class="checkout__payments-more">
-            <span class="checkout__payments-text"><?= $gateway->get_title() ?></span>
+            <span class="checkout__payments-text"></span>
             <span class="checkout__payments-pics">
                 
-                <?php if( $gateway->id == 'paypal' ){ ?>
+                <?php if( $gateway->id == 'ppec_paypal' ){ ?>
 
                     <img src="<?= DIRECT ?>pic/paypal.jpg" width="48" height="30" alt="paypal">
+                    <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/ppcredit-logo-small.png" width="148" height="30" class="ppcreditlogo ec_checkout_page_button_type_pc" align="top" alt="Check out with PayPal Credit">
                 <?php }
 
                 elseif( $gateway->id == 'stripe' ) { ?>
@@ -65,7 +64,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <img src="<?= DIRECT ?>pic/card-discover.jpg" width="48" height="30" alt="amex">
                 <?php } else { ?>
                     <?= $image = $gateway->get_icon(); ?>
-               <?php } ?>
+                       <?php } ?>
 
             </span>
             <span class="checkout__payments-text"><?= $gateway->get_description() ?></span>

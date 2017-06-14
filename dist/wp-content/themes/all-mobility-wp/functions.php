@@ -100,6 +100,25 @@ function my_filter_plugin_updates( $value ) {
 }
 add_filter( 'site_transient_update_plugins', 'my_filter_plugin_updates' );
 
+function updateProducts (){
+$products = get_posts(
+
+    array(
+        'post_type' => 'product',
+        'posts_per_page' => -1,
+        'fields' => 'ids'
+    )
+
+);
+
+    foreach ($products as $product){
+        update_post_meta( $product, '_tax_status', 'taxable' );
+    }
+
+}
+
+
+
 require_once( TEMPLATEINC . '/template.php' );
 require_once( TEMPLATEINC . '/actions.php' );
 require_once( TEMPLATEINC . '/ajaxes.php' );

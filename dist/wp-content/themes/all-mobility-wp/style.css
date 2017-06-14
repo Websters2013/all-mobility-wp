@@ -84,3 +84,7 @@ div.wpcf7-mail-sent-ok {
 .payment_box {
     display: none !important;
 }
+
+a.woocommerce-remove-coupon {
+    display: none !important;
+}
