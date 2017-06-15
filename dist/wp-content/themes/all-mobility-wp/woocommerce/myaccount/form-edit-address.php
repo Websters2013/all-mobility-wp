@@ -18,9 +18,24 @@
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
-}
+} ?>
 
-$page_title = ( 'billing' === $load_address ) ? __( 'Billing address', 'woocommerce' ) : __( 'Shipping address', 'woocommerce' );
+<!-- my-account -->
+<div class="my-account">
+
+    <h2 class="site__title site__title_3">My Account</h2>
+
+    <!-- my-account__content -->
+    <div class="my-account__content">
+
+        <!-- my-account__edit-data -->
+        <div class="my-account__edit-data">
+
+            <h3 class="site__title site__title_10">Account data</h3>
+
+            <div class="my-account__form">
+
+<?php $page_title = ( 'billing' === $load_address ) ? __( 'Billing address', 'woocommerce' ) : __( 'Shipping address', 'woocommerce' );
 
 do_action( 'woocommerce_before_edit_account_address_form' ); ?>
 
@@ -53,5 +68,8 @@ do_action( 'woocommerce_before_edit_account_address_form' ); ?>
 	</form>
 
 <?php endif; ?>
-
+            </div>
+        </div>
+    </div>
+</div>
 <?php do_action( 'woocommerce_after_edit_account_address_form' ); ?>

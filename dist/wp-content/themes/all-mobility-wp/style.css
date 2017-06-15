@@ -88,3 +88,7 @@ div.wpcf7-mail-sent-ok {
 a.woocommerce-remove-coupon {
     display: none !important;
 }
+
+.wc-social-login-profile {
+    display: none !important;
+}
