@@ -1,6 +1,123 @@
 .my-account {
   width: 100%;
   padding: 0 15px 12px;
+
+  h3{
+    position: relative;
+    margin: 0 0 19px;
+    padding: 0;
+    @include main-font1();
+    font-size: 22px;
+    color: #4E4E4E;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 33px;
+  }
+
+  legend{
+    padding: 25px 0 15px;
+  }
+
+  .woocommerce-form-row, .form-row{
+    @include flexbox();
+    @include justify-content(space-between);
+    @include align-items(center);
+    @include flex-direction();
+    @include flex-wrap( wrap );
+    max-width: 292px;
+    margin: 0 0 10px;
+
+    input[type="submit"],
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="phone"],
+    input[type="number"] {
+      display: inline-block;
+      width: 60.5%;
+      height: 40px;
+      background: transparent;
+      border: 2px solid #D1D1D1;
+      padding: 8px 5px;
+      font-size: 16px;
+      line-height: 16px;
+      border-radius: 4px;
+      color: #000;
+      @include main-font5();
+      font-weight: 400;
+      font-style: normal;
+      -webkit-transition: border 0.3s ease;
+      transition: border 0.3s ease;
+
+      &.not-touched,
+      &.not-valid {
+        border-color: red !important;
+      }
+      &:focus {
+        border-color: #F47920;
+      }
+
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus {
+        background-color: rgba(250, 255, 189, 0);
+      }
+
+    }
+
+    label{
+      @include main-font4();
+      font-size: 16px;
+      width: 34%;
+      text-align: left;
+      line-height: 17px;
+      color: #4E4E4E;
+
+      span, abbr {
+        margin-left: 4px;
+        color: #F47920;
+        text-decoration: none;
+      }
+
+    }
+
+    .websters-select{
+      width: 60%;
+      margin: 0;
+    }
+
+    .select2-container{
+      width: 100%;
+      margin-bottom: 10px;
+      padding-top: 10px;
+      text-align: right;
+    }
+
+  }
+
+  .woocommerce-Button, input.button{
+    @include inline-flex();
+    @include justify-content(center);
+    @include align-items(center);
+    @include flex-direction();
+    min-width: 108px;
+    height: 48px;
+    margin-top: 53px;
+    padding: 0 10px;
+    background: #0094C1;
+    border-radius: 4px;
+    color: #FFFFFF;
+    @include main-font10();
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: 0;
+    border: none;
+    transition: background 0.3s, color 0.3s;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
 }
 .my-account__links {
   padding: 16px 0 0;
@@ -210,10 +327,27 @@
   }
 
 }
+@media (min-width: $tablet-portrait) {
+
+  .my-account h3{
+    padding: 0;
+    text-align: left
+  }
+
+}
 @media (min-width: $desktop) {
 
   .my-account {
     padding: 0 5px 70px;
+
+    h3{
+      padding: 0;
+      margin: 0 0 23px;
+      font-size: 24px;
+      line-height: 27px;
+      text-align: left;
+    }
+
   }
   .my-account__links {
     padding: 8px 0 0;
