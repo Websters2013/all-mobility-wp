@@ -1,4 +1,5 @@
 .idea/
+gulpfile.js
 node_modules/
 dist/wp-content/themes/*/assets
 dist/wp-content/themes/*/assets/js
