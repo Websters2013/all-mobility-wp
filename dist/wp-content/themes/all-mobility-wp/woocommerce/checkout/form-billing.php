@@ -57,10 +57,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				if( $key == 'billing_postcode' ){ ?>
 
-				<p class="form-row  form-row-first address-field validate-required validate-state validate-postcode" id="billing_state_field">
+				<p class="form-row form-wide  form-row-first validate-required validate-postcode address-field" id="billing_postcode_field">
 					<label for="billing_postcode" class="">State/ZIP<abbr class="required" title="required">*</abbr></label>
 
-					<input type="text" class="input-text"  required name="billing_postcode" id="billing_postcode" placeholder=""  autocomplete="postal-code" value=""  />
 
 					<?php $states = WC()->countries->get_states( 'US' );  ?>
 
@@ -81,9 +80,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 						<?php } ?>
 					</select>
+
 					<?php endif; ?>
 
-				</p>
+                    <input type="text" class="input-text"  required name="billing_postcode" id="billing_postcode" placeholder=""  autocomplete="postal-code" value=""  />
+
+
+                </p>
 
 					<?php
 					continue;

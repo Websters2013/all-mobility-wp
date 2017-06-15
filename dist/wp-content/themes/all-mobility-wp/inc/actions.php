@@ -408,6 +408,8 @@ function getAttrForCategory( $catID ){
 
         $currentAttrTax = $attribute->attribute_name;
 
+        if( $currentAttrTax == 'color' ){
+
         $taxonomyName = 'pa_'.$currentAttrTax;
 
         $terms = get_terms( array(
@@ -429,6 +431,7 @@ function getAttrForCategory( $catID ){
 
         }
 
+        }
     }
 
     return $outPutAttr;
@@ -809,11 +812,11 @@ $categoryId = $_GET['idCategory'];
 
     }
     $allCharacters = array();
-
+    $attrColors = '';
     if(!empty($technicals)):
     foreach ( $technicals as $key => $technical){
 
-        if(  $key == 'brand' || $key == 'frame_color' || $key == 'choose_frame_type' ){
+        if(  $key == 'brand' || $key == 'choose_frame_type' ){
 
             if(!empty($item)):
 
@@ -837,7 +840,25 @@ $categoryId = $_GET['idCategory'];
 
             $allCharacters[] = $currentHar;
 
-        } else {
+        }
+        elseif( $key == 'pa_color' ){
+
+            foreach ( $technical as $item ){
+
+                $values[] = $item;
+
+            }
+
+            $attrColors =  array(
+                'taxonomy' => 'pa_color',
+                'terms' => $values,
+                'operator'	=> 'IN'
+            );
+
+
+        }
+
+        else {
 
             if(!empty($item)):
 
@@ -903,7 +924,8 @@ $categoryId = $_GET['idCategory'];
                 'taxonomy' => 'product_cat',
                 'field' => 'term_id',
                 'terms' => $categoryId
-            )
+            ),
+            $attrColors
 
         ),
         'meta_query' => array(
@@ -1364,13 +1386,11 @@ function getFilters( $catId ){
 
     $filtersFieldsLists = array(
         "brand",
-        "frame_color",
         "choose_frame_type"
     );
 
     $filtersFieldsListsLabels = array(
         "Brand",
-        "Frame Color",
         "Frame Type"
     );
 
@@ -1420,7 +1440,7 @@ function checkFiledInCategory( $field, $catId ){
                 'taxonomy' => 'product_cat',
                 'field' => 'term_id',
                 'terms' => $catId
-            ),
+            )
 
         ),
         'meta_query' => array(
@@ -1429,6 +1449,7 @@ function checkFiledInCategory( $field, $catId ){
                 'value'   => array(''),
                 'compare' => 'NOT IN'
             )
+
         )
     );
 

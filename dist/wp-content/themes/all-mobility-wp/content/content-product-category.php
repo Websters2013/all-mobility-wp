@@ -278,6 +278,46 @@ $powerWheelChairs = 125; ?>
 
                         <?php endforeach;
                     endif;
+
+                    if( !empty($attrs) ){
+                        foreach ( $attrs as $attr ){
+                        ?>
+                            <div class="category__filters-item">
+                                    <span>Frame Color
+
+                                        <svg width="6px" height="8px" viewBox="0 0 6 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                             <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+                                             <desc>Created with Sketch.</desc>
+                                             <defs></defs>
+                                             <g id="high-fildelity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+                                                 <g id="HD-category" transform="translate(-207.000000, -947.000000)" stroke-width="2" stroke="#444444">
+                                                     <polyline id="Path-3-Copy-10" transform="translate(209.500000, 951.000000) rotate(-90.000000) translate(-209.500000, -951.000000) " points="206.5 949.5 209.5 952.5 212.5 949.5"></polyline>
+                                                 </g>
+                                             </g>
+                                         </svg>
+
+                                    </span>
+                                <div class="category__filters-list">
+                                    <div>
+
+                                        <?php  foreach ( $attr as $sub_key => $item ) {
+                                            $attr_id = $item->term_id;
+                                            ?>
+
+                                            <div>
+
+                                                <input type="checkbox" name="pa_color" id="<?= $attr_id ?>" data-id="<?= $attr_id ?>">
+                                                <label for="<?= $attr_id ?>"><?= $item->name ?> <span class="category__filters-count"><?= $item->count_posts ?></span></label>
+                                            </div>
+
+                                        <?php  } ?>
+
+                                    </div>
+                                </div>
+                            </div>
+                   <?php }
+                    }
+
                     ?>
 
                 </form>
