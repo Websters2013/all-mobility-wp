@@ -114,6 +114,48 @@
   }
 
 }
+.my-account__edit-data {
+  padding-top: 13px;
+  padding-left: 5px;
+
+  .form-row {
+
+    label {
+      width: 34%;
+      @include main-font4();
+      font-size: 16px;
+      line-height: 17px;
+      color: #4E4E4E;
+      text-align: left;
+
+
+      span {
+        margin-left: 4px;
+        color: #F47920;
+      }
+    }
+
+  }
+
+}
+.my-account__form {
+
+  .site__row {
+    max-width: 292px;
+  }
+  .nice-checkbox {
+    margin-top: 48px;
+  }
+
+}
+.my-account__send {
+  padding-top: 53px;
+
+  .btn {
+    min-width: 111px;
+  }
+
+}
 
 @media (min-width: $phone-mini) {
 
