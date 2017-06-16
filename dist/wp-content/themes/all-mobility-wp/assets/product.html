@@ -10,6 +10,7 @@
     <title>Title</title>
 
     <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/slick.css">
     <link rel="stylesheet" href="css/rating.min.css">
     <link rel="stylesheet" href="css/perfect-scrollbar.css">
     <link rel="stylesheet" href="css/product-single.css">
@@ -993,30 +994,19 @@
                     <!-- product__slider -->
                     <div class="product__slider">
 
-                        <div class="swiper-container gallery-top">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide" style="background-image:url(pic/product-pic1.jpg)" data-image="pic/scooter.png"></div>
-                                <div class="swiper-slide" style="background-image:url(pic/product-pic1.jpg)" data-image="pic/product-pic1.jpg"></div>
-                                <!--<div class="swiper-slide" style="background-image:url(pic/product-pic1.jpg)"></div>-->
-                                <!--<div class="swiper-slide" style="background-image:url(pic/product-pic1.jpg)"></div>-->
+                        <div class="slider slider-for gallery-top">
+                            <div style="background-image:url(pic/product-pic1.jpg)" data-image="pic/scooter.png"></div>
+                            <div style="background-image:url(pic/product-pic1.jpg)" data-image="pic/scooter.png"></div>
+                        </div>
+                        <div class="slider slider-nav gallery-thumbs">
+                            <div>
+                                <div class="product__slider-thumbs" style="background-image:url(pic/product-pic1.jpg)"></div>
+                            </div>
+                            <div>
+                                <div class="product__slider-thumbs" style="background-image:url(pic/product-pic1.jpg)"></div>
                             </div>
                         </div>
-                        <div class="swiper-container gallery-thumbs">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="product__slider-thumbs" style="background-image:url(pic/product-pic1.jpg)"></div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="product__slider-thumbs" style="background-image:url(pic/product-pic1.jpg)"></div>
-                                </div>
-                                <!--<div class="swiper-slide">-->
-                                    <!--<div class="product__slider-thumbs" style="background-image:url(pic/product-pic1.jpg)"></div>-->
-                                <!--</div>-->
-                                <!--<div class="swiper-slide">-->
-                                    <!--<div class="product__slider-thumbs" style="background-image:url(pic/product-pic1.jpg)"></div>-->
-                                <!--</div>-->
-                            </div>
-                        </div>
+
                     </div>
                     <!-- /product__slider -->
 
@@ -1026,7 +1016,6 @@
                         $1,425.00
                     </div>
                     <!-- /product__price -->
-
 
                     <!-- product__items_non-customize ------ когда нет селектов добавить к product__items -->
 
@@ -2327,6 +2316,7 @@
     <script src="js/vendors/jquery-3.0.0.min.js"></script>
     <script src="js/vendors/perfect-scrollbar.jquery.min.js"></script>
     <script src="js/vendors/swiper.jquery.min.js"></script>
+    <script src="js/vendors/slick.min.js"></script>
     <script src="js/vendors/rating.js"></script>
     <script src="js/product.min.js"></script>
 </body>

@@ -483,15 +483,15 @@
     padding-right: 0;
   }
   .woocommerce form .form-row label {
-    width: 30%;
-    float: left;
+    width: 36%;
+    //float: left;
     padding: 8px 0 0;
   }
   .woocommerce form .form-row input.input-text,
   .woocommerce form .form-row .websters-select,
   .woocommerce form .form-row textarea {
     width: 64%;
-    float: right;
+    //float: right;
     margin: 0 0 10px;
   }
   .woocommerce form .form-row .websters-select {
@@ -507,13 +507,17 @@
   .woocommerce form .form-row-wide,
   .woocommerce-page form .form-row-first,
   .woocommerce-page form .form-row-last {
-    overflow: hidden;
+    @include flexbox();
+    @include flex-direction();
+    @include align-items();
+    @include justify-content(flex-end);
+    overflow: visible;
   }
   .woocommerce .col2-set .col-1,
-  .woocommerce-page .col2-set .col-1
+  .woocommerce-page .col2-set .col-1,
   .woocommerce .col2-set .col-2,
   .woocommerce-page .col2-set .col-2 {
-    overflow: hidden;
+    overflow: visible;
     float: none;
     width: 100%;
     margin: 0 0 51px;

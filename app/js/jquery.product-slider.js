@@ -34,103 +34,47 @@
             },
             _initSlider = function () {
 
-                _addSomeParams();
-
-                _slider = new Swiper( _obj.find('.gallery-top') , {
-                    slidesPerView: '1',
-                    loop: _loop,
-                    loopedSlides: _slidesLength,
-                    centeredSlides: false,
-                    spaceBetween: 30,
-                    onSlideChangeEnd: function(swiper){
-
-                        if(!_loop) {
-                            var activeIndex = swiper.activeIndex;
-                            $(_galleryThumbs.slides).removeClass('is-selected');
-                            $(_galleryThumbs.slides).eq(activeIndex).addClass('is-selected');
-                            _galleryThumbs.slideTo(activeIndex,500, false);
-                        } else {
-
-                            $('.swiper-slide .product__slider-thumbs').css({
-                                "border-color": "transparent"
-                            });
-                            $('.swiper-slide-active .product__slider-thumbs').css({
-                                "border-color": "rgba(244, 121, 32, 0.5)"
-                            });
-
-                        }
-
-                    }
-                } );
-
-                _galleryThumbs = new Swiper( _obj.find('.gallery-thumbs'), {
-                    centeredSlides: false,
-                    slidesPerView: '4',
-                    touchRatio: 0.2,
-                    //freeMode: !_loop,
-                    loop: _loop,
-                    loopedSlides: _slidesLength,
-                    slideToClickedSlide: true,
-                    breakpoints: {
-                        1440: {
-                            slidesPerView: '3'
-                        }
-                    },
-                    onInit: function(swiper) {
-
-                        if(!_loop) {
-                            $(swiper.slides).eq(swiper.activeIndex).addClass('is-selected');
-                        }
-                    },
-                    onClick: function (swiper, event){
-
-                        if(!_loop) {
-                            var clicked = swiper.clickedIndex;
-                            swiper.activeIndex = clicked;
-                            swiper.updateClasses();
-                            $(swiper.slides).removeClass('is-selected');
-                            $(swiper.clickedSlide).addClass('is-selected');
-                            _slider.slideTo(clicked,500, false);
-                        }
-
-
-                    }
+                $('.slider-for').slick({
+                    slidesToShow: 1,
+                    slidesPerRow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    infinite: true,
+                    asNavFor: '.slider-nav'
                 });
-
-                _slider.params.control = _galleryThumbs;
-                _galleryThumbs.params.control = _slider;
-
-                if (_loop) {
-
-                    $('.swiper-slide-active .product__slider-thumbs').css({
-                        "border-color": "rgba(244, 121, 32, 0.5)"
-                    });
-
-                }
-
-            },
-            _addSomeParams = function() {
-
-                if( _window.width() < 1440 ) {
-
-                    if( _obj.find('.gallery-thumbs .swiper-slide').length >= 3 ) {
-
-                        _loop = true;
-                        _slidesLength = _obj.find('.gallery-thumbs .swiper-slide').length;
-
-                    }
-
-                }
-                else {
-
-                    if( _obj.find('.gallery-thumbs .swiper-slide').length >= 4 ) {
-
-                        _loop = true;
-                        _slidesLength = _obj.find('.gallery-thumbs .swiper-slide').length;
-
-                    }
-
-                }
+                $('.slider-nav').slick({
+                    slidesToShow: 4,
+                    slidesPerRow: 4,
+                    asNavFor: '.slider-for',
+                    dots: false,
+                    arrows: false,
+                    infinite: true,
+                    centerMode: false,
+                    focusOnSelect: true,
+                    responsive: [
+                        {
+                            breakpoint: 1360,
+                            settings: {
+                                slidesToShow: 3,
+                                slidesToScroll: 3
+                            }
+                        },
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 4,
+                                slidesToScroll: 4
+                            }
+                        },
+                        {
+                            breakpoint: 412,
+                            settings: {
+                                slidesToShow: 3,
+                                slidesToScroll: 3
+                            }
+                        }
+                    ]
+                });
 
             };
 
