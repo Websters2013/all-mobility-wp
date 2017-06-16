@@ -57,7 +57,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				if( $key == 'billing_postcode' ){ ?>
 
-				<p class="form-row form-wide  form-row-first validate-required validate-postcode address-field" id="billing_postcode_field">
+				<p class="form-row form-wide  form-row-first validate-required validate-postcode address-field" id="billing_state_field">
 					<label for="billing_postcode" class="">State/ZIP<abbr class="required" title="required">*</abbr></label>
 
 

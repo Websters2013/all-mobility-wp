@@ -76,6 +76,7 @@ function add_js()
 
     wp_deregister_script('jquery');wp_register_script('jquery',get_template_directory_uri().'/assets/js/vendors/jquery-3.0.0.min.js');
     wp_register_script('swiper_js',get_template_directory_uri().'/assets/js/vendors/swiper.jquery.min.js');
+    wp_register_script('slick_js',get_template_directory_uri().'/assets/js/vendors/slick.min.js');
     wp_register_script('index_js',get_template_directory_uri().'/assets/js/index.min.js');
     wp_register_script('perfect_js',get_template_directory_uri().'/assets/js/vendors/perfect-scrollbar.jquery.min.js');
     wp_register_script('product_js',get_template_directory_uri().'/assets/js/product.min.js');
@@ -167,10 +168,12 @@ function add_js()
 
     if( is_singular( 'product' ) ){
         wp_enqueue_style('swiper_css',get_template_directory_uri().'/assets/css/swiper.min.css');
+        wp_enqueue_style('slick_css',get_template_directory_uri().'/assets/css/slick.css');
         wp_enqueue_style('rating_css',get_template_directory_uri().'/assets/css/rating.min.css');
         wp_enqueue_style('product_single_css',get_template_directory_uri().'/assets/css/product-single.css');
         wp_enqueue_style('perfect_scrollbar',get_template_directory_uri().'/assets/css/perfect-scrollbar.css');
         wp_enqueue_script('swiper_js');
+        wp_enqueue_script('slick_js');
         wp_enqueue_script('perfect_js');
         wp_enqueue_script('product_js');
         wp_enqueue_script('rating_js');
@@ -199,6 +202,8 @@ function add_js()
 
     if( is_wc_endpoint_url('edit-address') ) {
         wp_enqueue_script('my-account_js');
+        wp_enqueue_style('perfect_scrollbar',get_template_directory_uri().'/assets/css/perfect-scrollbar.css');
+        wp_enqueue_script('perfect_js');
     }
 
 }
@@ -290,26 +295,31 @@ function get_preview_slider(){
         <!-- product__slider -->
         <div class="product__slider">
 
-        <div class="swiper-container gallery-top">
-        <div class="swiper-wrapper">
+        <div class="slider slider-for gallery-top">
+
 
     <?php foreach ($image_urls as $image_url) { ?>
 
-        <div class="swiper-slide" style="background-image:url(<?= $image_url ?>)" data-image="<?= $image_url ?>"></div>
+        <div style="background-image:url(<?= $image_url ?>)" data-image="<?= $image_url ?>"></div>
 
    <?php  }  ?>
-        </div></div>
-          <div class="swiper-container gallery-thumbs">
-                            <div class="swiper-wrapper">
+        </div>
+
+          <?php if(count($image_urls) > 1): ?>
+          <div class="slider slider-nav gallery-thumbs">
+
             <?php
 
         foreach ($image_urls as $image_url) { ?>
-            <div class="swiper-slide">
+            <div>
                 <div class="product__slider-thumbs" style="background-image:url(<?= $image_url ?>)"></div>
             </div>
         <?php }
         ?>
-        </div></div></div>
+        </div>
+            <?php endif; ?>
+
+        </div>
 
    <?php  endif;?>
 

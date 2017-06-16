@@ -107,3 +107,11 @@ a.woocommerce-remove-coupon {
     margin-top: 20px;
     display: inline-block;
 }
+
+span.selection {
+    display: none;
+}
+
+.woocommerce-Address {
+    margin-bottom: 40px;
+}
