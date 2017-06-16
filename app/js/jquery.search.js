@@ -71,6 +71,11 @@
                     },
                     keydown: function(I) {
 
+                        _result.find('.search__found').html('');
+                        _result.find('.top-products').html('');
+
+                        suggestSelected = 0;
+
                         if( $(window).width() >= 1024 ) {
 
                             switch( I.keyCode ) {
@@ -215,85 +220,90 @@
                     categories = data.categories,
                     categoriesAvailability = categories.length != 0,
                     products = data.products,
+                    productsAvailability = products.length != 0,
                     allProductsCategoriesArr = [],
                     productsCategoriesArr = [],
                     urlProductsCategoriesArr = [],
                     flag = true;
 
-                var productsWrap = '<div class="top-products__wrap">';
+                if( productsAvailability ) {
 
-                $.each( products, function() {
+                    var productsWrap = '<div class="top-products__wrap">';
 
-                    var product = this;
+                    $.each( products, function() {
 
-                    productsWrap += '<div>\
-                                            <div class="top-products__item">\
-                                                <div class="top-products__pic" style="background-image: url('+ product.src +')">\
+                        var product = this;
+
+                        productsWrap += '<div>\
+                                                <div class="top-products__item">\
+                                                    <div class="top-products__pic" style="background-image: url('+ product.src +')">\
+                                                    </div>\
+                                                    <span class="top-products__price"><del>'+ product.oldPrice +'</del> '+ product.price +'</span>\
+                                                    <h3 class="top-products__item-title">'+ product.name +'</h3>\
+                                                    <a href="'+ product.href +'" class="top-products__btn">view</a>\
                                                 </div>\
-                                                <span class="top-products__price"><del>'+ product.oldPrice +'</del> '+ product.price +'</span>\
-                                                <h3 class="top-products__item-title">'+ product.name +'</h3>\
-                                                <a href="'+ product.href +'" class="top-products__btn">view</a>\
-                                            </div>\
-                                        </div>';
-                    if( !categoriesAvailability ) {
+                                            </div>';
+                        if( !categoriesAvailability ) {
 
-                        allProductsCategoriesArr.push( [product.categories.mainCategory, product.categories.urlMainCategory, product.categories.subcategories, product.categories.urlSubcategories] );
-
-                    }
-
-                } );
-
-                productsWrap += '</div>';
-
-                _result.find('div').eq(1).find('.top-products').html('<h2 class="top-products__title">Top Products</h2>' + productsWrap);
-
-                var resultStr = '<ul class="search__found">';
-
-                if( categoriesAvailability ) {
-
-                    $.each( categories, function() {
-
-                        var subcategories = this.subcategories,
-                            urlSubcategories = this.urlSubcategories,
-                            subcategoriesWrap = '';
-
-                        if( subcategories != undefined ) {
-
-                            for( var i = 0; i <= subcategories.length-1; i++ ) {
-
-                                subcategoriesWrap += '<li class="search__found-sub"><a href="'+ urlSubcategories[i] +'">' + subcategories[i] + '</a></li>';
-                            }
-
-                            subcategoriesWrap += '';
+                            allProductsCategoriesArr.push( [product.categories.mainCategory, product.categories.urlMainCategory, product.categories.subcategories, product.categories.urlSubcategories] );
 
                         }
-
-                        resultStr += '<li><a href="'+ this.urlCategory +'">'+ this.name +'</a></li>'+ subcategoriesWrap +'';
 
                     } );
 
-                } else {
+                    productsWrap += '</div>';
 
-                    for ( var i = 0; i <= allProductsCategoriesArr.length-1; i++ ) {
+                    _result.find('div').eq(1).find('.top-products').html('<h2 class="top-products__title">Top Products</h2>' + productsWrap);
 
-                        if( flag ){
-                            productsCategoriesArr.push(allProductsCategoriesArr[i]);
-                            flag = false;
-                        }
+                    var resultStr = '<ul class="search__found">';
 
-                        if( productsCategoriesArr[productsCategoriesArr.length-1][0] != allProductsCategoriesArr[i][0] ) {
+                    if( categoriesAvailability ) {
 
-                            productsCategoriesArr.push(allProductsCategoriesArr[i]);
+                        $.each( categories, function() {
 
-                        } else {
+                            var subcategories = this.subcategories,
+                                urlSubcategories = this.urlSubcategories,
+                                subcategoriesWrap = '';
 
-                            for ( var j = 0; j <= allProductsCategoriesArr[i].length-1; j++ ) {
+                            if( subcategories != undefined ) {
 
-                                for ( var z = 0; z <= allProductsCategoriesArr[i][2].length-1; z++ ) {
+                                for( var i = 0; i <= subcategories.length-1; i++ ) {
 
-                                    if( productsCategoriesArr[productsCategoriesArr.length-1][2].indexOf( allProductsCategoriesArr[i][2][z]) == -1 ) {
+                                    subcategoriesWrap += '<li class="search__found-sub"><a href="'+ urlSubcategories[i] +'">' + subcategories[i] + '</a></li>';
+                                }
 
-                                        productsCategoriesArr[productsCategoriesArr.length-1][2].push( allProductsCategoriesArr[i][2][z] )
+                                subcategoriesWrap += '';
+
+                            }
+
+                            resultStr += '<li><a href="'+ this.urlCategory +'">'+ this.name +'</a></li>'+ subcategoriesWrap +'';
+
+                        } );
+
+                    } else {
+
+                        for ( var i = 0; i <= allProductsCategoriesArr.length-1; i++ ) {
+
+                            if( flag ){
+                                productsCategoriesArr.push(allProductsCategoriesArr[i]);
+                                flag = false;
+                            }
+
+                            if( productsCategoriesArr[productsCategoriesArr.length-1][0] != allProductsCategoriesArr[i][0] ) {
+
+                                productsCategoriesArr.push(allProductsCategoriesArr[i]);
+
+                            } else {
+
+                                for ( var j = 0; j <= allProductsCategoriesArr[i].length-1; j++ ) {
+
+                                    for ( var z = 0; z <= allProductsCategoriesArr[i][2].length-1; z++ ) {
+
+                                        if( productsCategoriesArr[productsCategoriesArr.length-1][2].indexOf( allProductsCategoriesArr[i][2][z]) == -1 ) {
+
+                                            productsCategoriesArr[productsCategoriesArr.length-1][2].push( allProductsCategoriesArr[i][2][z] )
+
+                                        }
 
                                     }
 
@@ -303,43 +313,46 @@
 
                         }
 
-                    }
+                        var count = 0;
 
-                    var count = 0;
+                        for ( var i = 0; i <= productsCategoriesArr.length-1; i++ ) {
 
-                    for ( var i = 0; i <= productsCategoriesArr.length-1; i++ ) {
+                            for ( var j = 0; j <= productsCategoriesArr[i].length-1; j++ ) {
 
-                        for ( var j = 0; j <= productsCategoriesArr[i].length-1; j++ ) {
+                                var subcategoriesWrap = '';
 
-                            var subcategoriesWrap = '';
+                                for( var z = 0; z <= productsCategoriesArr[i][2].length-1; z++ ) {
 
-                            for( var z = 0; z <= productsCategoriesArr[i][2].length-1; z++ ) {
+                                    subcategoriesWrap += '<li class="search__found-sub"><a href="' + productsCategoriesArr[i][3][z] + '">' + productsCategoriesArr[i][2][z] + '</a></li>';
+                                    count ++;
 
-                                subcategoriesWrap += '<li class="search__found-sub"><a href="' + productsCategoriesArr[i][3][z] + '">' + productsCategoriesArr[i][2][z] + '</a></li>';
-                                count ++;
+                                }
+
+                                subcategoriesWrap += '';
 
                             }
 
-                            subcategoriesWrap += '';
+                            resultStr += '<li><a href="' + productsCategoriesArr[i][1] + '">' + productsCategoriesArr[i][0] + '</a></li>'+ subcategoriesWrap +'';
 
                         }
 
-                        resultStr += '<li><a href="' + productsCategoriesArr[i][1] + '">' + productsCategoriesArr[i][0] + '</a></li>'+ subcategoriesWrap +'';
-
                     }
 
+                    resultStr += '</ul>';
+
+                    _result.find('div:first').html(resultStr);
+
+                    _result.find('.search__found').find('li:not(:lt(11))').remove();
+
+                    countItems = _result.find('.search__found').find('li').length;
+
+                    _result.addClass('visible');
+
+                } else {
+
+                    _result.removeClass('visible');
+
                 }
-
-                resultStr += '</ul>';
-
-                _result.find('div:first').html(resultStr);
-
-                _result.find('.search__found').find('li:not(:lt(11))').remove();
-
-                countItems = _result.find('.search__found').find('li').length;
-
-                _result.addClass('visible');
-
             },
             _ajaxRequest =  function( input, n ) {
 

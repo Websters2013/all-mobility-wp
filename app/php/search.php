@@ -3,33 +3,7 @@ $value = $_GET['value'];
 
 $json_data = '{
     "categories": [
-        {
-            "name": "category1",
-            "urlCategory": "222",
-            "subcategories": ["subcategory1-1", "subcategory1-2", "subcategory1-3"],
-            "urlSubcategories": ["1", "#", "#"]
-        },
-        {
-            "name": "category2",
-            "urlCategory": "#",
-            "subcategories": ["subcategory2-1", "subcategory2-2", "subcategory2-3"],
-             "urlSubcategories": ["#", "#", "#"]
-        },
-        {
-            "name": "category3",
-             "urlCategory": "#",
-            "subcategories": ["subcategory3-1", "subcategory3-2", "subcategory3-3"],
-             "urlSubcategories": ["#", "#", "#"]
-        },
-        {
-            "name": "category4",
-             "urlCategory": "#",
-            "subcategories": ["subcategory4-1", "subcategory4-2", "subcategory4-3"],
-             "urlSubcategories": ["#", "#", "#"]
-        },
-        {
-            "name": "category5"
-        }
+        
     ],
     "products": [
         {
