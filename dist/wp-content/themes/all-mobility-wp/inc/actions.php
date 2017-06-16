@@ -197,8 +197,8 @@ function add_js()
         wp_enqueue_style('content_page',get_template_directory_uri().'/assets/css/content-page.css');
     }
 
-    if( true ){
-//        wp_enqueue_script('my-account_js');
+    if( is_wc_endpoint_url('edit-address') ) {
+        wp_enqueue_script('my-account_js');
     }
 
 }
@@ -522,7 +522,7 @@ function main_search(){
 
     $terms = getTermsForSearch($query);
 
-    if( $terms ):
+    if( !empty($terms) ):
 
     $allCatWithMain = array();
 
@@ -694,22 +694,24 @@ function main_search(){
             $product_terms  = wp_get_object_terms( $product->get_id(), 'product_cat');
 
             $sub_cat = '';
-
+            $urlSubcategories = '';
             foreach ($product_terms as $term){
 
                 if( $term->parent == 0 ){
 
                     $main_cat = json_encode($term->name);
-
+                    $urlMainCategory = json_encode( get_term_link($term->term_id,'product_cat') );
                 } else {
 
                     $sub_cat .= json_encode($term->name).',';
+                    $urlSubcategories .= json_encode(get_term_link($term->term_id,'product_cat')).',';
 
                 }
 
             }
 
             $sub_cat = substr( $sub_cat, 0, -1 );
+            $urlSubcategories = substr( $urlSubcategories, 0, -1 );
 
             ( $salePrice )? $salePrice = $salePrice : $salePrice = '' ;
             ( $regularPrice )? $regularPrice = $regularPrice : $regularPrice = '' ;
@@ -726,7 +728,9 @@ function main_search(){
             "oldPrice": '.$salePrice.',
             "categories": {
                 "mainCategory": '.$main_cat.',
-                "subcategories": ['.$sub_cat.']
+                "urlMainCategory": '.$urlMainCategory.',
+                "subcategories": ['.$sub_cat.'],
+                "urlSubcategories": ['.$urlSubcategories.']
             }
         },';
 

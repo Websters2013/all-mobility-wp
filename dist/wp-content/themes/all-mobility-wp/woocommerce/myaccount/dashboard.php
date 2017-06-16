@@ -112,7 +112,7 @@ if( $success_reg = $_SESSION['wb_reg'] ){
 
 				<?php endif; endif; ?>
 
-			<a href="#" class="my-account__edit">edit account settings</a>
+			<a href="<?= esc_url( wc_get_endpoint_url( 'edit-account' ) ) ?>" class="my-account__edit">edit account settings</a>
 
 			<div class="my-account__log-out">
 				<a href="<?php echo wp_logout_url( get_home_url() ); ?> " class="btn btn_17"><span>LOG OUT</span></a>

@@ -20,18 +20,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } ?>
 
+<?php
+global $wp;
+$current_url = home_url(add_query_arg(array(),$wp->request));
+
+$urls = explode('/',$current_url);
+$count = count($urls)-1;
+
+if( 'billing' === $urls[$count] ){
+    $active_billing = 'active';
+} elseif( 'shipping' === $urls[$count] ){
+    $active_shipping = 'active';
+} else {
+    $active = 'active';
+}
+
+?>
+
 <!-- my-account -->
 <div class="my-account">
 
     <h2 class="site__title site__title_3">My Account</h2>
+
+    <div class="my-account__links">
+        <a  class="<?= $active ?>" href="<?= esc_url( wc_get_endpoint_url( 'edit-account' ) ) ?>">Account overview</a>
+        <a class="<?= $active_billing ?>" href="<?= esc_url( wc_get_endpoint_url( 'edit-address/billing' ) ) ?>">Billing</a>
+        <a class="<?= $active_shipping ?>" href="<?= esc_url( wc_get_endpoint_url( 'edit-address/shipping' ) ) ?>">Shipping</a>
+    </div>
 
     <!-- my-account__content -->
     <div class="my-account__content">
 
         <!-- my-account__edit-data -->
         <div class="my-account__edit-data">
-
-            <h3 class="site__title site__title_10">Account data</h3>
 
             <div class="my-account__form">
 
@@ -66,6 +87,9 @@ do_action( 'woocommerce_before_edit_account_address_form' ); ?>
 		</div>
 
 	</form>
+
+    <a href="<?= get_permalink(13) ?>" class="my-account__edit my-account__back">Back to Profile</a>
+
 
 <?php endif; ?>
             </div>

@@ -51,9 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						 <p class="form-row  form-row-first address-field validate-required validate-state validate-postcode" id="shipping_state_field">
 							 <label for="shipping_postcode" class="">State/ZIP<abbr class="required" title="required">*</abbr></label>
 
-							 <input type="text" class="input-text"  required name="shipping_postcode" id="shipping_postcode" placeholder=""  autocomplete="postal-code" value=""  />
-
-							 <?php $states = WC()->countries->get_states( 'US' );  ?>
+                             <?php $states = WC()->countries->get_states( 'US' );  ?>
 
 							 <?php if(is_array( $states ) && !empty( $states )): ?>
 
@@ -74,7 +72,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 								 </select>
 							 <?php endif; ?>
 
-						 </p>
+                             <input type="text" class="input-text"  required name="shipping_postcode" id="shipping_postcode" placeholder=""  autocomplete="postal-code" value=""  />
+
+
+                         </p>
 
 						 <?php
 						 continue;

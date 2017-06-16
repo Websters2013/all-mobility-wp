@@ -25,7 +25,31 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 <!-- my-account -->
 <div class="my-account">
 
-    <h2 class="site__title site__title_3">My Account</h2>
+    <h2 class="site__title site__title_3">Edit Account</h2>
+
+
+    <?php
+    global $wp;
+    $current_url = home_url(add_query_arg(array(),$wp->request));
+
+    $urls = explode('/',$current_url);
+    $count = count($urls)-1;
+
+    if( 'billing' === $urls[$count] ){
+        $active_billing = 'active';
+    } elseif( 'shipping' === $urls[$count] ){
+        $active_shipping = 'active';
+    } else {
+        $active = 'active';
+    }
+
+    ?>
+
+    <div class="my-account__links">
+        <a  class="<?= $active ?>" href="<?= esc_url( wc_get_endpoint_url( 'edit-account' ) ) ?>">Account overview</a>
+        <a class="<?= $active_billing ?>" href="<?= esc_url( wc_get_endpoint_url( 'edit-address/billing' ) ) ?>">Billing</a>
+        <a class="<?= $active_shipping ?>" href="<?= esc_url( wc_get_endpoint_url( 'edit-address/shipping' ) ) ?>">Shipping</a>
+    </div>
 
     <!-- my-account__content -->
     <div class="my-account__content">
@@ -60,11 +84,11 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
                             <legend><?php _e( 'Password change', 'woocommerce' ); ?></legend>
 
                             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                                <label for="password_current"><?php _e( 'Current password (leave blank to leave unchanged)', 'woocommerce' ); ?></label>
+                                <label for="password_current"><?php _e( 'Current password', 'woocommerce' ); ?></label>
                                 <input type="password" class="woocommerce-Input woocommerce-Input--password input-text" name="password_current" id="password_current" />
                             </p>
                             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                                <label for="password_1"><?php _e( 'New password (leave blank to leave unchanged)', 'woocommerce' ); ?></label>
+                                <label for="password_1"><?php _e( 'New password', 'woocommerce' ); ?></label>
                                 <input type="password" class="woocommerce-Input woocommerce-Input--password input-text" name="password_1" id="password_1" />
                             </p>
                             <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
@@ -82,8 +106,30 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
                             <input type="hidden" name="action" value="save_account_details" />
                         </p>
 
+                            <?php $email =  esc_attr( $user->user_email );
+
+                            ?>
+                            <?php if( $email ):
+                                $status = mc_checklist($email);
+
+                            if($status == 'subscribed'):
+                                ?>
+                            <div class="nice-checkbox">
+                                <input type="checkbox" name="newsletters" id="newsletters" checked>
+                                <label for="newsletters">
+                                    I’m signed up for All Around Mobility newsletters
+                                </label>
+                            </div>
+
+                            <?php endif;
+                                    endif; ?>
+
                         <?php do_action( 'woocommerce_edit_account_form_end' ); ?>
                     </form>
+
+
+
+                        <a href="<?= get_permalink(13) ?>" class="my-account__edit my-account__back">Back to Profile</a>
 
                     </div>
         </div>
