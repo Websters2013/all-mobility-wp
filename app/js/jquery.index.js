@@ -10,61 +10,66 @@
 
     } );
 
-
     var MainSlider = function (obj) {
 
         //private properties
         var _obj = obj,
             _window = $(window),
-            _slide = _obj.find('.swiper-slide'),
-            _swiper,
+            _itemsWrap = _obj.find('.main-slider__items'),
+            _pagination = _obj.find('.swiper-pagination'),
+            _prev = _obj.find('.main-slider__constrols .swiper-button-prev'),
+            _next = _obj.find('.main-slider__constrols .swiper-button-next'),
             _globalWinWidth = _window.width();
 
         //private methods
 
         var _addEvents = function () {
 
-                _window.on({
+                _itemsWrap.on('init', function(slick) {
+
+                    _itemsWrap.find('.slick-current').find('.main-slider__content').addClass('visible');
+
+                } );
+
+                _itemsWrap.on('afterChange', function(slick, currentSlide) {
+
+                    $(currentSlide.$slides).find('.main-slider__content').removeClass('visible');
+                    $(currentSlide.$slides).filter('.slick-current').find('.main-slider__content').addClass('visible');
+
+                } );
+
+                _window.on( {
                     resize: function () {
 
                         if (_globalWinWidth < _window.width()) {
 
                             _globalWinWidth = _window.width() - 1;
 
-                            _slide.css({
+                            _obj.find( '.main-slider__item' ).css( {
                                 minHeight: ''
-                            });
-                            _obj.find( '.swiper-slide' ).css( {
-                                minHeight: $('.swiper-container').height()
+                            } );
+
+                            _obj.find( '.main-slider__item' ).css( {
+                                minHeight: _itemsWrap.height()
                             } );
 
                         }
                     }
-                });
+                } );
             },
             _initSlider = function() {
 
-                _swiper = new Swiper( _obj.find( '.swiper-container' ), {
-                    pagination: _obj.find('.swiper-pagination'),
-                    paginationClickable: true,
-                    speed: 600,
-                    loop: true,
-                    loopedSlides: 1,
-                    autoplay: 5000,
-                    touchRatio: 2,
-                    autoplayDisableOnInteraction: false,
-                    nextButton: _obj.find('.swiper-button-next'),
-                    prevButton: _obj.find('.swiper-button-prev'),
-                    onSlideChangeEnd: function(swiper) {
-
-                        swiper.slides.find('.main-slider__content').removeClass('visible');
-                        swiper.slides.eq(swiper.activeIndex).find('.main-slider__content').addClass('visible');
-
-                    }
+                _itemsWrap.slick( {
+                    dots: true,
+                    autoplay: true,
+                    autoplaySpeed: 5000,
+                    prevArrow: _prev,
+                    nextArrow: _next,
+                    appendDots:  _pagination
                 } );
 
-                _obj.find( '.swiper-slide' ).css( {
-                    minHeight: $('.swiper-container').height()
+                _obj.find( '.main-slider__item' ).css( {
+                    minHeight: _itemsWrap.height()
                 } );
 
             },

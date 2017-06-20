@@ -407,16 +407,28 @@
 
 @media (min-width: $phone-mini) {
 
+  .woocommerce-page form .form-row,
+  .woocommerce form .form-row-first,
+  .woocommerce form .form-row-last,
+  .woocommerce form .form-row-wide,
+  .woocommerce-page form .form-row-first,
+  .woocommerce-page form .form-row-last {
+    @include flexbox();
+    @include flex-direction();
+    @include align-items();
+    @include justify-content(flex-end);
+    overflow: visible;
+  }
   .woocommerce form .form-row label {
     width: 30%;
-    float: left;
+    //float: left;
     padding: 8px 0 0;
   }
   .woocommerce form .form-row input.input-text,
   .woocommerce form .form-row .websters-select,
   .woocommerce form .form-row textarea {
     width: 68%;
-    float: right;
+    //float: right;
     margin: 0 0 20px;
   }
   .woocommerce form .form-row .websters-select {
@@ -440,6 +452,40 @@
   }
   .checkout__payments-text {
     float: right;
+  }
+  .twofields {
+    position: relative;
+    @include flexbox();
+    @include flex-direction();
+    @include justify-content(space-between);
+    @include align-items();
+
+    .form-row {
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      right: 0;
+      width: calc(100% - 30% - 120px) !important;
+
+      input.input-text,
+      input.input-text {
+        width: 100% !important;
+      }
+
+      &:first-child {
+        position: relative;
+        z-index: 1;
+        top: auto;
+        right: auto;
+        width: 100% !important;
+      }
+
+      .custom_format_state {
+        width: 68%;
+      }
+
+    }
+
   }
 
 }
@@ -505,6 +551,7 @@
   .woocommerce form #shipping_state_field input.input-text {
     width: calc( 61% - 87px );
   }
+  .woocommerce-page form .form-row,
   .woocommerce form .form-row-first,
   .woocommerce form .form-row-last,
   .woocommerce form .form-row-wide,
@@ -689,6 +736,22 @@
   }
   #order_review {
     margin: 0 0 25px;
+  }
+  .twofields {
+
+    .form-row {
+      width: calc(100% - 36% - 120px) !important;
+
+      &:first-child {
+        width: 100% !important;
+      }
+
+      .custom_format_state {
+        width: 57%;
+      }
+
+    }
+
   }
 
 }

@@ -1,4 +1,5 @@
 .main-slider {
+  position: relative;
 
   .swiper-container {
     width: 100%;
@@ -18,7 +19,12 @@
     left: auto;
     top: auto;
     right: auto;
+    width: 27px;
+    height: 44px;
+    z-index: 10;
+    cursor: pointer;
     margin: 0;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: 15px;
     background-image: url("../img/arrow-right.png");
@@ -37,26 +43,40 @@
     width: auto;
     margin: 0 2px;
 
+    li,
     .swiper-pagination-bullet {
       display: inline-block;
-      vertical-align: middle;
       opacity: 1;
       margin: 0 8px;
       width: 9px;
       height: 9px;
       background: #fff;
+      border-radius: 100%;
       -webkit-transition: background 0.3s, color 0.3s;
       transition: background 0.3s, color 0.3s;
+
+      button {
+        display: none;
+      }
 
       &:hover {
         background: rgba(244, 121, 32, 0.76);
       }
 
     }
+    .slick-active,
     .swiper-pagination-bullet-active {
       background: #F47920;
     }
 
+  }
+  .main-slider__items {
+
+    .main-slider__item {
+      background-position: 23% top;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
   }
 
 }
@@ -92,6 +112,11 @@
 
     .swiper-slide {
       background-position: top left;
+    }
+    .main-slider__items {
+      .main-slider__item {
+        background-position: top left;
+      }
     }
 
   }
@@ -145,6 +170,14 @@
         height: 12px;
       }
 
+    }
+
+    .main-slider__items {
+
+      > div {
+        overflow: hidden;
+        border-radius: 4px;
+      }
     }
 
   }
