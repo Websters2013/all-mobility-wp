@@ -20,12 +20,7 @@
 
         //private properties
         var _self = this,
-            _obj = obj,
-            _slider,
-            _galleryThumbs,
-            _window = $(window),
-            _loop = false,
-            _slidesLength = 0;
+            _obj = obj;
 
         //private methods
         var _constructor = function() {
@@ -34,7 +29,7 @@
             },
             _initSlider = function () {
 
-                $('.slider-for').slick({
+                $('.slider-for').slick( {
                     slidesToShow: 1,
                     slidesPerRow: 1,
                     slidesToScroll: 1,
@@ -42,7 +37,7 @@
                     infinite: true,
                     asNavFor: '.slider-nav'
                 });
-                $('.slider-nav').slick({
+                $('.slider-nav').slick( {
                     slidesToShow: 4,
                     slidesPerRow: 4,
                     asNavFor: '.slider-for',
@@ -88,6 +83,9 @@
             _slider,
             _window = $(window),
             _flag,
+            _pagination = _obj.find('.swiper-pagination'),
+            _prev = _obj.find('.swiper-button-prev'),
+            _next = _obj.find('.swiper-button-next'),
             _loop = false;
 
         //private methods
@@ -139,28 +137,30 @@
             },
             _destroy = function () {
 
-                _slider.destroy(true, true);
+                _slider.slick('unslick');
 
             },
             _initSlider = function () {
 
                 _addSomeParams();
 
-                _slider = new Swiper( _obj.find( '.swiper-container' ), {
-                    pagination: _obj.find('.swiper-pagination'),
-                    slidesPerView: 5,
-                    paginationClickable: true,
-                    speed: 600,
-                    loop: _loop,
-                    autoplay: 5000,
-                    autoplayDisableOnInteraction: false,
-                    nextButton: _obj.find('.swiper-button-next'),
-                    prevButton: _obj.find('.swiper-button-prev'),
-                    breakpoints: {
-                        1440: {
-                            slidesPerView: 4
+                _slider = $('.featured-products__wrapper').slick( {
+                    dots: true,
+                    slidesToShow: 5,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 5000,
+                    prevArrow: _prev,
+                    nextArrow: _next,
+                    appendDots:  _pagination,
+                    responsive: [
+                        {
+                            breakpoint: 1440,
+                            settings: {
+                                slidesToShow: 4
+                            }
                         }
-                    }
+                    ]
                 } );
 
             },
@@ -168,7 +168,7 @@
 
                 if( _window.width() >= 1024 ) {
 
-                    if( _obj.find('.swiper-slide').length >= 4 ) {
+                    if( _obj.find('.featured-products__slide').length >= 4 ) {
 
                         _loop = true;
 
@@ -176,7 +176,7 @@
 
                 } else  if( _window.width() >= 1425 ) {
 
-                    if( _obj.find('.swiper-slide').length >= 5 ) {
+                    if( _obj.find('.featured-products__slide').length >= 5 ) {
 
                         _loop = true;
 
@@ -188,7 +188,7 @@
 
                     _obj.find('.featured-products__controls').css({
                         display: 'none'
-                    })
+                    } );
 
                 }
 
