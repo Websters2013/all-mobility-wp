@@ -23,7 +23,7 @@
 
                 _header.removeClass('site__header_hidden');
 
-                var pic = $('.gallery-top .swiper-slide:first').data('image'),
+                var pic = $('.gallery-top .slick-slide:first').data('image'),
 
                     e = event || window.event;
 
