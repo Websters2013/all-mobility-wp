@@ -54,7 +54,7 @@
 
 
 
-    <body data-action="<?php echo admin_url( 'admin-ajax.php' );?>" <?php body_class() ?> >
+    <body data-action="<?php echo admin_url( 'admin-ajax.php' );?>">
 
     <?php
 

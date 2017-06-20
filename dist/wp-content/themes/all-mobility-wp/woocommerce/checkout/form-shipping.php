@@ -57,6 +57,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 							 <?php if(is_array( $states ) && !empty( $states )): ?>
 
+                             <span class="custom_format_state">
+
 								 <select name="shipping_state" id="shipping_state"  data-placeholder="" autocomplete="address-level1">
 									 <?php foreach ($states as $key => $state){
 
@@ -64,14 +66,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 											 $selected = 'selected';
 										 } else {
 											 $selected = '';
-										 }
-
-										 ?>
+										 } ?>
 
 										 <option  <?= $selected ?> value="<?= $key ?>"><?= $key ?></option>
 
 									 <?php } ?>
 								 </select>
+                             </span>
 							 <?php endif; ?>
 
 
