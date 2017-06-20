@@ -307,7 +307,7 @@ $powerWheelChairs = 125; ?>
                                             <div>
 
                                                 <input type="checkbox" name="pa_color" id="<?= $attr_id ?>" data-id="<?= $attr_id ?>">
-                                                <label for="<?= $attr_id ?>"><?= $item->name ?> <span class="category__filters-count"><?= $item->count_posts ?></span></label>
+                                                <label for="<?= $attr_id ?>"><?= ucfirst($item->name) ?> <span class="category__filters-count"><?= $item->count_posts ?></span></label>
                                             </div>
 
                                         <?php  } ?>
