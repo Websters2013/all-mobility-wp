@@ -450,6 +450,40 @@
   .checkout__payments-text {
     float: right;
   }
+  .twofields {
+    position: relative;
+    @include flexbox();
+    @include flex-direction();
+    @include justify-content(space-between);
+    @include align-items();
+
+    .form-row {
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      right: 0;
+      width: calc(100% - 30% - 120px) !important;
+
+      input.input-text,
+      input.input-text {
+        width: 100% !important;
+      }
+
+      &:first-child {
+        position: relative;
+        z-index: 1;
+        top: auto;
+        right: auto;
+        width: 100% !important;
+      }
+
+      .custom_format_state {
+        width: 68%;
+      }
+
+    }
+
+  }
 
 }
 @media (min-width: $desktop) {
@@ -699,6 +733,22 @@
   }
   #order_review {
     margin: 0 0 25px;
+  }
+  .twofields {
+
+    .form-row {
+      width: calc(100% - 36% - 120px) !important;
+
+      &:first-child {
+        width: 100% !important;
+      }
+
+      .custom_format_state {
+        width: 57%;
+      }
+
+    }
+
   }
 
 }
