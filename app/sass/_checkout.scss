@@ -71,6 +71,7 @@
   padding-bottom: 0;
   border-bottom: none;
 }
+.woocommerce form .form-row,
 .woocommerce form .form-row-first,
 .woocommerce form .form-row-last,
 .woocommerce form .form-row-wide,
@@ -88,7 +89,7 @@
   display: none;
 }
 .woocommerce .col2-set .col-1,
-.woocommerce-page .col2-set .col-1
+.woocommerce-page .col2-set .col-1,
 .woocommerce .col2-set .col-2,
 .woocommerce-page .col2-set .col-2 {
   overflow: hidden;
@@ -407,17 +408,21 @@
 
 @media (min-width: $phone-mini) {
 
-  .woocommerce-page form .form-row,
+
+  .woocommerce form .form-row,
   .woocommerce form .form-row-first,
   .woocommerce form .form-row-last,
   .woocommerce form .form-row-wide,
-  .woocommerce-page form .form-row-first,
-  .woocommerce-page form .form-row-last {
+  .woocommerce form form .form-row-first,
+  .woocommerce form form .form-row-last {
     @include flexbox();
     @include flex-direction();
     @include align-items();
     @include justify-content(flex-end);
     overflow: visible;
+  }
+  .woocommerce form .form-row.place-order {
+    @include justify-content(flex-start);
   }
   .woocommerce form .form-row label {
     width: 30%;
@@ -548,7 +553,7 @@
   .woocommerce form #shipping_state_field input.input-text {
     width: calc( 61% - 87px );
   }
-  .woocommerce-page form .form-row,
+  .woocommerce form form .form-row,
   .woocommerce form .form-row-first,
   .woocommerce form .form-row-last,
   .woocommerce form .form-row-wide,
