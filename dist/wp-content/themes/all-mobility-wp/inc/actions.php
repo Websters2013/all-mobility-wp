@@ -970,6 +970,8 @@ $categoryId = $_GET['idCategory'];
 
         $currentProduct = wc_get_product( $product_id );
 
+
+
         if( get_field('featured_product',$product_id) == 'yes' ){
             $featured = 'featured';
         } else {
@@ -991,26 +993,27 @@ $categoryId = $_GET['idCategory'];
             $salePrice = $currentProduct->get_variation_sale_price();
 
             $available_variations = $currentProduct->get_available_variations();
+            if( $product_id == 2364 ){
+                $sdf = json_encode($available_variations);
 
+            }
             if(!empty($available_variations)):
+            $var = array();
 
             foreach ($available_variations as $key => $variation){
-                $var[$variation['regular_price']] = $variation['sale_price'];
+                $var[$variation['display_regular_price']] = $variation['display_price'];
             }
 
-
             ksort($var);
-
 
             $old_price = '';
             $new_price = '';
             foreach ($var as  $key =>  $item){
 
-//                $old_price .= '"'.$key.'$"'.',';
                 $old_price .= json_encode(wc_price($key)).',';
 
                 if($item){
-//                    $new_price .= '"'.$item.'$"'.',';
+
                     $new_price .= json_encode(wc_price($item)).',';
                 } else {
                     $new_price .= '""'.',';
