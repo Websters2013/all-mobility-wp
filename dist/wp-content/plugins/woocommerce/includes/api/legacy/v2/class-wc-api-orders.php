@@ -615,6 +615,8 @@ class WC_API_Orders extends WC_API_Resource {
 
 			// Order status.
 			if ( ! empty( $data['status'] ) ) {
+				// Refresh the order instance.
+				$order = wc_get_order( $order->get_id() );
 				$order->update_status( $data['status'], isset( $data['status_note'] ) ? $data['status_note'] : '', true );
 			}
 
@@ -937,10 +939,15 @@ class WC_API_Orders extends WC_API_Resource {
 			$line_item->set_variation( $item['variations'] );
 		}
 
-		$item_id = $line_item->save();
+		// Save or add to order.
+		if ( $creating ) {
+			$order->add_item( $line_item );
+		} else {
+			$item_id = $line_item->save();
 
-		if ( ! $item_id ) {
-			throw new WC_API_Exception( 'woocommerce_cannot_create_line_item', __( 'Cannot create line item, try again.', 'woocommerce' ), 500 );
+			if ( ! $item_id ) {
+				throw new WC_API_Exception( 'woocommerce_cannot_create_line_item', __( 'Cannot create line item, try again.', 'woocommerce' ), 500 );
+			}
 		}
 	}
 
@@ -1021,11 +1028,7 @@ class WC_API_Orders extends WC_API_Resource {
 			$item = new WC_Order_Item_Shipping();
 			$item->set_order_id( $order->get_id() );
 			$item->set_shipping_rate( $rate );
-			$shipping_id = $item->save();
-
-			if ( ! $shipping_id ) {
-				throw new WC_API_Exception( 'woocommerce_cannot_create_shipping', __( 'Cannot create shipping method, try again.', 'woocommerce' ), 500 );
-			}
+			$order->add_item( $item );
 		} else {
 
 			$item = new WC_Order_Item_Shipping( $shipping['id'] );
@@ -1092,11 +1095,7 @@ class WC_API_Orders extends WC_API_Resource {
 				}
 			}
 
-			$fee_id = $item->save();
-
-			if ( ! $fee_id ) {
-				throw new WC_API_Exception( 'woocommerce_cannot_create_fee', __( 'Cannot create fee, try again.', 'woocommerce' ), 500 );
-			}
+			$order->add_item( $item );
 		} else {
 
 			$item = new WC_Order_Item_Fee( $fee['id'] );
@@ -1155,11 +1154,7 @@ class WC_API_Orders extends WC_API_Resource {
 				'discount_tax' => 0,
 				'order_id'     => $order->get_id(),
 			) );
-			$coupon_id = $item->save();
-
-			if ( ! $coupon_id ) {
-				throw new WC_API_Exception( 'woocommerce_cannot_create_order_coupon', __( 'Cannot create coupon, try again.', 'woocommerce' ), 500 );
-			}
+			$order->add_item( $item );
 		} else {
 
 			$item = new WC_Order_Item_Coupon( $coupon['id'] );
@@ -1538,7 +1533,7 @@ class WC_API_Orders extends WC_API_Resource {
 			}
 
 			$order_refund = array(
-				'id'         => $refund->id,
+				'id'         => $refund->get_id(),
 				'created_at' => $this->server->format_datetime( $refund->get_date_created() ? $refund->get_date_created()->getTimestamp() : 0, false, false ),
 				'amount'     => wc_format_decimal( $refund->get_amount(), 2 ),
 				'reason'     => $refund->get_reason(),
@@ -1620,9 +1615,9 @@ class WC_API_Orders extends WC_API_Resource {
 			// HTTP 201 Created
 			$this->server->send_status( 201 );
 
-			do_action( 'woocommerce_api_create_order_refund', $refund->id, $order_id, $this );
+			do_action( 'woocommerce_api_create_order_refund', $refund->get_id(), $order_id, $this );
 
-			return $this->get_order_refund( $order_id, $refund->id );
+			return $this->get_order_refund( $order_id, $refund->get_id() );
 		} catch ( WC_Data_Exception $e ) {
 			return new WP_Error( $e->getErrorCode(), $e->getMessage(), array( 'status' => 400 ) );
 		} catch ( WC_API_Exception $e ) {

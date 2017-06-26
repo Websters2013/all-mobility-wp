@@ -40,10 +40,12 @@
 /* 
 Some themes set a box-shadow or max-width for all image / 
 div elements, we disable it to prevent it from messing up the map
+
+The .gv-iv- class is used in streetview, and they should not be included.
 */
-#wpsl-gmap div, 
+#wpsl-gmap div:not[class^="gv-iv"],
 #wpsl-gmap img,
-.wpsl-gmap-canvas div, 
+.wpsl-gmap-canvas div:not[class^="gv-iv"],
 .wpsl-gmap-canvas img {
     box-shadow: none !important;
     max-width: none !important;
@@ -55,6 +57,21 @@ div elements, we disable it to prevent it from messing up the map
     display: inline !important;
     opacity: 1 !important;
     max-height: none !important;
+}
+
+/*
+Fix a problem where the background color used
+in street view mode doesn't cover the control area.
+*/
+#wpsl-gmap * {
+    box-sizing: content-box !important;
+    -webkit-box-sizing: content-box !important;
+    -moz-box-sizing: content-box !important;
+}
+
+#wpsl-gmap div.gm-iv-marker,
+.wpsl-gmap-canvas div.gm-iv-marker {
+    backgroud-image: inherit;
 }
 
 #wpsl-wrap {
@@ -752,12 +769,13 @@ table.wpsl-opening-hours td {
 .wpsl-gmap-canvas .wpsl-infobox:before {
     border-left:13px solid transparent;
     border-right:13px solid transparent;
-    border-top:13px solid #ccc;	
+    border-top:13px solid #ccc;
     bottom:-13px;
     left:38px;
 }
 
-#wpsl-checkbox-filter {
+#wpsl-checkbox-filter,
+.wpsl-custom-checkboxes {
     display: block;
     float: left;
     margin: 5px 0 15px;
@@ -765,29 +783,35 @@ table.wpsl-opening-hours td {
     width: 100%;
 }
 
-#wpsl-checkbox-filter li {
+#wpsl-checkbox-filter li,
+.wpsl-custom-checkboxes li {
     float: left;
     list-style: none;
     margin: 0 1% 0 0;
 }
 
-#wpsl-checkbox-filter.wpsl-checkbox-1-columns li {
+#wpsl-checkbox-filter.wpsl-checkbox-1-columns li,
+.wpsl-custom-checkboxes.wpsl-checkbox-1-columns li {
     width: 99%;    
 }
 
-#wpsl-checkbox-filter.wpsl-checkbox-2-columns li {
+#wpsl-checkbox-filter.wpsl-checkbox-2-columns li,
+.wpsl-custom-checkboxes.wpsl-checkbox-2-columns li {
     width: 49%;    
 }
 
-#wpsl-checkbox-filter.wpsl-checkbox-3-columns li {
+#wpsl-checkbox-filter.wpsl-checkbox-3-columns li,
+.wpsl-custom-checkboxes.wpsl-checkbox-3-columns li {
     width: 32%;    
 }
 
-#wpsl-checkbox-filter.wpsl-checkbox-4-columns li {
+#wpsl-checkbox-filter.wpsl-checkbox-4-columns li,
+.wpsl-custom-checkboxes.wpsl-checkbox-4-columns li {
     width: 24%;    
 }
 
-#wpsl-checkbox-filter input {
+#wpsl-checkbox-filter input,
+.wpsl-custom-checkboxes input {
     margin-right: 5px;
 }
 

@@ -538,3 +538,16 @@ function wpsl_deregister_other_gmaps() {
         }
     }
 }
+
+/**
+ * Return the used distance unit.
+ *
+ * @since 2.2.8
+ * @return string Either km or mi
+ */
+function wpsl_get_distance_unit() {
+
+    global $wpsl_settings;
+
+    return apply_filters( 'wpsl_distance_unit', $wpsl_settings['distance_unit'] );
+}

@@ -129,6 +129,7 @@
     width:340px;
 }
 
+#wpsl-api-region,
 #wpsl-wrap.wpsl-settings input[type=text].textinput {
     width:255px;
 }
@@ -344,10 +345,17 @@
     overflow: hidden;
 }
 
-.wpsl-store-meta label {
+.wpsl-store-meta label,
+.wpsl-store-meta legend {
     float: left;
     width: 95px;
     margin-top: 3px;
+}
+
+.wpsl-store-meta fieldset label {
+    display: inline-block;
+    line-height: 1.4em;
+    margin: 0.25em 0 0.5em !important;
 }
 
 .wpsl-store-meta textarea,

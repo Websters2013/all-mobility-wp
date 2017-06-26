@@ -387,6 +387,12 @@ if ( !class_exists( 'WPSL_Admin' ) ) {
          * @return void
          */
         public function maybe_show_pointer() {
+
+            $disable_pointer = apply_filters( 'wpsl_disable_welcome_pointer', false );
+
+            if ( $disable_pointer ) {
+                return;
+            }
             
             $dismissed_pointers = explode( ',', (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
             

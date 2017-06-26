@@ -92,14 +92,16 @@ class WC_CLI_Runner {
 		// Define IDs that we are looking for in the routes (in addition to id)
 		// so that we can pass it to the rest command, and use it here to generate documentation.
 		$supported_ids = array(
+				'id'           => __( 'ID.', 'woocommerce' ),
 				'product_id'   => __( 'Product ID.', 'woocommerce' ),
 				'customer_id'  => __( 'Customer ID.', 'woocommerce' ),
 				'order_id'     => __( 'Order ID.', 'woocommerce' ),
 				'refund_id'    => __( 'Refund ID.', 'woocommerce' ),
 				'attribute_id' => __( 'Attribute ID.', 'woocommerce' ),
+				'zone_id'      => __( 'Zone ID.', 'woocommerce' ),
 		);
 		$rest_command->set_supported_ids( $supported_ids );
-		$positional_args = array_merge( array( 'id' ), array_keys( $supported_ids ) );
+		$positional_args = array_keys( $supported_ids );
 
 		$parent			 = "wc {$route_data['schema']['title']}";
 		$supported_commands = array();
@@ -141,6 +143,7 @@ class WC_CLI_Runner {
 		foreach ( $supported_commands as $command => $endpoint_args ) {
 			$synopsis = array();
 			$arg_regs = array();
+			$ids      = array();
 
 			foreach ( $supported_ids as $id_name => $id_desc ) {
 				if ( strpos( $route, '<' . $id_name . '>' ) !== false ) {
@@ -150,10 +153,10 @@ class WC_CLI_Runner {
 						'description' => $id_desc,
 						'optional'    => false,
 					);
+					$ids[] = $id_name;
 				}
 			}
-
-			if ( in_array( $command, array( 'delete', 'get', 'update' ) ) ) {
+			if ( in_array( $command, array( 'delete', 'get', 'update' ) ) && ! in_array( 'id', $ids )  ) {
 				$synopsis[] = array(
 					'name'		  => 'id',
 					'type'		  => 'positional',
@@ -163,7 +166,7 @@ class WC_CLI_Runner {
 			}
 
 			foreach ( $endpoint_args as $name => $args ) {
-				if ( ! in_array( $name, $positional_args ) ) {
+				if ( ! in_array( $name, $positional_args ) || strpos( $route, '<' . $id_name . '>' ) === false ) {
 					$arg_regs[] = array(
 						'name'		  => $name,
 						'type'		  => 'assoc',

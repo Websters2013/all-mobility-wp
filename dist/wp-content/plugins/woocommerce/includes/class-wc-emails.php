@@ -72,7 +72,7 @@ class WC_Emails {
 			'woocommerce_product_on_backorder',
 			'woocommerce_order_status_pending_to_processing',
 			'woocommerce_order_status_pending_to_completed',
-			'woocommerce_order_status_pending_to_cancelled',
+			'woocommerce_order_status_processing_to_cancelled',
 			'woocommerce_order_status_pending_to_failed',
 			'woocommerce_order_status_pending_to_on-hold',
 			'woocommerce_order_status_failed_to_processing',
@@ -102,13 +102,18 @@ class WC_Emails {
 	}
 
 	/**
-	 * Queue transactional email so it's not sent in current request.
+	 * Queues transactional email so it's not sent in current request if enabled,
+	 * otherwise falls back to send now.
 	 */
 	public static function queue_transactional_email() {
-		self::$background_emailer->push_to_queue( array(
-			'filter' => current_filter(),
-			'args'   => func_get_args(),
-		) );
+		if ( is_a( self::$background_emailer, 'WC_Background_Emailer' ) ) {
+			self::$background_emailer->push_to_queue( array(
+				'filter' => current_filter(),
+				'args'   => func_get_args(),
+			) );
+		} else {
+			call_user_func_array( array( __CLASS__, 'send_transactional_email' ), func_get_args() );
+		}
 	}
 
 	/**

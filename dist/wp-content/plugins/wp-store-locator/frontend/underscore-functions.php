@@ -78,7 +78,7 @@ function wpsl_create_underscore_templates( $template ) {
         $listing_template .= "\t\t" . '<div class="wpsl-direction-wrap">' . "\r\n";
         
         if ( !$wpsl_settings['hide_distance'] ) {
-            $listing_template .= "\t\t\t" . '<%= distance %> ' . esc_html( $wpsl_settings['distance_unit'] ) . '' . "\r\n";
+            $listing_template .= "\t\t\t" . '<%= distance %> ' . esc_html( wpsl_get_distance_unit() ) . '' . "\r\n";
         }
         
         $listing_template .= "\t\t\t" . '<%= createDirectionUrl() %>' . "\r\n"; 
@@ -205,7 +205,7 @@ function wpsl_store_header_template( $location = 'info_window' ) {
          * It's possible the permalinks are enabled, but not included in the location data on 
          * pages where the [wpsl_map] shortcode is used. 
          * 
-         * So we need to check for undefined, which isn't necesary in all other cases.
+         * So we need to check for undefined, which isn't necessary in all other cases.
          */
         if ( $location == 'wpsl_map') {
             $header_template = '<% if ( typeof permalink !== "undefined" ) { %>' . "\r\n";

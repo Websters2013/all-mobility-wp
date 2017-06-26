@@ -77,6 +77,7 @@ function initializeGmap( mapId, mapIndex ) {
 		mapTypeControl: Number( settings.mapTypeControl ) ? true : false,
 		scrollwheel: Number( settings.scrollWheel ) ? true : false,
 		streetViewControl: Number( settings.streetView ) ? true : false,
+        gestureHandling: settings.gestureHandling,
 		zoomControlOptions: {
 			position: google.maps.ControlPosition[ settings.controlPosition.toUpperCase() + '_TOP' ]
 		}
@@ -87,15 +88,12 @@ function initializeGmap( mapId, mapIndex ) {
 
 	map = new google.maps.Map( document.getElementById( mapId ), mapOptions );
 
-	// Do we need to disable the dragging of the map?
-	maybeDisableMapDrag( map );
-
 	// Check if we need to apply a map style.
 	maybeApplyMapStyle( settings.mapStyle );
 	
 	if ( ( typeof window[ "wpslMap_" + mapIndex ] !== "undefined" ) && ( typeof window[ "wpslMap_" + mapIndex ].locations !== "undefined" ) ) {
-		bounds		  = new google.maps.LatLngBounds(),
-		mapData       = window[ "wpslMap_" + mapIndex ].locations;
+		bounds	= new google.maps.LatLngBounds(),
+		mapData = window[ "wpslMap_" + mapIndex ].locations;
 
 		// Loop over the map data, create the infowindow object and add each marker.
 		$.each( mapData, function( index ) {
@@ -237,7 +235,8 @@ function getMapSettings( mapIndex ) {
 			mapStyle: wpslSettings.mapStyle,
 			streetView: wpslSettings.streetView,
 			scrollWheel: wpslSettings.scrollWheel,
-			controlPosition: wpslSettings.controlPosition
+			controlPosition: wpslSettings.controlPosition,
+            gestureHandling: wpslSettings.gestureHandling
 		};	
 
 	// If there are settings that are set through the shortcode, then we use them instead of the default ones.
@@ -334,30 +333,6 @@ function newInfoWindow() {
 }
 
 /**
- * Check if we need to disable dragging on the map.
- * 
- * Disabling dragging fixes the problem on mobile devices where 
- * users are scrolling down a page, but can't get past the map
- * because the map itself is being dragged instead of the page.
- * 
- * @since  2.1.0
- * @param  {object} map The map object.
- * @return {void}
- */
-function maybeDisableMapDrag( map ) {
-	var disableRes = parseInt( wpslSettings.draggable.disableRes ), 
-		mapOption  = {
-			draggable: Boolean( wpslSettings.draggable.enabled )
-		};
-
-	if ( disableRes !== "NaN" && mapOption.draggable ) {
-		mapOption.draggable = $( document ).width() > disableRes ? true : false;
-	}
-
-	map.setOptions( mapOption );
-}
-
-/**
  * Get the required marker settings.
  * 
  * @since  2.1.0
@@ -368,9 +343,13 @@ function getMarkerSettings() {
 		markerProps = wpslSettings.markerIconProps,
 		settings	= {};
 
-	// If no custom marker path is provided, then we stick with the default one.
+	// Use the correct marker path.
 	if ( typeof markerProps.url !== "undefined" ) {
-		settings.url = markerProps.url;
+        settings.url = markerProps.url;
+    } else if ( typeof markerProps.categoryMarkerUrl !== "undefined" ) {
+        settings.categoryMarkerUrl = markerProps.categoryMarkerUrl;
+    } else if ( typeof markerProps.alternateMarkerUrl !== "undefined" ) {
+        settings.alternateMarkerUrl = markerProps.alternateMarkerUrl;
 	} else {
 		settings.url = wpslSettings.url + "img/markers/";
 	}
@@ -1001,7 +980,7 @@ function calcRoute( start, end ) {
 	request = {
 		origin: start,
 		destination: end,
-		travelMode: google.maps.DirectionsTravelMode.DRIVING,
+		travelMode: wpslSettings.directionsTravelMode,
 		unitSystem: google.maps.UnitSystem[ distanceUnit ] 
 	};
 
@@ -1320,7 +1299,8 @@ function makeAjaxRequest( startLatLng, resetMap, autoLoad, infoWindow ) {
  * @returns {object}  ajaxData	  The collected data.
  */
 function collectAjaxData( startLatLng, resetMap, autoLoad ) {
-	var maxResult, radius, customName, customValue,
+	var maxResult, radius, customDropdownName, customDropdownValue,
+        customCheckboxName, customCheckboxValue,
 		categoryId	   = "",
 		isMobile	   = $( "#wpsl-wrap" ).hasClass( "wpsl-mobile" ),
 		defaultFilters = $( "#wpsl-wrap" ).hasClass( "wpsl-default-filters" ),
@@ -1384,22 +1364,33 @@ function collectAjaxData( startLatLng, resetMap, autoLoad ) {
 		// Include values from custom dropdowns.
 		if ( $( ".wpsl-custom-dropdown" ).length > 0 ) {
 			$( ".wpsl-custom-dropdown" ).each( function( index ) {
-				customName  = '';
-				customValue = '';
+				customDropdownName  = '';
+				customDropdownValue = '';
 
 				if ( isMobile || defaultFilters ) {
-					customName  = $( this ).attr( "name" );
-					customValue = $( this ).val();
+					customDropdownName  = $( this ).attr( "name" );
+					customDropdownValue = $( this ).val();
 				} else {
-					customName  = $( this ).attr( "name" );
-					customValue = $( this ).next( ".wpsl-selected-item" ).attr( "data-value" );
+					customDropdownName  = $( this ).attr( "name" );
+					customDropdownValue = $( this ).next( ".wpsl-selected-item" ).attr( "data-value" );
 				}
 
-				if ( customName && customValue ) {
-					ajaxData[customName] = customValue;
+				if ( customDropdownName && customDropdownValue ) {
+					ajaxData[customDropdownName] = customDropdownValue;
 				}
 			});	
 		}
+
+		// Include values from custom checkboxes
+        if ( $( ".wpsl-custom-checkboxes" ).length > 0 ) {
+            $( ".wpsl-custom-checkboxes" ).each( function( index ) {
+				customCheckboxName = $( this ).attr( "data-name" );
+
+                if ( customCheckboxName ) {
+                    ajaxData[customCheckboxName] = getCustomCheckboxValue( customCheckboxName );
+                }
+			});
+        }
 	}
 
    /*
@@ -1407,7 +1398,7 @@ function collectAjaxData( startLatLng, resetMap, autoLoad ) {
 	* is based on a geolocation attempt before including the autoload param.
 	* 
 	* Because if both the geolocation and autoload options are enabled, 
-	* and the geolocation attempt was successfull, then we need to to include 
+	* and the geolocation attempt was successful, then we need to to include
 	* the skip_cache param. 
 	* 
 	* This makes sure the results don't come from an older transient based on the 
@@ -1435,6 +1426,27 @@ function collectAjaxData( startLatLng, resetMap, autoLoad ) {
 	}
 	
 	return ajaxData;
+}
+
+/**
+ * Get custom checkbox values by data-name group.
+ *
+ * If multiple selection are made, then the returned
+ * values are comma separated
+ *
+ * @since  2.2.8
+ * @param  {string} customCheckboxName The data-name value of the custom checkbox
+ * @return {string} customValue		   The collected checkbox values separated by a comma
+ */
+function getCustomCheckboxValue( customCheckboxName ) {
+	var dataName    = $( "[data-name=" + customCheckboxName + "]" ),
+		customValue = [];
+
+	$( dataName ).find( "input:checked" ).each( function( index ) {
+        customValue.push( $( this ).val() );
+	});
+
+	return customValue.join();
 }
 
 /**
@@ -1517,12 +1529,16 @@ function addMarker( latLng, storeId, infoWindowData, draggable, infoWindow ) {
 	var url, mapIcon, marker,
 		keepStartMarker = true;
 
-	if ( storeId === 0 ) {
-		infoWindowData = {
-			store: wpslLabels.startPoint
-		};
+    if ( storeId === 0 ) {
+        infoWindowData = {
+            store: wpslLabels.startPoint
+        };
 
-		url = markerSettings.url + wpslSettings.startMarker;
+        url = markerSettings.url + wpslSettings.startMarker;
+    } else if ( typeof infoWindowData.alternateMarkerUrl !== "undefined" && infoWindowData.alternateMarkerUrl ) {
+		url = infoWindowData.alternateMarkerUrl;
+	} else if ( typeof infoWindowData.categoryMarkerUrl !== "undefined" && infoWindowData.categoryMarkerUrl ) {
+		url = infoWindowData.categoryMarkerUrl;
 	} else {
 		url = markerSettings.url + wpslSettings.storeMarker;
 	}

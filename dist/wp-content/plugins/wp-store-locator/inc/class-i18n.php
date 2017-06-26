@@ -113,8 +113,10 @@ if ( !class_exists( 'WPSL_i18n' ) ) {
             
             global $wpsl_settings;
 
-            if ( $this->wpml_exists() ) {
+            if ( defined( 'WPML_ST_VERSION' ) ) {
                 $translation = $text;
+            } elseif ( defined( 'POLYLANG_VERSION' ) ) {
+                $translation = pll__( $text );
             } else {
                 $translation = stripslashes( $wpsl_settings[$name] );
             }
