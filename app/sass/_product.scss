@@ -280,12 +280,12 @@
     min-height: 568px;
   }
   .product__add {
-    max-width: 305px;
+    max-width: 320px;
     margin: 0;
     text-align: left;
 
     .websters-select {
-      max-width: 264px;
+      max-width: 320px;
     }
 
   }
@@ -452,10 +452,12 @@
   .product__items {
 
     >div {
-      width: 52%;
+      width: 50%;
+      padding-left: 25px;
 
       &:first-child {
-        width: 43%;
+        width: 56%;
+        padding-left: 0;
       }
 
     }
