@@ -1054,9 +1054,8 @@ $categoryId = $_GET['idCategory'];
                     while ( have_rows('three_line_preview_text', $product_id) ) : the_row();
 
                         if( $count < 3 ){
-                            $description .= '"'.get_sub_field('new_line').'",';
+                            $description .= json_encode(get_sub_field('new_line')).',';
                         }
-
 
                         $count++;
                     endwhile;

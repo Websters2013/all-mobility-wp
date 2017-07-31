@@ -35,13 +35,19 @@
 
     <?php endif; ?>
 
+    <?php $video  = get_field('link_on_video') ?>
+
+    <?php if( $video ): ?>
+
     <!-- watch-video -->
     <div class="watch-video" style="background-image: url(<?= get_field('video_image') ?>)">
         
-        <a  target="_blank" href="<?= get_field('link_on_video') ?>" class="btn btn_3">watch video</a>
+        <a  target="_blank" href="<?= $video ?>" class="btn btn_3">watch video</a>
 
     </div>
     <!-- /watch-video -->
+
+    <?php endif; ?>
 
     <?php get_template_part('content/content','aside-contact') ?>
     

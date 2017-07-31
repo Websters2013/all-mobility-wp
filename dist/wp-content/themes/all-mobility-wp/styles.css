@@ -115,3 +115,7 @@ a.woocommerce-remove-coupon {
 .woocommerce-Address {
     margin-bottom: 40px;
 }
+
+.payment_box {
+    display: none !important;
+}
