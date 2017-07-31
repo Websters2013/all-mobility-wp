@@ -78,7 +78,7 @@ div.wpcf7-mail-sent-ok {
 }
 
 /*.upsells_added {*/
-    /*display: none;*/
+/*display: none;*/
 /*}*/
 
 .payment_box {
@@ -114,4 +114,12 @@ a.woocommerce-remove-coupon {
 
 .woocommerce-Address {
     margin-bottom: 40px;
+}
+
+.payment_box {
+    display: none !important;
+}
+
+a.reset_variations {
+    display: none;
 }

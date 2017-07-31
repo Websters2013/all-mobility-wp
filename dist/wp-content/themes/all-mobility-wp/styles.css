@@ -119,3 +119,7 @@ a.woocommerce-remove-coupon {
 .payment_box {
     display: none !important;
 }
+
+a.reset_variations {
+    display: none;
+}
