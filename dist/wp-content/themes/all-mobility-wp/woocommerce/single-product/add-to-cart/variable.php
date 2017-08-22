@@ -108,8 +108,8 @@ $upselsIDs = $product->get_upsell_ids(); ?>
 							<option value="0">'.$term->name.'</option>';
 
                     foreach ( $item as  $attr ){
-
-                        echo '<option value="'.$attr.'" >'.get_the_title($attr).'</option>';
+                        $_currentProduct = wc_get_product($attr);
+                        echo '<option value="'.$attr.'" >'.get_the_title($attr).' '.wc_price($_currentProduct->get_price()).'</option>';
                     }
 
 
@@ -134,11 +134,12 @@ $upselsIDs = $product->get_upsell_ids(); ?>
 
                 $countTerm = count( $defaultProducts );
 
-                foreach ($defaultProducts as $key => $item){ ?>
+                foreach ($defaultProducts as $key => $item){
+                    $_currentProduct = wc_get_product($item); ?>
 
                     <select name="<?= 'upsells_'.$k ?>">
                         <option value="0">Add-Ons</option>
-                        <option value="<?= $item ?>"><?= get_the_title($item) ?></option>
+                        <option value="<?= $item ?>"><?= get_the_title($item) ?> <?= wc_price($_currentProduct->get_price()) ?></option>
                     </select>
 
                     <?php  $k++;
