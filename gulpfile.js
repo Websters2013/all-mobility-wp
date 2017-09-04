@@ -14,7 +14,7 @@ let del             = require('del');
 
 let rootPathName = process.cwd().split('/');
 
-let distPath = `dist/wp-content/themes/${ rootPathName[ rootPathName.length - 1 ] }/assets`;
+let distPath = `dist/wp-content/themes/all-mobility-wp/assets`;
 
 
 let paths = {
