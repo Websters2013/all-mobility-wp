@@ -1743,3 +1743,33 @@ function custom_info_window_template() {
     return $info_window_template;
 
 }
+
+function updateFrameType() {
+
+    $args = array (
+        'post_type'  => 'product',
+        'posts_per_page' => -1,
+        'fields' => 'ids'
+    );
+
+    $attrProducts =  get_posts($args);
+    echo 'qwe';
+    foreach ($attrProducts as $item) {
+
+//
+        if ($value = get_field('choose_frame_type', $item) === 'Disassembles') {
+            echo '<h2>'.get_field('choose_frame_type', $item). '</h2> id =   '. $item.'<br>';
+            update_post_meta( $item, 'choose_frame_type', 'disassembles' );
+        }
+
+        if ($value = get_field('choose_frame_type', $item) === 'Rigid') {
+            echo '<h2>'.get_field('choose_frame_type', $item). '</h2> id =   '. $item.'<br>';
+            update_post_meta( $item, 'choose_frame_type', 'rigid' );
+        }
+
+
+//        wp_update_post($item);
+
+    }
+
+}

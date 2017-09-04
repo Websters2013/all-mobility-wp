@@ -267,7 +267,7 @@ $powerWheelChairs = 125; ?>
                                             <div>
 
                                                 <input type="checkbox" name="<?= $key ?>" id="<?= $sub_key ?>" data-id="<?= $sub_key ?>">
-                                                <label for="<?= $sub_key ?>"><?= $sub_key ?> <span class="category__filters-count"><?= $item ?></span></label>
+                                                <label for="<?= $sub_key ?>"><?= ucfirst($sub_key) ?> <span class="category__filters-count"><?= $item ?></span></label>
                                             </div>
 
                                         <?php  } ?>
