@@ -30,7 +30,7 @@ if(!$symbolsNumber){
 ?>
 
 <!-- search -->
-<div class="search" data-symbols="<?= $symbolsNumber ?>" data-path="<?php echo admin_url( 'admin-ajax.php' );?>" data-action="http://www.erefre.com">
+<div class="search" data-symbols="<?= $symbolsNumber ?>" data-path="<?php echo admin_url( 'admin-ajax.php' );?>" data-action="<?php echo admin_url( 'admin-ajax.php' );?>">
 
     <form action="<?= get_permalink(444) ?>">
         <input type="search" name="search" id="search1" autocomplete="off">
