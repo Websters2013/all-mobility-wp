@@ -1,0 +1,127 @@
+.site__content-brands {
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 52px;
+  margin-bottom: 48px;
+  .why-us {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+}
+.brands {
+  margin-top: -2px;
+  padding: 0 3px;
+  font-family: Roboto;
+  &__subtitle {
+    margin-left: 40px;
+    margin-right: 40px;
+    h3 {
+      color: #F47920;
+      font-family: "proximanova-semibold", sans-serif;
+      font-size: 24px;
+      line-height: 29px;
+      margin-bottom: 16px;
+      letter-spacing: -.3px;
+      padding-left: 3px;
+    }
+    p {
+      color: #4E4E4E;
+      font-family: "proximanova-semibold", sans-serif;
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: -.14px;
+      margin-bottom: 5px;
+    }
+  }
+  &__title {
+    margin-bottom: 34px;
+    margin-left: 40px;
+    margin-right: 40px;
+    h2 {
+      font-size: 24px;
+      line-height: 33px;
+      color: $brand-1;
+      font-weight: normal;
+      margin-bottom: 12px;
+    }
+    p {
+      opacity: 0.8;
+      color: $brand-1;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 22px;
+      letter-spacing: 0;
+      padding: 0 2px;
+      margin-bottom: 5px;
+    }
+  }
+  &__wrap {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 0 22px;
+    margin-bottom: 20px;
+  }
+  &__item {
+    flex-basis: 305px;
+    padding: 19px 26px;
+    border: 2px solid #E5E5E5;
+    border-radius: 4px;
+    min-height: 307px;
+    display: block;
+    margin-bottom: 25px;
+    margin-left: 5px;
+    margin-right: 5px;
+    box-shadow: 2px 2px 4px 0 #E5E5E5;
+    transition: box-shadow .3s linear;
+    &:hover {
+      box-shadow: 2px 2px 4px 0 #a4a4a4;
+    }
+    &-image {
+      width: auto;
+      height: calc(100% - 47px);
+      background-position: calc(50% + 3px);
+      background-repeat: no-repeat;
+      margin-left: 6px;
+      margin-right: 6px;
+      background-size: 100%;
+    }
+    h3 {
+      font-size: 22px;
+      line-height: 25px;
+      color: $brand-1;
+      position: relative;
+      font-weight: normal;
+      padding-bottom: 15px;
+      &:after {
+        content: '';
+        display: block;
+        height: 1px;
+        width: 100%;
+        background-color: #DDDDDD;
+        position: absolute;
+        bottom: 0;
+      }
+    }
+
+
+  }
+}
+@media (min-width: 1310px) {
+  .brands {
+    &__title {
+      h2 {
+        font-size: 30px;
+      }
+    }
+  }
+
+}
+@media (min-width: 1310px) {
+  .brands {
+    &__wrap {
+      justify-content: space-between;
+    }
+  }
+
+}

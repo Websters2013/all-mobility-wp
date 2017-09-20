@@ -1406,6 +1406,11 @@ textarea.site__input {
     padding: 37px 40px 74px;
     margin: 0 auto 41px;
   }
+  .site__content {
+    &_cart {
+      padding: 25px 38px 74px;
+    }
+  }
   .site__content_page {
     padding: 27px 40px 74px 40px;
     margin: 0 auto 41px;
