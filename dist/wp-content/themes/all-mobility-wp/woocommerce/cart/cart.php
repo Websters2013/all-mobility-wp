@@ -31,12 +31,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<form action="#">
 
-			<div class="my-cart__head">
-				<div class="my-cart__caption">Product</div>
-				<div class="my-cart__caption">Price</div>
-				<div class="my-cart__caption">Quantity</div>
-				<div class="my-cart__caption">Total</div>
-			</div>
+            <div class="my-cart__head">
+                <div class="my-cart__caption">Your Items</div>
+                <div class="my-cart__caption">Your Selected Options</div>
+                <div class="my-cart__caption">Quantity</div>
+                <div class="my-cart__caption">Price</div>
+            </div>
 
 			<?php
 
@@ -63,6 +63,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				//Upsells products
 				$customizableParametres = '';
+				$customizableParametres_2 = '';
 
 				if( $upsellsProduct = WC()->session->get($product_id) ){
 
@@ -75,6 +76,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$upsellSum +=  $upsellProduct->get_price()*$value['count'];
 
 
+						$customizableParametres_2 .= '<li><span>'.get_the_title($key).'</span><span>$'.$upsellProduct->get_price()*$value['count'].'</span></li>';
 						$customizableParametres .= get_the_title($key).' ('.$value['count'].')<br/>';
 					}
 
@@ -118,7 +120,119 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				<!-- my-cart__product -->
 				<div class="my-cart__product"  data-variation-id="<?= $variation_id ?>"  data-product-id="<?= $product_id ?>" data-product-key="<?= $cart_item_key ?>">
-					<div>
+                    <div>
+
+                        <!-- my-cart__product -->
+                        <div class="my-cart__name">
+
+                            <!-- my-cart__product -->
+                            <a href="<?= $link ?>" class="my-cart__pic">
+                                <img src="<?= $thumb_url ?>" alt="<?= $productTitle ?>">
+                            </a>
+                            <!-- my-cart__product -->
+
+                            <div>
+                                <h2 class="my-cart__title"><a href="<?= $link ?>"><?= $productTitle ?></a></h2>
+                                <a href="<?= $link ?>" class="my-cart__btn my-cart__btn-edit">edit item</a>
+                                <a href="#" class="my-cart__btn my-cart__remove">remove item</a>
+                            </div>
+
+                        </div>
+                        <!-- my-cart__product -->
+
+                        <!-- my-cart__info -->
+                        <div class="my-cart__info">
+
+                            <div>
+                                <div class="my-cart__base-price">
+                                    Base Price
+                                </div>
+
+                                <div>
+
+                                    <!-- count-product -->
+                                    <div class="count-product">
+                                        <input type="number" class="count-product__input site__input" value="<?= $quantity ?>" min="1" value="1">
+                                        <div>
+                                            <a class="count-product-cart my-cart__btn-edit" href="<?= $link ?>"><span>updete</span></a>
+                                            <a class="count-product-cart my-cart__remove" href="#"><span>remove</span></a>
+                                        </div>
+                                    </div>
+                                    <!-- /count-product -->
+
+                                    <div class="my-cart__count">
+                                        <select name="count" id="count">
+					                                <?php for( $i = 1; $i<=10;$i++ ): ?>
+                                              <option value="<?= $i ?>"><?= $i ?></option>
+					                                <?php endfor; ?>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="my-cart__total-price">
+                                    <?php echo WC()->cart->get_product_subtotal( $_product , $quantity ); ?>
+                                </div>
+
+                            </div>
+                            <div class="options">
+                                <div class="options__title">
+                                    Your Selected Options:
+                                </div>
+                                <ul>
+
+
+	                                <?php $variation = new WC_Product_Variation($variation_id);
+	                                //var_dump($variation);
+	                                ?>
+
+	                                <?php foreach($variation->get_attributes() as $name => $attr): ?>
+
+		                                <?php
+
+		                                //$name = substr($name, 10); //remove attribute_ from the key. ?>
+
+		                                <?php  echo $name.'---'.$attr; ?>
+
+	                                <?php endforeach; ?>
+
+
+
+                                    <!--<li><span>Title_product color: Blue, Бренд: Brand_1</span><span>$95</span></li>
+                                    <li><span>Title_product color: Red, Бренд: Brand_1</span><span>$97</span></li>
+                                    <li><span>Title_product color: Red, Бренд: Brand_2</span><span>$85</span></li>
+                                    <li><span>Title_product color: Yellow, Бренд: Brand_2</span><span>$100</span></li>-->
+                                </ul>
+                            </div>
+
+                            <?php if($customizableParametres_2){ ?>
+                            <div class="options">
+                                <div class="options__title">
+                                    Your Selected Accessories:
+                                </div>
+                                <ul>
+                                   <?= $customizableParametres_2; ?>
+                                </ul>
+                            </div>
+                            <?php } ?>
+
+                            <div class="my-cart__price-total">
+                                <span>Item Total</span><span><?= $subtotal_product ?></span>
+                            </div>
+
+                        </div>
+                        <!-- /my-cart__info -->
+
+                        <!-- my-cart__loading -->
+                        <div class="my-cart__loading">
+                            <span class="my-cart__loading-spin"></span>
+                        </div>
+                        <!-- /my-cart__loading -->
+
+                    </div>
+
+                    <?php /*
+                    <div>
 
 						<!-- my-cart__product -->
 						<div class="my-cart__name">
@@ -192,6 +306,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<!-- /my-cart__loading -->
 
 					</div>
+ */ ?>
+
 				</div>
 				<!-- /my-cart__product -->
 
@@ -255,6 +371,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 				<!-- /my-cart__promo-code -->
 
+                <!-- my-cart__payments -->
+                <div class="my-cart__payments">
+                    <img src="<?= DIRECT ?>pic/visa.jpg" width="48" height="30" alt="visa">
+                    <img src="<?= DIRECT ?>pic/mastercard.jpg" width="48" height="30" alt="mastercard">
+                    <img src="<?= DIRECT ?>pic/card-amex.jpg" width="50" height="30" alt="amex">
+                    <img src="<?= DIRECT ?>pic/card-discover.jpg" width="48" height="30" alt="amex">
+                    <img src="<?= DIRECT ?>pic/paypal.jpg" width="48" height="30" alt="paypal">
+                    <img src="<?= DIRECT ?>pic/card-pp-credit.jpg" width="66" height="30" alt="paypal">
+                </div>
+                <!-- /my-cart__payments -->
+
 				<!-- my-cart__result -->
 				<div class="my-cart__result">
 
@@ -272,6 +399,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<dd><?= WC()->cart->get_cart_subtotal()  ?></dd>
 					</dl>
 
+                    <!--<dl class="my-cart__subtotal">
+                        <dt>Taxes</dt>
+                        <dd><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&#36;</span>100.00</span></dd>
+                    </dl>-->
+
 					<dl class="my-cart__total">
 						<dt>TOTAL</dt>
 						<dd><?= WC()->cart->get_cart_total() ?></dd>
@@ -279,17 +411,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				</div>
 				<!-- /my-cart__result -->
-
-				<!-- my-cart__payments -->
-				<div class="my-cart__payments">
-					<img src="<?= DIRECT ?>pic/visa.jpg" width="48" height="30" alt="visa">
-					<img src="<?= DIRECT ?>pic/mastercard.jpg" width="48" height="30" alt="mastercard">
-					<img src="<?= DIRECT ?>pic/card-amex.jpg" width="50" height="30" alt="amex">
-					<img src="<?= DIRECT ?>pic/card-discover.jpg" width="48" height="30" alt="amex">
-					<img src="<?= DIRECT ?>pic/paypal.jpg" width="48" height="30" alt="paypal">
-					<img src="<?= DIRECT ?>pic/card-pp-credit.jpg" width="66" height="30" alt="paypal">
-				</div>
-				<!-- /my-cart__payments -->
 
 			</div>
 			<!-- /my-cart__footer -->
@@ -308,8 +429,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				</div>
 				<div>
-
-
 					<?php woocommerce_button_proceed_to_checkout() ?>
 				</div>
 			</div>

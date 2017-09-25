@@ -35,10 +35,17 @@
     position: relative;
     margin-bottom: 1px;
     letter-spacing: 0;
+    font-weight: normal;
     &-edit {
       margin-bottom: 13px;
     }
+    &:hover {
+      &:after {
+        opacity: 0;
+      }
+    }
     &:after {
+      opacity: 1;
       content: '';
       display: block;
       height: 2px;
@@ -47,6 +54,7 @@
       bottom: 0;
       left: 0;
       background-color: $cart-1;
+      transition: opacity .2s linear;
     }
   }
 
@@ -58,7 +66,15 @@
     font-size: 16px;
     line-height: 18px;
     position: relative;
+    font-weight: normal;
+    transition: opacity .2s linear;
+    &:hover {
+      &:after {
+        opacity: 0;
+      }
+    }
     &:after {
+      opacity: 1;
       content: '';
       display: block;
       height: 2px;
@@ -67,6 +83,7 @@
       bottom: 1px;
       left: 0;
       background-color: $cart-1;
+      transition: opacity .2s linear;
     }
     &:first-child {
       margin-bottom: 5px;
@@ -150,6 +167,7 @@
   line-height: 20px;
   color: #4E4E4E;
   letter-spacing: 0;
+  margin-bottom: 20px;
 
   a {
     color: #4E4E4E;
@@ -180,6 +198,9 @@
     width: 61%;
     padding: 11px 0 6px 31px;
     letter-spacing: 0.3px;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
 
     &:first-child {
       width: 21%;
@@ -220,7 +241,7 @@
     @include flex-direction(row);
     @include align-items(flex-start);
     @include justify-content(space-between);
-    padding-bottom: 22px;
+
     border-bottom: 2px solid #DDDDDD;
     >div {
       width: 30%;
@@ -262,7 +283,7 @@
   line-height: 16px;
   color: #4E4E4E;
 }
-.my-cart__remove {
+/*.my-cart__remove {
   position: absolute;
   top: 19px;
   right: 11px;
@@ -339,7 +360,7 @@
 
   }
 
-}
+}*/
 .my-cart__footer {
   padding: 14px 0 0;
   text-align: center;
@@ -854,8 +875,9 @@
   .options {
     flex-flow: column;
     padding-bottom: 19px;
-    padding-top: 14px;
+    padding-top: 12px;
     align-items: flex-start;
+    font-weight: normal;
     &__title {
       width: 100%;
       line-height: 43px;
@@ -869,26 +891,52 @@
         justify-content: space-between;
         width: 100%;
         line-height: 37px;
-        padding-left: 40px;
+        padding-left: 20px;
+        letter-spacing: .15px;
 
         span {
 
           &:last-child {
-            width: 100%;
-            max-width: 130px;
+            max-width: 80px;
+            padding-left: 10px;
+            padding-right: 20px;
+            text-align: right;
           }
         }
 
         &:nth-child(2n) {
-          background-color: #d8d8d8;
+          background-color: #D8D8D8;
         }
       }
     }
   }
 }
-
+.my-cart__info{
+  .my-cart__price-total {
+    padding-bottom: 0;
+    padding-top: 27px;
+    border: none;
+    span {
+      font-weight: normal;
+      &:last-child {
+        font-weight: bold;
+        width: 100%;
+        max-width: 70px;
+        margin-top: -8px;
+      }
+    }
+  }
+}
+.my-cart__base-price,
+.my-cart__total-price {
+  padding-top: 10px;
+  font-weight: normal;
+}
 @media (min-width: $desktop) {
-
+  .my-cart__base-price,
+  .my-cart__total-price {
+    padding-top: 0;
+  }
   .my-cart {
     padding: 0;
     text-align: left;
@@ -966,7 +1014,9 @@
     >div {
       @include align-items(center);
       padding-left: 40px;
+      padding-bottom: 22px;
       margin-bottom: 2px;
+
       >div {
         width: 44.5%;
 
@@ -999,7 +1049,7 @@
     }
 
   }
-  .my-cart__remove {
+  /*.my-cart__remove {
     top: 50%;
     right: 4px;
     width: 30px;
@@ -1023,7 +1073,7 @@
       border-right: 3px solid transparent;
     }
 
-  }
+  }*/
   .my-cart__head {
     position: relative;
     z-index: 4;
@@ -1379,14 +1429,19 @@
 
   .my-cart__info {
     .options {
-      flex-flow: column;
-      padding-bottom: 19px;
-      padding-top: 12px;
-      align-items: flex-start;
       margin-bottom: 0;
-
-      &__title {
-        width: 100%;
+      ul {
+        li {
+          padding-left: 40px;
+          span {
+            &:last-child {
+              width: 100%;
+              max-width: 140px;
+              padding-right: 0;
+              text-align: left;
+            }
+          }
+        }
       }
     }
   }

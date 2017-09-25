@@ -42,7 +42,14 @@
       width: 33px;
       height: 33px;
     }
-
+    &:last-child {
+      img {
+        width: 39px;
+        height: 40px;
+        margin-left: -11px;
+        margin-top: 1px;
+      }
+    }
   }
 
 }

@@ -66,8 +66,8 @@ get_header(); ?>
 	<div class="brands">
 
         <div class="brands__title">
-            <h2>Brand Showcase</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+
+            <?= get_field('title', get_the_ID()); ?>
         </div>
 
         <div class="brands__wrap">
@@ -155,8 +155,7 @@ get_header(); ?>
         </div>
 
         <div class="brands__subtitle">
-            <h3>Shop online OR offline</h3>
-            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+	        <?= get_field('description', get_the_ID()); ?>
         </div>
 
     </div>
