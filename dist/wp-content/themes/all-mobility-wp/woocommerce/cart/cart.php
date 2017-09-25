@@ -18,7 +18,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
-	
+
 } ?>
 
 
@@ -67,6 +67,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				if( $upsellsProduct = WC()->session->get($product_id) ){
 
+				    var_dump($upsellsProduct);
+
 					if(!empty($upsellsProduct)):
 
 					foreach ($upsellsProduct as $key => $value){
@@ -91,7 +93,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				if( !$cart_item['variation_id'] ){
 					$variation_id = 0;
-					
+
 					if( $upsellsProduct ){
 						$subtotal_product = wc_price(  $_product->get_price()*$quantity + $upsellSum );
 					} else {
@@ -110,8 +112,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$subtotal_product = WC()->cart->get_product_subtotal( $variationProduct , $quantity );
 					}
 
-				} 
-				
+				}
+
 				//Full subtotal
 				if( $upsellsProduct ){
 

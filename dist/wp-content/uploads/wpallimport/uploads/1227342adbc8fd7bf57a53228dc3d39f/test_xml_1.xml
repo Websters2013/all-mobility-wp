@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+	<node>
+		<sku><![CDATA[9000]]></sku>
+		<title><![CDATA[kepka]]></title>
+		<size><![CDATA[val1|val2]]></size>
+		<kontroller><![CDATA[val1|val2|val3|val4]]></kontroller>
+		<bagkrest><![CDATA[val1|val2|val3|val4]]></bagkrest>
+	</node>
+</data>
