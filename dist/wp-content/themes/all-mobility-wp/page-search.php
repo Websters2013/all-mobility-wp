@@ -270,7 +270,7 @@ get_header(); ?>
 
                         ?>
 
-                    <h1 class="site__title site__title_8">Search Results for <?= $query ?> - <?= $count.' '.$results ?></h1>
+                    <h1 class="site__title site__title_8">Search Results Products for <?= $query ?> - <?= $count.' '.$results ?></h1>
 
                     <!-- featured-products -->
                     <div class="featured-products featured-products_4">
@@ -316,53 +316,105 @@ get_header(); ?>
 
 
                     <?php $categories = getTermsForSearch($query, "");
-                    
                     $count = count($categories);
-                    if($count<=1){
-                        $results = 'result';
-                    } else {
-                        $results = 'results';
-                    }
+                    $search_term_string = '';
+                    $counter = 0;
+                    if( $categories ):
+	                    foreach ($categories as $key => $category_id) {
 
-                    if( $categories ): ?>
+		                    $category = get_term($key,'product_cat');
+		                    if($category->parent === 232) {
+			                    continue;
+		                    }
 
-                    <!-- search-results__items -->
-                    <div class="search-results__items">
+		                    $catName = $category->name;
 
-                        <h2 class="site__title site__title_7">Search Results for <?= $query ?> - <?= $count.' '.$results ?></h2>
+		                    $description = $category->description;
 
-                        <?php foreach ($categories as $key => $category_id):
+		                    $catName = str_replace($query,"<span>$query</span>",$catName);
 
-                            $category = get_term($key,'product_cat');
-
-                            $catName = $category->name;
-
-                            $description = $category->description;
-
-                            $catName = str_replace($query,"<span>$query</span>",$catName);
-
-                            $term_link = get_term_link($key);
-
-                            ?>
-
-                            <!-- search-results__items -->
+		                    $term_link = get_term_link($key);
+		                    $search_term_string .= '<!-- search-results__items -->
                             <div class="search-results__item">
 
                                 <h3 class="search-results__title">
-                                    <a href="<?= $term_link ?>"><?= $catName ?></a>
+                                    <a href="'.$term_link.'">'.$catName.'</a>
                                 </h3>
 
                                 <p><?= $description ?></p>
 
-                                <a href="<?= $term_link ?>" class="btn btn_15">READ MORE</a>
+                                <a href="'.$term_link.'" class="btn btn_15">READ MORE</a>
 
                             </div>
-                            <!-- /search-results__items -->
+                            <!-- /search-results__items -->';
+			             $counter++;
+	                    }
+	                    if($counter<=1){
+		                    $results = 'result';
+	                    } else {
+		                    $results = 'results';
+	                    }
+                      ?>
 
-                        <?php endforeach; ?>
+                    <!-- search-results__items -->
+                    <div class="search-results__items">
+
+                        <h2 class="site__title site__title_7">Search Results Categories for <?= $query ?> - <?= $counter.' '.$results ?></h2>
+
+                        <?= $search_term_string; ?>
 
                     </div>
                     <!-- /search-results__items -->
+
+                      <?php
+                        $counter = $count -$counter;
+	                    if($counter<=1){
+		                    $results = 'result';
+	                    } else {
+		                    $results = 'results';
+	                    }
+                      ?>
+
+                    <!-- search-results__items -->
+                        <div class="search-results__items">
+
+                            <h2 class="site__title site__title_7">Search Results for Brands <?= $query ?> - <?= $counter.' '.$results ?></h2>
+
+			                    <?php foreach ($categories as $key => $category_id):
+
+				                    $category = get_term($key,'product_cat');
+				                    if($category->parent !== 232) {
+					                    continue;
+				                    }
+
+				                    $catName = $category->name;
+
+				                    $description = $category->description;
+
+				                    $catName = str_replace($query,"<span>$query</span>",$catName);
+
+				                    $term_link = get_term_link($key);
+
+				                    ?>
+
+                              <!-- search-results__items -->
+                              <div class="search-results__item">
+
+                                  <h3 class="search-results__title">
+                                      <a href="<?= $term_link ?>"><?= $catName ?></a>
+                                  </h3>
+
+                                  <p><?= $description ?></p>
+
+                                  <a href="<?= $term_link ?>" class="btn btn_15">READ MORE</a>
+
+                              </div>
+                              <!-- /search-results__items -->
+
+			                    <?php endforeach; ?>
+
+                        </div>
+                        <!-- /search-results__items -->
 
                     <?php endif;
                     else :

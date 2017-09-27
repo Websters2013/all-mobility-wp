@@ -50,24 +50,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$thumb_url = wp_get_attachment_image_src($thumb_id,'full')[0];
 				$productTitle = $_product->get_title();
 				$link = get_permalink($product_id);
+				$parent = $cart_item['data']->post->post_parent;
+				$attributes = $cart_item['variation'];
+				$flag_variation = 1;
 
-				if( $inUpsells =  $allUpsells[$product_id] ){
+
+				if($inUpsells = $allUpsells[$cart_item['variation_id']]) {
+	                $quantity = $cart_item['quantity'] - $inUpsells;
+					$flag_variation = 1;
+                } elseif ( $inUpsells =  $allUpsells[$product_id] ){
 					$quantity = $cart_item['quantity'] - $inUpsells;
+
 				} else {
 					$quantity = $cart_item['quantity'];
+
 				}
 
 				if( !$quantity ){
 					continue;
 				}
 
+
 				//Upsells products
 				$customizableParametres = '';
 				$customizableParametres_2 = '';
 
-				if( $upsellsProduct = WC()->session->get($product_id) ){
+				if($flag_variation) {
+					$upsellsProduct = WC()->session->get($cart_item['variation_id']);
+                } else {
+					$upsellsProduct = WC()->session->get($product_id);
+                }
 
-				    var_dump($upsellsProduct);
+
+				if( $upsellsProduct ){
 
 					if(!empty($upsellsProduct)):
 
@@ -76,7 +91,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 						$upsellProduct = wc_get_product($key);
 
 						$upsellSum +=  $upsellProduct->get_price()*$value['count'];
-
 
 						$customizableParametres_2 .= '<li><span>'.get_the_title($key).'</span><span>$'.$upsellProduct->get_price()*$value['count'].'</span></li>';
 						$customizableParametres .= get_the_title($key).' ('.$value['count'].')<br/>';
@@ -101,16 +115,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 					}
 
 
-
 				} else {
-					$variation_id = $cart_item['variation_id'];
-					$variationProduct = new WC_Product_Variation($variation_id);
+                  $variation_id = $cart_item['variation_id'];
 
-					if( $upsellsProduct ){
-						$subtotal_product =  wc_price( $variationProduct->get_price()*$quantity + $upsellSum );
-					} else {
-						$subtotal_product = WC()->cart->get_product_subtotal( $variationProduct , $quantity );
-					}
+                  $variationProduct = new WC_Product_Variation($variation_id);
+
+                  if( $upsellsProduct ){
+                    $subtotal_product =  wc_price( $variationProduct->get_price()*$quantity + $upsellSum );
+                  } else {
+                    $subtotal_product = WC()->cart->get_product_subtotal( $variationProduct , $quantity );
+                  }
+
+
 
 				}
 
@@ -118,6 +134,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				if( $upsellsProduct ){
 
 				}
+
 				// \Full subtotal  ?>
 
 				<!-- my-cart__product -->
@@ -177,35 +194,21 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 </div>
 
                             </div>
+                            <?php if($attributes) { ?>
                             <div class="options">
                                 <div class="options__title">
                                     Your Selected Options:
                                 </div>
                                 <ul>
-
-
-	                                <?php $variation = new WC_Product_Variation($variation_id);
-	                                //var_dump($variation);
-	                                ?>
-
-	                                <?php foreach($variation->get_attributes() as $name => $attr): ?>
-
-		                                <?php
-
-		                                //$name = substr($name, 10); //remove attribute_ from the key. ?>
-
-		                                <?php  echo $name.'---'.$attr; ?>
-
-	                                <?php endforeach; ?>
-
-
-
-                                    <!--<li><span>Title_product color: Blue, Бренд: Brand_1</span><span>$95</span></li>
-                                    <li><span>Title_product color: Red, Бренд: Brand_1</span><span>$97</span></li>
-                                    <li><span>Title_product color: Red, Бренд: Brand_2</span><span>$85</span></li>
-                                    <li><span>Title_product color: Yellow, Бренд: Brand_2</span><span>$100</span></li>-->
+                                    <?php foreach ($attributes as $key => $value) {
+                                        $taxonomy = substr($key, 10);
+	                                    $term = get_term_by('slug', $value, $taxonomy);
+                                        ?>
+                                    <li><span><?= get_taxonomy( $taxonomy )->label.': '.$term->name; ?></span><span></span></li>
+                                    <?php } ?>
                                 </ul>
                             </div>
+                            <?php } ?>
 
                             <?php if($customizableParametres_2){ ?>
                             <div class="options">
@@ -233,82 +236,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                     </div>
 
-                    <?php /*
-                    <div>
-
-						<!-- my-cart__product -->
-						<div class="my-cart__name">
-
-							<!-- my-cart__product -->
-							<a href="<?= $link ?>" class="my-cart__pic">
-								<img src="<?= $thumb_url ?>" width="139" height="133" alt="<?= $productTitle ?>">
-							</a>
-							<!-- my-cart__product -->
-
-							<div>
-								<h2 class="my-cart__title"><a href="<?= $link ?>"><?= $productTitle ?></a></h2>
-								<p><?= $customizableParametres ?></p>
-								<a href="<?= $link ?>" class="my-cart__edit">edit</a>
-							</div>
-
-						</div>
-						<!-- my-cart__product -->
-
-						<!-- my-cart__info -->
-						<div class="my-cart__info">
-
-							<div>
-								<div class="my-cart__current-price">
-									<?= $_product->get_price_html(); ?>
-								</div>
-
-							<div>
-
-								<!-- count-product -->
-								<div class="count-product">
-									<a class="count-product__btn count-product_del" href="#"><span>-</span></a>
-									<input type="number" class="count-product__input site__input" value="<?= $quantity ?>" min="1" value="1">
-									<a class="count-product__btn count-product_add" href="#"><span>+</span></a>
-								</div>
-								<!-- /count-product -->
-
-								<div class="my-cart__count">
-									<select name="count" id="count">
-										<?php for( $i = 1; $i<=10;$i++ ): ?>
-											<option value="<?= $i ?>"><?= $i ?></option>
-										<?php endfor; ?>
-									</select>
-								</div>
-
-							</div>
-
-								<div class="my-cart__total-price">
-
-									<span class="my-cart__total-price-caption">Total</span>
-
-									<?= $subtotal_product ?>
-
-								</div>
-
-							</div>
-
-						</div>
-						<!-- /my-cart__info -->
-
-						<!-- my-cart__remove -->
-						<a href="#" class="my-cart__remove">
-							<span></span>
-						</a>
-						<!-- /my-cart__remove -->
-
-						<!-- my-cart__loading -->
-						<div class="my-cart__loading">
-							<span class="my-cart__loading-spin"></span>
-						</div>
-						<!-- /my-cart__loading -->
-
-					</div>
- */ ?>
 
 				</div>
 				<!-- /my-cart__product -->
@@ -540,5 +467,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 </div>
 <!-- /my-cart__layout -->
-
 

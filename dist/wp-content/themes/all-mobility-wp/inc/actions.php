@@ -995,11 +995,14 @@ $categoryId = $_GET['idCategory'];
 
             $salePrice = $currentProduct->get_variation_sale_price();
 
+
+
             $available_variations = $currentProduct->get_available_variations();
             if( $product_id == 2364 ){
                 $sdf = json_encode($available_variations);
 
             }
+
             if(!empty($available_variations)):
             $var = array();
 
@@ -1023,8 +1026,14 @@ $categoryId = $_GET['idCategory'];
                 }
 
             }
+
             $regularPrice = substr( $old_price, 0, -1 );
             $salePrice = substr( $new_price, 0, -1 );
+           if( $salePrice !== "") {
+	           $salePrice = $regularPrice;
+	           $regularPrice ='';
+           }
+
             endif;
 
         } elseif( $currentProduct->is_type('simple') ) {
@@ -1032,6 +1041,7 @@ $categoryId = $_GET['idCategory'];
             $regularPrice = $currentProduct->get_regular_price();
 
             ($regularPrice) ? $regularPrice = $regularPrice : $regularPrice = '' ;
+
 
             $salePrice = $currentProduct->get_sale_price();
 
@@ -1121,6 +1131,7 @@ $categoryId = $_GET['idCategory'];
             $specification = '""';
         }
 
+
         $products .= ' {
             "name": "'.$categoryId.'",
             "featured": "'.$featured.'",
@@ -1191,8 +1202,32 @@ add_action('woocommerce_add_to_cart', 'custome_add_to_cart',2);
 function custome_add_to_cart() {
 
     global $woocommerce;
+	global $mainProduct;
 
     $mainProduct = $_POST['add-to-cart'];
+	$variable = wc_get_product( $mainProduct )->is_type( 'variable');
+	if($variable) {
+	    $mainProduct = $_POST['variation_id'];
+		foreach ($_POST as $key => $value) {
+          if(strpos($key, 'attribute_') === 0) {
+            $attributes[$key] = $value;
+          }
+        }
+    }
+
+	$newUpsells = WC()->session->get('Upsells');
+
+	function filter_upsells($var) {
+	    var_dump($var);
+		//return($var['id'] === $mainProduct);
+	}
+
+	if($newUpsells && $variable) {
+		array_filter($newUpsells, "filter_upsells");
+	    /*foreach ($newUpsells['id'][$mainProduct]){
+            foreach ()
+        }*/
+    }
 
     if( WC()->session->get('upsellFlag') == 0 ):
 
@@ -1210,6 +1245,7 @@ function custome_add_to_cart() {
 
     } while ( $_POST["upsells_$i"] != null );
 
+
     foreach ($allProducts as $product_id){
 
         if( $product_id == 0 ){
@@ -1218,7 +1254,7 @@ function custome_add_to_cart() {
 
         WC()->cart->add_to_cart( $product_id );
 
-        if( $newUpsells = WC()->session->get($mainProduct) ){
+        if( $newUpsells ){
 
             if( isset( $newUpsells[$product_id]) ){
                 $newUpsells[$product_id]['count']++;
@@ -1232,7 +1268,7 @@ function custome_add_to_cart() {
         }
 
 
-        WC()->session->set($mainProduct,$newUpsells);
+        WC()->session->set('Upsells',$newUpsells);
 
     }
         WC()->session->set('needUpdate',1);
@@ -1667,8 +1703,13 @@ function  countHidenUpsells(){
     foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 
         $product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
+	    $_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
+        if($_product->post_type ==='product_variation') {
+	        $allUpsellsProducts[] = WC()->session->get($cart_item['variation_id']);
+        } else {
+	        $allUpsellsProducts[] = WC()->session->get($product_id);
+        }
 
-        $allUpsellsProducts[] = WC()->session->get($product_id);
 
     }
 

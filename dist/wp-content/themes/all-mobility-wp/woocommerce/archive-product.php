@@ -34,7 +34,10 @@ get_header( 'shop' ); ?>
 
 		<?php
 		if( is_tax('product_cat') ){
-			$class_padding=' site__content_no-padding';
+          $class_padding = ' site__content_no-padding';
+          if(get_queried_object()->slug === 'brands') {
+            $class_padding = ' site__content-brands';
+          }
 		} else {
 			$class_padding='';
 		}
@@ -99,7 +102,13 @@ get_header( 'shop' ); ?>
 		</div>
 		<!-- /why-us -->
 
-		<?php get_template_part('content/content','product-category') ?>
+		<?php if(get_queried_object()->slug === 'brands') {
+          get_template_part('content/content','product-category-brands');
+        } else {
+          get_template_part('content/content','product-category');
+        }
+        ?>
+
 
 	</div>
 

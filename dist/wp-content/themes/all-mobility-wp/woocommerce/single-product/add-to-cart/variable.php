@@ -103,7 +103,6 @@ $upselsIDs = $product->get_upsell_ids(); ?>
 
                     $term = get_term( $key, 'upsell_category' );
 
-
                     echo '<select name="upsells_'.$j.'">
 							<option value="0">'.$term->name.'</option>';
 
