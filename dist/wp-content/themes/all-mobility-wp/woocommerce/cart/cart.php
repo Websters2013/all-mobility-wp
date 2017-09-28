@@ -50,20 +50,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$link = get_permalink($product_id);
 				$parent = $cart_item['data']->post->post_parent;
 				$attributes = $cart_item['variation'];
-				$flag_variation = 1;
+				$flag_variation = 0;
+                $upsellSum = 0;
 
 
-				if($inUpsells = $allUpsells[$cart_item['variation_id']]) {
+				if($_product->post_type ==='product_variation') {
+                    $inUpsells = $allUpsells[$cart_item['variation_id']];
 	                $quantity = $cart_item['quantity'] - $inUpsells;
-					$flag_variation = 1;
+                    $flag_variation = 1;
                 } elseif ( $inUpsells =  $allUpsells[$product_id] ){
 					$quantity = $cart_item['quantity'] - $inUpsells;
 
 				} else {
 					$quantity = $cart_item['quantity'];
-
 				}
-
 				if( !$quantity ){
 					continue;
 				}
@@ -74,30 +74,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 				$customizableParametres_2 = '';
 
 				if($flag_variation) {
-					$upsellsProduct = WC()->session->get($cart_item['variation_id']);
+                  $mainProduct = $cart_item['variation_id'];
                 } else {
-					$upsellsProduct = WC()->session->get($product_id);
+                  $mainProduct = $product_id;
+
                 }
+              $poducts_in_list = array();
+              $newUpsells = WC()->session->get('Upsells');
 
+              foreach ($newUpsells as $key => $value) {
+                if(array_key_exists($mainProduct,$value) && !in_array($key,$poducts_in_list)) {
+                  $poducts_in_list[] = $key;
 
-				if( $upsellsProduct ){
+	                if(!empty($newUpsells[$key][$mainProduct]['product'])):
 
-					if(!empty($upsellsProduct)):
+		                foreach ($newUpsells[$key][$mainProduct]['product'] as $key_2 => $value_2){
 
-					foreach ($upsellsProduct as $key => $value){
+			                $upsellProduct = wc_get_product($key_2);
 
-						$upsellProduct = wc_get_product($key);
+			                $upsellSum +=  $upsellProduct->get_price() * $value_2;
 
-						$upsellSum +=  $upsellProduct->get_price()*$value['count'];
+			                $customizableParametres_2 .= '<li><span>'.get_the_title($key_2) .' ('.$value_2.')</span><span>$'.$upsellProduct->get_price()*$value_2.'</span></li>';
+			                //$customizableParametres .= get_the_title($key_2).' ('.$value_2.')<br/>';
 
-						$customizableParametres_2 .= '<li><span>'.get_the_title($key).'</span><span>$'.$upsellProduct->get_price()*$value['count'].'</span></li>';
-						$customizableParametres .= get_the_title($key).' ('.$value['count'].')<br/>';
-					}
+		                }
 
-
-					endif;
-
-				}
+                endif;
+                }
+              }
 
 				// \Upsells products
 
@@ -106,7 +110,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				if( !$cart_item['variation_id'] ){
 					$variation_id = 0;
 
-					if( $upsellsProduct ){
+					if( $poducts_in_list ){
 						$subtotal_product = wc_price(  $_product->get_price()*$quantity + $upsellSum );
 					} else {
 						$subtotal_product = WC()->cart->get_product_subtotal( $_product , $quantity );
@@ -118,7 +122,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
                   $variationProduct = new WC_Product_Variation($variation_id);
 
-                  if( $upsellsProduct ){
+                  if( $poducts_in_list ){
                     $subtotal_product =  wc_price( $variationProduct->get_price()*$quantity + $upsellSum );
                   } else {
                     $subtotal_product = WC()->cart->get_product_subtotal( $variationProduct , $quantity );
@@ -128,12 +132,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				}
 
-				//Full subtotal
-				if( $upsellsProduct ){
-
-				}
-
-				// \Full subtotal  ?>
+				?>
 
 				<!-- my-cart__product -->
 				<div class="my-cart__product"  data-variation-id="<?= $variation_id ?>"  data-product-id="<?= $product_id ?>" data-product-key="<?= $cart_item_key ?>">

@@ -1728,54 +1728,39 @@ function getUnitByKey( $key ){
 
 function  countHidenUpsells(){
 
-    $allUpsellsProducts = array();
+    //$allUpsellsProducts = array();
+	$poducts_in_list = array();
+	$newUpsells = WC()->session->get('Upsells');
 
     foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 
         $product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
 	    $_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
-	    $poducts_in_list = array();
 	    if($_product->post_type ==='product_variation') {
 	        $mainProduct = $cart_item['variation_id'];
-	        //$mainProduct = WC()->session->get($cart_item['variation_id']);
-	        //$allUpsellsProducts[] = WC()->session->get($cart_item['variation_id']);
         } else {
 	        $mainProduct = $product_id;
-	        $allUpsellsProducts[] = WC()->session->get($product_id);
         }
-	    $newUpsells = WC()->session->get('Upsells');
+
 	    foreach ($newUpsells as $key => $value) {
 		    if(array_key_exists($mainProduct,$value) && !in_array($key,$poducts_in_list)) {
-			    $poducts_in_list[] = $key;
+			    $poducts_in_list[$key] = $mainProduct;
 		    }
 	    }
-
     }
-
     $mainRepeat = array();
 
-    foreach ( $allUpsellsProducts as $eachMainUpsells ){
-
-        if( is_array($eachMainUpsells) ):
-
-        foreach (  $eachMainUpsells as  $key => $eachMainUpsell ){
-
-            if( $mainRepeat[$key] ){
-
-                $mainRepeat[$key] += $eachMainUpsell['count'];
-
+    foreach ( $poducts_in_list as $key => $value ){
+        if( is_array( $newUpsells[$key][$value]['product']) ):
+        foreach (  $newUpsells[$key][$value]['product'] as  $key_2 => $value_2 ){
+            if( $mainRepeat[$key_2] ){
+                $mainRepeat[$key_2] += $value_2;
             } else {
-
-                $mainRepeat[$key] = $eachMainUpsell['count'];
-
+                $mainRepeat[$key_2] = $value_2;
             }
-
         }
-
         endif;
     }
-
-
     return $mainRepeat;
 
 }

@@ -6,6 +6,7 @@ function cart_quantity_changes(){
     $idProduct = $_GET['id'];
     $keyProduct  = $_GET['key'];
     $variation_id = $_GET['variation'];
+		$poducts_in_list = array();
 
     if( $variation_id ){
         $_product = new WC_Product_Variation($variation_id);
@@ -30,11 +31,35 @@ function cart_quantity_changes(){
     $cartPrice = json_encode( WC()->cart->get_cart_total() );
 
 
-    $upsellsProducts = WC()->session->get($idProduct);
+    $upsellsProducts = WC()->session->get('Upsells');
+		$upsellSum = 0;
 
-    $upsellSum = 0;
 
-    if( $upsellsProducts ){
+	foreach ($upsellsProducts as $key => $value) {
+		if(array_key_exists($idProduct,$value) && !in_array($key,$poducts_in_list)) {
+			$poducts_in_list[] = $key;
+
+			if(!empty($newUpsells[$key][$idProduct]['product'])) {
+
+				foreach ($newUpsells[$key][$idProduct]['product'] as $key_2 => $value_2){
+
+					$upsellProduct = wc_get_product($key_2);
+
+					$upsellSum +=  $upsellProduct->get_price() * $value_2;
+				}
+
+				$product_price = $_product->get_price()*$new_quantity + $upsellSum;
+
+				$subtotal_product = json_encode( wc_price($product_price) );
+
+			}
+		}
+	}
+
+
+
+
+   /* if( $upsellsProducts ){
 
         foreach ($upsellsProducts as $key => $value){
 
@@ -52,7 +77,7 @@ function cart_quantity_changes(){
 
         $subtotal_product = json_encode( WC()->cart->get_product_subtotal( $_product , $new_quantity ) );
         
-    }
+    }*/
     
     $count_products = json_encode( WC()->cart->get_cart_contents_count() );
 
