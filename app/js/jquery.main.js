@@ -37,6 +37,12 @@
 
         } );
 
+        $('.product__items').each(function () {
+
+            new ChangePrice( $(this) );
+
+        } );
+
     } );
 
     var SubMenu = function (obj) {
@@ -179,6 +185,7 @@
                             //if( $('.featured-product__loading').hasClass('visible') ) {
 
                                 timeout = setTimeout( function() {
+                                    console.log(data);
 
                                     _obj.find('.featured-product').find('.featured-product__title').text(data.name);
                                     _obj.find('.featured-product').find('.featured-product__pic img').attr('src', data.src);
@@ -641,4 +648,56 @@
         _init();
     };
 
+    var ChangePrice = function (obj) {
+
+        Number.prototype.formatMoney = function(c, d, t){
+            var n = this,
+                c = isNaN(c = Math.abs(c)) ? 2 : c,
+                d = d == undefined ? "." : d,
+                t = t == undefined ? "," : t,
+                s = n < 0 ? "-" : "",
+                i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+                j = (j = i.length) > 3 ? j % 3 : 0;
+            return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+        };
+
+        $('.variations_form').on('change', function () {
+           var variation = $('.variations').find('select'),
+               counter = 0;
+
+
+           variation.each(function ($value) {
+               if($( this ).val()) {
+                   counter++;
+               }
+           });
+           if(counter === variation.length) {
+               var price = $('.price').text(),
+                   symbol = $('.price>span>span').text();
+
+               price = parseFloat(price.slice(1));
+
+               $upsells = $('.variations_form>.websters-select').find('select');
+               $upsells.each(function () {
+                   var select = $( this ).val();
+
+                   if(select > 0) {
+                       $( this ).find('option').each(function () {
+                           if($(this).val() === select) {
+                               price += $(this).data('price');
+                           }
+                       });
+                   }
+               });
+               $('.price').css('display', 'none');
+               $('.featured-product__price>strong').html('<span>'+symbol+'</span>'+price.formatMoney(2, '.', ','));
+
+           }
+
+        });
+
+    }
+
+
 } )();
+
