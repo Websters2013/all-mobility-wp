@@ -672,7 +672,7 @@
                }
            });
            if(counter === variation.length) {
-               var price = $('.price').text(),
+               var price = $('.price>span').text(),
                    symbol = $('.price>span>span').text();
 
                price = parseFloat(price.slice(1));

@@ -1202,29 +1202,32 @@ add_action('woocommerce_add_to_cart', 'custome_add_to_cart',2);
 function custome_add_to_cart() {
 
     global $woocommerce;
-
+	$newUpsells = array();
     $mainProduct = $_POST['add-to-cart'];
 	$newUpsells = WC()->session->get('Upsells');
-	$attributes = array();
 
-	var_dump();
-	$variable = wc_get_product( $mainProduct )->is_type( 'variable');
-	if($variable) {
-      $mainProduct = $_POST['variation_id'];
-      foreach ($_POST as $key => $value) {
-        if(strpos($key, 'attribute_') === 0) {
-          $attributes[$key] = $value;
-        }
-      }
-    }
 
     if( WC()->session->get('upsellFlag') == 0 ):
 
-        WC()->session->set('upsellFlag',1);
+      $attributes = array();
+      $poducts_in_list = array();
+      $variable = wc_get_product( $mainProduct )->is_type( 'variable');
+      if($variable) {
+        $mainProduct = $_POST['variation_id'];
+        foreach ($_POST as $key => $value) {
+          if(strpos($key, 'attribute_') === 0) {
+            $attributes[$key] = $value;
+          }
+        }
+      }
 
-         $i = 0;
 
-        $upSellsArray = array();
+
+      WC()->session->set('upsellFlag',1);
+
+      $i = 0;
+
+      $upSellsArray = array();
 
     do {
 
@@ -1235,63 +1238,74 @@ function custome_add_to_cart() {
     } while ( $_POST["upsells_$i"] != null );
 
 
-
     foreach ($allProducts as $product_id){
 
         if( $product_id == 0 ){
             continue;
         }
-
-	    /*if($newUpsells && $variable) {
-
-		    foreach ($newUpsells as $row => $value){
-			    if(strval  ($mainProduct) === strval ($row)) {
-			        $counter = 0;
-				    foreach ($value['attributs'] as $key => $value_2) {
-						if($attributes[$key] === $value_2) {
-						    $counter++;
-                        }
-				    }
-					//
-				    if($counter === count($value['attributs'])) {
-				        //var_dump(isset( $row['product'][$product_id]), $row['product']);
-                      if( !empty( $row['product'][$product_id]) ){
-	                      $value['product'][$product_id]['count']++;
-                      } else {
-                          //var_dump( 1);
-	                      $value['product'][] = array($product_id =>array('count' =>5));
-                      }
-                    }
-							    //var_dump($value['product']);//var_dump($newUpsells);//
-			    }
-
+	    foreach ($newUpsells as $key => $value) {
+		    if(array_key_exists($mainProduct,$value) && !in_array($key,$poducts_in_list)) {
+			    $poducts_in_list[] = $key;
 		    }
+	    }
 
+	    if($newUpsells && $variable && !empty($poducts_in_list)) {
+		    foreach ($poducts_in_list as $row => $value){
+              $counter = 0;
+              foreach ($newUpsells[$value][$mainProduct]['attributs'] as $key => $value_2) {
+                if($attributes[$key] === $value_2) {
+                  $counter++;
+                }
+              }
+              if($counter === count($newUpsells[$value][$mainProduct]['attributs'])) {
+                if( isset($newUpsells[$value][$mainProduct]['product'][$product_id]) ){
+                  $newUpsells[$value][$mainProduct]['product'][$product_id]++;
+                } else {
+                  $newUpsells[$value][$mainProduct]['product'][$product_id]= 1;
+                      }
+              } else {
+	              $newUpsells[] = array(
+		              $mainProduct => array(
+			              'product' => array(
+				              $product_id => 1
+			              ),
+			              'attributs' => $attributes
+		              )
+	              );
+              }
+		    }
 	    } elseif ($variable) {
-			    $newUpsells[$mainProduct]['product'] = array($product_id =>array('count' =>1));
-			    $newUpsells[$mainProduct]['attributs'] = $attributes;
+          $newUpsells[] = array(
+            $mainProduct => array(
+              'product' => array(
+                $product_id => 1
+              ),
+              'attributs' => $attributes
+            )
+          );
         } elseif ( $newUpsells ){
 
-            if( isset( $newUpsells[$product_id]) ){
-                $newUpsells[$product_id]['count']++;
+            if( isset( $newUpsells[$poducts_in_list[0]][$mainProduct]['product'][$product_id]) ){
+	            $newUpsells[$poducts_in_list[0]][$mainProduct]['product'][$product_id]++;
             } else {
-                $newUpsells[$product_id]['count'] = 1;
+                $newUpsells[] = array($mainProduct => array('product' => array($product_id => 1)));
             }
 
         } else {
-            $newUpsells = array();
-            $newUpsells[$product_id]['count'] = 1;
-        }*/
+            //$newUpsells = array();
+            $newUpsells[] = array($mainProduct => array('product' => array($product_id => 1)));
+        }
 	    WC()->cart->add_to_cart( $product_id );
-    }
 	    WC()->session->set('Upsells',$newUpsells);
+    }
+
         WC()->session->set('needUpdate',1);
 
         WC()->session->set('upsellFlag',0);
 
 
-        //$newUpsells = WC()->session->get('Upsells');
-
+	    //var_dump($newUpsells = WC()->session->get('Upsells'));
+        //=
 
     endif;
 
