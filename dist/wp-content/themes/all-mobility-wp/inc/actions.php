@@ -1202,31 +1202,20 @@ add_action('woocommerce_add_to_cart', 'custome_add_to_cart',2);
 function custome_add_to_cart() {
 
     global $woocommerce;
-	global $mainProduct;
 
     $mainProduct = $_POST['add-to-cart'];
+	$newUpsells = WC()->session->get('Upsells');
+	$attributes = array();
+
+	var_dump();
 	$variable = wc_get_product( $mainProduct )->is_type( 'variable');
 	if($variable) {
-	    $mainProduct = $_POST['variation_id'];
-		foreach ($_POST as $key => $value) {
-          if(strpos($key, 'attribute_') === 0) {
-            $attributes[$key] = $value;
-          }
+      $mainProduct = $_POST['variation_id'];
+      foreach ($_POST as $key => $value) {
+        if(strpos($key, 'attribute_') === 0) {
+          $attributes[$key] = $value;
         }
-    }
-
-	$newUpsells = WC()->session->get('Upsells');
-
-	function filter_upsells($var) {
-	    var_dump($var);
-		//return($var['id'] === $mainProduct);
-	}
-
-	if($newUpsells && $variable) {
-		array_filter($newUpsells, "filter_upsells");
-	    /*foreach ($newUpsells['id'][$mainProduct]){
-            foreach ()
-        }*/
+      }
     }
 
     if( WC()->session->get('upsellFlag') == 0 ):
@@ -1246,15 +1235,42 @@ function custome_add_to_cart() {
     } while ( $_POST["upsells_$i"] != null );
 
 
+
     foreach ($allProducts as $product_id){
 
         if( $product_id == 0 ){
             continue;
         }
 
-        WC()->cart->add_to_cart( $product_id );
+	    /*if($newUpsells && $variable) {
 
-        if( $newUpsells ){
+		    foreach ($newUpsells as $row => $value){
+			    if(strval  ($mainProduct) === strval ($row)) {
+			        $counter = 0;
+				    foreach ($value['attributs'] as $key => $value_2) {
+						if($attributes[$key] === $value_2) {
+						    $counter++;
+                        }
+				    }
+					//
+				    if($counter === count($value['attributs'])) {
+				        //var_dump(isset( $row['product'][$product_id]), $row['product']);
+                      if( !empty( $row['product'][$product_id]) ){
+	                      $value['product'][$product_id]['count']++;
+                      } else {
+                          //var_dump( 1);
+	                      $value['product'][] = array($product_id =>array('count' =>5));
+                      }
+                    }
+							    //var_dump($value['product']);//var_dump($newUpsells);//
+			    }
+
+		    }
+
+	    } elseif ($variable) {
+			    $newUpsells[$mainProduct]['product'] = array($product_id =>array('count' =>1));
+			    $newUpsells[$mainProduct]['attributs'] = $attributes;
+        } elseif ( $newUpsells ){
 
             if( isset( $newUpsells[$product_id]) ){
                 $newUpsells[$product_id]['count']++;
@@ -1265,18 +1281,18 @@ function custome_add_to_cart() {
         } else {
             $newUpsells = array();
             $newUpsells[$product_id]['count'] = 1;
-        }
-
-
-        WC()->session->set('Upsells',$newUpsells);
-
+        }*/
+	    WC()->cart->add_to_cart( $product_id );
     }
+	    WC()->session->set('Upsells',$newUpsells);
         WC()->session->set('needUpdate',1);
 
         WC()->session->set('upsellFlag',0);
 
-        $newUpsells = WC()->session->get($mainProduct);
-      
+
+        //$newUpsells = WC()->session->get('Upsells');
+
+
     endif;
 
 }

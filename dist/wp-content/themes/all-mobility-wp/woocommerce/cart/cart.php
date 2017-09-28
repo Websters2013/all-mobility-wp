@@ -21,8 +21,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 } ?>
 
-
-
 <!-- my-cart__layout -->
 <div class="my-cart__layout">
 
