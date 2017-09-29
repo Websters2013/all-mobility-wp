@@ -202,9 +202,9 @@ function remove_cart_item(){
 
 
 		if($upsellsProducts[$poducts_in_list[0]]) {
-			unset($upsellsProducts[$poducts_in_list[0]][$mainProduct]['product']);
+			unset($upsellsProducts[$poducts_in_list[0]]);
 		}
-		WC()->session->set( 'Upsells', $upsellsProducts);
+		WC()->session->set( 'Upsells', array_values ( $upsellsProducts));
 		//WC()->session->set( $idProduct, array() );
 
 		$cartTotal  = json_encode( WC()->cart->get_cart_total() );

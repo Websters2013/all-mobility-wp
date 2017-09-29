@@ -1253,33 +1253,33 @@ function custome_add_to_cart() {
             $counter_2 = 0;
 		    foreach ($poducts_in_list as $row => $value){
               $counter = 0; $counter_2++;
+              $count_attr_apsells = count($newUpsells[$value][$mainProduct]['attributs']);
               foreach ($newUpsells[$value][$mainProduct]['attributs'] as $key => $value_2) {
                 if(($attributes[$key] === $value_2) && $attributes  ) {
                   $counter++;
                 }
               }
 
-              if($counter === count($newUpsells[$value][$mainProduct]['attributs'])) {
+              if($counter === $count_attr_apsells) {
                 if( isset($newUpsells[$value][$mainProduct]['product'][$product_id]) ){
                   $newUpsells[$value][$mainProduct]['product'][$product_id]++;
+	                var_dump('COUNT'.$counter_2.'<br>');
                 } else {
                   $newUpsells[$value][$mainProduct]['product'][$product_id]= 1;
-	                var_dump('GOOD!!!!!!!!!!!'.$counter_2);
-	                continue;
-                      }
-              } else {
-                if($counter_2 === count($poducts_in_list)) {
-                  var_dump('SYKA!!!!!!!!!!!'.$counter_2);
-                  $newUpsells[] = array(
-                    $mainProduct => array(
-                      'product' => array($product_id => 1),
-                      'attributs' => $attributes
-                    )
-                  );
+	                var_dump('PRODUCT'.$counter_2.'<br>');
                 }
+              } elseif($counter_2 === count($poducts_in_list) && ($counter !== $count_attr_apsells)) {
+                var_dump('NEW VARIABLE'.$counter_2.'<br>');
+                $newUpsells[] = array(
+                  $mainProduct => array(
+                    'product' => array($product_id => 1),
+                    'attributs' => $attributes
+                    )
+                );
               }
 		    }
 	    } elseif ($variable) {
+			    var_dump('NEW<br>');
           $newUpsells[] = array(
             $mainProduct => array(
               'product' => array(
@@ -1297,7 +1297,7 @@ function custome_add_to_cart() {
             }
 
         } else {
-            //$newUpsells = array();
+            $newUpsells = array();
             $newUpsells[] = array($mainProduct => array('product' => array($product_id => 1)));
         }
 	    WC()->cart->add_to_cart( $product_id );
