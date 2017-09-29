@@ -15,17 +15,25 @@ function cart_quantity_changes(){
 		$mainProduct = $idProduct;
 	}
 
-	$allUpsells = countHidenUpsells();
+	$upsellsProducts = WC()->session->get('Upsells');
+
+	$upsellSum = 0;
+
+	$poducts_in_list = array();
+	$test = '';
 
 	foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+
 		if($cart_item_key === $keyProduct) {
-			$poducts_in_list = array();
+
 			$attributes = $cart_item['variation'];
-			foreach ($allUpsells as $key => $value) {
-				if ( array_key_exists( $mainProduct, $value ) && ! in_array( $key, $poducts_in_list ) ) {
+			foreach ($upsellsProducts as $key => $value) {
+
+				if ( array_key_exists( $mainProduct, $value ) && !in_array( $key, $poducts_in_list ) ) {
+
 					if($_product->post_type === 'product_variation') {
 						$counter = 0;
-						foreach ($allUpsells[$key][$mainProduct]['attributs'] as $key_2 => $value_2) {
+						foreach ($upsellsProducts[$key][$mainProduct]['attributs'] as $key_2 => $value_2) {
 							if(($attributes[$key_2] === $value_2) && $attributes  ) {
 								$counter++;
 							}
@@ -33,16 +41,14 @@ function cart_quantity_changes(){
 						if($counter < count($attributes)) {
 							continue;
 						}
-
 					}
 					$poducts_in_list[] = $key;
 				}
 			}
-
-
-
 		}
 	}
+
+	$allUpsells = countHidenUpsells();
 
 	$hiddenQuanityItems = $allUpsells[$idProduct];
 
@@ -58,18 +64,13 @@ function cart_quantity_changes(){
 
 	$cartPrice = json_encode( WC()->cart->get_cart_total() );
 
+	if( !empty($upsellsProducts[$poducts_in_list[0]][$mainProduct]['product']) ){
 
-	$upsellsProducts = WC()->session->get($idProduct);
-
-	$upsellSum = 0;
-
-	if( $upsellsProducts ){
-
-		foreach ($upsellsProducts as $key => $value){
+		foreach ($upsellsProducts[$poducts_in_list[0]][$mainProduct]['product'] as $key => $value){
 
 			$upsellProduct = wc_get_product($key);
 
-			$upsellSum +=  $upsellProduct->get_price()*$value['count'];
+			$upsellSum +=  $upsellProduct->get_price()*$value;
 
 		}
 
@@ -83,6 +84,7 @@ function cart_quantity_changes(){
 
 	}
 
+
 	$count_products = json_encode( WC()->cart->get_cart_contents_count() );
 
 	$json_data = '{
@@ -92,7 +94,8 @@ function cart_quantity_changes(){
          "taxes": '.$taxes.',
         "cartCountPrice": '.$cartPrice.',
         "discount": '.$discount.',
-        "cartCountProducts" : '.$count_products.'
+        "cartCountProducts" : '.$count_products.',
+        "productSubtotal" : '.json_encode( wc_price($_product->get_price()*$new_quantity)).'
     }';
 
 	echo $json_data;

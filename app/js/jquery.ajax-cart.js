@@ -316,14 +316,15 @@
                         action: 'cart_quantity_changes',
                         id: elem.attr('data-product-id'),
                         key: elem.attr('data-product-key'),
+                        variation: elem.attr('data-variation-id'),
                         countProduct: value,
                         flag: 'changeCount'
                     },
                     dataType: 'json',
                     type: "get",
                     success: function (m) {
-
-                        elem.find('.my-cart__total-price').html( m.productTotal );
+                        elem.find('.my-cart__total-price').html( m.productSubtotal );
+                        elem.find('.my-cart__price-total>span:last-child').html( m.productTotal );
                         _subTotalPrice.find('dd').html( m.subtotal );
                         _totalPrice.find('dd').html( m.total );
                         _cart.find('.cart__price').html(m.cartCountPrice);
@@ -338,6 +339,7 @@
 
                     },
                     error: function (XMLHttpRequest) {
+                        console.log(XMLHttpRequest);
                         if ( XMLHttpRequest.statusText != "abort" ) {
                             console.log("Error");
                         }
