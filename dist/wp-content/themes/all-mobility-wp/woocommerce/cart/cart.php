@@ -54,7 +54,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 $upsellSum = 0;
 
 
-				if($_product->post_type ==='product_variation') {
+				if($_product->post_type === 'product_variation') {
                     $inUpsells = $allUpsells[$cart_item['variation_id']];
 	                $quantity = $cart_item['quantity'] - $inUpsells;
                     $flag_variation = 1;
@@ -70,7 +70,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 				//Upsells products
-				$customizableParametres = '';
+				//$customizableParametres = '';
 				$customizableParametres_2 = '';
 
 				if($flag_variation) {
@@ -85,6 +85,27 @@ if ( ! defined( 'ABSPATH' ) ) {
               foreach ($newUpsells as $key => $value) {
                 if(array_key_exists($mainProduct,$value) && !in_array($key,$poducts_in_list)) {
                   $poducts_in_list[] = $key;
+
+
+	                if($_product->post_type === 'product_variation') {
+		                //var_dump($newUpsells[$key][$mainProduct]['attributs'] );
+		                $counter = 0;
+		                foreach ($newUpsells[$key][$mainProduct]['attributs'] as $key_2 => $value_2) {
+			                //var_dump($attributes[$key_2].'--'.$value_2.'<br>');
+			                if(($attributes[$key_2] === $value_2) && $attributes  ) {
+				                $counter++;
+			                }
+		                }
+		                //var_dump($counter < count($attributes));
+		                if($counter < count($attributes)) {
+			                continue;
+		                }
+
+	                }
+
+
+
+
 
 	                if(!empty($newUpsells[$key][$mainProduct]['product'])):
 

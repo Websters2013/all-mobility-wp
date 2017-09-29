@@ -1250,13 +1250,15 @@ function custome_add_to_cart() {
 	    }
 
 	    if($newUpsells && $variable && !empty($poducts_in_list)) {
+            $counter_2 = 0;
 		    foreach ($poducts_in_list as $row => $value){
               $counter = 0;
               foreach ($newUpsells[$value][$mainProduct]['attributs'] as $key => $value_2) {
-                if($attributes[$key] === $value_2) {
+                if(($attributes[$key] === $value_2) && $attributes  ) {
                   $counter++;
                 }
               }
+              //var_dump($counter === count($newUpsells[$value][$mainProduct]['attributs']));
               if($counter === count($newUpsells[$value][$mainProduct]['attributs'])) {
                 if( isset($newUpsells[$value][$mainProduct]['product'][$product_id]) ){
                   $newUpsells[$value][$mainProduct]['product'][$product_id]++;
@@ -1264,14 +1266,18 @@ function custome_add_to_cart() {
                   $newUpsells[$value][$mainProduct]['product'][$product_id]= 1;
                       }
               } else {
-	              $newUpsells[] = array(
-		              $mainProduct => array(
-			              'product' => array(
-				              $product_id => 1
-			              ),
-			              'attributs' => $attributes
-		              )
-	              );
+                if($counter_2 < count($poducts_in_list)) {
+                  continue;
+                } else {
+                  $newUpsells[] = array(
+                    $mainProduct => array(
+                      'product' => array(
+                        $product_id => 1
+                      ),
+                      'attributs' => $attributes
+                    )
+                  );
+                }
               }
 		    }
 	    } elseif ($variable) {
@@ -1728,37 +1734,59 @@ function getUnitByKey( $key ){
 
 function  countHidenUpsells(){
 
-    //$allUpsellsProducts = array();
 	$poducts_in_list = array();
 	$newUpsells = WC()->session->get('Upsells');
+	//var_dump($newUpsells);
 
     foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 
         $product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
 	    $_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
-	    if($_product->post_type ==='product_variation') {
+	    if($_product->post_type === 'product_variation') {
 	        $mainProduct = $cart_item['variation_id'];
+			$attributes = $cart_item['variation'];
+
         } else {
 	        $mainProduct = $product_id;
         }
 
+
+
 	    foreach ($newUpsells as $key => $value) {
-		    if(array_key_exists($mainProduct,$value) && !in_array($key,$poducts_in_list)) {
-			    $poducts_in_list[$key] = $mainProduct;
+		    if(array_key_exists($mainProduct,$value) && !array_key_exists($key,$poducts_in_list)) {
+              if($_product->post_type === 'product_variation') {
+	              //var_dump($newUpsells[$key][$mainProduct]['attributs'] );
+                $counter = 0;
+                foreach ($newUpsells[$key][$mainProduct]['attributs'] as $key_2 => $value_2) {
+	                //var_dump($attributes[$key_2].'--'.$value_2.'<br>');
+                  if(($attributes[$key_2] === $value_2) && $attributes  ) {
+                    $counter++;
+                  }
+                }
+                //var_dump($counter < count($attributes));
+                if($counter < count($attributes)) {
+                  continue;
+                }
+
+              }
+              $poducts_in_list[$key] = $mainProduct;
+
 		    }
 	    }
+	    //var_dump($poducts_in_list);
     }
     $mainRepeat = array();
 
     foreach ( $poducts_in_list as $key => $value ){
         if( is_array( $newUpsells[$key][$value]['product']) ):
-        foreach (  $newUpsells[$key][$value]['product'] as  $key_2 => $value_2 ){
+
+          foreach (  $newUpsells[$key][$value]['product'] as  $key_2 => $value_2 ){
             if( $mainRepeat[$key_2] ){
                 $mainRepeat[$key_2] += $value_2;
             } else {
                 $mainRepeat[$key_2] = $value_2;
             }
-        }
+          }
         endif;
     }
     return $mainRepeat;
