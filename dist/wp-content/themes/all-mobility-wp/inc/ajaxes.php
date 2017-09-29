@@ -9,11 +9,40 @@ function cart_quantity_changes(){
 
 	if( $variation_id ){
 		$_product = new WC_Product_Variation($variation_id);
+		$mainProduct = $variation_id;
 	} else {
-		$_product = wc_get_product( $idProduct );;
+		$_product = wc_get_product( $idProduct );
+		$mainProduct = $idProduct;
 	}
 
 	$allUpsells = countHidenUpsells();
+
+	foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+		if($cart_item_key === $keyProduct) {
+			$poducts_in_list = array();
+			$attributes = $cart_item['variation'];
+			foreach ($allUpsells as $key => $value) {
+				if ( array_key_exists( $mainProduct, $value ) && ! in_array( $key, $poducts_in_list ) ) {
+					if($_product->post_type === 'product_variation') {
+						$counter = 0;
+						foreach ($allUpsells[$key][$mainProduct]['attributs'] as $key_2 => $value_2) {
+							if(($attributes[$key_2] === $value_2) && $attributes  ) {
+								$counter++;
+							}
+						}
+						if($counter < count($attributes)) {
+							continue;
+						}
+
+					}
+					$poducts_in_list[] = $key;
+				}
+			}
+
+
+
+		}
+	}
 
 	$hiddenQuanityItems = $allUpsells[$idProduct];
 
