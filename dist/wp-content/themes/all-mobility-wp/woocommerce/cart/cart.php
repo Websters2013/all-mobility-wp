@@ -39,7 +39,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php
 
 			$allUpsells = countHidenUpsells();
-			var_dump($allUpsells);
+			//var_dump($allUpsells);
+			var_dump(WC()->session->get('Upsells'));
 
 			foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 

@@ -1252,7 +1252,7 @@ function custome_add_to_cart() {
 	    if($newUpsells && $variable && !empty($poducts_in_list)) {
             $counter_2 = 0;
 		    foreach ($poducts_in_list as $row => $value){
-              $counter = 0;
+              $counter = 0; $counter_2++;
               foreach ($newUpsells[$value][$mainProduct]['attributs'] as $key => $value_2) {
                 if(($attributes[$key] === $value_2) && $attributes  ) {
                   $counter++;

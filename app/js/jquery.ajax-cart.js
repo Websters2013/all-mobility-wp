@@ -261,6 +261,7 @@
                         key: elem.attr('data-product-key'),
                         id: elem.attr('data-product-id'),
                         upsals: elem.attr('data-upsals'),
+                        variation: elem.attr('data-variation-id'),
                         value: elem.find('.count-product__input').val(),
                         flag: 'remove'
                     },
