@@ -20,7 +20,7 @@ function cart_quantity_changes(){
 	$upsellSum = 0;
 
 	$poducts_in_list = array();
-	$test = '';
+
 
 	foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 
@@ -95,8 +95,7 @@ function cart_quantity_changes(){
         "cartCountPrice": '.$cartPrice.',
         "discount": '.$discount.',
         "cartCountProducts" : '.$count_products.',
-        "productSubtotal" : '.json_encode( wc_price($_product->get_price()*$new_quantity)).',
-        "test": '.$test.'
+        "productSubtotal" : '.json_encode( wc_price($_product->get_price()*$new_quantity)).'
     }';
 
 	echo $json_data;
@@ -114,8 +113,6 @@ function remove_cart_item(){
 	$idProduct = $_GET['id'];
 
 	$values = $_GET['value'];
-
-	$test = '';
 
 	$variation_id = $_GET['variation'];
 
@@ -195,7 +192,6 @@ function remove_cart_item(){
 
 	$itemInCartValue = $itemInCart['quantity'];
 	$value = $values;
- $test =  $values.'--'.$itemInCartValue;
 	if( $itemInCartValue != $value ){
 		WC()->cart->set_quantity($keyProduct, ( $itemInCartValue - $value ) );
 	} else {
@@ -205,7 +201,9 @@ function remove_cart_item(){
 		// \Check qty in cart
 
 
-		$upsellsProducts[$poducts_in_list[0]][$mainProduct]['product'] = array();
+		if($upsellsProducts[$poducts_in_list[0]]) {
+			unset($upsellsProducts[$poducts_in_list[0]][$mainProduct]['product']);
+		}
 		WC()->session->set( 'Upsells', $upsellsProducts);
 		//WC()->session->set( $idProduct, array() );
 
@@ -319,9 +317,51 @@ function edt_cart_item(){
 
 	$idProduct = $_GET['id'];
 
-	$value = $_GET['value'];
+	$values = $_GET['value'];
 
-	if( $checkUpsells = WC()->session->get($idProduct) ){
+	$variation_id = $_GET['variation'];
+
+	if( $variation_id ){
+		$_product = new WC_Product_Variation($variation_id);
+		$mainProduct = $variation_id;
+	} else {
+		$_product = wc_get_product( $idProduct );
+		$mainProduct = $idProduct;
+	}
+
+
+	$upsellsProducts = WC()->session->get('Upsells');
+
+	$poducts_in_list = array();
+
+	foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+
+		if($cart_item_key === $keyProduct) {
+
+			$attributes = $cart_item['variation'];
+			foreach ($upsellsProducts as $key => $value) {
+
+				if ( array_key_exists( $mainProduct, $value ) && !in_array( $key, $poducts_in_list ) ) {
+
+					if($_product->post_type === 'product_variation') {
+						$counter = 0;
+						foreach ($upsellsProducts[$key][$mainProduct]['attributs'] as $key_2 => $value_2) {
+							if(($attributes[$key_2] === $value_2) && $attributes  ) {
+								$counter++;
+							}
+						}
+						if($counter < count($attributes)) {
+							continue;
+						}
+					}
+					$poducts_in_list[] = $key;
+				}
+			}
+		}
+	}
+
+
+	if( $checkUpsells = $upsellsProducts[$poducts_in_list[0]][$mainProduct]['product'] ){
 
 		if( !empty($checkUpsells) ){
 
@@ -340,7 +380,7 @@ function edt_cart_item(){
 
 					$upsellCartItemQty = $upsellCartItem['quantity'];
 
-					WC()->cart->set_quantity( $checkUpsellKey, ( $upsellCartItemQty - $checkUpsell['count'] ) );
+					WC()->cart->set_quantity( $checkUpsellKey, ( $upsellCartItemQty - $checkUpsell ) );
 
 				}
 
@@ -356,6 +396,8 @@ function edt_cart_item(){
 
 	$itemInCartValue = $itemInCart['quantity'];
 
+
+	$value = $values;
 	if( $itemInCartValue != $value ){
 		WC()->cart->set_quantity($keyProduct, ( $itemInCartValue - $value ) );
 	} else {
@@ -365,8 +407,9 @@ function edt_cart_item(){
 	// \Check qty in cart
 
 
-
-	WC()->session->set( $idProduct, array() );
+	$upsellsProducts[$poducts_in_list[0]][$mainProduct]['product'] = array();
+	WC()->session->set( 'Upsells', $upsellsProducts);
+	//WC()->session->set( $idProduct, array() );
 
 	$cartTotal  = json_encode( WC()->cart->get_cart_total() );
 	$subTotal = json_encode(WC()->cart->get_cart_subtotal());

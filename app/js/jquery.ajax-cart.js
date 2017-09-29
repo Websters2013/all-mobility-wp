@@ -1,6 +1,7 @@
 "use strict";
 ( function(){
 
+    console.log('asddasda')
     $( function () {
 
         $.each( $('.my-cart__product'), function () {
@@ -33,10 +34,11 @@
             _define = $('.my-cart__define'),
             _applied = $('.my-cart__applied'),
             _invalid = $('.my-cart__invalid'),
-            _edit = _obj.find('.my-cart__edit'),
+            _edit = _obj.find('.my-cart__btn-edit'),
             _selectCount = _obj.find('.my-cart__count select'),
             _window = $(window);
 
+        console.log(_edit, 'Hello Vitaliya');
         //private methods
         var _addEvents = function () {
 
@@ -205,6 +207,7 @@
                             parent = curItem.parents('.my-cart__product'),
                             link = parent.find('.my-cart__pic').attr('href');
 
+                        console.log(curItem)
                         _removeEditProduct( parent, link );
 
                         return false;
@@ -234,7 +237,7 @@
                         key: elem.attr('data-product-key'),
                         id: elem.attr('data-product-id'),
                         value: elem.find('.count-product__input').val(),
-                        flag: 'edit'
+                        variation: elem.attr('data-variation-id'),
                     },
                     dataType: 'json',
                     type: "get",
