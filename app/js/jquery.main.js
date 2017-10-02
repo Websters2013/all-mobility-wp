@@ -675,7 +675,7 @@
                var price = $('.price>span').text(),
                    symbol = $('.price>span>span').text();
 
-               price = parseFloat(price.slice(1));
+               price = parseFloat((price.slice(1).split(',')).join(''));
 
                $upsells = $('.variations_form>.websters-select').find('select');
                $upsells.each(function () {

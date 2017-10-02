@@ -1263,13 +1263,13 @@ function custome_add_to_cart() {
               if($counter === $count_attr_apsells) {
                 if( isset($newUpsells[$value][$mainProduct]['product'][$product_id]) ){
                   $newUpsells[$value][$mainProduct]['product'][$product_id]++;
-	                var_dump('COUNT'.$counter_2.'<br>');
+	               // var_dump('COUNT'.$counter_2.'<br>');
                 } else {
                   $newUpsells[$value][$mainProduct]['product'][$product_id]= 1;
-	                var_dump('PRODUCT'.$counter_2.'<br>');
+	               // var_dump('PRODUCT'.$counter_2.'<br>');
                 }
               } elseif($counter_2 === count($poducts_in_list) && ($counter !== $count_attr_apsells)) {
-                var_dump('NEW VARIABLE'.$counter_2.'<br>');
+                //var_dump('NEW VARIABLE'.$counter_2.'<br>');
                 $newUpsells[] = array(
                   $mainProduct => array(
                     'product' => array($product_id => 1),
@@ -1279,7 +1279,7 @@ function custome_add_to_cart() {
               }
 		    }
 	    } elseif ($variable) {
-			    var_dump('NEW<br>');
+			    //var_dump('NEW<br>');
           $newUpsells[] = array(
             $mainProduct => array(
               'product' => array(

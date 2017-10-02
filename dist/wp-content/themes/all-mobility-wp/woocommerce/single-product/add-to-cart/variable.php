@@ -108,7 +108,7 @@ $upselsIDs = $product->get_upsell_ids(); ?>
 
                     foreach ( $item as  $attr ){
                         $_currentProduct = wc_get_product($attr);
-                        echo '<option data-price="'.wc_price($_currentProduct->get_price()).'" value="'.$attr.'" >'.get_the_title($attr).' '.wc_price($_currentProduct->get_price()).'</option>';
+                        echo '<option data-price="'.$_currentProduct->get_price().'" value="'.$attr.'" >'.get_the_title($attr).' '.wc_price($_currentProduct->get_price()).'</option>';
                     }
 
 

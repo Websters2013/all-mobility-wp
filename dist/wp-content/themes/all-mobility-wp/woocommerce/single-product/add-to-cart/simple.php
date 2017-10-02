@@ -118,7 +118,7 @@ if ( $product->is_in_stock() ) : ?>
                             $_currentProduct = wc_get_product($item); ?>
 							<select name="<?= 'upsells_'.$k ?>">
 								<option value="0">Add-Ons</option>
-								<option value="<?= $item ?>"><?= get_the_title($item) ?> <?= wc_price($_currentProduct->get_price()) ?></option>
+								<option data-price="<?php $_currentProduct->get_price(); ?>" value="<?= $item ?>"><?= get_the_title($item) ?> <?= wc_price($_currentProduct->get_price()) ?></option>
 							</select>
 
 							<?php  $k++;
