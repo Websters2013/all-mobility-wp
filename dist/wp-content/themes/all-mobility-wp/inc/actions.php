@@ -11,6 +11,8 @@ function myStartSession() {
     if(!session_id()) {
         session_start();
     }
+
+	updateProducts_2();
 }
 
 remove_action('wp_head', 'print_emoji_detection_script', 7);

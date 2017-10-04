@@ -6,12 +6,11 @@ $category_ID  = $cat_obj->term_id;
 
 
 
-if( $cat_obj->parent != 0 ){
+if( $cat_obj->parent != 0  && $cat_obj->parent != 803){
     $category_sub = ' category_sub';
 } else {
     $category_sub = '';
 }
-
 
 $mobilityScootersId = 145;
 
@@ -257,7 +256,6 @@ $powerWheelChairs = 125; ?>
                                     <div>
 
                                         <?php  foreach ( $filter as $sub_key => $item ) {
-
                                             if( $sub_key == 'name' ){
                                                 continue;
                                             }

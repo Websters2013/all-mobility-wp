@@ -403,7 +403,7 @@
     }
     .featured-product__price {
       margin: 0 4px;
-      font-size: 20px;
+      font-size: 18px;
 
       del {
         font-size: 14px;
@@ -424,9 +424,8 @@
   .featured-products__inner {
 
     >div {
-     /* width: 25%;
-      padding: 0 18px;*/
-      width: 33.33%;
+      /*padding: 0 18px;*/
+      width: 25%;
       margin: 0 0 30px;
     }
 

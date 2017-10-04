@@ -118,6 +118,23 @@ $products = get_posts(
 }
 
 
+function updateProducts_2 (){
+	$products = get_posts(
+
+		array(
+			'post_type' => 'product',
+			'posts_per_page' => -1,
+			'fields' => 'ids'
+		)
+
+	);
+
+	foreach ($products as $product){
+		update_post_meta( $product, 'choose_frame_type', 'rigid', 'Rigid' );
+	}
+
+}
+
 
 require_once( TEMPLATEINC . '/template.php' );
 require_once( TEMPLATEINC . '/actions.php' );
