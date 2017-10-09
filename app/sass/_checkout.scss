@@ -406,6 +406,20 @@
   background-size: 29px;
 }
 
+.woocommerce form .form-row {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  .woocommerce-password-hint {
+    display: none;
+  }
+
+  .woocommerce-password-strength.short {
+    width: 100%;
+  }
+
+}
+
 @media (min-width: $phone-mini) {
 
 
@@ -492,7 +506,9 @@
     }
 
   }
-
+  .woocommerce form .form-row {
+    justify-content: flex-start;
+  }
 }
 @media (min-width: $desktop) {
 

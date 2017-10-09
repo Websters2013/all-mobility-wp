@@ -193,7 +193,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                                     <div class="count-product">
                                         <input type="number" class="count-product__input site__input" value="<?= $quantity ?>" min="1">
                                         <div>
-                                            <a class="count-product-cart my-cart__btn-edit" href="<?= $link ?>"><span>updete</span></a>
+                                            <a class="count-product-cart my-cart__btn-edit" href="<?= $link ?>"><span>update</span></a>
                                             <a class="count-product-cart my-cart__remove" href="#"><span>remove</span></a>
                                         </div>
                                     </div>
