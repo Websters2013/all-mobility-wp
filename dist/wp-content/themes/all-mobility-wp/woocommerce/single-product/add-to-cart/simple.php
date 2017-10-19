@@ -43,9 +43,9 @@ if ( $product->is_in_stock() ) : ?>
 
 	?>
 
-	<div class="product__items <?= $class_customize ?>">
+	<div class="product__items <?= $class_customize ?>" data-price="<?= strip_tags(wc_price($product->get_price())); ?>">
 		<div class="product__add">
-			<form method="post" enctype='multipart/form-data'>
+			<form method="post" enctype='multipart/form-data' >
 
 				<?php if( $upselsIDs ):
 
@@ -118,7 +118,7 @@ if ( $product->is_in_stock() ) : ?>
                             $_currentProduct = wc_get_product($item); ?>
 							<select name="<?= 'upsells_'.$k ?>">
 								<option value="0">Add-Ons</option>
-								<option data-price="<?php $_currentProduct->get_price(); ?>" value="<?= $item ?>"><?= get_the_title($item) ?> <?= wc_price($_currentProduct->get_price()) ?></option>
+								<option data-price="<?= strip_tags($_currentProduct->get_price()); ?>" value="<?= $item ?>"><?= get_the_title($item) ?> <?= wc_price($_currentProduct->get_price()) ?></option>
 							</select>
 
 							<?php  $k++;
@@ -154,8 +154,6 @@ if ( $product->is_in_stock() ) : ?>
 				do_action( 'woocommerce_after_add_to_cart_quantity' );
 				?>
 
-			
-
 				<button type="submit" name="add-to-cart" value="<?php echo esc_attr( get_the_ID() ); ?>" class="btn btn_2 btn_img-left single_add_to_cart_button button alt">
 			<span>
 
@@ -163,7 +161,11 @@ if ( $product->is_in_stock() ) : ?>
 
 				<?php echo esc_html( $product->single_add_to_cart_text() ); ?></span>
 				</button>
+                <div class="woocommerce-variation single_variation" style="">
+                    <div class="woocommerce-variation-price featured-product__price">
 
+                    </div>
+                </div>
 				<?php
 				/**
 				 * @since 2.1.0.

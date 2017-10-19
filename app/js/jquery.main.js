@@ -2,6 +2,17 @@
 
     var globalScrollFlag = true;
 
+    Number.prototype.formatMoney = function(c, d, t){
+        var n = this,
+            c = isNaN(c = Math.abs(c)) ? 2 : c,
+            d = d == undefined ? "." : d,
+            t = t == undefined ? "," : t,
+            s = n < 0 ? "-" : "",
+            i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+            j = (j = i.length) > 3 ? j % 3 : 0;
+        return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+    };
+
     $(function () {
 
         $('.site__menu').each(function () {
@@ -650,34 +661,67 @@
 
     var ChangePrice = function (obj) {
 
-        Number.prototype.formatMoney = function(c, d, t){
-            var n = this,
-                c = isNaN(c = Math.abs(c)) ? 2 : c,
-                d = d == undefined ? "." : d,
-                t = t == undefined ? "," : t,
-                s = n < 0 ? "-" : "",
-                i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
-                j = (j = i.length) > 3 ? j % 3 : 0;
-            return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-        };
-
-        $('.variations_form').on('change', function () {
-           var variation = $('.variations').find('select'),
-               counter = 0;
+        var form = obj.find('form');
 
 
-           variation.each(function ($value) {
-               if($( this ).val()) {
-                   counter++;
+        form.on('change', function () {
+           //console.log(variationCount);
+            var $upsells = obj.find('form>.websters-select select'),
+                variation = form.find('.variations select'),
+                variationCount = variation.length,
+                price = obj.attr('data-price'),
+                symbol = $('.product__price>span>span').text();
+
+           if(variationCount > 0) {
+               var counter = 0;
+               variation.each(function () {
+                   if($( this ).val()) {
+                       counter++;
+                   }
+               });
+
+               if(counter !== variation.length) {
+                  return false;
                }
-           });
-           if(counter === variation.length) {
+
+               if(form.find('.featured-product__price .price').text().trim()  !== ''){
+                       price = $('.price>span').text();
+                       symbol = $('.price>span>span').text();
+               }
+
+           }
+            //console.log(price);
+            price = parseFloat((price.slice(1).split(',')).join(''));
+
+            $upsells.each(function () {
+                var select = $( this ).val();
+
+                if(select > 0) {
+                    $( this ).find('option').each(function () {
+                        if($(this).val() === select) {
+                            price = price + +$(this).data('price');
+                        }
+                    });
+                }
+            });
+
+            $('.price').css('display', 'none');
+            console.log($('.featured-product__price>strong').length === 0);
+            if(form.find('.featured-product__price>strong').length === 0) {
+                form.find('.featured-product__price').append('<strong class="product__price"></strong>');
+            }
+
+
+            form.find('.featured-product__price>strong').html('<span>'+symbol+'</span>'+price.formatMoney(2, '.', ','));
+
+           /*if((counter === variation.length) && (variation.length > 0)) {
+
+
                var price = $('.price>span').text(),
                    symbol = $('.price>span>span').text();
 
                price = parseFloat((price.slice(1).split(',')).join(''));
 
-               $upsells = $('.variations_form>.websters-select').find('select');
                $upsells.each(function () {
                    var select = $( this ).val();
 
@@ -692,7 +736,7 @@
                $('.price').css('display', 'none');
                $('.featured-product__price>strong').html('<span>'+symbol+'</span>'+price.formatMoney(2, '.', ','));
 
-           }
+           }*/
 
         });
 

@@ -28,7 +28,7 @@ do_action( 'woocommerce_before_add_to_cart_form' );
 global $product;
 $upselsIDs = $product->get_upsell_ids(); ?>
 
-<div class="product__items">
+<div class="product__items" data-price="<?= strip_tags(wc_price($product->get_price())); ?>">
 	<div class="product__add">
 
 	<h2 class="product__add-title">Customize & Purchase</h2>

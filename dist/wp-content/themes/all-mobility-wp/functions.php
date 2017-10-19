@@ -136,6 +136,36 @@ function updateProducts_2 (){
 }
 
 
+function register_shipped_status() {
+	register_post_status( 'wc-shipped', array(
+		'label'                     => 'Shipped',
+		'public'                    => true,
+		'exclude_from_search'       => false,
+		'show_in_admin_all_list'    => true,
+		'show_in_admin_status_list' => true,
+		'label_count'               => _n_noop( 'Shipped <span class="count">(%s)</span>', 'Shipped <span class="count">(%s)</span>' )
+	) );
+}
+add_action( 'init', 'register_shipped_status' );
+function add_shipped_order_statuses( $order_statuses ) {
+	$new_order_statuses = array();
+
+	foreach ( $order_statuses as $key => $status ) {
+
+		$new_order_statuses[ $key ] = $status;
+
+		if ( 'wc-processing' === $key ) {
+			$new_order_statuses['wc-shipped'] = 'Shipped';
+		}
+	}
+
+	return $new_order_statuses;
+}
+add_filter( 'wc_order_statuses', 'add_shipped_order_statuses' );
+
+
+
+
 require_once( TEMPLATEINC . '/template.php' );
 require_once( TEMPLATEINC . '/actions.php' );
 require_once( TEMPLATEINC . '/ajaxes.php' );

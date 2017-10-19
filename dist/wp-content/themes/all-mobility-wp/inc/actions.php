@@ -1031,7 +1031,7 @@ $categoryId = $_GET['idCategory'];
 
             $regularPrice = substr( $old_price, 0, -1 );
             $salePrice = substr( $new_price, 0, -1 );
-           if( $salePrice !== "") {
+           if( $salePrice === "") {
 	           $salePrice = $regularPrice;
 	           $regularPrice ='';
            }

@@ -76,7 +76,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<p>Your order # <?= $order->get_order_number() ?> with a total of <?= $order->get_formatted_order_total() ?> was successfully confirmed
 			and currently is being processed by our team.</p>
 		<p>You will receive a confirmation e-mail within a few minutes.</p>
-		<p>You can track your oder on <a href="<?= get_permalink(13).'/orders/' ?>">this page</a></p>
+		<p>You can track your order on <a href="<?= get_permalink(13).'/orders/' ?>">this page</a></p>
 	</div>
 	<!-- /confirmation__info -->
 
