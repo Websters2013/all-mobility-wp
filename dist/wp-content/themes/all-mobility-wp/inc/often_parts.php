@@ -31,17 +31,22 @@ function get_featured_slider_products( $ids = null ){
 
     $product = wc_get_product(get_the_ID());
 
-    $crossSellsIds = $product->get_cross_sell_ids(); ?>
+    $crossSellsIds = $product->get_cross_sell_ids();
 
-    <?php if(!empty( $crossSellsIds )): ?>
+
+
+    if(!empty( $crossSellsIds )): ?>
 
     <!-- featured-products -->
     <div class="featured-products featured-products_2">
 
         <div class="swiper-container">
-            <div class="swiper-wrapper">
+            <div class="swiper-wrapper featured-products__wrapper">
 
                 <?php foreach ($crossSellsIds as $crossSellsId):
+
+	                //var_dump($crossSellsId);
+
                     $link = get_permalink($crossSellsId);
                     $title = get_the_title($crossSellsId);
                     $thumb_id = get_post_thumbnail_id($crossSellsId);
@@ -72,7 +77,7 @@ function get_featured_slider_products( $ids = null ){
 
                     ?>
 
-                    <div class="swiper-slide">
+                    <div class="swiper-slide featured-products__slide">
 
                         <!-- featured-product -->
                         <a href="<?= $link ?>" class="featured-product">
