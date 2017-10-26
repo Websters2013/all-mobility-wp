@@ -89,7 +89,7 @@ if ( $product->is_in_stock() ) : ?>
 
 							foreach ( $item as  $attr ){
                                 $_currentProduct = wc_get_product($attr);
-                                echo '<option value="'.$attr.'" >'.get_the_title($attr).' '.wc_price($_currentProduct->get_price()).'</option>';
+                                echo '<option data-price="'.strip_tags($_currentProduct->get_price()).'" value="'.$attr.'" >'.get_the_title($attr).' '.wc_price($_currentProduct->get_price()).'</option>';
 							}
 
 

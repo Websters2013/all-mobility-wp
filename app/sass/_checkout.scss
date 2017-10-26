@@ -420,6 +420,27 @@
 
 }
 
+#payment div.payment_box {
+  position: relative;
+  width: 100%;
+  display: none;
+  padding-top: 20px;
+
+
+  label {
+    padding: 0;
+
+    &:after {
+      display: none;
+    }
+  }
+
+  fieldset {
+    width: 100%;
+  }
+}
+
+
 @media (min-width: $phone-mini) {
 
 
@@ -507,7 +528,22 @@
 
   }
   .woocommerce form .form-row {
-    justify-content: flex-start;
+    justify-content: flex-end;
+  }
+
+  #payment div.payment_box {
+    .form-row .websters-select {
+      margin-right: 0;
+      width: 33%;
+
+      &:nth-child(2) {
+        margin-right: 2%;
+      }
+    }
+
+    .form-row-last {
+      justify-content: flex-start;
+    }
   }
 }
 @media (min-width: $desktop) {
@@ -775,6 +811,18 @@
 
   }
 
+  #payment div.payment_box {
+    padding-top: 60px;
+
+    .form-row .websters-select {
+      margin-right: 0;
+      width: 31%;
+
+      &:nth-child(2) {
+        margin-right: 2%;
+      }
+    }
+  }
 }
 @media (min-width: $desktop-hd) {
 

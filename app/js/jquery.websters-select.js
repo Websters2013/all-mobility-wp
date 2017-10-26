@@ -1,6 +1,7 @@
 ( function(){
 
     $( function(){
+
         $( 'select' ).each( function(){
             new WebstersSelect( {
                 obj: $( this ),
@@ -9,7 +10,24 @@
             } );
 
         } );
+
+        console.log('ye');
     } );
+
+    var timerId = setTimeout(function tick() {
+        $( '.woocommerce-cc-month, .woocommerce-cc-year' ).each( function(){
+            console.log($( this ).parent().hasClass('websters-select'));
+            if(!$( this ).parent().hasClass('websters-select')) {
+                new WebstersSelect( {
+                    obj: $( this ),
+                    optionType: 1,
+                    showType: 2
+                } );
+            }
+
+        } );
+        timerId = setTimeout(tick, 2000);
+    }, 2000);
 
     var WebstersSelect = function( params ){
 

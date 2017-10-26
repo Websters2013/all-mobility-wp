@@ -25,7 +25,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     <?php if( $gateway->id != 'stripe' ): ?>
 
-    <input type="radio" name="payment_method"  value="<?php echo esc_attr( $gateway->id ); ?>" id="<?= $gateway->id ?>">
+
+            <input type="radio" name="payment_method"  value="<?php echo esc_attr( $gateway->id ); ?>" id="<?= $gateway->id ?>">
+
 
     <?php
 
@@ -72,6 +74,13 @@ if ( ! defined( 'ABSPATH' ) ) {
         </span>
 
 	</label>
+	<?php if( $gateway->id == 'usaepay' ){ ?>
+	<?php if ( $gateway->has_fields() || $gateway->get_description() ) : ?>
+      <div class="payment_box payment_method_<?php echo $gateway->id; ?>" style="display:none;">
+				<?php $gateway->payment_fields(); ?>
+      </div>
+	<?php endif; ?>
+	<?php }  ?>
 
 <!--    --><?php //if( $gateway == 'stripe' ): ?>
 <!--        <div class="payment_box payment_method_stripe">-->

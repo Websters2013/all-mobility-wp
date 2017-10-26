@@ -665,7 +665,7 @@
 
 
         form.on('change', function () {
-           //console.log(variationCount);
+
             var $upsells = obj.find('form>.websters-select select'),
                 variation = form.find('.variations select'),
                 variationCount = variation.length,
@@ -690,7 +690,7 @@
                }
 
            }
-            //console.log(price);
+
             price = parseFloat((price.slice(1).split(',')).join(''));
 
             $upsells.each(function () {
@@ -713,30 +713,6 @@
 
 
             form.find('.featured-product__price>strong').html('<span>'+symbol+'</span>'+price.formatMoney(2, '.', ','));
-
-           /*if((counter === variation.length) && (variation.length > 0)) {
-
-
-               var price = $('.price>span').text(),
-                   symbol = $('.price>span>span').text();
-
-               price = parseFloat((price.slice(1).split(',')).join(''));
-
-               $upsells.each(function () {
-                   var select = $( this ).val();
-
-                   if(select > 0) {
-                       $( this ).find('option').each(function () {
-                           if($(this).val() === select) {
-                               price += $(this).data('price');
-                           }
-                       });
-                   }
-               });
-               $('.price').css('display', 'none');
-               $('.featured-product__price>strong').html('<span>'+symbol+'</span>'+price.formatMoney(2, '.', ','));
-
-           }*/
 
         });
 
