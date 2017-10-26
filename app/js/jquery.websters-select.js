@@ -11,7 +11,6 @@
 
         } );
 
-        console.log('ye');
     } );
 
     var timerId = setTimeout(function tick() {

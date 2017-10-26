@@ -706,13 +706,18 @@
             });
 
             $('.price').css('display', 'none');
-            console.log($('.featured-product__price>strong').length === 0);
+            //console.log($('.featured-product__price>strong').length === 0);
             if(form.find('.featured-product__price>strong').length === 0) {
                 form.find('.featured-product__price').append('<strong class="product__price"></strong>');
             }
 
+            if(price>0) {
+                price = '<span>' + symbol + '</span>'+ price.formatMoney(2, '.', ',');
+            } else {
+                price = 'FREE';
+            }
 
-            form.find('.featured-product__price>strong').html('<span>'+symbol+'</span>'+price.formatMoney(2, '.', ','));
+            form.find( '.featured-product__price>strong' ).html( price );
 
         });
 

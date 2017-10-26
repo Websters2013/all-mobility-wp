@@ -146,6 +146,7 @@
 
                 _slider = $('.featured-products__wrapper').slick( {
                     dots: true,
+                    //centerMode: true,
                     slidesToShow: 5,
                     slidesToScroll: 1,
                     autoplay: true,
