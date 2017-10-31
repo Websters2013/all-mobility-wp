@@ -67,7 +67,7 @@
                 if( curText == '' ){
                     curText =  _obj.find( 'option').eq( 0 ).text();
                 }
-                _text.text( curText );
+                _text.text( _findFree(curText) );
             },
             _hidePopup = function(){
                 _opened = false;
@@ -98,7 +98,7 @@
             },
             _onEvents = function(){
                 _obj.on( 'change', function() {
-                    _text.text( $( this ).find( 'option:selected' ).text() );
+                    _text.html( _findFree($( this ).find( 'option:selected' ).text()) );
 
                 } );
                 $(document).on(
@@ -177,12 +177,16 @@
                 _popup = $( '<div class="websters-select__popup" id="websters-select__popup' + id + '"></div>' );
 
                 _obj.find( 'option' ).each( function( i ){
-                    var curItem = $( this );
+                    var curItem = $( this ),
+                    text = curItem.text();
+
+
+
 
                     if( i == curIndex ){
-                        list.append( '<li class="active">' + curItem.text() + '</li>' );
+                        list.append( '<li class="active">' + _findFree(text) + '</li>' );
                     } else {
-                        list.append( '<li>' + curItem.text() + '</li>' );
+                        list.append( '<li>' + _findFree(text) + '</li>' );
                     }
 
                 } );
@@ -227,6 +231,13 @@
                     }
                 } );
 
+            }
+            _findFree = function (text) {
+                indexFree = text.indexOf('free');
+                if(indexFree !== -1){
+                    text = text.slice(0,indexFree)+'<span>FREE</span>'+text.slice(indexFree+4);
+                }
+                return text;
             };
 
         //public properties

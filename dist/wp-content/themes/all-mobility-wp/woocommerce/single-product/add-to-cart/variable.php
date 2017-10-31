@@ -108,7 +108,15 @@ $upselsIDs = $product->get_upsell_ids(); ?>
 
                     foreach ( $item as  $attr ){
                         $_currentProduct = wc_get_product($attr);
-                        echo '<option data-price="'.$_currentProduct->get_price().'" value="'.$attr.'" >'.get_the_title($attr).' '.wc_price($_currentProduct->get_price()).'</option>';
+	                    $prices = strip_tags($_currentProduct->get_price());
+	                    $prices_2 = wc_price($_currentProduct->get_price());
+
+	                    if(!is_numeric($prices) || $prices === '0') {
+
+		                    $prices = 0;
+		                    $prices_2 = '(free)';
+	                    }
+                        echo '<option data-price="'.$prices.'" value="'.$attr.'" >'.get_the_title($attr).' '.$prices_2.'</option>';
                     }
 
 
@@ -134,11 +142,20 @@ $upselsIDs = $product->get_upsell_ids(); ?>
                 $countTerm = count( $defaultProducts );
 
                 foreach ($defaultProducts as $key => $item){
-                    $_currentProduct = wc_get_product($item); ?>
+                    $_currentProduct = wc_get_product($item);
+	                $prices = strip_tags($_currentProduct->get_price());
+	                $prices_2 = wc_price($_currentProduct->get_price());
+
+	                if(!is_numeric($prices) || $prices === '0') {
+
+		                $prices = 0;
+		                $prices_2 = '(free)';
+	                }
+                    ?>
 
                     <select name="<?= 'upsells_'.$k ?>">
                         <option value="0">Add-Ons</option>
-                        <option data-price="<?= $_currentProduct->get_price(); ?>" value="<?= $item ?>"><?= get_the_title($item) ?> <?= wc_price($_currentProduct->get_price()) ?></option>
+                        <option data-price="<?= $prices; ?>" value="<?= $item ?>"><?= get_the_title($item) .' '. $prices_2; ?></option>
                     </select>
 
                     <?php  $k++;

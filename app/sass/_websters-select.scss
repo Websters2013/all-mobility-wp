@@ -58,6 +58,10 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     text-align: left;
+
+    span {
+      color: $cart-1;
+    }
   }
 
   &_mobile {
@@ -104,15 +108,25 @@
       padding: 6px 14px;
       text-transform: capitalize;
 
-
+      span {
+        color: $cart-1;
+      }
       &:hover {
         color: #fff;
         background: #D1D1D1;
+
+        span {
+          color: $main-color-1;
+        }
       }
 
       &.active {
         color: #fff;
         background: rgba(28, 28, 28, 0.51);
+
+        span {
+          color: $main-color-1;
+        }
       }
 
     }

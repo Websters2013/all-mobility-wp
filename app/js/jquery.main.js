@@ -711,11 +711,11 @@
                 form.find('.featured-product__price').append('<strong class="product__price"></strong>');
             }
 
-            if(price>0) {
+            /*if(price > 0) { */
                 price = '<span>' + symbol + '</span>'+ price.formatMoney(2, '.', ',');
-            } else {
+            /*} else {
                 price = 'FREE';
-            }
+            }*/
 
             form.find( '.featured-product__price>strong' ).html( price );
 
