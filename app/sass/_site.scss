@@ -36,6 +36,17 @@
       }
       .site__header-call {
         height: 60px;
+        width: 50.7%;
+        left: 49.3%;
+        padding-top: 2px;
+
+        span {
+          margin-right: 4px;
+        }
+
+        svg {
+          margin: 0 8px 0 0;
+        }
       }
       .logo {
         left: 18px;
@@ -535,7 +546,11 @@
 .site__content_inner {
   max-width: 1360px;
   padding: 28px 20px;
+  &.site__checkout {
+    padding: 18px 24px 28px 25px;
+  }
 }
+
 .site__content_page {
   max-width: 1360px;
   padding: 28px 17px;
@@ -934,6 +949,9 @@ textarea.site__input {
     }
 
   }
+  .site__content_inner.site__checkout {
+    padding: 33px 39px 28px 39px;
+  }
 }
 @media (min-width: $desktop) {
 
@@ -952,6 +970,7 @@ textarea.site__input {
         }
         .logo {
           top: 20px;
+          left: 48px;
         }
         .login {
           top: 39px;
@@ -960,8 +979,9 @@ textarea.site__input {
           top: 39px;
         }
         .site__header-call {
-          top: 38px;
+          top: 37px;
         }
+
         .search,
         .site__header-get,
         .site__menu {
@@ -971,6 +991,8 @@ textarea.site__input {
         }
         .site__header-call {
           height: auto;
+          width: 40%;
+          left: 41.7%;
 
           span {
 
@@ -980,6 +1002,10 @@ textarea.site__input {
               color: #F47920;
             }
 
+          }
+
+          svg {
+            margin: 0 13px 0 0;
           }
 
         }

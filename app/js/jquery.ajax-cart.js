@@ -1,7 +1,6 @@
 "use strict";
 ( function(){
 
-    console.log('asddasda')
     $( function () {
 
         $.each( $('.my-cart__product'), function () {
@@ -38,7 +37,6 @@
             _selectCount = _obj.find('.my-cart__count select'),
             _window = $(window);
 
-        console.log(_edit, 'Hello Vitaliya');
         //private methods
         var _addEvents = function () {
 
@@ -207,7 +205,6 @@
                             parent = curItem.parents('.my-cart__product'),
                             link = parent.find('.my-cart__pic').attr('href');
 
-                        console.log(curItem)
                         _removeEditProduct( parent, link );
 
                         return false;
@@ -343,7 +340,7 @@
 
                     },
                     error: function (XMLHttpRequest) {
-                        console.log(XMLHttpRequest);
+
                         if ( XMLHttpRequest.statusText != "abort" ) {
                             console.log("Error");
                         }

@@ -68,13 +68,15 @@
 
   label {
     padding-top: 1px;
+    //padding-left: 32px;
     padding-left: 32px;
     @include main-font5();
     color: #4E4E4E;
 
     &:after {
       top: 2px;
-      left: 0;
+     // left: 0;
+      left: 2px;
       width: 14px;
       height: 14px;
       background: #fff;
@@ -84,11 +86,44 @@
 
     &:before {
       top: 7px;
-      left: 5px;
+      left: 7px;
+      //left: 5px;
       width: 8px;
       height: 8px;
     }
     
   }
+
+}
+
+@media (min-width: $desktop) {
+  .nice-radio_2 {
+
+    &.payment_method_usaepay label {
+      line-height: 30px;
+
+      &:after {
+        top: 7px;
+      }
+      &:before {
+        top: 12px;
+      }
+    }
+
+    label {
+      line-height: 48px;
+      padding-left: 35px;
+
+      &:after {
+        top: 17px;
+        left: 3px;
+      }
+      &:before {
+        top: 22px;
+        left: 8px;
+      }
+    }
+  }
+
 
 }

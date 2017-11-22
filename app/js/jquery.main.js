@@ -196,7 +196,6 @@
                             //if( $('.featured-product__loading').hasClass('visible') ) {
 
                                 timeout = setTimeout( function() {
-                                    console.log(data);
 
                                     _obj.find('.featured-product').find('.featured-product__title').text(data.name);
                                     _obj.find('.featured-product').find('.featured-product__pic img').attr('src', data.src);
@@ -658,7 +657,6 @@
 
         _init();
     };
-
     var ChangePrice = function (obj) {
 
         var form = obj.find('form');

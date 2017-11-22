@@ -15,7 +15,6 @@
 
     var timerId = setTimeout(function tick() {
         $( '.woocommerce-cc-month, .woocommerce-cc-year' ).each( function(){
-            console.log($( this ).parent().hasClass('websters-select'));
             if(!$( this ).parent().hasClass('websters-select')) {
                 new WebstersSelect( {
                     obj: $( this ),
@@ -105,7 +104,7 @@
                     "change",
                     "select",
                     function() {
-                        $( this).prev().text( $( this ).find( 'option:selected' ).text() );
+                        $( this).prev().html( _findFree($( this ).find( 'option:selected' ).text()) );
                     }
                 );
 
