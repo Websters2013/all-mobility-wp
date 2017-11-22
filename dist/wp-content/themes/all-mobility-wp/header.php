@@ -50,6 +50,29 @@
 
 </script>
 
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-826605253"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'AW-826605253');
+        </script>
+
+
+	    <?php if(is_order_received_page() && $_GET['key']) {
+			    $id_order = wc_get_order_id_by_order_key($_GET['key']);
+			    $order = new WC_Order( $id_order );
+		    ?>
+          <!-- Event snippet for Example conversion page -->
+          <script>
+              gtag('event', 'conversion', {'send_to': 'AW-826605253/aFD6CLLBxnkQxf2TigM',
+                  'value': <?= number_format($order->get_total(), 2, ',', ''); ?>,
+                  'currency': 'USD'
+              });
+          </script>
+	    <?php } ?>
+
     </head>
 
 
@@ -180,6 +203,12 @@
                         </g>
                     </g>
 </svg>
+
+                <?php if(is_checkout()) {?>
+
+	                <img src="<?= get_template_directory_uri().'/assets/img/image003.png'; ?>" alt="logo">
+
+                <?php }?>
 
                 <?= $end_wrap  ?>
 

@@ -1,11 +1,11 @@
 <?php function wooc_extra_register_fields() {?>
 
     <p class="form-row form-row-first">
-        <label for="reg_billing_first_name"><?php _e( 'First name', 'woocommerce' ); ?><span class="required">*</span></label>
+        <label for="reg_billing_first_name"><?php _e( 'First Name', 'woocommerce' ); ?><span class="required">*</span></label>
         <input type="text" class="input-text" name="billing_first_name" id="reg_billing_first_name" value="<?php if ( ! empty( $_POST['billing_first_name'] ) ) esc_attr_e( $_POST['billing_first_name'] ); ?>" />
     </p>
     <p class="form-row form-row-last">
-        <label for="reg_billing_last_name"><?php _e( 'Last name', 'woocommerce' ); ?><span class="required">*</span></label>
+        <label for="reg_billing_last_name"><?php _e( 'Last Name', 'woocommerce' ); ?><span class="required">*</span></label>
         <input type="text" class="input-text" name="billing_last_name" id="reg_billing_last_name" value="<?php if ( ! empty( $_POST['billing_last_name'] ) ) esc_attr_e( $_POST['billing_last_name'] ); ?>" />
     </p>
 
@@ -307,11 +307,11 @@ function custom_override_checkout_fields( $fields ) {
     unset($fields['billing']['billing_company']);
 
     $fields['account']['account_password'] = array(
-        'label'     => __('Create Password', 'woocommerce'),
+        'label'     => __('Create password', 'woocommerce'),
         'required' => true
     );
     $fields['account']['account_password-2'] = array(
-        'label'     => __('Repeat Password', 'woocommerce'),
+        'label'     => __('Repeat password', 'woocommerce'),
         'type'     => __('password', 'woocommerce'),
         'required' => true
 
@@ -325,17 +325,40 @@ function custom_override_billing_fields( $fields ) {
     unset($fields['billing_company']);
 
     $fields['billing_email'] = array(
-        'label'     => __('Email', 'woocommerce'),
+        'label'     => __('E-mail', 'woocommerce'),
         'required' => true
     );
 
     $fields['billing_address_2'] = array(
-        'label'     => __('Address 2', 'woocommerce'),
+        'label'     => __('Street Address', 'woocommerce'),
+    );
+
+    $fields['billing_city'] = array(
+        'label'     => __('City', 'woocommerce'),
+    );
+
+    $fields['billing_first_name'] = array(
+        'label'     => __('First Name', 'woocommerce'),
+    );
+
+    $fields['billing_last_name'] = array(
+        'label'     => __('Last Name', 'woocommerce'),
     );
 
 
+	$fields2['billing_first_name'] = $fields['billing_first_name'];
+	$fields2['billing_last_name'] = $fields['billing_last_name'];
+	$fields2['billing_phone'] = $fields['billing_phone'];
+	$fields2['billing_email'] = $fields['billing_email'];
+	$fields2['billing_address_1'] = $fields['billing_address_1'];
+	$fields2['billing_address_2'] = $fields['billing_address_2'];
+	$fields2['billing_company'] = $fields['billing_company'];
+	$fields2['billing_country'] = $fields['billing_country'];
+	$fields2['billing_city'] = $fields['billing_city'];
+	$fields2['billing_state'] = $fields['billing_state'];
+	$fields2['billing_postcode'] = $fields['billing_postcode'];
 
-    return $fields;
+    return $fields2;
 
 }
 
@@ -343,9 +366,25 @@ function custom_override_shipping_fields( $fields ) {
     unset($fields['shipping_company']);
     unset($fields['shipping_email']);
 
-    $fields['shipping_address_2'] = array(
-        'label'     => __('Address 2', 'woocommerce'),
-    );
+    $fields['shipping_address_1'] = array(
+		'label'     => __('Street Address', 'woocommerce'),
+	);
+
+	$fields['shipping_address_2'] = array(
+		'label'     => __('Street Address', 'woocommerce'),
+	);
+
+	$fields['shipping_first_name'] = array(
+		'label'     => __('First Name', 'woocommerce'),
+	);
+
+	$fields['shipping_last_name'] = array(
+		'label'     => __('Last Name', 'woocommerce'),
+	);
+
+	$fields['shipping_city'] = array(
+		'label'     => __('City', 'woocommerce'),
+	);
 
     return $fields;
 }
@@ -361,3 +400,21 @@ function wc_check_confirm_password_matches_checkout( $posted ) {
         }
     }
 }
+
+
+///update
+
+remove_action( 'woocommerce_cart_is_empty', 'wc_empty_cart_message', 10 );
+add_action( 'woocommerce_cart_is_empty', 'wc_empty_cart_message_custom', 10 );
+function wc_empty_cart_message_custom() {
+	echo '
+<div class="my-cart__layout">
+	<div class="my-cart__empty">
+		<div>
+			<h2 class="site__title site__title_3">Your cart is currently empty.</h2>
+		</div>
+	</div>
+</div>';
+}
+
+

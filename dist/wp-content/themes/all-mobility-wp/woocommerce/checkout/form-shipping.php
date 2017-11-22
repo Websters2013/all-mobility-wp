@@ -13,13 +13,12 @@
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @author  WooThemes
  * @package WooCommerce/Templates
- * @version 3.0.0
+ * @version 3.0.9
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
 ?>
 <div class="woocommerce-shipping-fields">
 	<?php if ( true === WC()->cart->needs_shipping_address() ) : ?>

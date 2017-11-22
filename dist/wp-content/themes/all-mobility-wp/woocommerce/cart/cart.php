@@ -13,13 +13,15 @@
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @author  WooThemes
  * @package WooCommerce/Templates
- * @version 3.0.3
+ * @version 3.1.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+}
 
-} ?>
+do_action( 'woocommerce_before_cart' ); ?>
+
 
 <!-- my-cart__layout -->
 <div class="my-cart__layout">
@@ -28,6 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="my-cart__products">
 
 		<form action="#">
+		    <?php do_action( 'woocommerce_before_cart_table' ); ?>
 
             <div class="my-cart__head">
                 <div class="my-cart__caption">Your Items</div>
@@ -35,12 +38,13 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <div class="my-cart__caption">Quantity</div>
                 <div class="my-cart__caption">Price</div>
             </div>
+			<?php do_action( 'woocommerce_before_cart_contents' ); ?>
 
 			<?php
 
 			$allUpsells = countHidenUpsells();
+
 			//var_dump($allUpsells);
-			//var_dump(WC()->session->get('Upsells'));
 
 			foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 
@@ -262,6 +266,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<?php } ?>
 
+            <?php do_action( 'woocommerce_cart_contents' ); ?>
+
 			<!-- my-cart__footer -->
 			<div class="my-cart__footer">
 
@@ -296,6 +302,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<div>
 							<input type="text" class="site__input" name="promo-code" id="promo-code" value="<?= $coupons[0] ?>">
 							<button type="button" class="btn btn_7"><span>APPLY</span></button>
+							<?php do_action( 'woocommerce_cart_coupon' ); ?>
+
 						</div>
 					</div>
 					<!-- /my-cart__define -->
@@ -348,11 +356,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<dd><?= WC()->cart->get_cart_subtotal()  ?></dd>
 					</dl>
 
-                    <!--<dl class="my-cart__subtotal">
-                        <dt>Taxes</dt>
-                        <dd><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">&#36;</span>100.00</span></dd>
-                    </dl>-->
-
 					<dl class="my-cart__total">
 						<dt>TOTAL</dt>
 						<dd><?= WC()->cart->get_cart_total() ?></dd>
@@ -383,6 +386,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div>
 			<!-- /my-cart__end -->
 
+            <?php do_action( 'woocommerce_after_cart_table' ); ?>
 		</form>
 
 		<?php
@@ -488,3 +492,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 </div>
 <!-- /my-cart__layout -->
 
+<?php do_action( 'woocommerce_after_cart' ); ?>

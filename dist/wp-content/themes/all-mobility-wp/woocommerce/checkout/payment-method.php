@@ -26,12 +26,13 @@ if ( ! defined( 'ABSPATH' ) ) {
     <?php if( $gateway->id != 'stripe' ): ?>
 
 
-            <input type="radio" name="payment_method"  value="<?php echo esc_attr( $gateway->id ); ?>" id="<?= $gateway->id ?>">
+            <input class="input-radio" type="radio" name="payment_method"  value="<?php echo esc_attr( $gateway->id ); ?>" id="payment_method_<?= $gateway->id ?>">
 
 
     <?php
 
-        $label_class = '';
+        //$label_class = '';
+        $label_class = 'payment_method_';
 
     else :
         $label_class = 'payment_method_';
@@ -50,16 +51,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         <?= $name  ?>
         <span class="checkout__payments-more">
-            <span class="checkout__payments-text"></span>
+            <span class="checkout__payments-text"><?= $gateway->get_description() ?></span>
             <span class="checkout__payments-pics">
                 
                 <?php if( $gateway->id == 'ppec_paypal' ){ ?>
 
                     <img src="<?= DIRECT ?>pic/paypal.jpg" width="48" height="30" alt="paypal">
-                    <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/ppcredit-logo-small.png" width="148" height="30" class="ppcreditlogo ec_checkout_page_button_type_pc" align="top" alt="Check out with PayPal Credit">
+                    <img src="<?= DIRECT ?>/pic/card-pp-credit.jpg" width="" height="30" class="ppcreditlogo ec_checkout_page_button_type_pc" align="top" alt="Check out with PayPal Credit">
                 <?php }
 
-                elseif( $gateway->id == 'stripe' ) { ?>
+                elseif( $gateway->id == 'stripe' || $gateway->id == 'usaepay') { ?>
                     <img src="<?= DIRECT ?>pic/visa.jpg" width="48" height="30" alt="visa">
                     <img src="<?= DIRECT ?>pic/mastercard.jpg" width="48" height="30" alt="mastercard">
                     <img src="<?= DIRECT ?>pic/card-amex.jpg" width="50" height="30" alt="amex">
@@ -69,7 +70,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                        <?php } ?>
 
             </span>
-            <span class="checkout__payments-text"><?= $gateway->get_description() ?></span>
 
         </span>
 
@@ -81,11 +81,5 @@ if ( ! defined( 'ABSPATH' ) ) {
       </div>
 	<?php endif; ?>
 	<?php }  ?>
-
-<!--    --><?php //if( $gateway == 'stripe' ): ?>
-<!--        <div class="payment_box payment_method_stripe">-->
-<!--            <div id="stripe-payment-data" data-panel-label="" data-description="" data-email="alexksnikol@gmail.com" data-amount="130000" data-name="All About Mobility" data-currency="usd" data-image="" data-bitcoin="true" data-locale="en" data-allow-remember-me="false"><p>Pay with your credit card via Stripe. TEST MODE ENABLED. In test mode, you can use the card number 4242424242424242 with any CVC and a valid expiration date or check the documentation "<a href="https://stripe.com/docs/testing">Testing Stripe</a>" for more card numbers.</p>-->
-<!--            </div>		</div>-->
-<!--    --><?php //endif; ?>
 
 </div>

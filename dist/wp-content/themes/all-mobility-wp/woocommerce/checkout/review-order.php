@@ -68,22 +68,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<td><?php wc_cart_totals_subtotal_html(); ?></td>
 		</tr>
 
-		<?php foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
-			<tr class="cart-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
-				<th><?php wc_cart_totals_coupon_label( $coupon ); ?></th>
-				<td><?php wc_cart_totals_coupon_html( $coupon ); ?></td>
-			</tr>
-		<?php endforeach; ?>
-
-		<?php if ( WC()->cart->needs_shipping() && WC()->cart->show_shipping() ) : ?>
-
-			<?php do_action( 'woocommerce_review_order_before_shipping' ); ?>
-
-			<?php wc_cart_totals_shipping_html(); ?>
-
-			<?php do_action( 'woocommerce_review_order_after_shipping' ); ?>
-
-		<?php endif; ?>
+        <?php foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
+            <tr class="cart-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
+                <th><?= __('Promo code  discount', 'woocommerce'); ?></th>
+                <td><?=  '-'.wc_price(WC()->cart->get_coupon_discount_amount( $coupon->get_code(), WC()->cart->display_cart_ex_tax )); ?></td>
+            </tr>
+        <?php endforeach; ?>
 
 		<?php foreach ( WC()->cart->get_fees() as $fee ) : ?>
 			<tr class="fee">
@@ -102,16 +92,29 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php endforeach; ?>
 			<?php else : ?>
 				<tr class="tax-total">
-					<th><?php echo esc_html( WC()->countries->tax_or_vat() ); ?></th>
+					<th><?= __('Taxes', 'woocommerce'); ?></th>
 					<td><?php wc_cart_totals_taxes_total_html(); ?></td>
 				</tr>
 			<?php endif; ?>
 		<?php endif; ?>
 
+        <?php if ( WC()->cart->needs_shipping() && WC()->cart->show_shipping() ) : ?>
+
+          <?php do_action( 'woocommerce_review_order_before_shipping' ); ?>
+
+            <tr class="shipping">
+                <th><?= __('Shipping (UPS Ground)', 'woocommerce'); ?></th>
+                <td><?= WC()->cart->get_cart_shipping_total(); ?></td>
+            </tr>
+
+          <?php do_action( 'woocommerce_review_order_after_shipping' ); ?>
+
+        <?php endif; ?>
+
 		<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
 
 		<tr class="order-total">
-			<th><?php _e( 'Total', 'woocommerce' ); ?></th>
+			<th><?php _e( 'Total:', 'woocommerce' ); ?></th>
 			<td><?php wc_cart_totals_order_total_html(); ?></td>
 		</tr>
 

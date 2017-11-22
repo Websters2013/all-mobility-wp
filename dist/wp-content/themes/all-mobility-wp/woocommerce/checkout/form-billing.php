@@ -13,7 +13,7 @@
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @author  WooThemes
  * @package WooCommerce/Templates
- * @version 3.0.0
+ * @version 3.0.9
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -60,7 +60,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <div class="twofields">
 
                             <p class="form-row form-wide  form-row-first validate-required validate-postcode address-field" id="billing_postcode_field">
-                                <label for="billing_postcode" class="">State/ZIP<abbr class="required" title="required">*</abbr></label>
+                                <label for="billing_postcode" class="">State / Zip<abbr class="required" title="required">*</abbr></label>
 
 
                                 <?php $states = WC()->countries->get_states( 'US' );  ?>
@@ -68,23 +68,22 @@ if ( ! defined( 'ABSPATH' ) ) {
                                 <?php if(is_array( $states ) && !empty( $states )): ?>
 
                                     <span class="custom_format_state">
-					<select name="billing_state" id="billing_state"  data-placeholder="" autocomplete="address-level1">
-						<?php foreach ($states as $key => $state){
+					                    <select name="billing_state" id="billing_state"  data-placeholder="" autocomplete="address-level1">
+                                        <?php foreach ($states as $key => $state){
 
-                            if($checkout->get_value('billing_state') == $key){
-                                $selected = 'selected';
-                            } else {
-                                $selected = '';
-                            }
+                                            if($checkout->get_value('billing_state') == $key){
+                                                $selected = 'selected';
+                                            } else {
+                                                $selected = '';
+                                            }
 
-                            ?>
+                                            ?>
 
-                            <option  <?= $selected ?> value="<?= $key ?>"><?= $key ?></option>
+                                            <option  <?= $selected ?> value="<?= $key ?>"><?= $key ?></option>
 
-                        <?php } ?>
-					</select>
-                    </span>
-
+                                        <?php } ?>
+                                        </select>
+                                    </span>
 
                                 <?php endif; ?>
 

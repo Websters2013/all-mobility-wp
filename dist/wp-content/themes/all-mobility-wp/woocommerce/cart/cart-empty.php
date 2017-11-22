@@ -13,7 +13,7 @@
  * @see 	    https://docs.woocommerce.com/document/template-structure/
  * @author  WooThemes
  * @package WooCommerce/Templates
- * @version 2.0.0
+ * @version 3.1.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -22,21 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 wc_print_notices();
 
-?>
-
-<!-- my-cart__layout -->
-<div class="my-cart__layout">
-
-	<!-- my-cart__empty -->
-	<div class="my-cart__empty">
-		<div>
-
-			<h2 class="site__title site__title_3">Your cart is currently empty.</h2>
-			
-		</div>
-	</div>
-	<!-- /my-cart__empty -->
-
-</div>
-<!-- /my-cart__layout -->
-
+/**
+ * @hooked wc_empty_cart_message - 10
+ */
+do_action( 'woocommerce_cart_is_empty' );

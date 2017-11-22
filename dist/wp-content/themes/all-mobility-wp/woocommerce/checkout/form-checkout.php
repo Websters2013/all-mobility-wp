@@ -19,7 +19,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
+global $woocommerce;
 
 
 do_action( 'woocommerce_before_checkout_form', $checkout );
@@ -54,8 +54,8 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 							<p class="form-row form-row-wide create-account">
 								<input class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" id="createaccount" <?php checked( ( true === $checkout->get_value( 'createaccount' ) || ( true === apply_filters( 'woocommerce_create_account_default_checked', false ) ) ), true ) ?> type="checkbox" name="createaccount" value="1" />
 
-								<label for="createaccount" class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
-									<?php _e( 'Save this information and create an account with us to get discounts and special offers', 'woocommerce' ); ?>
+								<label for="createaccount" class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox woocommerce-form__label-createaccount">
+									<?php _e( 'Save this information and create and account with us to get discounts and special offers', 'woocommerce' ); ?>
 								</label>
 							</p>
 
@@ -65,7 +65,7 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 						<?php if ( $checkout->get_checkout_fields( 'account' ) ) : ?>
 
-							<div class="create-account">
+							<div class="create-account create-account-input">
 								<?php foreach ( $checkout->get_checkout_fields( 'account' )  as $key => $field ) : ?>
 									<?php woocommerce_form_field( $key, $field, $checkout->get_value( $key ) ); ?>
 								<?php endforeach; ?>
@@ -82,13 +82,13 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 
 		</div>
-<!---->
-<!--		--><?php //do_action( 'woocommerce_checkout_after_customer_details' ); ?>
+
+            <?php //do_action( 'woocommerce_checkout_after_customer_details' ); ?>
 		</div>
 	<?php endif; ?>
 		<div>
 	<div class="total-order">
-	<h3 id="order_review_heading"><?php _e( 'Order Summary', 'woocommerce' ); ?></h3>
+	<h3 id="order_review_heading"><span><?php _e( 'Order Summary', 'woocommerce' ); ?></span> <a href="<?= $woocommerce->cart->get_cart_url(); ?>">edit</a></h3>
 
 	<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
 

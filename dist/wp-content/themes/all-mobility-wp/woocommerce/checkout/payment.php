@@ -27,7 +27,7 @@ if ( ! is_ajax() ) {
 <div id="payment" class="woocommerce-checkout-payment">
 	<?php if ( WC()->cart->needs_payment() ) : ?>
 
-	<div class="checkout__payments">
+	<div class="checkout__payments wc_payment_methods payment_methods methods">
 
 		<h3>Choose payment method</h3>
 
@@ -48,6 +48,8 @@ if ( ! is_ajax() ) {
 
 	<?php endif; ?>
 
+    <p class="checkout__payments-error">Please try another payment method or call us at 1-800-ALL-MOBI for assistance.</p>
+
 	<div class="form-row place-order">
 		<noscript>
 			<?php _e( '<p class="checkout__payments-error">Please try another payment method or call us at 1-800-ALL-MOBI for assistance.</p>', 'woocommerce' ); ?>
@@ -57,9 +59,6 @@ if ( ! is_ajax() ) {
 		<?php wc_get_template( 'checkout/terms.php' ); ?>
 
 		<?php do_action( 'woocommerce_review_order_before_submit' ); ?>
-
-<!--        <a class="paypal_checkout_button" href="https://allaroundmobility.com/?wc-api=WC_Gateway_PayPal_Express_AngellEYE&amp;pp_action=set_express_checkout&amp;use_paypal_credit=true">
-<img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/ppcredit-logo-small.png" width="148" height="26" class="ppcreditlogo ec_checkout_page_button_type_pc" align="top" alt="Check out with PayPal Credit"></a>-->
 
 		<button type="submit" class="button alt" id="place_order" name="woocommerce_checkout_place_order" id="place_order" value="Place order" data-value="Place order">
 			<span>PURCHASE</span>
