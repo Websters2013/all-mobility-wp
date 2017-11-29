@@ -1,4 +1,9 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * My Account Shortcodes
  *
@@ -211,8 +216,6 @@ class WC_Shortcode_My_Account {
 						'key'   => $rp_key,
 						'login' => $rp_login,
 					) );
-				} else {
-					self::set_reset_password_cookie();
 				}
 			}
 		}
@@ -232,8 +235,6 @@ class WC_Shortcode_My_Account {
 	 * @return bool True: when finish. False: on error
 	 */
 	public static function retrieve_password() {
-		global $wpdb, $wp_hasher;
-
 		$login = trim( $_POST['user_login'] );
 
 		if ( empty( $login ) ) {
@@ -313,7 +314,7 @@ class WC_Shortcode_My_Account {
 		$user = check_password_reset_key( $key, $login );
 
 		if ( is_wp_error( $user ) ) {
-			wc_add_notice( $user->get_error_message(), 'error' );
+			wc_add_notice( __( 'This key is invalid or has already been used. Please reset your password again if needed.', 'woocommerce' ), 'error' );
 			return false;
 		}
 
@@ -337,6 +338,8 @@ class WC_Shortcode_My_Account {
 
 	/**
 	 * Set or unset the cookie.
+	 *
+	 * @param string $value
 	 */
 	public static function set_reset_password_cookie( $value = '' ) {
 		$rp_cookie = 'wp-resetpass-' . COOKIEHASH;

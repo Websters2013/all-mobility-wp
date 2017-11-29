@@ -64,7 +64,7 @@ class WC_Product_Variable extends WC_Product {
 	 * Get an array of all sale and regular prices from all variations. This is used for example when displaying the price range at variable product level or seeing if the variable product is on sale.
 	 *
 	 * @param  bool $include_taxes Should taxes be included in the prices.
-	 * @return array() Array of RAW prices, regular prices, and sale prices with keys set to variation ID.
+	 * @return array Array of RAW prices, regular prices, and sale prices with keys set to variation ID.
 	 */
 	public function get_variation_prices( $include_taxes = false ) {
 		$prices = $this->data_store->read_price_data( $this, $include_taxes );
@@ -143,12 +143,14 @@ class WC_Product_Variable extends WC_Product {
 			$max_reg_price = end( $prices['regular_price'] );
 
 			if ( $min_price !== $max_price ) {
-				$price = apply_filters( 'woocommerce_variable_price_html', wc_format_price_range( $min_price, $max_price ) . $this->get_price_suffix(), $this );
+				$price = wc_format_price_range( $min_price, $max_price );
 			} elseif ( $this->is_on_sale() && $min_reg_price === $max_reg_price ) {
-				$price = apply_filters( 'woocommerce_variable_price_html', wc_format_sale_price( wc_price( $max_reg_price ), wc_price( $min_price ) ) . $this->get_price_suffix(), $this );
+				$price = wc_format_sale_price( wc_price( $max_reg_price ), wc_price( $min_price ) );
 			} else {
-				$price = apply_filters( 'woocommerce_variable_price_html', wc_price( $min_price ) . $this->get_price_suffix(), $this );
+				$price = wc_price( $min_price );
 			}
+
+			$price = apply_filters( 'woocommerce_variable_price_html', $price . $this->get_price_suffix(), $this );
 		}
 
 		return apply_filters( 'woocommerce_get_price_html', $price, $this );
@@ -177,6 +179,8 @@ class WC_Product_Variable extends WC_Product {
 
 	/**
 	 * Return a products child ids.
+	 *
+	 * @param bool|string $visible_only
 	 *
 	 * @return array Children ids
 	 */
@@ -221,6 +225,10 @@ class WC_Product_Variable extends WC_Product {
 
 	/**
 	 * Variable products themselves cannot be downloadable.
+	 *
+	 * @param string $context
+	 *
+	 * @return bool
 	 */
 	public function get_downloadable( $context = 'view' ) {
 		return false;
@@ -228,6 +236,10 @@ class WC_Product_Variable extends WC_Product {
 
 	/**
 	 * Variable products themselves cannot be virtual.
+	 *
+	 * @param string $context
+	 *
+	 * @return bool
 	 */
 	public function get_virtual( $context = 'view' ) {
 		return false;
@@ -278,7 +290,7 @@ class WC_Product_Variable extends WC_Product {
 			'attributes'            => $variation->get_variation_attributes(),
 			'availability_html'     => wc_get_stock_html( $variation ),
 			'backorders_allowed'    => $variation->backorders_allowed(),
-			'dimensions'            => wc_format_dimensions( $variation->get_dimensions( false ) ),
+			'dimensions'            => $variation->get_dimensions( false ),
 			'dimensions_html'       => wc_format_dimensions( $variation->get_dimensions( false ) ),
 			'display_price'         => wc_get_price_to_display( $variation ),
 			'display_regular_price' => wc_get_price_to_display( $variation, array( 'price' => $variation->get_regular_price() ) ),
@@ -291,13 +303,13 @@ class WC_Product_Variable extends WC_Product {
 			'is_virtual'            => $variation->is_virtual(),
 			'max_qty'               => 0 < $variation->get_max_purchase_quantity() ? $variation->get_max_purchase_quantity() : '',
 			'min_qty'               => $variation->get_min_purchase_quantity(),
-			'price_html'            => $show_variation_price ? '<span class="price">' . $variation->get_price_html() . '</span><strong class="product__price"></strong>' : '',
+			'price_html'            => $show_variation_price ? '<span class="price">' . $variation->get_price_html() . '</span>' : '',
 			'sku'                   => $variation->get_sku(),
 			'variation_description' => wc_format_content( $variation->get_description() ),
 			'variation_id'          => $variation->get_id(),
 			'variation_is_active'   => $variation->variation_is_active(),
 			'variation_is_visible'  => $variation->variation_is_visible(),
-			'weight'                => wc_format_weight( $variation->get_weight() ),
+			'weight'                => $variation->get_weight(),
 			'weight_html'           => wc_format_weight( $variation->get_weight() ),
 		), $this, $variation );
 	}
@@ -477,7 +489,7 @@ class WC_Product_Variable extends WC_Product {
 	}
 
 	/**
-	 * Returns whether or not the product has additonal options that need
+	 * Returns whether or not the product has additional options that need
 	 * selecting before adding to cart.
 	 *
 	 * @since  3.0.0
@@ -498,7 +510,7 @@ class WC_Product_Variable extends WC_Product {
 	 * upwards (from child to parent) when the variation is saved.
 	 *
 	 * @param WC_Product|int $product Product object or ID for which you wish to sync.
-	 * @param bool $save If true, the prouduct object will be saved to the DB before returning it.
+	 * @param bool $save If true, the product object will be saved to the DB before returning it.
 	 * @return WC_Product Synced product object.
 	 */
 	public static function sync( $product, $save = true ) {
@@ -526,7 +538,7 @@ class WC_Product_Variable extends WC_Product {
 	 * Sync parent stock status with the status of all children and save.
 	 *
 	 * @param WC_Product|int $product Product object or ID for which you wish to sync.
-	 * @param bool $save If true, the prouduct object will be saved to the DB before returning it.
+	 * @param bool $save If true, the product object will be saved to the DB before returning it.
 	 * @return WC_Product Synced product object.
 	 */
 	public static function sync_stock_status( $product, $save = true ) {
