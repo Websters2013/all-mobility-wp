@@ -58,10 +58,10 @@ if ( !class_exists( 'WPSL_Frontend' ) ) {
             
             add_filter( 'the_content',                 array( $this, 'cpt_template' ) );
             
-            add_shortcode( 'wpsl',                     array( $this, 'show_store_locator' ) );
-            add_shortcode( 'wpsl_address',             array( $this, 'show_store_address' ) );
-            add_shortcode( 'wpsl_hours',               array( $this, 'show_opening_hours' ) );
-            add_shortcode( 'wpsl_map',                 array( $this, 'show_store_map' ) );
+            add_shortcode( 'wpsl',                 array( $this, 'show_store_locator' ) );
+            add_shortcode( 'wpsl_address',         array( $this, 'show_store_address' ) );
+            add_shortcode( 'wpsl_hours',           array( $this, 'show_opening_hours' ) );
+            add_shortcode( 'wpsl_map',             array( $this, 'show_store_map' ) );
 		}
         
         /**
@@ -251,12 +251,12 @@ if ( !class_exists( 'WPSL_Frontend' ) ) {
 
                 $sql_sort = 'ORDER BY distance '. $limit;
             } else {
-                array_push( $placeholder_values, $this->check_store_filter( 'radius' ), $this->check_store_filter( 'max_results' ) );
+                array_push( $placeholder_values, $this->check_store_filter( 'search_radius' ), $this->check_store_filter( 'max_results' ) );
                 $sql_sort = 'HAVING distance < %d ORDER BY distance LIMIT 0, %d';
             }
 
             $placeholder_values = apply_filters( 'wpsl_sql_placeholder_values', $placeholder_values );
-            
+
             /* 
              * The sql that will check which store locations fall within 
              * the selected radius based on the lat and lng values. 
@@ -1079,17 +1079,41 @@ if ( !class_exists( 'WPSL_Frontend' ) ) {
          * Make sure the filter contains a valid value, otherwise use the default value.
          * 
          * @since 2.0.0
+         * @param  string $filter       The name of the filter
          * @return string $filter_value The filter value
          */
         public function check_store_filter( $filter ) {
-            
-            if ( isset( $_GET[$filter] ) && absint( $_GET[$filter] ) ) {
+
+            if ( isset( $_GET[$filter] ) && absint( $_GET[$filter] ) && $this->check_allowed_filter_value( $filter ) ) {
                 $filter_value = $_GET[$filter];
             } else {
                 $filter_value = $this->get_default_filter_value( $filter );
-            }    
-            
+            }
+
             return $filter_value;
+        }
+
+        /**
+         * Make sure the used filter value isn't bigger
+         * then the value that's set on the settings page.
+         *
+         * @since 2.2.9
+         * @param  string $filter  The name of the filter
+         * @return bool   $allowed True if the value is equal or smaller then the value from the settings page
+         */
+        public function check_allowed_filter_value( $filter ) {
+
+            global $wpsl_settings;
+
+            $allowed = false;
+
+            $max_filter_val = max( explode(',', str_replace( array( '[',']' ), '', $wpsl_settings[$filter] ) ) );
+
+            if ( (int) $_GET[$filter] <= (int) $max_filter_val ) {
+                $allowed = true;
+            }
+
+            return $allowed;
         }
                 
         /**
@@ -1099,22 +1123,22 @@ if ( !class_exists( 'WPSL_Frontend' ) ) {
          * @param  string $type     The request list type
          * @return string $response The default list value
          */
-       public function get_default_filter_value( $type ) {
+        public function get_default_filter_value( $type ) {
 
-           $settings    = get_option( 'wpsl_settings' );
-           $list_values = explode( ',', $settings[$type] );
+            $settings    = get_option( 'wpsl_settings' );
+            $list_values = explode( ',', $settings[$type] );
 
-           foreach ( $list_values as $k => $list_value ) {
+            foreach ( $list_values as $k => $list_value ) {
 
-               // The default radius has a [] wrapped around it, so we check for that and filter out the [].
-               if ( strpos( $list_value, '[' ) !== false ) {
+                // The default radius has a [] wrapped around it, so we check for that and filter out the [].
+                if ( strpos( $list_value, '[' ) !== false ) {
                    $response = filter_var( $list_value, FILTER_SANITIZE_NUMBER_INT );
                    break;
-               }
-           }	
+                }
+            }
 
-           return $response;		
-       }
+            return $response;
+        }
         
         /**
          * Check if we have a opening day that has an value, if not they are all set to closed.
@@ -1610,7 +1634,8 @@ if ( !class_exists( 'WPSL_Frontend' ) ) {
                 'mapTabAnchor'          => apply_filters( 'wpsl_map_tab_anchor', 'wpsl-map-tab' ),
                 'mapTabAnchorReturn'    => apply_filters( 'wpsl_map_tab_anchor_return', false ),
                 'gestureHandling'       => apply_filters( 'wpsl_gesture_handling', 'auto' ),
-                'directionsTravelMode'  => $this->get_directions_travel_mode()
+                'directionsTravelMode'  => $this->get_directions_travel_mode(),
+                'runFitBounds'          => $wpsl_settings['run_fitbounds']
             );
 
 			$locator_map_settings = array(
@@ -1662,10 +1687,11 @@ if ( !class_exists( 'WPSL_Frontend' ) ) {
 
             // If the marker clusters are enabled, include the js file and marker settings.
             if ( $wpsl_settings['marker_clusters'] ) {
-                wp_enqueue_script( 'wpsl-cluster', WPSL_URL . 'js/markerclusterer'. $min .'.js', '', WPSL_VERSION_NUM, true  ); //not minified version is in the /js folder
+                wp_enqueue_script( 'wpsl-cluster', WPSL_URL . 'js/markerclusterer'. $min .'.js', array( 'wpsl-js' ), WPSL_VERSION_NUM, true  ); //not minified version is in the /js folder
 
-                $base_settings['clusterZoom'] = $wpsl_settings['cluster_zoom'];
-                $base_settings['clusterSize'] = $wpsl_settings['cluster_size'];
+                $base_settings['clusterZoom']      = $wpsl_settings['cluster_zoom'];
+                $base_settings['clusterSize']      = $wpsl_settings['cluster_size'];
+                $base_settings['clusterImagePath'] = 'https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/images/m';
             }
 
             // Check if we need to include the infobox script and settings.

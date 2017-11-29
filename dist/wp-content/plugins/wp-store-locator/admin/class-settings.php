@@ -174,6 +174,9 @@ if ( !class_exists( 'WPSL_Settings' ) ) {
 				$output['start_latlng'] = $start_latlng;
 			}
 
+			// Do we need to run the fitBounds function make the markers fit in the viewport?
+            $output['run_fitbounds'] = isset( $_POST['wpsl_map']['run_fitbounds'] ) ? 1 : 0;
+
 			// Check if we have a valid map type.
 			$output['map_type']    = wpsl_valid_map_type( $_POST['wpsl_map']['type'] );
             $output['auto_locate'] = isset( $_POST['wpsl_map']['auto_locate'] ) ? 1 : 0; 

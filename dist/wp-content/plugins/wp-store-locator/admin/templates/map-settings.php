@@ -199,6 +199,10 @@ global $wpdb, $wpsl, $wpsl_admin, $wp_version, $wpsl_settings;
                                 <input type="hidden" value="<?php echo esc_attr( $wpsl_settings['start_latlng'] ); ?>" name="wpsl_map[start_latlng]" id="wpsl-latlng" />
                             </p>
                             <p>
+                                <label for="wpsl-run-fitbounds"><?php _e( 'Auto adjust the zoom level to make sure all markers are visible?', 'wpsl' ); ?><span class="wpsl-info"><span class="wpsl-info-text wpsl-hide"><?php _e( 'This runs after a search is made, and makes sure all the returned locations are visible in the viewport.', 'wpsl' ); ?></span></span></label>
+                                <input type="checkbox" value="" <?php checked( $wpsl_settings['run_fitbounds'], true ); ?> name="wpsl_map[run_fitbounds]" id="wpsl-run-fitbounds">
+                            </p>
+                            <p>
                                 <label for="wpsl-zoom-level"><?php _e( 'Initial zoom level', 'wpsl' ); ?>:</label> 
                                 <?php echo $wpsl_admin->settings_page->show_zoom_levels(); ?>
                             </p>

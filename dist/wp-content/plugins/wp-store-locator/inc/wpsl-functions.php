@@ -79,6 +79,7 @@ function wpsl_get_default_settings() {
         'autocomplete'            => 0,
         'autoload'                => 1,
         'autoload_limit'          => 50,
+        'run_fitbounds'           => 1,
         'zoom_level'              => 3,
         'auto_zoom_level'         => 15,
         'start_name'              => '',

@@ -1246,8 +1246,16 @@ function makeAjaxRequest( startLatLng, resetMap, autoLoad, infoWindow ) {
 			$storeList.html( "<li class='no-results'>" + noResultsMsg + "</li>" );
 		}
 		
-		// Make sure everything fits on the screen.
-		fitBounds();
+		/*
+		 * Do we need to adjust the zoom level so that all the markers fit in the viewport,
+		 * or just center the map on the start marker.
+		 */
+        if ( wpslSettings.runFitBounds == 1 ) {
+            fitBounds();
+		} else {
+            map.setZoom( Number( wpslSettings.zoomLevel ) );
+            map.setCenter( markersArray[0].position );
+        }
 		
 		/* 
 		 * Store the default zoom and latlng values the first time 
@@ -1315,8 +1323,8 @@ function collectAjaxData( startLatLng, resetMap, autoLoad ) {
 	 * Otherwise we first make sure the filter val is valid before including the radius / max_results param
 	 */
 	if ( resetMap ) {
-		ajaxData.max_results = wpslSettings.maxResults;
-		ajaxData.radius	     = wpslSettings.searchRadius;
+		ajaxData.max_results   = wpslSettings.maxResults;
+		ajaxData.search_radius = wpslSettings.searchRadius;
 	} else {
 		if ( isMobile || defaultFilters ) {
 			maxResult = parseInt( $( "#wpsl-results .wpsl-dropdown" ).val() );
@@ -1326,7 +1334,7 @@ function collectAjaxData( startLatLng, resetMap, autoLoad ) {
 			radius    = parseInt( $( "#wpsl-radius .wpsl-selected-item" ).attr( "data-value" ) );
 		}
 		
-		// If the max resuls or radius filter values are NaN, then we use the default value.
+		// If the max results or radius filter values are NaN, then we use the default value.
 		if ( isNaN( maxResult ) ) {
 			ajaxData.max_results = wpslSettings.maxResults;
 		} else {
@@ -1334,9 +1342,9 @@ function collectAjaxData( startLatLng, resetMap, autoLoad ) {
 		}
 		
 		if ( isNaN( radius ) ) {
-			ajaxData.radius = wpslSettings.searchRadius;
+			ajaxData.search_radius = wpslSettings.searchRadius;
 		} else {
-			ajaxData.radius = radius;
+			ajaxData.search_radius = radius;
 		}
 		
 		/* 
@@ -1496,7 +1504,8 @@ function getCheckboxIds() {
  */
 function checkMarkerClusters() {
 	if ( wpslSettings.markerClusters == 1 ) {
-		var clusterZoom = Number( wpslSettings.clusterZoom ),
+		var markers, markersArrayNoStart,
+			clusterZoom = Number( wpslSettings.clusterZoom ),
 			clusterSize = Number( wpslSettings.clusterSize );
 
 		if ( isNaN( clusterZoom ) ) {
@@ -1507,7 +1516,18 @@ function checkMarkerClusters() {
 			clusterSize = "";
 		}
 
-		markerClusterer = new MarkerClusterer( map, markersArray, {
+        /*
+         * Remove the start location marker from the cluster so the location
+         * count represents the actual returned locations, and not +1 for the start location.
+         */
+		if ( typeof wpslSettings.excludeStartFromCluster !== "undefined" && wpslSettings.excludeStartFromCluster == 1 ) {
+            markersArrayNoStart = markersArray.slice( 0 );
+            markersArrayNoStart.splice( 0,1 );
+        }
+
+        markers = ( typeof markersArrayNoStart === "undefined" ) ? markersArray : markersArrayNoStart;
+
+        markerClusterer = new MarkerClusterer( map, markers, {
 			gridSize: clusterSize,
 			maxZoom: clusterZoom
 		});

