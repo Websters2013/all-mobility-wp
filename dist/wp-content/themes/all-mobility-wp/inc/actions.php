@@ -104,6 +104,7 @@ function add_js()
         wp_enqueue_style('index_css', get_template_directory_uri().'/assets/css/index.css');
         wp_enqueue_style('swiper_css',get_template_directory_uri().'/assets/css/swiper.min.css');
         wp_enqueue_script('swiper_js');
+        wp_enqueue_script('slick_js');
         wp_enqueue_script('index_js');
     }
 

@@ -56,15 +56,15 @@ if ( ! defined( 'ABSPATH' ) ) {
                 
                 <?php if( $gateway->id == 'ppec_paypal' ){ ?>
 
-                    <img src="<?= DIRECT ?>pic/paypal.jpg" width="48" height="30" alt="paypal">
-                    <img src="<?= DIRECT ?>/pic/card-pp-credit.jpg" width="" height="30" class="ppcreditlogo ec_checkout_page_button_type_pc" align="top" alt="Check out with PayPal Credit">
+                    <img src="<?= DIRECT ?>pic/paypal.svg" width="48" height="30" alt="paypal">
+                    <img src="<?= DIRECT ?>/pic/paypal-credit.svg" width="" height="30" class="ppcreditlogo ec_checkout_page_button_type_pc" align="top" alt="Check out with PayPal Credit">
                 <?php }
 
                 elseif( $gateway->id == 'stripe' || $gateway->id == 'usaepay') { ?>
-                    <img src="<?= DIRECT ?>pic/visa.jpg" width="48" height="30" alt="visa">
-                    <img src="<?= DIRECT ?>pic/mastercard.jpg" width="48" height="30" alt="mastercard">
-                    <img src="<?= DIRECT ?>pic/card-amex.jpg" width="50" height="30" alt="amex">
-                    <img src="<?= DIRECT ?>pic/card-discover.jpg" width="48" height="30" alt="amex">
+                    <img src="<?= DIRECT ?>pic/visa.svg" width="48" height="30" alt="visa">
+                    <img src="<?= DIRECT ?>pic/mc.svg" width="48" height="30" alt="mastercard">
+                    <img src="<?= DIRECT ?>pic/amex.svg" width="50" height="30" alt="amex">
+                    <img src="<?= DIRECT ?>pic/discover.svg" width="48" height="30" alt="amex">
                 <?php } else { ?>
                     <?= $image = $gateway->get_icon(); ?>
                        <?php } ?>
