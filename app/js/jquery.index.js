@@ -15,7 +15,7 @@
         //private properties
         var _obj = obj,
             _window = $(window),
-            _itemsWrap = _obj.find('.main-slider__items'),
+            _itemsWrap = _obj.find('.swiper-container'),
             _pagination = _obj.find('.swiper-pagination'),
             _prev = _obj.find('.main-slider__constrols .swiper-button-prev'),
             _next = _obj.find('.main-slider__constrols .swiper-button-next'),
@@ -24,19 +24,6 @@
         //private methods
 
         var _addEvents = function () {
-
-                _itemsWrap.on('init', function(slick) {
-
-                    _itemsWrap.find('.slick-current').find('.main-slider__content').addClass('visible');
-
-                } );
-
-                _itemsWrap.on('afterChange', function(slick, currentSlide) {
-
-                    $(currentSlide.$slides).find('.main-slider__content').removeClass('visible');
-                    $(currentSlide.$slides).filter('.slick-current').find('.main-slider__content').addClass('visible');
-
-                } );
 
                 _window.on( {
                     resize: function () {
@@ -59,14 +46,15 @@
             },
             _initSlider = function() {
 
-                _itemsWrap.slick( {
+                var swiper = new Swiper(_itemsWrap, {
                     dots: true,
-                    autoplay: true,
-                    autoplaySpeed: 5000,
-                    prevArrow: _prev,
-                    nextArrow: _next,
-                    appendDots:  _pagination
-                } );
+                    slideActiveClass: 'visible',
+                    //paginationType: 'bullets',
+                    nextButton: _next,
+                    prevButton: _prev,
+                    autoplay : 3500,
+                    loop : true
+                });
 
                 _obj.find( '.main-slider__item' ).css( {
                     minHeight: _itemsWrap.height()
