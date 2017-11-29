@@ -1,0 +1,540 @@
+2017-11-21T07:15:50+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T07:16:15+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 2016947539 bytes)
+
+2017-11-21T07:16:17+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 2016947539 bytes)
+
+2017-11-21T07:16:17+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 2016947539 bytes)
+
+2017-11-21T07:16:17+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 2016947539 bytes)
+
+2017-11-21T07:16:17+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 2016947539 bytes)
+
+2017-11-21T07:16:17+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 2016947539 bytes)
+
+2017-11-21T07:16:17+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 2016947539 bytes)
+
+2017-11-21T07:16:17+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 2016947539 bytes)
+
+2017-11-21T07:16:18+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 2016947539 bytes)
+
+2017-11-21T07:16:18+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 2016947539 bytes)
+
+2017-11-21T07:16:22+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 2016947539 bytes)
+
+2017-11-21T07:16:37+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 2016947539 bytes)
+
+2017-11-21T07:16:38+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 2016947539 bytes)
+
+2017-11-21T07:16:46+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 2016947539 bytes)
+
+2017-11-21T07:16:59+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 2016947539 bytes)
+
+2017-11-21T07:17:01+00:00 CRITICAL Allowed memory size of 536870912 bytes exhausted (tried to allocate 2016947539 bytes)
+
+2017-11-21T08:04:25+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T08:04:25+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T08:04:25+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T08:04:25+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T08:04:25+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T08:07:27+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T08:07:27+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T08:07:27+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T08:07:27+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T08:07:27+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T08:09:38+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T08:09:38+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T08:09:38+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T08:12:09+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T08:12:09+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T08:14:18+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T08:16:29+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T08:18:26+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T08:20:21+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-11-21T13:06:50+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:59
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:06:53+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:59
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:07:09+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:59
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:07:12+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:59
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:11:32+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:59
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:11:34+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:59
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:12:26+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:59
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:12:28+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:59
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:13:44+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:59
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:13:45+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:59
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:13:47+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:59
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:27:41+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:59
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:27:43+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:59
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:42:04+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:42:07+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:43:04+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:43:08+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:43:26+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:43:29+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:43:41+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:43:45+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:44:04+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:44:08+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:44:44+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:44:48+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:44:50+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:44:53+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:44:58+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:45:02+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:45:20+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:45:24+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:45:26+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:45:30+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:55:32+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T13:55:36+00:00 CRITICAL Uncaught Error: Call to a member function get_total() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:69
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T14:36:38+00:00 CRITICAL Uncaught Error: Call to a member function get_order_number() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:65
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T14:36:41+00:00 CRITICAL Uncaught Error: Call to a member function get_order_number() on string in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:65
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T14:42:11+00:00 CRITICAL Uncaught Error: Call to undefined function get_order() in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:66
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-11-21T14:42:15+00:00 CRITICAL Uncaught Error: Call to undefined function get_order() in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:66
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
