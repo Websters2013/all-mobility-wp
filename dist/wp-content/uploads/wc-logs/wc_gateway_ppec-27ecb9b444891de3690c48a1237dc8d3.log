@@ -80034,3 +80034,394 @@
     [L_SEVERITYCODE0] => Error
 )
 
+11-30-2017 @ 08:16:29 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:16:30 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:16:34 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:16:34 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:16:35 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:16:35 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:16:36 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:16:36 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:16:37 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:16:38 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:16:38 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:16:39 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:16:40 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:16:40 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:16:41 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:16:42 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:16:45 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:16:46 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:16:46 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:16:47 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:24:11 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:24:12 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:24:13 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:24:13 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:24:14 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:24:15 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:24:15 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:24:16 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:24:16 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:24:17 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:24:18 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:24:18 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:24:19 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:24:19 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:24:20 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:24:20 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:24:21 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:24:21 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:24:22 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:24:22 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:24:23 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:24:23 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:46:41 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:46:42 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+
+11-30-2017 @ 08:46:45 - WC_Gateway_PPEC_Client::_request: remote request to https://api.sandbox.paypal.com/nvp with params: Array
+(
+    [METHOD] => GetPalDetails
+    [VERSION] => 120.0
+    [USER] => 
+    [PWD] => 
+)
+
+11-30-2017 @ 08:46:46 - WC_Gateway_PPEC_Client::_request: returns error: Array
+(
+    [ACK] => Failure
+    [L_ERRORCODE0] => 3
+    [L_SHORTMESSAGE0] => Error in WC_Gateway_PPEC_Client::_request
+    [L_LONGMESSAGE0] => An error occurred while trying to connect to PayPal: cURL error 58: could not load PEM client certificate, OpenSSL error error:0906D06C:PEM routines:PEM_read_bio:no start line, (no key found, wrong pass phrase, or wrong file format?)
+    [L_SEVERITYCODE0] => Error
+)
+

@@ -64,7 +64,7 @@
 
           <script>
               gtag('event', 'conversion', {'send_to': 'AW-826605253/aFD6CLLBxnkQxf2TigM',
-                  'value': <?= number_format($order->get_total(), 2, ',', ''); ?>,
+                  'value': <?= number_format($order->get_total(), 2, '.', ''); ?>,
                   'currency': 'USD'
               });
           </script>
