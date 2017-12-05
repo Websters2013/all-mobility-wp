@@ -210,10 +210,10 @@ function add_js()
     }
 
 }
-if(is_admin()){
+//if(is_admin()){
 //    wp_enqueue_style('style', get_template_directory_uri().'/style.css');
     wp_enqueue_style('style', get_template_directory_uri().'/style.css');
-}
+//}
 
 
 if ( function_exists( 'add_theme_support' ) ) add_theme_support( 'post-thumbnails' );

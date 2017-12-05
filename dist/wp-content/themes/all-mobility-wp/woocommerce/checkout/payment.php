@@ -48,13 +48,12 @@ if ( ! is_ajax() ) {
 
 	<?php endif; ?>
 
-    <p class="checkout__payments-error">Please try another payment method or call us at 1-800-ALL-MOBI for assistance.</p>
-
+    <!--<p class="checkout__payments-error">Please try another payment method or call us at 1-800-ALL-MOBI for assistance.</p>-->
 	<div class="form-row place-order">
-		<noscript>
-			<?php _e( '<p class="checkout__payments-error">Please try another payment method or call us at 1-800-ALL-MOBI for assistance.</p>', 'woocommerce' ); ?>
-			<br/><input type="submit" class="button alt" name="woocommerce_checkout_update_totals" value="<?php esc_attr_e( 'Update totals', 'woocommerce' ); ?>" />
-		</noscript>
+		<!--<noscript>
+			<?php /*_e( '<p class="checkout__payments-error">Please try another payment method or call us at 1-800-ALL-MOBI for assistance.</p>', 'woocommerce' ); */?>
+			<br/><input type="submit" class="button alt" name="woocommerce_checkout_update_totals" value="<?php /*esc_attr_e( 'Update totals', 'woocommerce' ); */?>" />
+		</noscript>-->
 
 		<?php wc_get_template( 'checkout/terms.php' ); ?>
 
