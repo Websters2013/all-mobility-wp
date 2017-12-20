@@ -538,3 +538,79 @@ Stack trace:
 #7 {main}
   thrown
 
+2017-12-07T12:01:03+00:00 CRITICAL Uncaught Error: Call to a member function get_title() on null in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:95
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-12-07T12:01:34+00:00 CRITICAL Uncaught Error: Call to a member function get_title() on null in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:96
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-12-07T12:02:11+00:00 CRITICAL Uncaught Error: Call to a member function get_title() on null in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:96
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-12-07T12:02:23+00:00 CRITICAL Uncaught Error: Call to a member function get_title() on null in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:96
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-12-07T12:02:47+00:00 CRITICAL Uncaught Error: Call to a member function get_name() on array in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:64
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-12-07T12:03:36+00:00 CRITICAL Uncaught Error: Call to a member function get_name() on array in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\header.php:64
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(41): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-checkout.php(5): get_header()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+
+2017-12-08T07:33:33+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+
+2017-12-14T07:14:53+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
+

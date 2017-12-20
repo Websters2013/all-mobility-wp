@@ -169,7 +169,7 @@ if ( $product->is_in_stock() ) : ?>
 				do_action( 'woocommerce_after_add_to_cart_quantity' );
 				?>
 
-				<button type="submit" name="add-to-cart" value="<?php echo esc_attr( get_the_ID() ); ?>" class="btn btn_2 btn_img-left single_add_to_cart_button button alt">
+				<button type="submit" name="add-to-cart" value="<?php echo esc_attr( get_the_ID() ); ?>" class="btn btn_2 btn_img-left single_add_to_cart_button button alt add_to_cart_button">
 			<span>
 
                                         <img src="<?= DIRECT ?>img/cart.png" width="30" height="26px" alt="">

@@ -31,7 +31,7 @@ global $product;
 		 */
 		do_action( 'woocommerce_after_add_to_cart_quantity' );
 	?>
-	<button type="submit" class="btn btn_2 btn_img-left single_add_to_cart_button button alt">
+	<button type="submit" class="btn btn_2 btn_img-left single_add_to_cart_button button alt add_to_cart_button">
 
 		<span>
 

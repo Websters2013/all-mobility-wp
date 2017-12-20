@@ -37,17 +37,6 @@
 
         <?php wp_head() ?>
 
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-            ga('create', 'UA-100436176-1', 'auto');
-            ga('send', 'pageview');
-
-        </script>
-
         <!-- Hotjar Tracking Code for https://allaroundmobility.com -->
         <script>
             (function(h,o,t,j,a,r){
@@ -67,21 +56,46 @@
             gtag('js', new Date());
 
             gtag('config', 'AW-826605253');
-        </script>
 
-	    <?php if(is_order_received_page() && $_GET['key']) {
+
+	    <?php   if(is_order_received_page() && $_GET['key']) {
 		    $id_order = wc_get_order_id_by_order_key($_GET['key']);
 		    $order = new WC_Order( $id_order );
+
+
+		    $products_in_cart = '';
+		    $items_order = $order->get_items();
+		    foreach ($items_order as $item) {
+
+			    if( $item->get_variation_id() ){
+				    $_product = new WC_Product_Variation($item->get_variation_id());
+			    } else {
+				    $_product = wc_get_product( $item->get_product_id() );
+			    }
+			    $price = $_product->get_price();
+			    $products_in_cart .= '{
+                                          "id": "'.$item->get_product_id().'",
+                                          "name": "'.$item->get_name().'",
+                                          "quantity": '.$item->get_quantity().',
+                                          "price": '.$price.'
+                                        },';
+		    }
 		    ?>
-
-          <script>
               gtag('event', 'conversion', {'send_to': 'AW-826605253/aFD6CLLBxnkQxf2TigM',
-                  'value': <?= number_format($order->get_total(), 2, '.', ''); ?>,
-                  'currency': 'USD'
+              'value': <?= number_format($order->get_total(), 2, '.', ''); ?>,
+              'currency': 'USD'
               });
-          </script>
-	    <?php } ?>
 
+              gtag('event', 'checkout_progress', {
+              "transaction_id": "<?= $_GET['key']; ?>",
+              "currency": "USD",
+              "value": "<?= number_format($order->get_total(), 2, '.', ''); ?>",
+              "items": [<?= substr($products_in_cart, 0, -1); ?>],
+              "coupon": ""
+              });
+
+	    <?php } ?>
+        </script>
     </head>
 
 
@@ -221,7 +235,7 @@
 
                 <?= $end_wrap  ?>
 
-                <?php      $cart = WC()->cart;
+                <?php $cart = WC()->cart;
                 $cart_url = $cart->get_cart_url();
                 $count_products = $cart->get_cart_contents_count();
                 if($cart->is_empty()){
@@ -255,7 +269,7 @@
 
                     <img src="<?= DIRECT ?>img/book.png" width="17" height="18" alt="book">
 
-                    GET A FREE CATALOG</a>
+                    GET A SPECIAL DISCOUNT</a>
                 <!-- /site__header-get -->
 
                 <?php $phone = get_field('main_phone','options');  ?>

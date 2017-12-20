@@ -23,30 +23,6 @@ remove_action('wp_head', 'rel_canonical');
 remove_action('wp_head', 'signuppageheaders');
 remove_action('wp_head', 'wp_oembed_add_discovery_links');
 remove_action('wp_head', 'wp_oembed_add_host_js');
-// Отключаем сам REST API
-add_filter('rest_enabled', '__return_false');
-
-// Отключаем фильтры REST API
-remove_action('xmlrpc_rsd_apis', 'rest_output_rsd');
-remove_action('wp_head', 'rest_output_link_wp_head', 10, 0);
-remove_action('template_redirect', 'rest_output_link_header', 11, 0);
-remove_action('auth_cookie_malformed', 'rest_cookie_collect_status');
-remove_action('auth_cookie_expired', 'rest_cookie_collect_status');
-remove_action('auth_cookie_bad_username', 'rest_cookie_collect_status');
-remove_action('auth_cookie_bad_hash', 'rest_cookie_collect_status');
-remove_action('auth_cookie_valid', 'rest_cookie_collect_status');
-remove_filter('rest_authentication_errors', 'rest_cookie_check_errors', 100);
-
-// Отключаем события REST API
-remove_action('init', 'rest_api_init');
-remove_action('rest_api_init', 'rest_api_default_filters', 10, 1);
-remove_action('parse_request', 'rest_api_loaded');
-
-// Отключаем Embeds связанные с REST API
-remove_action('rest_api_init', 'wp_oembed_register_route');
-remove_filter('rest_pre_serve_request', '_oembed_rest_pre_serve_request', 10, 4);
-
-remove_action('wp_head', 'wp_oembed_add_discovery_links');
 
 //remove_action('wp_head', 'wp_oembed_add_host_js');
 add_filter('the_content', 'do_shortcode');
@@ -76,7 +52,7 @@ add_action('wp_enqueue_scripts', 'add_js');
 function add_js()
 {
 
-    wp_deregister_script('jquery');wp_register_script('jquery',get_template_directory_uri().'/assets/js/vendors/jquery-3.0.0.min.js');
+    wp_deregister_script('jquery');wp_register_script('jquery',get_template_directory_uri().'/assets/js/vendors/jquery-3.0.0.min.js', '', '', false);
     wp_register_script('swiper_js',get_template_directory_uri().'/assets/js/vendors/swiper.jquery.min.js');
     wp_register_script('slick_js',get_template_directory_uri().'/assets/js/vendors/slick.min.js');
     wp_register_script('index_js',get_template_directory_uri().'/assets/js/index.min.js');
@@ -207,6 +183,11 @@ function add_js()
         wp_enqueue_script('my-account_js');
         wp_enqueue_style('perfect_scrollbar',get_template_directory_uri().'/assets/css/perfect-scrollbar.css');
         wp_enqueue_script('perfect_js');
+    }
+
+    if(is_page_template('page-form.php')) {
+	    wp_enqueue_script('my-cart-single_js');
+	    wp_enqueue_style('form',get_template_directory_uri().'/assets/css/form.css');
     }
 
 }
