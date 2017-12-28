@@ -55,46 +55,109 @@
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'AW-826605253');
+            gtag('config', 'AW-826605253', { 'transport_type': 'beacon'});
+            gtag('config', 'UA-100436176-1', { 'transport_type': 'beacon'});
 
 
-	    <?php   if(is_order_received_page() && $_GET['key']) {
-		    $id_order = wc_get_order_id_by_order_key($_GET['key']);
-		    $order = new WC_Order( $id_order );
+				    <?php if(is_product()) { ?>
+            gtag('event', 'view_item', {
+                "items": [
+                    {
+                        "id": "<?= get_the_ID(); ?>",
+                        "name": "<?= get_the_title(); ?>"
+                    }
+                ]
+            });
 
 
-		    $products_in_cart = '';
-		    $items_order = $order->get_items();
-		    foreach ($items_order as $item) {
+            $(function($) {
 
-			    if( $item->get_variation_id() ){
-				    $_product = new WC_Product_Variation($item->get_variation_id());
-			    } else {
-				    $_product = wc_get_product( $item->get_product_id() );
-			    }
-			    $price = $_product->get_price();
-			    $products_in_cart .= '{
+                $( '.add_to_cart_button' ).click( function() {
+                    gtag('event', 'add_to_cart', {
+                        "currency": "USD",
+                        "items": [
+                            {
+                                "id": "<?= get_the_ID(); ?>",
+                                "name": "<?= get_the_title(); ?>",
+                                "quantity": 1
+                            }
+                        ]
+                    });
+
+                    alert('add to cart');
+                });
+
+            });
+				    <?php } ?>
+
+
+				    <?php if(is_cart()) { ?>
+
+            $(function($) {
+                $( '.checkout-button' ).click( function() {
+
+                    gtag('event', 'begin_checkout', {
+                        "currency": "USD",
+                        "value": "<?= WC()->cart->total; ?>",
+                        "items": [
+											    <?php
+											    $products_in_cart = '';
+											    foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+												    $_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
+												    $product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
+
+												    $products_in_cart .= '{
+                                      "id": "'.$product_id.'",
+                                      "name": "'.$_product->get_title().'",
+                                      "quantity": '.$cart_item['quantity'].',
+                                      "price": '.number_format($_product->get_price(), 2, '.', '').'
+                                    },';
+											    }
+											    echo substr($products_in_cart, 0, -1);
+											    ?>
+                        ],
+                        "coupon": ""
+                    });
+
+                });
+            });
+				    <?php } ?>
+
+
+				    <?php   if(is_order_received_page() && $_GET['key']) {
+				    $id_order = wc_get_order_id_by_order_key($_GET['key']);
+				    $order = new WC_Order( $id_order );
+
+
+				    $products_in_cart = '';
+				    $items_order = $order->get_items();
+				    foreach ($items_order as $item) {
+					    $products_in_cart .= '{
                                           "id": "'.$item->get_product_id().'",
                                           "name": "'.$item->get_name().'",
                                           "quantity": '.$item->get_quantity().',
-                                          "price": '.$price.'
+                                          "price": '.$item->get_total().'
                                         },';
-		    }
-		    ?>
-              gtag('event', 'conversion', {'send_to': 'AW-826605253/aFD6CLLBxnkQxf2TigM',
-              'value': <?= number_format($order->get_total(), 2, '.', ''); ?>,
-              'currency': 'USD'
-              });
+				    }
+				    ?>
+            gtag('event', 'conversion', {'send_to': 'AW-826605253/aFD6CLLBxnkQxf2TigM',
+                'value': <?= number_format($order->get_total(), 2, '.', ''); ?>,
+                'currency': 'USD'
+            });
 
-              gtag('event', 'checkout_progress', {
-              "transaction_id": "<?= $_GET['key']; ?>",
-              "currency": "USD",
-              "value": "<?= number_format($order->get_total(), 2, '.', ''); ?>",
-              "items": [<?= substr($products_in_cart, 0, -1); ?>],
-              "coupon": ""
-              });
+            gtag('event', 'purchase', {
+                "transaction_id": "<?= $_GET['key']; ?>",
+                "currency": "USD",
+                "value": <?= number_format($order->get_total(), 2, '.', ''); ?>,
+				<?php if( substr($products_in_cart, 0, -1) ) { ?>
+                "items": [<?= substr($products_in_cart, 0, -1); ?>],
+				<?php } ?>
+                "coupon": ""
+            });
 
-	    <?php } ?>
+				    <?php } ?>
+
+
         </script>
     </head>
 

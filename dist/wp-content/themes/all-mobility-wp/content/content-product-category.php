@@ -335,7 +335,8 @@ $powerWheelChairs = 125; ?>
             <!-- category__find-best -->
             <div class="category__find-best">
 
-                <h2 class="site__title site__title_3 site__title_white"><?= $cat_obj->name; ?></h2>
+                <?php /*<h2 class="site__title site__title_3 site__title_white"><?= $cat_obj->name; ?></h2> */ ?>
+                <h2 class="site__title site__title_3 site__title_white">Use our search tool to find the product that fits you</h2>
 
 
 

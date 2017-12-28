@@ -32,13 +32,21 @@ if ( $post_id > 0 ) {
 } else{
 	$where = 0;
 }
+$args = array(
+	'status'      => '',
+	'post_status' => 'publish',
+	'post_type'   => 'product',
+	'count' => true,
+	'post_id' => $post_id
+);
 
+$comments_count = get_comments( $args );
 ?>
 
 <!-- reviews -->
 <div class="reviews">
 
-	<h2 class="site__title site__title_2">Reviews (<?= $product->get_review_count()?>)</h2>
+	<h2 class="site__title site__title_2">Reviews (<?= $comments_count; ?>)</h2>
 
 	<!-- reviews__items -->
 	<div class="reviews__items">
@@ -46,7 +54,9 @@ if ( $post_id > 0 ) {
 		<?php if ( have_comments() ) :
 
 			$args = array(
-				'status'      => 'all',
+				'status'      => 'approve',
+				'orderby'     => 'comment_date',
+				'order'       => 'ASC',
 				'post_status' => 'publish',
 				'post_type'   => 'product',
 				'post_id' => $post_id

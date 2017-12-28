@@ -133,10 +133,11 @@
 
     .ps-scrollbar-y-rail {
       right: 1px !important;
-      width: 4px !important;
+      width: 8px !important;
 
       .ps-scrollbar-y {
-        width: 4px !important;
+        width: 8px !important;
+        min-height: 16px;
       }
 
     }

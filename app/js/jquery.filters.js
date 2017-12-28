@@ -257,7 +257,7 @@
                 } );
                 _additionalParameters.on( {
                    submit: function() {
-
+                       gtag('event', 'filter');
                        if( _window.width() >= 1024 ) {
 
                            _addLoading();
@@ -776,7 +776,7 @@
                     dataType: 'json',
                     type: "get",
                     success: function ( m ) {
-
+                        $("html, body").animate({ scrollTop: 0 }, "slow");
                         _pasteNewProducts( m );
                         _createPagination( m );
 
