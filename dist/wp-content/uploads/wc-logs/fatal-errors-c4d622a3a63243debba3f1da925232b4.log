@@ -614,3 +614,15 @@ Stack trace:
 
 2017-12-14T07:14:53+00:00 CRITICAL Maximum execution time of 60 seconds exceeded
 
+2017-12-28T11:11:57+00:00 CRITICAL Uncaught Error: Call to undefined function datediff() in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\footer.php:332
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(688): require_once()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', true)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(76): locate_template(Array, true)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\page-home.php(110): get_footer()
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template-loader.php(74): include('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-blog-header.php(19): require_once('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\index.php(17): require('D:\\new_domains\\...')
+#7 {main}
+  thrown
+

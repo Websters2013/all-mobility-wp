@@ -305,6 +305,43 @@
 
 <?php if( !is_page_template('page-checkout.php') ): ?>
 
+	<?php
+
+	$d = time() ;
+	$test  = date('n', $d);
+	$current_year  = date('Y', $d);
+
+	if( $test > 1) {
+		$year1 = $current_year;
+		$year2 = $current_year + 1;
+	} else {
+	    $year1 = $current_year - 1;
+		$year2 = $current_year;
+    }
+
+	$d1 = mktime(0, 0, 0, 12, 31, $year1 );
+	$d2 = mktime(0, 0, 0, 1, 7, $year2 );
+
+  ?>
+
+	<?php if( $d > $d1 && $d < $d2 && ! isset( $_SESSION['new_year'] ) ): ?>
+
+        <button id="new_year" class="popup__open" data-popup="new_year" style="display: none;"></button>
+
+        <script>
+            $( document ).ready(function () {
+
+                setTimeout(function () {
+
+                    $('#new_year').trigger('click');
+
+                }, 5000);
+
+            });
+        </script>
+
+	<?php endif; ?>
+
     <!-- popup -->
     <div class="popup">
 
@@ -390,6 +427,84 @@
             </div>
             <!-- /popup__content -->
 
+	        <?php if( $d > $d1 && $d < $d2 && ! isset( $_SESSION['new_year'] ) ): ?>
+            <!-- popup__content -->
+            <div class="popup__content popup__new_year">
+
+                <!-- get-catalog -->
+                <div class="get-catalog">
+                    <a href="#" class="popup__close"></a>
+                    <div class="get-catalog__pic">
+                        <img src="<?= DIRECT ?>pic/popup_image.png" width="699" height="267" alt="">
+                    </div>
+
+                    <h2 class="get-catalog__title">GET A SPECIAL DISCOUNT OFF OF YOUR PURCHASE</h2>
+
+                    <ul class="get-catalog__list">
+                        <li>
+
+                            <svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <defs></defs>
+                                <g id="high-fildelity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="catalog-popup" transform="translate(-442.000000, -581.000000)" fill="#0094C1">
+                                        <path d="M459,601 L470,601 L470,603 L459,603 L459,611 L457,611 L457,603 L446,603 L446,601 L457,601 L457,593 L444,593 L444,609 C444,611.209 445.791,613 448,613 L468,613 C470.209,613 472,611.209 472,609 L472,593 L459,593 L459,601 Z M461,587 C459.896,587 459,586.105 459,585 C459,583.896 459.896,583 461,583 C462.105,583 463,583.896 463,585 C463,586.105 462.105,587 461,587 L461,587 Z M455,587 C453.896,587 453,586.105 453,585 C453,583.896 453.896,583 455,583 C456.105,583 457,583.896 457,585 C457,586.105 456.105,587 455,587 L455,587 Z M472,587 L464.445,587 C464.789,586.41 465,585.732 465,585 C465,582.791 463.209,581 461,581 C459.798,581 458.733,581.541 458,582.38 C457.267,581.541 456.202,581 455,581 C452.791,581 451,582.791 451,585 C451,585.732 451.211,586.41 451.555,587 L444,587 C442.895,587 442,587.896 442,589 L442,591 L474,591 L474,589 C474,587.896 473.105,587 472,587 L472,587 Z" id="Page-1"></path>
+                                    </g>
+                                </g>
+                            </svg>
+
+                            <span>Special
+                                    Offers</span>
+
+                        </li>
+                        <li>
+
+                            <svg width="26px" height="32px" viewBox="0 0 26 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <defs></defs>
+                                <g id="high-fildelity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="catalog-popup" transform="translate(-642.000000, -583.000000)" fill="#0094C1">
+                                        <path d="M664.905,589.953 C660.519,591.203 659.717,594.748 660,597 C656.872,593.322 657,589.093 657,583 C646.968,586.783 649.301,597.688 649,601 C646.476,598.935 646,594 646,594 C643.336,595.371 642,599.031 642,602 C642,609.18 647.82,615 655,615 C662.179,615 668,609.18 668,602 C668,597.733 664.867,595.765 664.905,589.953" id="Fill-1"></path>
+                                    </g>
+                                </g>
+                            </svg>
+
+                            <span>
+                                        New Deals &
+                                    products
+                                    </span>
+                        </li>
+                        <li>
+                            <svg width="33px" height="32px" viewBox="0 0 33 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <defs></defs>
+                                <g id="high-fildelity" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="catalog-popup" transform="translate(-867.000000, -584.000000)" fill="#0094C1">
+                                        <path d="M891.81575,596.842 C890.25575,598.403 887.72675,598.403 886.16775,596.842 C884.60775,595.281 884.60775,592.75 886.16775,591.19 C887.72675,589.628 890.25575,589.628 891.81575,591.19 C893.37575,592.75 893.37575,595.281 891.81575,596.842 L891.81575,596.842 Z M897.09575,584 L883.68175,584 C882.62375,584 882.42975,584.462 881.42075,585.518 L871.43575,595.473 L887.55075,611.588 L897.56175,601.609 C898.41175,600.761 899.01275,600.339 899.01275,599.283 L899.01275,585.91 C899.01275,584.856 898.15475,584 897.09575,584 L897.09575,584 Z M887.57975,592.603 C886.79875,593.383 886.79875,594.649 887.57975,595.429 C888.35975,596.209 889.62475,596.209 890.40375,595.429 C891.18375,594.649 891.18375,593.383 890.40375,592.603 C889.62475,591.822 888.35975,591.822 887.57975,592.603 L887.57975,592.603 Z M868.21575,598.683 C866.59475,600.298 866.59475,602.918 868.21575,604.533 L878.48675,614.774 C880.10775,616.389 882.73475,616.389 884.35575,614.774 L886.13375,613 L870.01875,596.885 L868.21575,598.683 Z" id="Fill-1"></path>
+                                    </g>
+                                </g>
+                            </svg>
+
+                            <span>
+                                        Exclusive discounts
+                                    </span>
+                        </li>
+                    </ul>
+
+                    <!-- get-catalog__subscribe -->
+                    <div class="get-catalog__subscribe">
+							        <?= do_shortcode('[contact-form-7 id="510" title="Subscribe Form"]') ?>
+                    </div>
+                    <!-- /get-catalog__subscribe -->
+
+                </div>
+                <!-- /get-catalog -->
+
+            </div>
+            <!-- /popup__content -->
+		    <?php
+
+			       $_SESSION['new_year'] = true;
+
+            endif; ?>
+
         </div>
         <!-- /popup__wrap -->
 
@@ -397,6 +512,9 @@
     <!-- /popup -->
 
 <?php endif; ?>
+
+
+
 
 <?php wp_footer(); ?>
 
