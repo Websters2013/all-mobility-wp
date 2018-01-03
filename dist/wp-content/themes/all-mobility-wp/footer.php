@@ -356,7 +356,7 @@
                 <div class="get-catalog">
                     <a href="#" class="popup__close"></a>
                     <div class="get-catalog__pic">
-                        <img src="<?= DIRECT ?>pic/get-scooter.jpg" width="699" height="267" alt="">
+                        <img src="<?= get_site_url(); ?>/wp-content/uploads/2017/11/banner-2.jpg" width="699" height="267" alt="">
                     </div>
 
                     <h2 class="get-catalog__title">Get a Free Catalog with Our Exclusive Offers</h2>
