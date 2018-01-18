@@ -2,6 +2,29 @@
 
 global $wp_query;
 
+function the_product_price($product, $id){
+	$sale_price = get_post_meta( $id, '_price', true);
+	$regular_price = get_post_meta( $id, '_regular_price', true);
+	if ($regular_price == ""){
+
+		$available_variations = $product->get_available_variations();
+		if($available_variations){
+			#Step 2: Get product variation id
+			$variation_id=$available_variations[0]['variation_id']; // Getting the variable id of just the 1st product. You can loop $available_variations to get info about each variation.
+			#Step 3: Create the variable product object
+			$variable_product1= new WC_Product_Variation( $variation_id );
+			#Step 4: You have the data. Have fun :)
+			$regular_price = $variable_product1->regular_price;
+		}
+	}
+	if(!empty($regular_price)){
+		echo '<del class="product-categories__item-product__sale">'. wc_price($regular_price).'</del>';
+	}else{
+		echo '<span class="product-categories__item-product__price">'. wc_price($regular_price).'</span>';
+	}
+	if(!empty($sale_price)){ echo '<span class="product-categories__item-product__price">'.  wc_price($sale_price) .'</span>';}
+}
+
 if( is_front_page() ){
 
     if( have_rows('categories_items') ):
@@ -23,15 +46,28 @@ if( is_front_page() ){
 
 } elseif( is_product_category() ){
 
-$cat_obj = $wp_query->get_queried_object();
+    $exclude_posts = array();
 
-$category_ID  = $cat_obj->term_id;
+    $cat_obj = $wp_query->get_queried_object();
+
+    $category_ID  = $cat_obj->term_id;
+
+    if($popular_product = get_field('product_recoment', 'product_cat_'.$category_ID)) {
+	    $exclude_posts['recommended'] = $popular_product;
+    }
+	if($top_selling_product = get_field('product_top_selling', 'product_cat_'.$category_ID)) {
+		$exclude_posts['top selling'] = $top_selling_product;
+	}
+	if($best_value_product = get_field('product_best_value', 'product_cat_'.$category_ID)) {
+		$exclude_posts['best value'] = $best_value_product;
+	}
 
     $args = array(
+        //    'posts_per_page' => -1,
         'parent'   => $category_ID,
-        'taxonomy' => 'product_cat'
+        'taxonomy' => 'product_cat',
+        //'post__not_in' => $exclude_posts
     );
-
     $product_terms = get_terms($args);
 
 } elseif( is_singular('wpsl_stores') ){
@@ -48,10 +84,37 @@ $category_ID  = $cat_obj->term_id;
 
 }
 
-if(!empty($product_terms)): ?>
+if( ! empty( $product_terms ) || ! empty( $exclude_posts ) ): ?>
 
 <!-- product-categories__inner -->
 <div class="product-categories__inner">
+
+	<?php foreach ($exclude_posts as $key => $exclude_post):
+		$thumbnail = get_the_post_thumbnail_url( $exclude_post , 'thumbnail_id' );
+		$_product = wc_get_product( $exclude_post );
+			//var_dump($_product);//$fromPrice = wc_price($fromPrice);
+		?>
+
+      <div class="product-categories__wraper-product">
+
+          <div class="product-categories__item-product">
+
+              <div class="product-categories__item-product__label product-categories__item-product__label-<?php echo implode("-", explode(" ", $key ) );?>"><?= $key; ?></div>
+              <div class="product-categories__item-product__pic" style="background-image: url(<?= $thumbnail ?>)"></div>
+              <h2 class="product-categories__item-product__title"><?= get_the_title( $exclude_post ); ?></h2>
+
+                <?php the_product_price($_product, $exclude_post); ?>
+
+
+              <input id="compare-<?= $exclude_post; ?>" class="input-checkbox" type="checkbox" name="compare" value="<?= $exclude_post; ?>">
+              <label for="compare-<?= $exclude_post; ?>" class="checkbox">Add to Compare</label>
+              <a href="<?= get_permalink($exclude_post); ?>" class="btn btn_6">See more</a>
+
+          </div>
+
+      </div>
+	<?php endforeach; ?>
+
     <?php foreach ($product_terms as $product_term):
 
         $id = $product_term->term_id;

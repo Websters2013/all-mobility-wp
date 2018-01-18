@@ -133,6 +133,26 @@
     margin-bottom: 18px;
   }
 
+  .iframe {
+    position: relative;
+    padding-top: calc(20px + 56.25%);
+    overflow: hidden;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+
+    iframe,
+    object,
+    embed {
+      position: absolute;
+      top: 20px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: calc(100% - 20px);
+    }
+  }
 }
 .product__download {
   display: none;

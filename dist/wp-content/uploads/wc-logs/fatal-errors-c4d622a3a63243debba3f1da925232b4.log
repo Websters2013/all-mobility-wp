@@ -626,3 +626,56 @@ Stack trace:
 #7 {main}
   thrown
 
+2018-01-16T07:56:15+00:00 CRITICAL Maximum execution time of 30 seconds exceeded
+
+2018-01-16T16:14:50+00:00 CRITICAL Uncaught Error: Call to a member function is_on_sale() on null in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\woocommerce\single-product\sale-flash.php:26
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-content\plugins\woocommerce\includes\wc-core-functions.php(209): include()
+#1 D:\new_domains\all-mobility-wp\dist\wp-content\plugins\woocommerce\includes\wc-template-functions.php(995): wc_get_template('single-product/...')
+#2 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\content\content-home-category.php(72): woocommerce_show_product_sale_flash(1740, Object(WC_Product))
+#3 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(690): require('D:\\new_domains\\...')
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', false)
+#5 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(155): locate_template(Array, true, false)
+#6 D:\new_domains\all-mobility-wp\dist\wp-content\themes\al
+
+2018-01-16T16:24:48+00:00 CRITICAL Uncaught Error: Call to undefined function the_product_price() in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\content\content-home-category.php:83
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(690): require()
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', false)
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(155): locate_template(Array, true, false)
+#3 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\content\content-product-category.php(479): get_template_part('content/content', 'home-category')
+#4 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(690): require('D:\\new_domains\\...')
+#5 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', false)
+#6 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(155): locate_template(Array, true, false)
+#7 D:\new_domains\all-mobili
+
+2018-01-16T16:25:31+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product::get_available_variations() in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\content\content-home-category.php:71
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\content\content-home-category.php(111): the_product_price(Object(WC_Product))
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(690): require('D:\\new_domains\\...')
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', false)
+#3 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(155): locate_template(Array, true, false)
+#4 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\content\content-product-category.php(479): get_template_part('content/content', 'home-category')
+#5 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(690): require('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647
+
+2018-01-16T16:27:21+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product::get_available_variations() in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\content\content-home-category.php:71
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\content\content-home-category.php(111): the_product_price(Object(WC_Product), 1740)
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(690): require('D:\\new_domains\\...')
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', false)
+#3 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(155): locate_template(Array, true, false)
+#4 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\content\content-product-category.php(479): get_template_part('content/content', 'home-category')
+#5 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(690): require('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\wp-includes\template.p
+
+2018-01-16T16:27:48+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product::get_available_variations() in D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\content\content-home-category.php:71
+Stack trace:
+#0 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\content\content-home-category.php(111): the_product_price(Object(WC_Product), 1740)
+#1 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(690): require('D:\\new_domains\\...')
+#2 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(647): load_template('D:\\new_domains\\...', false)
+#3 D:\new_domains\all-mobility-wp\dist\wp-includes\general-template.php(155): locate_template(Array, true, false)
+#4 D:\new_domains\all-mobility-wp\dist\wp-content\themes\all-mobility-wp\content\content-product-category.php(479): get_template_part('content/content', 'home-category')
+#5 D:\new_domains\all-mobility-wp\dist\wp-includes\template.php(690): require('D:\\new_domains\\...')
+#6 D:\new_domains\all-mobility-wp\dist\wp-includes\template.p
+

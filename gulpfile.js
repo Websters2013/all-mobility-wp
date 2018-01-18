@@ -116,6 +116,12 @@ let paths = {
             ]
         },
         {
+            dist: 'iframe-button.js',
+            contains: [
+                'app/js/iframe-button.js'
+            ]
+        },
+        {
             dist: 'not-found.min.js',
             contains: [
                 'app/js/jquery.main.js',

@@ -58,7 +58,7 @@ if($_POST['add-to-cart']){
 			<div>
 				<?php $title = get_the_title(); ?>
 				<h2 class="site__title site__title_2"><?= $title ?></h2>
-				<?= get_the_content() ?>
+				<?= do_shortcode(get_the_content()) ?>
 
 			</div>
 			<div>
