@@ -26,6 +26,68 @@
   background: #FFFFFF;
   border: 2px solid #DDDDDD;
   border-radius: 6px;
+
+
+  input[ type = checkbox ] {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+
+    &:checked + label {
+
+      &:before {
+        display: block;
+      }
+
+    }
+
+    &:disabled + label {
+      cursor: default;
+      opacity: .5;
+    }
+
+    +label {
+      position: relative;
+      cursor: pointer;
+      width: 130px;
+      line-height: 30px;
+      display: block;
+      min-width: 130px;
+      margin: auto auto 0;
+      padding: 6px 0 6px 28px;
+      font-size: 14px;
+
+      &:after,
+      &:before {
+        position: absolute;
+        content: '';
+      }
+
+      &:after {
+        top: 12px;
+        left: 2px;
+        width: 12px;
+        height: 12px;
+        border-radius: 2px;
+        border: 2px solid #DDD;
+      }
+
+      &:before {
+        display: none;
+        top: 14px;
+        left: 8px;
+        border-left: 2px solid #F47920;
+        border-top: 2px solid #F47920;
+        width: 3px;
+        height: 7px;
+        -webkit-transform: rotate(220deg);
+        transform: rotate(220deg);
+        content: '';
+      }
+
+    }
+
+  }
+
 }
 .products-subcategory__head {
   //@include flexbox();
@@ -161,7 +223,14 @@
     padding-left: 4px;
     text-align: left;
   }
+  .products-subcategory__item {
 
+    input[type=checkbox]+label {
+      position: absolute;
+      right: 35px;
+      bottom: 65px;
+    }
+  }
 }
 @media (min-width: $desktop) {
 
@@ -179,6 +248,16 @@
     margin: 0 0 14px;
     padding: 24px 24px 19px 324px;
     min-height: 288px;
+
+    input[type=checkbox]+label {
+      position: absolute;
+      right: auto;
+      bottom: auto;
+      left: 48px;
+      top: 235px;
+      font-size: 16px;
+      width: auto;
+    }
   }
   .products-subcategory__head {
     margin: 0 0 7px;
@@ -256,7 +335,7 @@
     left: 29px;
     top: 23px;
     width: 233px;
-    height: 245px;
+    height: 216px;
   }
   .products-subcategory__description {
     padding: 0 3px;

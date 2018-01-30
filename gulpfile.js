@@ -32,6 +32,16 @@ let paths = {
             ]
         },
         {
+            dist: 'compare.min.js',
+            contains: [
+                'app/js/jquery.main.js',
+                'app/js/jquery.popup.js',
+                'app/js/jquery.index.js',
+                'app/js/jquery.compare.js',
+                'app/js/jquery.search.js'
+            ]
+        },
+        {
             dist: 'ui.min.js',
             contains: [
                 'app/js/jquery.popup.js',
